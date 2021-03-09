@@ -68,7 +68,10 @@
                 @foreach($dataCard as $card)
                     <tr>
                     <td>{{$card->card}}</td>
-                    <td><a style="margin-right:7px" class="btn btn-info btn-sm" href="#"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger btn-sm" href="#" onclick="return confirm('Apakah Anda Yakin ?')"><i class="fas fa-trash"></i></a></td>
+                    <td>
+                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteCard/{{$card->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" data-target="#update{{$card->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Card
+                    </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -77,19 +80,40 @@
             </div>
         </div>
         <!-- smpe sini -->
-
-        <!-- Content Row -->
-        <div class="row">
-        <form method="POST" enctype="multipart/form-data" action="/admin/profile">
-
-        </form>
-        </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
     @include('adminDashboard/footer')
 
+@foreach($dataCard as $oldCard)
+  <div class="modal fade" id="update{{$oldCard->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-card') }}" method="POST">
+                @csrf
+                    <input type="hidden" name="id_card" value="{{$oldCard->id}}"> 
+                    <div class="form-group">
+                      <label for="card" class="font-weight-bold text-dark">Card</label>
+                      <input type="text" class="form-control" id="card" placeholder="Masukan Nama" name="card" value="{{$oldCard->card}}" require>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 
 <!-- jQuery -->

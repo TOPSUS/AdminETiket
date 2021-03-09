@@ -58,7 +58,7 @@
                 </div>
                 <div class="col">
                     <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
-                    <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas">
+                    <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0">
                 </div>
             </div>
 

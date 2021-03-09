@@ -68,7 +68,7 @@
             </div>
             <div class="row card-header">
                 <div class="col">
-                      <label for="nohp" class="font-weight-bold text-dark">No Hp</label>
+                    <label for="nohp" class="font-weight-bold text-dark">No Hp</label>
                     <input type="text" class="form-control" id="nohp" placeholder="Masukan No Telp" name="nohp">
                 </div>
                 <div class="col">

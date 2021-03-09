@@ -25,4 +25,20 @@ class cardController extends Controller
     ]);
         return redirect('/Dashboard/CRUD/Card');
     }
+//Update User
+    public function updateCard(Request $request){
+        $dataUpdate=\App\Card::find($request->id_card);
+
+        $dataUpdate->card=$request->card;
+        $dataUpdate->save();
+        return redirect()->back();
+    }
+//Delete User
+public function deleteCard($id){
+    $deleteCard=\App\Card::find($id);
+    $deleteCard->delete();
+
+    return redirect()->back();
+}
+
 }

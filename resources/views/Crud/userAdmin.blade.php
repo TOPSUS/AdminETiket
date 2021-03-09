@@ -33,7 +33,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data User</h1>
+            <h1>Data Admin Speedboat</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -54,108 +54,42 @@
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
+          @foreach($dataAdmin as $admin)
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
                 <div class="card-header text-muted border-bottom-0">
-                  Admin - Caspla Speedboat
+                  Admin -  {{$admin->speedboat->nama_speedboat}}
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <h2 class="lead"><b>Dedy</b></h2>
+                      <h2 class="lead"><b>{{$admin->nama}}</b></h2>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: A. Yani Utara Peguyangan</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : 08990325187</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email : dedy.kurniawan0212@gmail.com</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-venus-mars"></i></span> Gender : Laki - laki</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{$admin->alamat}}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : {{$admin->nohp}}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email : {{$admin->email}}</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-venus-mars"></i></span> Gender : {{$admin->jeniskelamin}}</li>
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <img src="{{ asset ('Lte/dist/img/avatar5.png') }}" alt="" class="img-circle img-fluid">
+                      <img src="/avatar/{{$admin->foto}}" alt="" class="img-circle img-fluid">
                     </div>
                   </div>
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
+                    <a href="/Dashboard/CRUD/DeleteUser/{{$admin->id}}" class="btn btn-sm bg-danger">
                       <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a data-toggle="modal" data-target="#update{{$admin->id}}" href="#" class="btn btn-sm btn-primary">
                       <i class="fas fa-edit"></i> Edit Profile
                     </a>
                   </div>
                 </div>
               </div>
             </div>
+          @endforeach
 
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light">
-                <div class="card-header text-muted border-bottom-0">
-                  Admin - Caspla Speedboat
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>Dedy</b></h2>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: A. Yani Utara Peguyangan</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : 08990325187</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email : dedy.kurniawan0212@gmail.com</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-venus-mars"></i></span> Gender : Laki - laki</li>
-                      </ul>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="{{ asset ('Lte/dist/img/avatar5.png') }}" alt="" class="img-circle img-fluid">
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light">
-                <div class="card-header text-muted border-bottom-0">
-                  Admin - Caspla Speedboat
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>Dedy</b></h2>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: A. Yani Utara Peguyangan</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : 08990325187</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email : dedy.kurniawan0212@gmail.com</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-venus-mars"></i></span> Gender : Laki - laki</li>
-                      </ul>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="{{ asset ('Lte/dist/img/avatar5.png') }}" alt="" class="img-circle img-fluid">
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
- 
           </div>
         </div>
         <!-- /.card-body -->
@@ -183,13 +117,93 @@
   <!-- /.content-wrapper -->
 
   @include('adminDashboard/footer')
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+<!-- Modal Update -->
+
+@foreach($dataAdmin as $oldAdmin)
+  <div class="modal fade" id="update{{$oldAdmin->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-user') }}" method="POST">
+                @csrf
+                    <input type="hidden" name="id_user" value="{{$oldAdmin->id}}"> 
+                    <div class="form-group">
+                      <label for="nama" class="font-weight-bold text-dark">Nama</label>
+                      <input type="text" class="form-control" id="nama" placeholder="Masukan Nama" name="nama" value="{{$oldAdmin->nama}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="font-weight-bold text-dark">Email</label>
+                      <input type="email" class="form-control" id="email" placeholder="Masukan E-mail" name="email" value="{{$oldAdmin->email}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="nohp" class="font-weight-bold text-dark">No Hp</label>
+                      <input type="text" class="form-control" id="nohp" placeholder="Masukan No Telp" name="nohp" value="{{$oldAdmin->nohp}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="font-weight-bold text-dark">Jenis Kelamin</label><br>
+                      @if($oldAdmin->jeniskelamin == 'Laki-laki')
+                      <input class="custom-radio" type="radio" name="jeniskelamin" value="Laki-laki" checked> Laki-laki 
+                        <span class="fas fa-mars"></span>&nbsp &nbsp
+                      <input class="custom-radio" type="radio" name="jeniskelamin" value="Perempuan"> Perempuan
+                        <span class="fas fa-venus"></span>
+                      @else
+                      <input class="custom-radio" type="radio" name="jeniskelamin" value="Laki-laki"> Laki-laki 
+                        <span class="fas fa-mars"></span>&nbsp &nbsp
+                      <input class="custom-radio" type="radio" name="jeniskelamin" value="Perempuan" checked> Perempuan
+                        <span class="fas fa-venus"></span>
+                      @endif
+                    </div>
+                    <div class="form-group">
+                      <label for="alamat" class="font-weight-bold text-dark">Alamat</label>
+                      <input type="text" class="form-control" id="alamat"  placeholder="Masukan Alamat" name="alamat" value="{{$oldAdmin->alamat}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="InputName" class="font-weight-bold text-dark">Role/Jabatan</label>
+                      <br>@if($oldAdmin->role == "Customer")
+                        <input type="radio" name="role" value="Customer" checked> Customer &nbsp &nbsp
+                        <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
+                        <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                        <input type="radio" name="role" value="SAdmin"> Super Admin
+                        @elseif($oldAdmin->role == "Direktur")
+                        <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
+                        <input type="radio" name="role" value="Direktur" checked> Direktur &nbsp &nbsp
+                        <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                        <input type="radio" name="role" value="SAdmin"> Super Admin
+                        @elseif($oldAdmin->role == "Admin")
+                        <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
+                        <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
+                        <input type="radio" name="role" value="Admin" checked> Admin &nbsp &nbsp
+                        <input type="radio" name="role" value="SAdmin"> Super Admin
+                        @else
+                        <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
+                        <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
+                        <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                        <input type="radio" name="role" value="SAdmin" checked> Super Admin
+                        @endif
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="InputName" class="font-weight-bold text-dark">Foto</label>
+                      <input type="file" id="exampleInputFile" name="foto">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- ./wrapper -->
+  @endforeach
+<!-- End Modal Update -->
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

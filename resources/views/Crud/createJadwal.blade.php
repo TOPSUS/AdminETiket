@@ -38,7 +38,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('viewjadwal') }}">Data Jadwal</a></li>
               <li class="breadcrumb-item active"><a href="{{ route('create-jadwal') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
@@ -53,38 +52,54 @@
  <!-- Begin Page Content -->
  <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="#">
-          
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-jadwal')}}">
+        @csrf 
             <div class="row card-header">
                 <div class="col">
-                    <label for="asal" class="font-weight-bold text-dark">Asal Pelabuhan</label>
+                    <label for="id_asal_pelabuhan" class="font-weight-bold text-dark">Asal Pelabuhan</label>
                     <select name="id_asal_pelabuhan" class="custom-select" required>
-                   
+                    @foreach($pelabuhan as $asal)
+                      <option value="{{$asal->id}}">{{$asal->nama_pelabuhan}}</option>
+                    @endforeach
                 </select>
                 </div>
                 <div class="col">
-                    <label for="tujuan" class="font-weight-bold text-dark">Tujuan Pelabuhan</label>
+                    <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan Pelabuhan</label>
                     <select name="id_tujuan_pelabuhan" class="custom-select" required>
-                   
+                    @foreach($pelabuhan as $tujuan)
+                      <option value="{{$tujuan->id}}">{{$tujuan->nama_pelabuhan}}</option>
+                    @endforeach
                 </select>
                 </div>
             </div>
             <div class="row card-header">
                 <div class="col">
-                    <label for="asal" class="font-weight-bold text-dark">Waktu Berangkat</label>
-                    <input type="time" step="1" class="form-control" id="asal" placeholder="Masukan Asal Speedboat" name="waktu_berangkat">
+                    <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
+                    <input type="time" step="1" class="form-control" id="waktu_berangkat" placeholder="Masukan Asal Speedboat" name="waktu_berangkat">
                 </div>
                 <div class="col">
-                    <label for="tujuan" class="font-weight-bold text-dark">Waktu Sampai</label>
-                    <input type="time" step="1" class="form-control" id="tujuan" placeholder="Masukan Tujuan Speedboat" name="waktu_sampai">
+                    <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
+                    <input type="time" step="1" class="form-control" id="waktu_sampai" placeholder="Masukan Tujuan Speedboat" name="waktu_sampai">
                 </div>
             </div>
 
             <div class="form-group card-header ">
-                <label for="alamat" class="font-weight-bold text-dark">Speed Boat</label>
+                <label for="id_speedboat" class="font-weight-bold text-dark">Speed Boat</label>
                 <select name="id_speedboat" class="custom-select" required>
-                   
+                  @foreach($speedboat as $sb)
+                     <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
+                  @endforeach
                 </select>
+            </div>
+
+            <div class="row card-header">
+                <div class="col">
+                    <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
+                    <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga Tiket" name="harga">
+                </div>
+                <div class="col">
+                   
+                </div>
             </div>
 
             <div class="form-group card-header">

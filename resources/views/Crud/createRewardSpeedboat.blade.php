@@ -49,13 +49,15 @@
 
    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="">
-            
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-rewardspeedboat')}}">
+          @csrf
             <div class="row card-header">
                 <div class="col">
-                    <label for="asal" class="font-weight-bold text-dark">Nama Speedboat</label>
-                    <select name="id_asal_pelabuhan" class="custom-select" required>
-                
+                    <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
+                    <select name="id_speedboat" class="custom-select" required>
+                    @foreach($speedboat as $sb)
+                     <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
+                    @endforeach
                 </select>
                 </div>
                 <div class="col">
@@ -73,7 +75,7 @@
                 <label for="exampleInputFile">Foto Reward</label>
                   <div class="input-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
                       <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                     </div>
                   </div>
@@ -83,12 +85,12 @@
 
             <div class="row card-header">
                 <div class="col">
-                    <label for="nik" class="font-weight-bold text-dark">Berlaku Sampai</label>
-                    <input type="date" step="1" class="form-control" id="lama_beroperasi" placeholder="Masukan Asal Speedboat" name="lama_beroperasi">
+                    <label for="berlaku" class="font-weight-bold text-dark">Berlaku Sampai</label>
+                    <input type="date" step="1" class="form-control" id="berlaku" placeholder="Masukan Asal Speedboat" name="berlaku">
                 </div>
                 <div class="col">
-                    <label for="nama" class="font-weight-bold text-dark"> Point</label>
-                    <input type="number" class="form-control" id="minimal_point" placeholder="Masukan Point" name="minimal_point">
+                    <label for="minimal_point" class="font-weight-bold text-dark"> Point</label>
+                    <input type="number" class="form-control" id="minimal_point" placeholder="Masukan Point" name="minimal_point" min="0">
                 </div>
             </div>
 

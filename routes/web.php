@@ -42,6 +42,8 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/SuperAdminData', 'Crud\userController@viewsuperadmin')->name('viewuser-superadmin');
 		Route::get('/Dashboard/CRUD/CreateUser', 'Crud\userController@create')->name('create-user');
 		Route::post('/Dashboard/CRUD/AddUser','Crud\UserController@addUser')->name('add-user');
+		Route::post('/Dashboard/CRUD/UpdateCustomer','Crud\UserController@updateUser')->name('update-user');
+		Route::get('/Dashboard/CRUD/DeleteUser/{id}','Crud\UserController@deleteUser')->name('delete-user');
 		
 
 	//Speedboat
@@ -52,6 +54,10 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 	//Jadwal
 		Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
 		Route::get('/Dashboard/CRUD/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
+		Route::post('/Dashboard/CRUD/AddJadwal','Crud\jadwalController@addJadwal')->name('add-jadwal');
+		Route::post('/Dashboard/CRUD/UpdateJadwal','Crud\jadwalController@updateJadwal')->name('update-jadwal');
+		Route::get('/Dashboard/CRUD/DeleteJadwal/{id}','Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
+
 	
 	//Pelabuhan
 		Route::get('/Dashboard/CRUD/PelabuhanData', 'Crud\pelabuhanController@view')->name('viewpelabuhan');
@@ -61,11 +67,16 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 	//Reward Speedboat
 		Route::get('/Dashboard/CRUD/RewardSpeedboatData', 'Crud\rewardSpeedboatController@view')->name('viewreward');
 		Route::get('/Dashboard/CRUD/CreateRewardSpeedboatData', 'Crud\rewardSpeedboatController@create')->name('create-reward');
+		Route::post('/Dashboard/CRUD/AddRewardSpeedboat','Crud\rewardSpeedboatController@addRewardSpeedboat')->name('add-rewardspeedboat');
+		Route::post('/Dashboard/CRUD/UpdateRewardSpeedboat','Crud\rewardSpeedboatController@updateRewardSpeedboat')->name('update-rewardspeedboat');
+		Route::get('/Dashboard/CRUD/DeleteRewardSpeedboat/{id}','Crud\rewardSpeedboatController@deleteRewardSpeedboat')->name('delete-rewardspeedboat');
 	
 	//Card
 		Route::get('/Dashboard/CRUD/Card', 'Crud\cardController@view')->name('viewcard');
 		Route::get('/Dashboard/CRUD/CreateCard', 'Crud\cardController@create')->name('create-card');
 		Route::post('/Dashboard/CRUD/AddCard','Crud\cardController@addCard')->name('add-card');
+		Route::post('/Dashboard/CRUD/UpdateCard','Crud\cardController@updateCard')->name('update-card');
+		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-user');
 
 });
 

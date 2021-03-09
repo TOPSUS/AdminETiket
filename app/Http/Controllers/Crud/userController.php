@@ -9,28 +9,32 @@ use App\Http\Controllers\Controller;
 class userController extends Controller
 {
     //
-     public function viewcustomer(){
-    	return view('Crud.userCustomer');
+    public function viewcustomer(){
+        $dataCustomer=\App\User::where('role','Customer')->get();
+    	return view('Crud.userCustomer', compact('dataCustomer'));
     }
 
     public function viewdirektur(){
-    	return view('Crud.userDirektur');
+        $dataDirektur=\App\User::where('role','Direktur')->with('speedboat')->get();
+    	return view('Crud.userDirektur', compact('dataDirektur'));
     }
 
     public function viewadmin(){
-    	return view('Crud.userAdmin');
+        $dataAdmin=\App\User::where('role','Admin')->with('speedboat')->get();
+    	return view('Crud.userAdmin', compact('dataAdmin'));
     }
 
     public function viewsuperadmin(){
-    	return view('Crud.userSuperAdmin');
+        $dataSAdmin=\App\User::where('role','SAdmin')->get();
+    	return view('Crud.userSuperAdmin', compact('dataSAdmin'));
     }
 
-    //FORM CREATE USER
+//FORM CREATE USER
     public function create(){
         return view('Crud.createUser');
     }
 
-    //CREATE USER
+//CREATE USER
     public function addUser(Request $request)
 	{
 		\App\User::create([
@@ -40,9 +44,34 @@ class userController extends Controller
 			'nohp'=>$request->nohp,
 			'email'=>$request->email,
 			'password'=>Hash::make($request->password),
-			'foto'=>$request->foto,
+			'foto'=>'avatar.png',
             'role'=>$request->role,
 		]);
-		return redirect('/Dashboard/CRUD/CreateUser');
+        return redirect()->back();
 	}
+
+//Update User
+    public function updateUser(Request $request){
+        $dataUpdate=\App\User::find($request->id_user);
+
+        $dataUpdate->nama=$request->nama;
+        $dataUpdate->alamat=$request->alamat;
+        $dataUpdate->jeniskelamin=$request->jeniskelamin;
+        $dataUpdate->nohp=$request->nohp;
+        $dataUpdate->email=$request->email;
+        $dataUpdate->foto=$request->foto;
+        $dataUpdate->role=$request->role;
+
+        $dataUpdate->save();
+        return redirect()->back();
+    }
+
+//Delete User
+public function deleteUser($id){
+    $deleteUser=\App\User::find($id);
+    $deleteUser->delete();
+
+    return redirect()->back();
+}
+
 }

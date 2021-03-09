@@ -54,58 +54,25 @@
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light">
-              <div class="col-12 text-center d-flex">
-                      <img src="{{ asset ('Lte/dist/img/reward.jpg') }}" alt="" class="img-square" style="width:300px;height:200px;">
-                    </div>
-                <div class="card-header text-muted border-bottom-0">
-                  Reward - Caspla Speedboat
-                </div>
-                
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <i class="fas fa-lg fa-donate"></i><b>POIN : 100</b>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                      <br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-gift"></i></span> Reward: Emas 10kg</li><br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-stopwatch"></i></span> Masa Berlaku : <br>30 February 2022</li>
-                      </ul>
-                    </div>
-                   
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Reward
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
 
+          @foreach($dataRewardSpeedboat as $rewardSpeedboat)
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
               <div class="col-12 text-center d-flex">
-                      <img src="{{ asset ('Lte/dist/img/reward.jpg') }}" alt="" class="img-square" style="width:300px;height:200px;">
+                      <img src="/reward/{{$rewardSpeedboat->foto}}" alt="" class="img-square" style="width:300px;height:200px;">
                     </div>
                 <div class="card-header text-muted border-bottom-0">
-                  Reward - Caspla Speedboat
+                  Reward - {{$rewardSpeedboat->speedboat->nama_speedboat}}
                 </div>
                 
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
-                      <i class="fas fa-lg fa-donate"></i><b>POIN : 100</b>
+                      <i class="fas fa-lg fa-donate"></i><b>POIN : {{$rewardSpeedboat->minimal_point}}</b>
                       <ul class="ml-4 mb-0 fa-ul text-muted">
                       <br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-gift"></i></span> Reward: Emas 10kg</li><br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-stopwatch"></i></span> Masa Berlaku : <br>30 February 2022</li>
+                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-gift"></i></span> Reward: {{$rewardSpeedboat->reward}}</li><br>
+                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-stopwatch"></i></span> Masa Berlaku : <br>{{$rewardSpeedboat->berlaku}}</li>
                       </ul>
                     </div>
                    
@@ -113,51 +80,17 @@
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
+                    <a href="/Dashboard/CRUD/DeleteRewardSpeedboat/{{$rewardSpeedboat->id}}" class="btn btn-sm bg-danger">
                       <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a data-toggle="modal" data-target="#update{{$rewardSpeedboat->id}}" href="#" class="btn btn-sm btn-primary">
                       <i class="fas fa-edit"></i> Edit Reward
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light">
-              <div class="col-12 text-center d-flex">
-                      <img src="{{ asset ('Lte/dist/img/reward.jpg') }}" alt="" class="img-square" style="width:300px;height:200px;">
-                    </div>
-                <div class="card-header text-muted border-bottom-0">
-                  Reward - Caspla Speedboat
-                </div>
-                
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <i class="fas fa-lg fa-donate"></i><b>POIN : 100</b>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                      <br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-gift"></i></span> Reward: Emas 10kg</li><br>
-                        <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-stopwatch"></i></span> Masa Berlaku : <br>30 February 2022</li>
-                      </ul>
-                    </div>
-                   
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Reward
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          @endforeach
 
           </div>
         </div>
@@ -186,13 +119,59 @@
   <!-- /.content-wrapper -->
 
   @include('adminDashboard/footer')
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+
+<!-- Modal Update -->
+@foreach($dataRewardSpeedboat as $oldRewardSpeedboat)
+  <div class="modal fade" id="update{{$oldRewardSpeedboat->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-rewardspeedboat') }}" method="POST">
+                @csrf
+                    <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
+                    <div class="form-group">
+                      <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
+                      <select name="id_speedboat" class="custom-select" required>
+                      <option value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}</option>
+                          @foreach($speedboat as $sp)
+                          <option value="{{$sp->id}}">{{$sp->nama_speedboat}}</option>
+                          @endforeach
+                     </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputFile">Nama Reward</label>
+                      <input type="text" class="form-control" id="reward" placeholder="Masukan Nama Reward" name="reward" value="{{$oldRewardSpeedboat->reward}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="berlaku" class="font-weight-bold text-dark">Berlaku Sampai</label>
+                      <input type="date" step="1" class="form-control" id="berlaku" placeholder="Masukan Asal Speedboat" name="berlaku" value="{{$oldRewardSpeedboat->berlaku}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="minimal_point" class="font-weight-bold text-dark"> Point</label>
+                      <input type="number" class="form-control" id="minimal_point" placeholder="Masukan Point" name="minimal_point" min="0" value="{{$oldRewardSpeedboat->minimal_point}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="InputName" class="font-weight-bold text-dark">Foto</label>
+                      <input type="file" id="exampleInputFile" name="foto">
+                    </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- ./wrapper -->
+@endforeach
+<!-- End Modal Update -->
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

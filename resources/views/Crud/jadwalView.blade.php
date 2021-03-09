@@ -69,35 +69,97 @@
                 </thead>
                 
                 <tbody>
-                
+                @foreach($dataJadwal as $jadwal)
                     <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a style="margin-right:7px" class="btn btn-info btn-sm" href="#"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger btn-sm" href="#" onclick="return confirm('Apakah Anda Yakin ?')"><i class="fas fa-trash"></i></a></td>
+                    <td>{{$jadwal->asal->nama_pelabuhan}}</td>
+                    <td>{{$jadwal->waktu_berangkat}}</td>
+                    <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
+                    <td>{{$jadwal->waktu_sampai}}</td>
+                    <td>{{$jadwal->speedboat->nama_speedboat}}</td>
+                    <td>
+                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteJadwal/{{$jadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" data-target="#update{{$jadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
+                    </td>
                     </tr>
-                
-
+                @endforeach
                 </tbody>
                 </table>
             </div>
             </div>
         </div>
         <!-- smpe sini -->
-
-        <!-- Content Row -->
-        <div class="row">
-        <form method="POST" enctype="multipart/form-data" action="/admin/profile">
-
-        </form>
-        </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
     @include('adminDashboard/footer')
+
+<!-- Modal Update -->
+@foreach($dataJadwal as $oldJadwal)
+  <div class="modal fade" id="update{{$oldJadwal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Jadwal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-jadwal') }}" method="POST">
+                @csrf
+                    <input type="hidden" name="id_jadwal" value="">
+                    <div class="form-group">
+                    <label for="id_asal_pelabuhan" class="font-weight-bold text-dark">Asal Pelabuhan</label>
+                      <select name="id_asal_pelabuhan" class="custom-select" required>
+                        <option value="{{$oldJadwal->id_asal_pelabuhan}}">{{$oldJadwal->asal->nama_pelabuhan}}</option>
+                        @foreach($pelabuhan as $pb)
+                        <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan Pelabuhan</label>
+                        <select name="id_tujuan_pelabuhan" class="custom-select" required>
+                          <option value="{{$oldJadwal->id_tujuan_pelabuhan}}">{{$oldJadwal->tujuan->nama_pelabuhan}}</option>
+                            @foreach($pelabuhan as $pb)
+                            <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
+                            @endforeach
+                        </select>
+                    </div>                
+                    <div class="form-group">
+                      <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
+                      <input type="time" step="1" class="form-control" id="waktu_berangkat" placeholder="Masukan Asal Speedboat" name="waktu_berangkat" value="{{$oldJadwal->waktu_berangkat}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
+                      <input type="time" step="1" class="form-control" id="waktu_sampai" placeholder="Masukan Tujuan Speedboat" name="waktu_sampai" value="{{$oldJadwal->waktu_sampai}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="id_speedboat" class="font-weight-bold text-dark">Speed Boat</label>
+                      <select name="id_speedboat" class="custom-select" required>
+                        <option value="{{$oldJadwal->id_speedboat}}">{{$oldJadwal->speedboat->nama_speedboat}}</option>
+                              @foreach($speedboat as $sb)
+                              <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
+                              @endforeach
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
+                      <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga Tiket" name="harga" value="{{$oldJadwal->harga}}" require>
+                    </div>
+                
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Modal Update -->
 
 
 
