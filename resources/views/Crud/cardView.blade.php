@@ -65,13 +65,12 @@
                 </thead>
                 
                 <tbody>
-                
+                @foreach($dataCard as $card)
                     <tr>
-                    <td></td>
+                    <td>{{$card->card}}</td>
                     <td><a style="margin-right:7px" class="btn btn-info btn-sm" href="#"><i class="fas fa-pencil-alt"></i></a><a class="btn btn-danger btn-sm" href="#" onclick="return confirm('Apakah Anda Yakin ?')"><i class="fas fa-trash"></i></a></td>
                     </tr>
-                
-
+                @endforeach
                 </tbody>
                 </table>
             </div>

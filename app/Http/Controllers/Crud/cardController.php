@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class cardController extends Controller
 {
-    //
+//View Card
     public function view(){
-    	return view('Crud.cardView');
+        $dataCard = \App\Card::all();
+    	return view('Crud.cardView', compact('dataCard'));
     }
 //Form Create
     public function create(){
@@ -22,6 +23,6 @@ class cardController extends Controller
     \App\Card::create([
         'card'=>$request->card
     ]);
-        return redirect('/Dashboard/CRUD/CreateCard');
+        return redirect('/Dashboard/CRUD/Card');
     }
 }
