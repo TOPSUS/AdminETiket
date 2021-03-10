@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class rewardSpeedboat extends Model
 {
     //
+    use SoftDeletes;
     protected $guarded = [];
     protected $table = 'tb_reward_speedboat';
     protected $fillable = [

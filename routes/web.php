@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+//ROUTE SUPER ADMIN -----------------------------------------------------------------------------------
 Route::group(['middleware'=>'SAdmin'],function(){
 Route::get('/Dashboard', 'Admin\adminController@index')->name('admin-home');
+
 
 Route::prefix('Admin')->group(function () {
 	Route::get('/Dashboard', 'Admin\adminController@index')->name('admin-home');
@@ -83,7 +84,7 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-user');
 
 });
-
+//ROUTE SUPER ADMIN END-----------------------------------------------------------------------------------
 
 //Route Login Register
 Route::get('/', 'loginController@index')->name('logins')->middleware('guest');

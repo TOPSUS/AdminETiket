@@ -16,6 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    use SoftDeletes;
     protected $guarded = [];
     protected $table = 'tb_user';
     
