@@ -50,37 +50,37 @@
 
     <!-- Main content -->
     <section class="content">
-
+    @foreach($dataSpeedboat as $speedboat)
       <!-- Default box -->
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
+        
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">Caspla Bali Seaview</h3>
               <div class="col-12">
-                <img src="{{ asset('Lte/dist/img/Caspla1.jpg') }}" class="product-image" alt="Product Image">
+                <img src="/speedboat/{{$speedboat->foto}}" class="product-image" alt="Product Image">
               </div>
               
             </div>
             <div class="col-12 col-sm-6">
-              <h3 class="my-3">Caspla Bali Seaview</h3>
-              <p>Caspla Bali Sea View Tours and Travel welcomes you to explore the Island of Nusa Penida which is known as a hidden paradise island in Bali.</p>
-              <h4 class="mt-3"><small>Max Capacity</small> 100 </h4>
+              <h3 class="my-3">{{$speedboat->nama_speedboat}}</h3>
+              <p>{{$speedboat->deskripsi}}</p>
+              <h4 class="mt-3"><small>Max Capacity</small> {{$speedboat->kapasitas}} </h4>
               <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
-                  Rp.100.000
+                  {{$speedboat->contact_service}}
                 </h2>
                 <h4 class="mt-0">
-                  <small>Harga /tiket </small>
+                  <small>Contact Service </small>
                 </h4>
               </div>
               <br>
              <div class="">
                   <div class="text-right">
-                    <a href="#" class="btn btn-sm bg-danger">
+                    <a href="/Dashboard/CRUD/DeleteSpeedboat/{{$speedboat->id}}" class="btn btn-sm bg-danger">
                       <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary">
+                    <a data-toggle="modal" data-target="#update{{$speedboat->id}}" href="#" class="btn btn-sm btn-primary">
                       <i class="fas fa-edit"></i> Edit Speedboat
                     </a>
                   </div>
@@ -96,89 +96,76 @@
               </div>
             </nav>
             <div class="tab-content p-3" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> Lorem Caspla Bali Sea View Tours and Travel welcomes you to explore the Island of Nusa Penida which is known as a hidden paradise island in Bali. To get to Nusa Penida Island we need 30 minutes only for crossing the sea from Sanur harbor using our Luxury speed boat with 200 HP X 3 engine with capacity 40 persons for each boat. Caspla Bali also provides services to cross to the island of Nusa Lembongan and Gili. Caspla Bali Boat Reguler Trip "Sanur to Nusa Penida". Motorized with 200x3 horse power rated under international maritime. Code of Safety, 13.00-meter length, 3.00-meter width. Boat Capacity for 45 persons completed with a life jacket, compass and radio calling GPRS Caspla Bali Boat is the best speed boat go to Nusa Penida used Caspla Bali 4 and have 6-year experience sea public transport to go Nusa Penida. </div>
+              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> {{$speedboat->deskripsi}}</div>
               <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> </div>
             </div>
+
           </div>
         </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
-      <!-- Default box -->
-      <div class="card card-solid">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">Caspla Bali Seaview</h3>
-              <div class="col-12">
-                <img src="{{ asset('Lte/dist/img/Caspla1.jpg') }}" class="product-image" alt="Product Image">
-              </div>
-              <div class="col-12 product-image-thumbs">
-                <div class="product-image-thumb active"><img src="{{ asset('Lte/dist/img/Caspla1.jpg') }}" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="{{ asset('Lte/dist/img/Caspla2.jpg') }}" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="{{ asset('Lte/dist/img/Caspla3.jpg') }}" alt="Product Image"></div>
-                <div class="product-image-thumb" ><img src="{{ asset('Lte/dist/img/Caspla5.jpg') }}" alt="Product Image"></div>
-              </div>
-            </div>
-            <div class="col-12 col-sm-6">
-              <h3 class="my-3">Caspla Bali Seaview</h3>
-              <p>Caspla Bali Sea View Tours and Travel welcomes you to explore the Island of Nusa Penida which is known as a hidden paradise island in Bali.</p>
-              <h4 class="mt-3"><small>Max Capacity</small> 100 </h4>
-              <div class="bg-gray py-2 px-3 mt-4">
-                <h2 class="mb-0">
-                  Rp.100.000
-                </h2>
-                <h4 class="mt-0">
-                  <small>Harga /tiket </small>
-                </h4>
-              </div>
-              
-              <div class="mt-4">
-                 <div class="btn btn-default btn-lg btn-flat">
-                  <i class="fas fa-id-badge fa-lg mr-2"></i> 
-                  Contact Info
-                </div>
-              </div>
-
-              <div class="mt-4 product-share">
-                <a href="#" class="text-gray">
-                  <i class="fab fa-facebook-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                  <i class="fab fa-twitter-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                  <i class="fas fa-envelope-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                  <i class="fas fa-rss-square fa-2x"></i>
-                </a>
-              </div>
-
-            </div>
-          </div>
-          <div class="row mt-4">
-            <nav class="w-100">
-              <div class="nav nav-tabs" id="product-tab" role="tablist">
-                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
-                <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Rating</a>
-              </div>
-            </nav>
-            <div class="tab-content p-3" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> Lorem Caspla Bali Sea View Tours and Travel welcomes you to explore the Island of Nusa Penida which is known as a hidden paradise island in Bali. To get to Nusa Penida Island we need 30 minutes only for crossing the sea from Sanur harbor using our Luxury speed boat with 200 HP X 3 engine with capacity 40 persons for each boat. Caspla Bali also provides services to cross to the island of Nusa Lembongan and Gili. Caspla Bali Boat Reguler Trip "Sanur to Nusa Penida". Motorized with 200x3 horse power rated under international maritime. Code of Safety, 13.00-meter length, 3.00-meter width. Boat Capacity for 45 persons completed with a life jacket, compass and radio calling GPRS Caspla Bali Boat is the best speed boat go to Nusa Penida used Caspla Bali 4 and have 6-year experience sea public transport to go Nusa Penida. </div>
-              <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> </div>
-            </div>
-          </div>
-        </div>
-        <!-- /.card-body -->
-      </div>
-      <!-- /.card -->
+    @endforeach
     </section>
+    
     <!-- /.content -->
   </div>
+
   <!-- /.content-wrapper -->
-    @include('adminDashboard/footer')
+  @include('adminDashboard/footer')
+
+<!-- Modal Update -->
+@foreach($dataSpeedboat as $oldSpeedboat)
+  <div class="modal fade" id="update{{$oldSpeedboat->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('update-speedboat') }}" method="POST">
+                @csrf
+                    <input type="hidden" name="id_speedboat" value="{{$oldSpeedboat->id}}">
+                    <div class="form-group">
+                      <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
+                      <input type="text" class="form-control" id="nama_speedboat" placeholder="Masukan Nama Speed Boat" name="nama_speedboat" value="{{$oldSpeedboat->nama_speedboat}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
+                      <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0" value="{{$oldSpeedboat->kapasitas}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
+                      <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service" value="{{$oldSpeedboat->contact_service}}" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
+                      <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi" value="" require> {{$oldSpeedboat->deskripsi}}</textarea>                    
+                      </div>
+                    <div class="form-group">
+                    <label for="exampleInputFile">Foto Speedboat</label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
+                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- End Modal Update -->
 
 
 

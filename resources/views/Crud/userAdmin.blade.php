@@ -189,8 +189,13 @@
                     </div>
                     
                     <div class="form-group">
-                      <label for="InputName" class="font-weight-bold text-dark">Foto</label>
-                      <input type="file" id="exampleInputFile" name="foto">
+                    <label for="exampleInputFile">Foto</label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
+                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="modal-footer">

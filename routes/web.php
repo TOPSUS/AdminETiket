@@ -50,6 +50,8 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/SpeedboatData', 'Crud\speedboatController@view')->name('viewspeedboat');
 		Route::get('/Dashboard/CRUD/CreateSpeedboat', 'Crud\speedboatController@create')->name('create-speedboat');
 		Route::post('/Dashboard/CRUD/AddSpeedboat','Crud\speedboatController@addSpeedboat')->name('add-speedboat');
+		Route::post('/Dashboard/CRUD/UpdateSpeedboat','Crud\speedboatController@updateSpeedboat')->name('update-speedboat');
+		Route::get('/Dashboard/CRUD/DeleteSpeedboat/{id}','Crud\speedboatController@deleteSpeedboat')->name('delete-speedboat');
 	
 	//Jadwal
 		Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
@@ -63,6 +65,8 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/PelabuhanData', 'Crud\pelabuhanController@view')->name('viewpelabuhan');
 		Route::get('/Dashboard/CRUD/CreatePelabuhan', 'Crud\pelabuhanController@create')->name('create-pelabuhan');
 		Route::post('/Dashboard/CRUD/AddPelabuhan','Crud\pelabuhanController@addPelabuhan')->name('add-pelabuhan');
+		Route::post('/Dashboard/CRUD/UpdatePelabuhan','Crud\pelabuhanController@updatePelabuhan')->name('update-pelabuhan');
+		Route::get('/Dashboard/CRUD/DeletePelabuhan/{id}','Crud\pelabuhanController@deletePelabuhan')->name('delete-pelabuhan');
 
 	//Reward Speedboat
 		Route::get('/Dashboard/CRUD/RewardSpeedboatData', 'Crud\rewardSpeedboatController@view')->name('viewreward');

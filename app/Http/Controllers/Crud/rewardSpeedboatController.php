@@ -33,7 +33,7 @@ class rewardSpeedboatController extends Controller
         ]);   
         return view('Crud.rewardSpeedboatView');
     }
-//Update Jadwal
+//Update Reward Speedboat
     public function updateRewardSpeedboat(Request $request){
         $dataUpdate=\App\rewardSpeedboat::find($request->id_reward_speedboat);
 
@@ -47,7 +47,7 @@ class rewardSpeedboatController extends Controller
         return redirect()->back();
 }
 
-    //Delete User
+//Delete Reward Speedboat
     public function deleteRewardSpeedboat($id){
         $deleteRewardSpeedboat=\App\rewardSpeedboat::find($id);
         $deleteRewardSpeedboat->delete();
