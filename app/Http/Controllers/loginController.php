@@ -25,7 +25,7 @@ class loginController extends Controller
                     }
                     elseif ($data->role=="Admin"){
                         session(['Admin'=>true]);
-                        return redirect('/UTIK');
+                        return redirect('/Home');
                     }
                     elseif ($data->role=="Direktur"){
                         session(['Direktur'=>true]);

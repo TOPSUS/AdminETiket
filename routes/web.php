@@ -92,8 +92,29 @@ Route::get('/Logout', 'loginController@logoutAdmin')->name('logouts');
 Route::post('/LoginAdmin','loginController@loginAdmin')->name('loginAdmin');
 Route::get('/Register','registerController@index')->name('register');
 
+//Admin
+Route::get('/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
+Route::get('/ProfileSpeedboat', 'Admin\adminSpeedboat@profile')->name('speedboatProfile');
+Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
+Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
 
+
+//CRUD Admin
+	//CRUD Berita Speedboat
+	Route::get('/BeritaSpeedboat', 'crudAdmin\beritaSpeedboatController@index')->name('beritaSpeedboat');
+	Route::get('/Berita/CreateBerita', 'crudAdmin\beritaSpeedboatController@create')->name('createBeritaSpeedboat');
+	Route::post('/Berita/AddBerita','crudAdmin\beritaSpeedboatController@addBerita')->name('addBerita');
+	Route::get('/BeritaSpeedboat/{id}/edit','crudAdmin\beritaSpeedboatController@editBerita');
+    route::post('/Berita/{id}/update','crudAdmin\beritaSpeedboatController@updateBerita')->name('updateBerita');
+	route::delete('/Berita/{id}/delete','crudAdmin\beritaSpeedboatController@deleteBerita')->name('deleteBerita');
+
+	//CRUD Berita Pelabuhan
+	Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
+	Route::get('/Berita/CreateBeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@create')->name('createBeritaPelabuhan');
+	Route::post('/Berita/AddBeritaPelabuhan','crudAdmin\beritaPelabuhanController@addBerita')->name('addBeritaPelabuhan');
+	Route::get('/BeritaPelabuhan/{id}/edit','crudAdmin\beritaPelabuhanController@editBerita');
+    route::post('/Berita/{id}/update','crudAdmin\beritaPelabuhanController@updateBerita')->name('updateBeritaPelabuhan');
+	route::delete('/Berita/{id}/delete','crudAdmin\beritaPelabuhanController@deleteBerita')->name('deleteBeritaPelabuhan');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
