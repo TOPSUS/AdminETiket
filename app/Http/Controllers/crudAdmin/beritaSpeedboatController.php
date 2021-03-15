@@ -66,12 +66,12 @@ class beritaSpeedboatController extends Controller
     
     //edit Berita
     public function editBerita($id){
-    	$Beritaa = \App\beritaSpeedboat::find($id);
-    	return view('CrudAdmin\editBeritaSpeedboat',compact('Beritaa'));
+    	$Beritaas = \App\beritaSpeedboat::find($id);
+    	return view('CrudAdmin\editBeritaSpeedboat',compact('Beritaas'));
     }
 
     //Update Berita
-    public function updateBerita($id, Request $request){
+    public function updateBeritas($id, Request $request){
         $IdUser=Auth::user()->id;
         $IdSpeedboat=\App\User::find(Auth::user()->id);
         $beritaspeedboat = \App\beritaSpeedboat::find($id);
@@ -106,7 +106,7 @@ class beritaSpeedboatController extends Controller
         return redirect('/BeritaSpeedboat');
     }
   
-    public function deleteBerita($id){
+    public function deleteBeritas($id){
         $deleteItem = \App\beritaSpeedboat::find($id);
         $deleteItem->delete();
         return redirect('/BeritaSpeedboat')->with('success','Berita berhasil dihapus!');

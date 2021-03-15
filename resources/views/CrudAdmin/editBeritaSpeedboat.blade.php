@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Create Jadwal</title>
+  <title>Dashboard | Edit Berita Speedboat</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -47,22 +47,22 @@
  <!-- Begin Page Content -->
  <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="/Berita/{{$Beritaa->id}}/update">
+        <form method="POST" enctype="multipart/form-data" action="/Beritas/{{$Beritaas->id}}/update">
         @csrf 
             <div class="form-group card-header">
             <div class="form-group">
                     <label for="judul" class="font-weight-bold text-dark">Judul</label>
                     <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita" 
-                    value="{{$Beritaa->judul}}" name="judul">
+                    value="{{$Beritaas->judul}}" name="judul">
                 </div>
                 <div class="form-group">
                     <label for="berita" class="font-weight-bold text-dark">Berita</label>
-                    <textarea id="berita" class="summernote" name="berita" required> {!! $Beritaa->berita !!}</textarea>
+                    <textarea id="berita" class="summernote" name="berita" required> {!! $Beritaas->berita !!}</textarea>
                 </div>
             </div>
             <div class="form-group card-header">
                 <a href="/BeritaSpeedboat"><button type="button" class="btn btn-secondary">Batal</button></a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Update Berita</button>
+                <button type="submit" class="btn btn-success">Update Berita</button>
             </div>
         </form>
     </div>

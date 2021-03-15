@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Create Jadwal</title>
+  <title>Dashboard | Edit Berita Pelabuhan</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -68,8 +68,8 @@
                 </div>
             </div>
             <div class="form-group card-header">
-                <a href="/BeritaSpeedboat"><button type="button" class="btn btn-secondary">Batal</button></a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Update Berita</button>
+                <a href="/BeritaPelabuhan"><button type="button" class="btn btn-secondary">Batal</button></a>
+                <button type="submit" class="btn btn-success">Update Berita</button>
             </div>
         </form>
     </div>

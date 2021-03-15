@@ -102,11 +102,11 @@ Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->nam
 //CRUD Admin
 	//CRUD Berita Speedboat
 	Route::get('/BeritaSpeedboat', 'crudAdmin\beritaSpeedboatController@index')->name('beritaSpeedboat');
-	Route::get('/Berita/CreateBerita', 'crudAdmin\beritaSpeedboatController@create')->name('createBeritaSpeedboat');
-	Route::post('/Berita/AddBerita','crudAdmin\beritaSpeedboatController@addBerita')->name('addBerita');
+	Route::get('/Beritas/CreateBerita', 'crudAdmin\beritaSpeedboatController@create')->name('createBeritaSpeedboat');
+	Route::post('/Beritas/AddBerita','crudAdmin\beritaSpeedboatController@addBerita')->name('addBerita');
 	Route::get('/BeritaSpeedboat/{id}/edit','crudAdmin\beritaSpeedboatController@editBerita');
-    route::post('/Berita/{id}/update','crudAdmin\beritaSpeedboatController@updateBerita')->name('updateBerita');
-	route::delete('/Berita/{id}/delete','crudAdmin\beritaSpeedboatController@deleteBerita')->name('deleteBerita');
+    route::post('/Beritas/{id}/update','crudAdmin\beritaSpeedboatController@updateBeritas')->name('updateBerita');
+	route::delete('/Beritas/{id}/delete','crudAdmin\beritaSpeedboatController@deleteBeritas')->name('deleteBerita');
 
 	//CRUD Berita Pelabuhan
 	Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');

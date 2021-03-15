@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Berita</title>
+  <title>Dashboard | Berita Speedboat</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -99,11 +99,11 @@
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="/Berita/{{$beritaSpeedboat->id}}/delete" method="POST">
+                                    <form action="/Beritas/{{$beritaSpeedboat->id}}/delete" method="POST">
                                       <div class="modal-body">
                                       {{ csrf_field() }}
                                       {{ method_field('delete') }}
-                                      Apakah Anda yakin menghapus pengumuman?</b>
+                                      Apakah anda yakin menghapus berita?</b>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
