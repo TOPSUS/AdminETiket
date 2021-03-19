@@ -128,6 +128,13 @@
             </a>
           </li>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('viewpembelian') }}" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p class="text">Data Pembelian</p>
+            </a>
+          </li>
+          </li>
 
           <li class="nav-header">About Us</li>
           <li class="nav-item">

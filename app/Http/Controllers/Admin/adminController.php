@@ -13,6 +13,7 @@ class adminController extends Controller
     }
 
     public function contact(){
-    	return view('Page.contactUs');
+        $dataSAdmin=\App\User::where('role','SAdmin')->get();
+    	return view('Page.contactUs', compact('dataSAdmin'));
     }
 }

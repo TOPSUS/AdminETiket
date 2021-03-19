@@ -27,7 +27,9 @@ Route::prefix('Admin')->group(function () {
 Route::get('/Dashboard/Speedboat', 'speedboatController@index')->name('speedboat');
 Route::get('/Dashboard/SpeedboatContact', 'speedboatController@contact')->name('speedboat-contact');
 
+//Berita
 Route::get('/Dashboard/Berita', 'beritaController@index')->name('berita');
+Route::get('/Dashboard/Berita/Create', 'beritaController@create')->name('create-berita');
 
 Route::get('/Dashboard/Pelabuhan', 'Crud\pelabuhanController@index')->name('pelabuhan');
 Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->name('pelabuhan-contact');
@@ -83,6 +85,12 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::post('/Dashboard/CRUD/UpdateCard','Crud\cardController@updateCard')->name('update-card');
 		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-user');
 
+	//Approve Pembelian
+		Route::get('/Dashboard/Pembelian', 'pembelianController@view')->name('viewpembelian');
+		Route::get('/Dashboard/DetailPembelian/{id}', 'pembelianController@detail')->name('detail-pembelian');
+		Route::get('/Dashboard/DetailPembelian/Approve/{id}', 'pembelianController@approve')->name('approve-pembelian');
+		Route::get('/Dashboard/DetailPembelian/Reject/{id}', 'pembelianController@reject')->name('reject-pembelian');
+
 });
 //ROUTE SUPER ADMIN END-----------------------------------------------------------------------------------
 
@@ -102,11 +110,11 @@ Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->nam
 //CRUD Admin
 	//CRUD Berita Speedboat
 	Route::get('/BeritaSpeedboat', 'crudAdmin\beritaSpeedboatController@index')->name('beritaSpeedboat');
-	Route::get('/Beritas/CreateBerita', 'crudAdmin\beritaSpeedboatController@create')->name('createBeritaSpeedboat');
-	Route::post('/Beritas/AddBerita','crudAdmin\beritaSpeedboatController@addBerita')->name('addBerita');
+	Route::get('/Berita/CreateBerita', 'crudAdmin\beritaSpeedboatController@create')->name('createBeritaSpeedboat');
+	Route::post('/Berita/AddBerita','crudAdmin\beritaSpeedboatController@addBerita')->name('addBerita');
 	Route::get('/BeritaSpeedboat/{id}/edit','crudAdmin\beritaSpeedboatController@editBerita');
-    route::post('/Beritas/{id}/update','crudAdmin\beritaSpeedboatController@updateBeritas')->name('updateBerita');
-	route::delete('/Beritas/{id}/delete','crudAdmin\beritaSpeedboatController@deleteBeritas')->name('deleteBerita');
+    route::post('/Berita/{id}/update','crudAdmin\beritaSpeedboatController@updateBerita')->name('updateBerita');
+	route::delete('/Berita/{id}/delete','crudAdmin\beritaSpeedboatController@deleteBerita')->name('deleteBerita');
 
 	//CRUD Berita Pelabuhan
 	Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');

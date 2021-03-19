@@ -12,6 +12,7 @@ class speedboatController extends Controller
     }
 
     public function contact(){
-    	return view('Page.speedboatContact');
+        $dataDirektur=\App\User::where('role','Direktur')->with('speedboat')->get();
+        return view('Page.speedboatContact', compact('dataDirektur'));
     }
 }

@@ -12,11 +12,16 @@ class Jadwal extends Model
     protected $guarded = [];
     protected $table = 'tb_jadwal';
     protected $fillable = [
-        'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_speedboat','harga'
+        'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_speedboat','harga','tanggal'
     ];
 
 //relasi ke tb speedboat
     public function speedboat()
+    {
+        return $this->belongsTo('App\Speedboat','id_speedboat','id');
+    }
+
+    public function speedboat1()
     {
         return $this->belongsTo('App\Speedboat','id_speedboat','id');
     }
@@ -31,5 +36,16 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Pelabuhan','id_tujuan_pelabuhan');
     }
+
+    public function asal1()
+    {
+        return $this->belongsTo('App\Pelabuhan','id_asal_pelabuhan');
+    }
+
+    public function tujuan1()
+    {
+        return $this->belongsTo('App\Pelabuhan','id_tujuan_pelabuhan');
+    }
+
 
 }

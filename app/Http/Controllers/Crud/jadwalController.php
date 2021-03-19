@@ -28,15 +28,23 @@ class jadwalController extends Controller
 //Create Jadwal
     public function addJadwal(Request $request)
     {
-        \App\Jadwal::create([
-            'waktu_berangkat'=>$request->waktu_berangkat,
-            'id_asal_pelabuhan'=>$request->id_asal_pelabuhan,
-            'waktu_sampai'=>$request->waktu_sampai,
-            'id_tujuan_pelabuhan'=>$request->id_tujuan_pelabuhan,
-            'id_speedboat'=>$request->id_speedboat,
-            'harga'=>$request->harga,
-        ]);   
-        return view('Crud.jadwalView');
+        $data = $request->daterange;
+        $period = explode(' - ',$data);
+        $date1 = \Carbon\Carbon::parse($period[0])->format('Y-m-d');
+        $date2 = \Carbon\Carbon::parse($period[1])->format('Y-m-d');
+        $period = \Carbon\CarbonPeriod::create($date1,$date2);
+        foreach ($period as $pd){
+            \App\Jadwal::create([
+                'waktu_berangkat'=>$request->waktu_berangkat,
+                'id_asal_pelabuhan'=>$request->id_asal_pelabuhan,
+                'waktu_sampai'=>$request->waktu_sampai,
+                'id_tujuan_pelabuhan'=>$request->id_tujuan_pelabuhan,
+                'id_speedboat'=>$request->id_speedboat,
+                'tanggal'=>$pd->toDateString(),
+                'harga'=>$request->harga,
+            ]);
+        }
+        return redirect('/Dashboard/CRUD/JadwalData');
 
     }
 
