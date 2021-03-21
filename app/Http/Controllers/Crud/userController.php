@@ -34,6 +34,17 @@ class userController extends Controller
         return view('Crud.createUser');
     }
 
+//FORM CREATE DIREKTUR
+public function createdirektur(){
+    return view('Crud.createDirektur');
+}
+
+//FORM CREATE ADMIN
+public function createadmin(){
+    $dataSpeedboat=\App\Speedboat::all();
+    return view('Crud.createAdmin', compact('dataSpeedboat'));
+}
+
 //CREATE USER
     public function addUser(Request $request)
 	{
@@ -47,8 +58,46 @@ class userController extends Controller
 			'foto'=>'avatar.png',
             'role'=>$request->role,
 		]);
-        return redirect()->back();
+        return redirect('/Dashboard/CRUD/CustomerData');
 	}
+
+//CREATE DIREKTUR
+public function addDirektur(Request $request)
+{
+
+    $dataSpeedboat = \App\Speedboat::create(['nama_speedboat'=>$request->nama_speedboat]);
+
+    \App\User::create([
+        'nama'=>$request->nama,
+        'alamat'=>$request->alamat,
+        'jeniskelamin'=>$request->jeniskelamin,
+        'nohp'=>$request->nohp,
+        'email'=>$request->email,
+        'password'=>Hash::make($request->password),
+        'foto'=>'avatar.png',
+        'id_speedboat'=>$dataSpeedboat->id,
+        'role'=>'Direktur',
+    ]);
+    return redirect('/Dashboard/CRUD/DirekturData');
+}
+
+//CREATE Admin
+public function addAdmin(Request $request)
+{
+    \App\User::create([
+        'nama'=>$request->nama,
+        'alamat'=>$request->alamat,
+        'jeniskelamin'=>$request->jeniskelamin,
+        'nohp'=>$request->nohp,
+        'email'=>$request->email,
+        'password'=>Hash::make($request->password),
+        'foto'=>'avatar.png',
+        'id_speedboat'=>$request->id_speedboat,
+        'role'=>'Admin',
+    ]);
+    return redirect('/Dashboard/CRUD/AdminData');
+}
+
 
 //Update User
     public function updateUser(Request $request){

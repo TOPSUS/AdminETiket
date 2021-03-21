@@ -35,12 +35,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>User Data</h1>
+            <h1>Data Direktur</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-user') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('create-direktur') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -54,7 +54,7 @@
  <!-- Begin Page Content -->
    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('add-user')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-direktur')}}">
             @csrf
             <div class="row card-header">
                 <div class="col">
@@ -90,10 +90,9 @@
                 <input type="password" class="form-control" id="password"  placeholder="Masukan Password" name="password">
             </div>
 
-            <div class="form-group card-header">
-                <label for="InputName" class="font-weight-bold text-dark">Role/Jabatan</label>
-                    <br><input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
-                    <input type="radio" name="role" value="SAdmin"> Super Admin
+            <div class="form-group card-header ">
+                <label for="nama_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
+                <input type="text" class="form-control" id="nama_speedboat"  placeholder="Masukan Nama Speedboat" name="nama_speedboat">
             </div>
 
             <div class="form-group card-header">

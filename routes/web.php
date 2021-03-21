@@ -55,6 +55,10 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/AdminData', 'Crud\userController@viewadmin')->name('viewuser-admin');
 		Route::get('/Dashboard/CRUD/SuperAdminData', 'Crud\userController@viewsuperadmin')->name('viewuser-superadmin');
 		Route::get('/Dashboard/CRUD/CreateUser', 'Crud\userController@create')->name('create-user');
+		Route::get('/Dashboard/CRUD/CreateDirektur', 'Crud\userController@createdirektur')->name('create-direktur');
+		Route::get('/Dashboard/CRUD/CreateAdmin', 'Crud\userController@createadmin')->name('create-admin');
+		Route::post('/Dashboard/CRUD/AddAdmin','Crud\UserController@addAdmin')->name('add-admin');
+		Route::post('/Dashboard/CRUD/AddDirektur','Crud\UserController@addDirektur')->name('add-direktur');
 		Route::post('/Dashboard/CRUD/AddUser','Crud\UserController@addUser')->name('add-user');
 		Route::post('/Dashboard/CRUD/UpdateCustomer','Crud\UserController@updateUser')->name('update-user');
 		Route::get('/Dashboard/CRUD/DeleteUser/{id}','Crud\UserController@deleteUser')->name('delete-user');
