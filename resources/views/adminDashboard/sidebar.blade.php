@@ -121,20 +121,30 @@
               <p class="text">Pelabuhan</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('berita') }}" class="nav-link">
-              <i class="nav-icon fas fa-newspaper"></i>
-              <p class="text">Berita</p>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-newspaper"></i>
+              <p class="text">Berita
+                <i class="fas fa-angle-left right"></i>
+              </p>
             </a>
-          </li>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('viewpembelian') }}" class="nav-link">
-              <i class="nav-icon fas fa-chart-bar"></i>
-              <p class="text">Data Pembelian</p>
-            </a>
-          </li>
-          </li>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('berita-pelabuhan') }}" class="nav-link">
+                    <i class="nav-icon fas fa-newspaper"></i>
+                      <p>Berita Pelabuhan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('berita-speedboat') }}" class="nav-link">
+                      <i class="nav-icon fas fa-newspaper"></i>
+                      <p>Berita Speedboat</p>
+                    </a>
+                  </li>
+                  
+              </li>
+            </ul> 
 
           <li class="nav-header">About Us</li>
           <li class="nav-item">

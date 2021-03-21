@@ -48,35 +48,32 @@
 
     <!-- Main content -->
     <section class="content">
-
+    @foreach($dataPelabuhan as $pelabuhan)
       <!-- Default box -->
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">Pelabuhan</h3>
+              <h3 class="d-inline-block d-sm-none">Caspla Bali Seaview</h3>
               <div class="col-12">
-                <img src="{{ asset('Lte/dist/img/pelabuhan1.jpg') }}" class="product-image" alt="Product Image">
+                <img src="/pelabuhan/{{$pelabuhan->foto}}" class="product-image" alt="Product Image">
               </div>
+              
             </div>
-
             <div class="col-12 col-sm-6">
-              <h3 class="my-3">Pelabuhan Sanur</h3>
-              <p>Pelabuhan Denpasar Sanur - Nusa Penida</p>
-            </div>
-              <div class="mt-4">
-                 <div class="btn btn-default btn-lg btn-flat">
-                  <i class="fas fa-id-badge fa-lg mr-2"></i> 
-                  Contact Info
-                </div>
-              </div>
-
+              <h3 class="my-3">Pelabuhan {{$pelabuhan->nama_pelabuhan}}</h3>
+              <p>{{$pelabuhan->deskripsi}}</p>
+              <br>
+             
             </div>
           </div>
           
+        </div>
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+
+    @endforeach
     </section>
     <!-- /.content -->
   </div>

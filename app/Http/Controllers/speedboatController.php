@@ -8,7 +8,8 @@ class speedboatController extends Controller
 {
     //
      public function index(){
-    	return view('Page.Speedboat');
+        $dataSpeedboat=\App\Speedboat::all();
+    	return view('Page.Speedboat',compact('dataSpeedboat'));
     }
 
     public function contact(){

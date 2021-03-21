@@ -9,7 +9,8 @@ class pelabuhanController extends Controller
 {
     //
     public function index(){
-    	return view('Page.Pelabuhan');
+        $dataPelabuhan=\App\Pelabuhan::all();
+    	return view('Page.Pelabuhan', compact('dataPelabuhan'));
     }
 
     public function contact(){

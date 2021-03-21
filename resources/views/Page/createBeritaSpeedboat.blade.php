@@ -33,11 +33,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tambah Berita Pelabuhan</h1>
+            <h1>Tambah Berita Speedboat</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><a href="{{ route('beritaPelabuhan') }}">Berita</a></li>
+              <li class="breadcrumb-item active"><a href="{{ route('berita-speedboat') }}">Berita</a></li>
               <li class="breadcrumb-item"> Tambah Berita
                 </a>
               </li>
@@ -52,7 +52,7 @@
         <!-- Begin Page Content -->
         <div class="card shadow mb-4">
             <div class="card shadow">
-                <form method="POST" enctype="multipart/form-data" action="{{route('addBeritaPelabuhan')}}">
+                <form method="POST" enctype="multipart/form-data" action="{{route('add-beritaSpeedboat')}}">
                 @csrf 
                     <div class="form-group card-header">
                     <div class="form-group">
@@ -60,12 +60,12 @@
                             <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita" name="judul">
                         </div>
                         <div class="form-group">
-                        <label for="pelabuhan" class="font-weight-bold text-dark">Pelabuhan</label>
-                        <select name="id_pelabuhan" id="id_pelabuhan" class="custom-select" required>
-                        <option>- Pilih Kategori Berita -</option>
-                        
-                          <option value=""></option>
-                          
+                        <label for="speedboat" class="font-weight-bold text-dark">Speedboat</label>
+                        <select name="id_speedboat" id="id_speedboat" class="custom-select" required>
+                        <option>- Pilih Speedboat -</option>
+                          @foreach($dataSpeedboat as $speedboat)
+                          <option value="{{$speedboat->id}}">{{$speedboat->nama_speedboat}}</option>
+                          @endforeach
                         </select>
                         </div>
                         <div class="form-group">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="form-group card-header">
-                        <a href="/BeritaPelabuhan"><button type="button" class="btn btn-secondary">Batal</button></a>
+                        <a href="/Berita"><button type="button" class="btn btn-secondary">Batal</button></a>
                         <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Tambah Berita</button>
                     </div>
                 </form>

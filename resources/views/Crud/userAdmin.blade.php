@@ -15,6 +15,12 @@
   <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset ('Lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset ('Lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+   <!-- Theme style -->
+   <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -52,6 +58,7 @@
 
       <!-- Default box -->
       <div class="card card-solid">
+
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
           @foreach($dataAdmin as $admin)
@@ -215,8 +222,31 @@
 <!-- Bootstrap 4 -->
 <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset ('Lte//dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset ('Lte/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset ('Lte/dist/js/demo.js') }}"></script>
+<!-- DataTables -->
+<script src="{{ asset ('Lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset ('Lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset ('Lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset ('Lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 </body>
 </html>

@@ -19,4 +19,9 @@ class beritaSpeedboat extends Model
     {
     	return $this->belongsTo('App\User','id_user','id');
     }
+
+    public function relasiSpeedboat()
+    {
+    	return $this->belongsTo('App\Speedboat','id_speedboat');
+    }
 }

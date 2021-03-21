@@ -27,10 +27,21 @@ Route::prefix('Admin')->group(function () {
 Route::get('/Dashboard/Speedboat', 'speedboatController@index')->name('speedboat');
 Route::get('/Dashboard/SpeedboatContact', 'speedboatController@contact')->name('speedboat-contact');
 
-//Berita
-Route::get('/Dashboard/Berita', 'beritaController@index')->name('berita');
-Route::get('/Dashboard/Berita/Create', 'beritaController@create')->name('create-berita');
+//Berita Pelabuhan
+Route::get('/Dashboard/BeritaPelabuhan', 'beritaController@indexPelabuhan')->name('berita-pelabuhan');
+Route::get('/Dashboard/BeritaPelabuhan/Create', 'beritaController@createBeritaPelabuhan')->name('create-beritaPelabuhan');
+Route::Post('/Dashboard/BeritaPelabuhan/AddBerita', 'beritaController@addBeritaPelabuhan')->name('add-beritaPelabuhan');
+route::delete('/Dashboard/BeritaPelabuhan/{id}/delete','beritaController@deleteBeritaPelabuhan')->name('delete-BeritaPelabuhan');
 
+
+//Berita Speedboat
+Route::get('/Dashboard/BeritaSpeedboat', 'beritaController@indexSpeedboat')->name('berita-speedboat');
+Route::get('/Dashboard/BeritaSpeedboat/Create', 'beritaController@createBeritaSpeedboat')->name('create-beritaSpeedboat');
+Route::Post('/Dashboard/BeritaSpeedboat/AddBerita', 'beritaController@addBeritaSpeedboat')->name('add-beritaSpeedboat');
+route::delete('/Dashboard/BeritaSpeedboat/{id}/delete','beritaController@deleteBeritaSpeedboat')->name('delete-beritaSpeedboat');
+
+
+//
 Route::get('/Dashboard/Pelabuhan', 'Crud\pelabuhanController@index')->name('pelabuhan');
 Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->name('pelabuhan-contact');
 
