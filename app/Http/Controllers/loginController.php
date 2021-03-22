@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class loginController extends Controller
 {
@@ -14,6 +15,12 @@ class loginController extends Controller
     }
 
     public function loginAdmin(Request $request){
+        $request->validate([
+            'email'=>['required','email'],
+            'password'=>['required'],
+            'g-recaptcha-response'=>'required|captcha',
+        ]);
+
         $data = \App\User::where('email',$request->email)->first();
         if($data){
             if(Hash::check($request->password, $data->password)) {
@@ -29,7 +36,7 @@ class loginController extends Controller
                     }
                     elseif ($data->role=="Direktur"){
                         session(['Direktur'=>true]);
-                        return redirect('/Love');
+                        return redirect('/');
                     }
                     else{
                         return redirect('/');

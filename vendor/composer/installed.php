@@ -6,11 +6,20 @@
     'aliases' => 
     array (
     ),
-    'reference' => '00ea2b46d95700217585c9bcb19ba6ea6d369117',
+    'reference' => '5ddfeec97d28bf51e51d95e06988fd2382c9076a',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
   array (
+    'anhskohbo/no-captcha' => 
+    array (
+      'pretty_version' => '3.3.0',
+      'version' => '3.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f654a4093bd2e9ddbdfad3297bb7aa142a55e611',
+    ),
     'asm89/stack-cors' => 
     array (
       'pretty_version' => '1.3.0',
@@ -422,7 +431,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '00ea2b46d95700217585c9bcb19ba6ea6d369117',
+      'reference' => '5ddfeec97d28bf51e51d95e06988fd2382c9076a',
     ),
     'laravel/tinker' => 
     array (
