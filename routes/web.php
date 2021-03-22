@@ -139,5 +139,12 @@ Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->nam
     route::post('/Berita/{id}/update','crudAdmin\beritaPelabuhanController@updateBerita')->name('updateBeritaPelabuhan');
 	route::delete('/Berita/{id}/delete','crudAdmin\beritaPelabuhanController@deleteBerita')->name('deleteBeritaPelabuhan');
 
+	//CRUD Jadwal
+	Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
+	Route::get('/Jadwal/CreateJadwal', 'crudAdmin\jadwalController@create')->name('createJadwal');
+	Route::post('/Jadwal/AddJadwal','crudAdmin\jadwalController@addJadwal')->name('addJadwal');
+    route::post('/Jadwal/update','crudAdmin\jadwalController@editJadwal')->name('editJadwal');
+	route::delete('/Jadwal/delete/{id}','crudAdmin\jadwalController@deleteJadwalSpeedboat')->name('deleteJadwal');
+
 Auth::routes();
 

@@ -39,7 +39,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-jadwal') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('createJadwal') }}"><i class="fas fa-plus"></i> Tambah Jadwal
                 </a>
               </li>
             </ol>
@@ -63,7 +63,7 @@
                     <th>Waktu Berangkat</th>
                     <th>Tujuan</th>
                     <th>Waktu Sampai</th>
-                    <th>Speed Boat</th>
+                    <th>Harga</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
@@ -77,7 +77,7 @@
                     <td>{{$dataJadwal->waktu_sampai}}</td>
                     <td>{{$dataJadwal->harga}}</td>
                     <td>
-                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteJadwal/{{$dataJadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" class="btn btn-sm bg-danger" data-target="#delete{{$dataJadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
                     <a data-toggle="modal" data-target="#update{{$dataJadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
                     </td>
                     </tr>
@@ -106,15 +106,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('update-jadwal') }}" method="POST">
+                <form action="{{ route('editJadwal') }}" method="POST">
                 @csrf
-                    <input type="hidden" name="id_jadwal" value="">
+                    <input type="hidden" name="id_jadwal" value="{{$oldJadwal->id}}">
                     <div class="form-group">
                     <label for="id_asal_pelabuhan" class="font-weight-bold text-dark">Asal Pelabuhan</label>
                       <select name="id_asal_pelabuhan" class="custom-select" required>
                         <option value="{{$oldJadwal->id_asal_pelabuhan}}">{{$oldJadwal->asal->nama_pelabuhan}}</option>
-                        @foreach($pelabuhan as $pb)
-                        <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
+                        @foreach($pelabuhanasal as $pa)
+                        <option value="{{$pa->id}}">{{$pa->nama_pelabuhan}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -122,8 +122,8 @@
                       <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan Pelabuhan</label>
                         <select name="id_tujuan_pelabuhan" class="custom-select" required>
                           <option value="{{$oldJadwal->id_tujuan_pelabuhan}}">{{$oldJadwal->tujuan->nama_pelabuhan}}</option>
-                            @foreach($pelabuhan as $pb)
-                            <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
+                            @foreach($pelabuhantujuan as $pt)
+                            <option value="{{$pt->id}}">{{$pt->nama_pelabuhan}}</option>
                             @endforeach
                         </select>
                     </div>                
@@ -151,6 +151,32 @@
 </div>
 @endforeach
 <!-- End Modal Update -->
+
+ <!-- Modal Delete -->
+ <div class="modal fade" id="delete{{$dataJadwal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Delete</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="/Jadwal/delete/{{$dataJadwal->id}}" method="POST">
+                                      <div class="modal-body">
+                                      {{ csrf_field() }}
+                                      {{ method_field('delete') }}
+                                      Apakah anda yakin menghapus berita?</b>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- End Modal Delete -->
 
 
 
