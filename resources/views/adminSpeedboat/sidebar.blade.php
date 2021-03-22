@@ -37,8 +37,8 @@
               <p class="text">Speedboat</p>
             </a>
           </li>
-            <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item">
+            <a href="{{ route('transaksiPembelian') }}" class="nav-link">
               <i class="nav-icon fas fa-credit-card"></i>
               <p class="text">Transaksi</p>
             </a>
@@ -62,13 +62,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('rewardSpeedboatView') }}" class="nav-link">
               <i class="nav-icon fas fa-gift"></i>
               <p class="text">Reward</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('reviewSpeedboat') }}" class="nav-link">
               <i class="nav-icon fas fa-star"></i>
               <p class="text">Review</p>
             </a>

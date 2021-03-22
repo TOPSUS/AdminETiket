@@ -36,6 +36,10 @@ class ComposerStaticInit97c3ef993fd0a9e7a138bd4d8895d66a
     );
 
     public static $prefixLengthsPsr4 = array (
+        'w' => 
+        array (
+            'willvincent\\Rateable\\' => 21,
+        ),
         'v' => 
         array (
             'voku\\' => 5,
@@ -173,6 +177,10 @@ class ComposerStaticInit97c3ef993fd0a9e7a138bd4d8895d66a
     );
 
     public static $prefixDirsPsr4 = array (
+        'willvincent\\Rateable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/willvincent/laravel-rateable/src',
+        ),
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
@@ -484,31 +492,62 @@ class ComposerStaticInit97c3ef993fd0a9e7a138bd4d8895d66a
     );
 
     public static $classMap = array (
+        'App\\Berita' => __DIR__ . '/../..' . '/app/Berita.php',
+        'App\\Card' => __DIR__ . '/../..' . '/app/Card.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\adminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/adminController.php',
+        'App\\Http\\Controllers\\Admin\\adminSpeedboat' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/adminSpeedboat.php',
+        'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
+        'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
+        'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
+        'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
+        'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Crud\\cardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/cardController.php',
+        'App\\Http\\Controllers\\Crud\\jadwalController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/jadwalController.php',
         'App\\Http\\Controllers\\Crud\\pelabuhanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/pelabuhanController.php',
+        'App\\Http\\Controllers\\Crud\\rewardSpeedboatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/rewardSpeedboatController.php',
         'App\\Http\\Controllers\\Crud\\speedboatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/speedboatController.php',
         'App\\Http\\Controllers\\Crud\\userController' => __DIR__ . '/../..' . '/app/Http/Controllers/Crud/userController.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\beritaController' => __DIR__ . '/../..' . '/app/Http/Controllers/beritaController.php',
+        'App\\Http\\Controllers\\crudAdmin\\beritaPelabuhanController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/beritaPelabuhanController.php',
+        'App\\Http\\Controllers\\crudAdmin\\beritaSpeedboatController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/beritaSpeedboatController.php',
+        'App\\Http\\Controllers\\crudAdmin\\jadwalController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/jadwalController.php',
+        'App\\Http\\Controllers\\crudAdmin\\reviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/reviewController.php',
+        'App\\Http\\Controllers\\crudAdmin\\rewardController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/rewardController.php',
+        'App\\Http\\Controllers\\crudAdmin\\transaksiPembelianController' => __DIR__ . '/../..' . '/app/Http/Controllers/crudAdmin/transaksiPembelianController.php',
         'App\\Http\\Controllers\\loginController' => __DIR__ . '/../..' . '/app/Http/Controllers/loginController.php',
+        'App\\Http\\Controllers\\pembelianController' => __DIR__ . '/../..' . '/app/Http/Controllers/pembelianController.php',
         'App\\Http\\Controllers\\registerController' => __DIR__ . '/../..' . '/app/Http/Controllers/registerController.php',
         'App\\Http\\Controllers\\speedboatController' => __DIR__ . '/../..' . '/app/Http/Controllers/speedboatController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\SAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/SAdmin.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Jadwal' => __DIR__ . '/../..' . '/app/Jadwal.php',
+        'App\\Pelabuhan' => __DIR__ . '/../..' . '/app/Pelabuhan.php',
+        'App\\Pembelian' => __DIR__ . '/../..' . '/app/Pembelian.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Review' => __DIR__ . '/../..' . '/app/Review.php',
+        'App\\Speedboat' => __DIR__ . '/../..' . '/app/Speedboat.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\beritaPelabuhan' => __DIR__ . '/../..' . '/app/beritaPelabuhan.php',
+        'App\\beritaSpeedboat' => __DIR__ . '/../..' . '/app/beritaSpeedboat.php',
+        'App\\detailPembelian' => __DIR__ . '/../..' . '/app/detailPembelian.php',
+        'App\\rewardSpeedboat' => __DIR__ . '/../..' . '/app/rewardSpeedboat.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
@@ -4981,6 +5020,9 @@ class ComposerStaticInit97c3ef993fd0a9e7a138bd4d8895d66a
         'phpDocumentor\\Reflection\\Types\\Void_' => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src/Types/Void_.php',
         'phpDocumentor\\Reflection\\Utils' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/Utils.php',
         'voku\\helper\\ASCII' => __DIR__ . '/..' . '/voku/portable-ascii/src/voku/helper/ASCII.php',
+        'willvincent\\Rateable\\Rateable' => __DIR__ . '/..' . '/willvincent/laravel-rateable/src/Rateable.php',
+        'willvincent\\Rateable\\RateableServiceProvider' => __DIR__ . '/..' . '/willvincent/laravel-rateable/src/RateableServiceProvider.php',
+        'willvincent\\Rateable\\Rating' => __DIR__ . '/..' . '/willvincent/laravel-rateable/src/Rating.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

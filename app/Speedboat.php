@@ -15,5 +15,9 @@ class Speedboat extends Model
         'nama_speedboat','kapasitas','deskripsi','foto','contact_service','tanggal_beroperasi',
     ];
 
-    
+    //relasi ke tb reward
+    public function reward() 
+    {
+        return $this->hasMany('App\rewardSpeedboat');
+    }
 }
