@@ -13,7 +13,7 @@ class beritaPelabuhanController extends Controller
 {
     //View Berita
     public function index(){
-        $berita=\App\beritaPelabuhan::with('relasiPelabuhan')->get();
+        $berita=\App\beritaPelabuhan::with('relasiPelabuhan')->orderBy('created_at','desc')->get();
         $pelabuhan=\App\beritaPelabuhan::all();
         return view('pageAdminSpeedboat.beritaPelabuhanAdmin', compact('berita'));
     }

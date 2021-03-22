@@ -13,13 +13,7 @@ class adminSpeedboat extends Controller
     	return view('adminSpeedboat.homeAdmin');
     }
 
-    public function profile(){
-        $IdAdmin=Auth::user()->id;
-        $dataAdmin=\App\User::find($IdAdmin);
-        $profile=\App\Speedboat::find($dataAdmin->id_speedboat);
-
-        return view('pageAdminSpeedboat.profileSpeedboat', compact('profile'));
-    }
+    
 
 
 }
