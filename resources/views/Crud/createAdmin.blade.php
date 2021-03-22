@@ -35,12 +35,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>User Data</h1>
+            <h1>Data Admin</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-user') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('create-admin') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -54,7 +54,7 @@
  <!-- Begin Page Content -->
    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('add-user')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-admin')}}">
             @csrf
             <div class="row card-header">
                 <div class="col">
@@ -91,9 +91,13 @@
             </div>
 
             <div class="form-group card-header">
-                <label for="InputName" class="font-weight-bold text-dark">Role/Jabatan</label>
-                    <br><input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
-                    <input type="radio" name="role" value="SAdmin"> Super Admin
+                <label for="speedboat" class="font-weight-bold text-dark">Speedboat</label>
+                <select name="id_speedboat" id="id_speedboat" class="custom-select" required>
+                <option>- Pilih Speedboat -</option>
+                    @foreach($dataSpeedboat as $speedboat)
+                    <option value="{{$speedboat->id}}">{{$speedboat->nama_speedboat}}</option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="form-group card-header">

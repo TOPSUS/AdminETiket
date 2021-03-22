@@ -10,6 +10,7 @@ class Jadwal extends Model
     //
     use SoftDeletes;
     protected $guarded = [];
+    protected $primarykey ='id';
     protected $table = 'tb_jadwal';
     protected $fillable = [
         'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_speedboat','harga','tanggal'
@@ -29,12 +30,12 @@ class Jadwal extends Model
 //relasi ke tb pelabuhan
     public function asal()
     {
-        return $this->belongsTo('App\Pelabuhan','id_asal_pelabuhan');
+        return $this->belongsTo('App\Pelabuhan','id_asal_pelabuhan','id');
     }
 
     public function tujuan()
     {
-        return $this->belongsTo('App\Pelabuhan','id_tujuan_pelabuhan');
+        return $this->belongsTo('App\Pelabuhan','id_tujuan_pelabuhan','id');
     }
 
     public function asal1()

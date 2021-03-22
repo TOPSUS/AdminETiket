@@ -47,51 +47,46 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
-
-      <!-- Default box -->
-      <div class="card card-solid">
-        <div class="card-body pb-0">
-          <div class="row d-flex align-items-stretch">
-          @foreach($dataCustomer as $customer)
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-              <div class="card bg-light">
-                <div class="card-header text-muted border-bottom-0">
-                  Customer
-                </div>
-                <div class="card-body pt-0">
-                  <div class="row">
-                    <div class="col-7">
-                      <h2 class="lead"><b>{{$customer->nama}}</b></h2>
-                      <ul class="ml-4 mb-0 fa-ul text-muted">
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{$customer->alamat}}</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : {{$customer->nohp}}</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-envelope"></i></span> Email : {{$customer->email}}</li>
-                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-venus-mars"></i></span> Gender : {{$customer->jeniskelamin}}</li>
-                      </ul>
-                    </div>
-                    <div class="col-5 text-center">
-                      <img src="/avatar/{{$customer->foto}}" alt="" class="img-circle img-fluid">
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="text-right">
-                    <a href="/Dashboard/CRUD/DeleteUser/{{$customer->id}}" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a data-toggle="modal" data-target="#update{{$customer->id}}" class="btn btn-sm btn-primary" href="#">
-                      <i class="fas fa-edit"></i> Edit Profile
-                    </a>
-                  </div>
-                </div>
-              </div>
+     <!-- Main content -->
+     <section class="content">
+        <hr style="margin-top: 20px" class="sidebar-divider my-0">
+        <!-- DataTales Example -->
+        <!-- Copy drisini -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                    <th>Nama User</th>
+                    <th>Alamat</th>
+                    <th>Jenis Kelamin</th>
+                    <th>No Hp</th>
+                    <th>Email</th>
+                    <th>Aksi</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                @foreach($dataCustomer as $customer)
+                    <tr>
+                    <td>{{$customer->nama}}</td>
+                    <td>{{$customer->alamat}}</td>
+                    <td>{{$customer->jeniskelamin}}</td>
+                    <td>{{$customer->nohp}}</td>
+                    <td>{{$customer->email}}</td>
+                    <td>
+                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteUser/{{$customer->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" data-target="#update{{$customer->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit User
+                    </td>
+                    </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
-          @endforeach
-
-          </div>
+      
         </div>
+        <!-- smpe sini -->
         <!-- /.card-body -->
         <div class="card-footer">
           <nav aria-label="Contacts Page Navigation">

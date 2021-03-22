@@ -14,7 +14,7 @@
           <img src="{{ asset('Lte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Super Admin</a>
+          <a href="#" class="d-block">Admin</a>
         </div>
       </div>
 
@@ -31,7 +31,7 @@
           
           <li class="nav-header">Page</li>
           <li class="nav-item has-treeview">
-           <li class="nav-item">
+           <li class="nav-item ">
             <a href="{{ route('speedboatProfile') }}" class="nav-link">
               <i class="nav-icon fas fa-ship"></i>
               <p class="text">Speedboat</p>
@@ -49,18 +49,30 @@
               <p class="text">Jadwal</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('beritaPelabuhan') }}" class="nav-link">
-              <i class="nav-icon fas fa-newspaper"></i>
-              <p class="text">Berita Pelabuhan</p>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-database"></i>
+              <p>
+                Berita
+                <i class="fas fa-angle-left right"></i>
+              </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('beritaSpeedboat') }}" class="nav-link">
-              <i class="nav-icon fas fa-newspaper"></i>
-              <p class="text">Berita Speedboat</p>
-            </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
+                <a href="{{ route('beritaPelabuhan') }}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Pelabuhan</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('beritaSpeedboat') }}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Speedboat</p>
+                </a>
+              </li>
+            </ul>
           <li class="nav-item">
             <a href="{{ route('rewardSpeedboatView') }}" class="nav-link">
               <i class="nav-icon fas fa-gift"></i>
