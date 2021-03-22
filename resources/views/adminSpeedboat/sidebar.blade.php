@@ -51,7 +51,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-database"></i>
+              <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Berita
                 <i class="fas fa-angle-left right"></i>
@@ -60,7 +60,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
                 <a href="{{ route('beritaPelabuhan') }}" class="nav-link">
-                  <i class="far fa-edit nav-icon"></i>
+                  <i class="nav-icon fas fa-monument"></i>
                   <p>Pelabuhan</p>
                 </a>
               </li>
@@ -68,7 +68,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('beritaSpeedboat') }}" class="nav-link">
-                  <i class="far fa-edit nav-icon"></i>
+                  <i class="nav-icon fas fa-ship"></i>
                   <p>Speedboat</p>
                 </a>
               </li>
