@@ -137,12 +137,12 @@
                     <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
                     <div class="form-group">
                       <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                      <select name="id_speedboat" class="custom-select" required>
-                      <option value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}</option>
+                      <input type="hidden" name="id_speedboat" value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}
+                    <!--  <option value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}</option> 
                           @foreach($speedboat as $sp)
-                          <option value="{{$sp->id}}">{{$sp->nama_speedboat}}</option>
+                          <input type="hidden" value="{{$sp->id}}">{{$sp->nama_speedboat}}</option>
                           @endforeach
-                     </select>
+                    -->
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Nama Reward</label>

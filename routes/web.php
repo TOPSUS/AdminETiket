@@ -120,7 +120,7 @@ Route::get('/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
 Route::get('/ProfileSpeedboat', 'Admin\adminSpeedboat@profile')->name('speedboatProfile');
 Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
 Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
-Route::get('/Reward', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+Route::get('/Reward', 'crudAdmin\rewardController@view')->name('rewardSpeedboatView');
 Route::get('/Review', 'crudAdmin\reviewController@index')->name('reviewSpeedboat');
 Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
 
@@ -142,7 +142,7 @@ Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('
 	route::delete('/Berita/{id}/delete','crudAdmin\beritaPelabuhanController@deleteBerita')->name('deleteBeritaPelabuhan');
 
 	//CRUD Reward Speedboat
-	Route::get('/Reward', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+	Route::get('/Reward', 'crudAdmin\rewardController@view')->name('rewardSpeedboatView');
 	Route::get('/Reward/CreateRewardSpeedboat', 'crudAdmin\rewardController@create')->name('createRewardSpeedboat');
 	Route::post('/Reward/AddRewardSpeedboat','crudAdmin\rewardController@addReward')->name('addRewardSpeedboat');
 	Route::post('/Reward/UpdateRewardSpeedboat','crudAdmin\rewardController@updateReward')->name('updateRewardSpeedboat');
