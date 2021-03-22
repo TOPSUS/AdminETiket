@@ -120,7 +120,9 @@ Route::get('/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
 Route::get('/ProfileSpeedboat', 'Admin\adminSpeedboat@profile')->name('speedboatProfile');
 Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
 Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
-
+Route::get('/Reward', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+Route::get('/Review', 'crudAdmin\reviewController@index')->name('reviewSpeedboat');
+Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
 
 //CRUD Admin
 	//CRUD Berita Speedboat
@@ -139,12 +141,17 @@ Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->nam
     route::post('/Berita/{id}/update','crudAdmin\beritaPelabuhanController@updateBerita')->name('updateBeritaPelabuhan');
 	route::delete('/Berita/{id}/delete','crudAdmin\beritaPelabuhanController@deleteBerita')->name('deleteBeritaPelabuhan');
 
-	//CRUD Jadwal
-	Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
-	Route::get('/Jadwal/CreateJadwal', 'crudAdmin\jadwalController@create')->name('createJadwal');
-	Route::post('/Jadwal/AddJadwal','crudAdmin\jadwalController@addJadwal')->name('addJadwal');
-    route::post('/Jadwal/update','crudAdmin\jadwalController@editJadwal')->name('editJadwal');
-	route::delete('/Jadwal/delete/{id}','crudAdmin\jadwalController@deleteJadwalSpeedboat')->name('deleteJadwal');
+	//CRUD Reward Speedboat
+	Route::get('/Reward', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+	Route::get('/Reward/CreateRewardSpeedboat', 'crudAdmin\rewardController@create')->name('createRewardSpeedboat');
+	Route::post('/Reward/AddRewardSpeedboat','crudAdmin\rewardController@addReward')->name('addRewardSpeedboat');
+	Route::post('/Reward/UpdateRewardSpeedboat','crudAdmin\rewardController@updateReward')->name('updateRewardSpeedboat');
+	Route::get('/Reward/DeleteRewardSpeedboat/{id}','crudAdmin\rewardController@deleteReward')->name('deleteRewardSpeedboat');
+	
+	//Transaksi Pembelian
+	Route::get('Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
+	Route::get('/DetailTransaksi/{id}', 'crudAdmin\transaksiPembelianController@detail')->name('detailTransaksi');
+	Route::get('/DetailTransaksi/Approve/{id}', 'crudAdmin\transaksiPembelianController@approve')->name('approveTransaksi');
+	Route::get('/DetailTransaksi/Reject/{id}', 'crudAdmin\transaksiPembelianController@reject')->name('rejectTransaksi');
 
 Auth::routes();
-

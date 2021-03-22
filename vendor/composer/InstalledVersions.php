@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '00ea2b46d95700217585c9bcb19ba6ea6d369117',
+    'reference' => '55e7fb3eab97ef76ad30e399f603eeec35fdee90',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -446,7 +446,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '00ea2b46d95700217585c9bcb19ba6ea6d369117',
+      'reference' => '55e7fb3eab97ef76ad30e399f603eeec35fdee90',
     ),
     'laravel/tinker' => 
     array (
@@ -1213,6 +1213,15 @@ private static $installed = array (
       ),
       'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
     ),
+    'willvincent/laravel-rateable' => 
+    array (
+      'pretty_version' => '2.3.0',
+      'version' => '2.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f6b3440dbf4b791b235ea4e4bd3fa7f87fed236e',
+    ),
   ),
 );
 private static $canGetVendors;
@@ -1436,7 +1445,6 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
-
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];
