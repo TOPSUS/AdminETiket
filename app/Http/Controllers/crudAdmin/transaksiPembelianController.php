@@ -4,16 +4,23 @@ namespace App\Http\Controllers\crudAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class transaksiPembelianController extends Controller
 {
     //
     public function index(){
+        $IdAdmin=Auth::user()->id;
+        $dataAdmin=\App\User::find($IdAdmin);
+        //$dataPembelian=\App\Pembelian::find($request->id_speedboat);
         $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
+
     	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('dataPembelian'));
     }
     //View Detail
     public function detail($id){
+        $IdAdmin=Auth::user()->id;
+        $IdSpeedboat=\App\User::find(Auth::user()->id);
     	$dataPembelian=\App\Pembelian::with('user','jadwal','detailPembelian')->where('id',$id)->first();
         $detailPembelian=\App\detailPembelian::where('id_pembelian',$dataPembelian->id)->get();
         $jumlah=0; 
@@ -31,7 +38,7 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Terkonfirmasi';
         $pembelian->save();
 
-        return redirect('DetailTransaksi');
+        return redirect('/DetailTransaksi');
     }
 
     //reject
@@ -40,6 +47,6 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Dibatalkan';
         $pembelian->save();
 
-        return redirect('DetailTransaksi');
+        return redirect('/DetailTransaksi');
     }
 }

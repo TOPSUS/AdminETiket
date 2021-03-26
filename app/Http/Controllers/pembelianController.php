@@ -12,7 +12,7 @@ class pembelianController extends Controller
         $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
     	return view('Page.approvePembelianView', compact('dataPembelian'));
     }
-//View Detail
+    //View Detail
     public function detail($id){
     	$dataPembelian=\App\Pembelian::with('user','jadwal','detailPembelian')->where('id',$id)->first();
         $detailPembelian=\App\detailPembelian::where('id_pembelian',$dataPembelian->id)->get();

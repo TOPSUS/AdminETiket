@@ -54,11 +54,12 @@
             <div class="row card-header">
                 <div class="col">
                     <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                    <select name="id_speedboat" class="custom-select" required>
-                    @foreach($speedboat as $sb)
+                    <input type="hidden" name="id_speedboat" value="{{$dataRewardSpeedboat->id_speedboat}}">{{$dataRewardSpeedboat->speedboat->nama_speedboat}}
+                  <!--
+                   @foreach($dataRewardSpeedboat as $rewardSpeedboat)
                      <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
                     @endforeach
-                </select>
+                  -->
                 </div>
                 <div class="col">
                    
