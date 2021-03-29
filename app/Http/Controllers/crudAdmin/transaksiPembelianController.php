@@ -15,12 +15,12 @@ class transaksiPembelianController extends Controller
         //$dataPembelian=\App\Pembelian::find($request->id_speedboat);
         $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
 
-    	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('dataPembelian'));
+    	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('IdAdmin', 'dataPembelian'));
     }
     //View Detail
     public function detail($id){
         $IdAdmin=Auth::user()->id;
-        $IdSpeedboat=\App\User::find(Auth::user()->id);
+        $IdSpeedboat=\App\User::find($IdAdmin);
     	$dataPembelian=\App\Pembelian::with('user','jadwal','detailPembelian')->where('id',$id)->first();
         $detailPembelian=\App\detailPembelian::where('id_pembelian',$dataPembelian->id)->get();
         $jumlah=0; 

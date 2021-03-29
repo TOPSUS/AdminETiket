@@ -5,7 +5,7 @@ namespace App\Http\Controllers\crudAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+
 
 class rewardController extends Controller
 {
@@ -16,16 +16,18 @@ class rewardController extends Controller
         $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
         //$speedboat=\App\rewardSpeedboat::get();
 
-    	return view('pageAdminSpeedboat.rewardSpeedboatAdmin', compact('speedboat','dataRewardSpeedboat'));
+    	return view('pageAdminSpeedboat.rewardSpeedboatAdmin', compact('dataRewardSpeedboat'));
     }
 
 //Form Create Reward Speedboat
     public function create(){
-
+        $IdAdmin=Auth::user()->id;
+        $dataAdmin=\App\User::find($IdAdmin);
         //$speedboat=\App\Speedboat::all();
-        //$dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
+        $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
 
-        return view('CrudAdmin.createRewardSpeedboat', compact('speedboat'));
+        return view('CrudAdmin.createRewardSpeedboat', compact('dataRewardSpeedboat'));
+        //return view('/RewardSpeedboat/CreateRewardSpeedboat');
     }
 
 //Create Reward Speedboat
@@ -43,7 +45,7 @@ class rewardController extends Controller
         $dataRewardSpeedboat-> id_user = $IdUser;
             
         $dataRewardSpeedboat->save();
-        return redirect('/Reward');
+        return redirect('/RewardSpeedboat');
     }
 //Update Reward Speedboat
     public function updateReward(Request $request){

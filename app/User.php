@@ -47,4 +47,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Speedboat','id_speedboat','id');
     }
+
+//relasi ke reward speedboat
+    public function reward()
+    {
+    
+    return $this->hasMany('App\rewardSpeedboat');
+    }
 }
