@@ -60,7 +60,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item has-treeview">
                 <a href="{{ route('beritaPelabuhan') }}" class="nav-link">
-                  <i class="nav-icon fas fa-monument"></i>
+                  <i class="nav-icon fas fa-newspaper"></i>
                   <p>Pelabuhan</p>
                 </a>
               </li>
@@ -68,7 +68,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('beritaSpeedboat') }}" class="nav-link">
-                  <i class="nav-icon fas fa-ship"></i>
+                  <i class="nav-icon fas fa-newspaper"></i>
                   <p>Speedboat</p>
                 </a>
               </li>

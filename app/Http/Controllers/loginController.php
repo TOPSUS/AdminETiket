@@ -14,6 +14,12 @@ class loginController extends Controller
     }
 
     public function loginAdmin(Request $request){
+        $request->validate([
+            'email'=>['required','email'],
+            'password'=>['required'],
+            'g-recaptcha-response'=>'required|captcha',
+        ]);
+        
         $data = \App\User::where('email',$request->email)->first();
         if($data){
             if(Hash::check($request->password, $data->password)) {

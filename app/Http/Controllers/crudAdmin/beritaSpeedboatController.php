@@ -15,7 +15,7 @@ class beritaSpeedboatController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $berita=\App\beritaSpeedboat::get();
+        $berita=\App\beritaSpeedboat::orderBy('created_at','desc')->get();
         //where('id_user', $dataAdmin->id)->get();
 
         return view('pageAdminSpeedboat.beritaSpeedboatAdmin', compact('berita'));

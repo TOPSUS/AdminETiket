@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/Facades/NoCaptcha.php',
+    'Anhskohbo\\NoCaptcha\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptcha.php',
+    'Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptchaServiceProvider.php',
     'App\\Berita' => $baseDir . '/app/Berita.php',
     'App\\Card' => $baseDir . '/app/Card.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
@@ -30,6 +33,7 @@ return array(
     'App\\Http\\Controllers\\crudAdmin\\beritaPelabuhanController' => $baseDir . '/app/Http/Controllers/crudAdmin/beritaPelabuhanController.php',
     'App\\Http\\Controllers\\crudAdmin\\beritaSpeedboatController' => $baseDir . '/app/Http/Controllers/crudAdmin/beritaSpeedboatController.php',
     'App\\Http\\Controllers\\crudAdmin\\jadwalController' => $baseDir . '/app/Http/Controllers/crudAdmin/jadwalController.php',
+    'App\\Http\\Controllers\\crudAdmin\\profileSpeedboatController' => $baseDir . '/app/Http/Controllers/crudAdmin/profileSpeedboatController.php',
     'App\\Http\\Controllers\\crudAdmin\\reviewController' => $baseDir . '/app/Http/Controllers/crudAdmin/reviewController.php',
     'App\\Http\\Controllers\\crudAdmin\\rewardController' => $baseDir . '/app/Http/Controllers/crudAdmin/rewardController.php',
     'App\\Http\\Controllers\\crudAdmin\\transaksiPembelianController' => $baseDir . '/app/Http/Controllers/crudAdmin/transaksiPembelianController.php',
