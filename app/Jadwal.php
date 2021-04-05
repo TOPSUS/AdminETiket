@@ -13,7 +13,7 @@ class Jadwal extends Model
     protected $primarykey ='id';
     protected $table = 'tb_jadwal';
     protected $fillable = [
-        'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_speedboat','harga','tanggal'
+        'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal','harga','tanggal'
     ];
 
 //relasi ke tb speedboat
@@ -25,6 +25,11 @@ class Jadwal extends Model
     public function speedboat1()
     {
         return $this->belongsTo('App\Speedboat','id_speedboat','id');
+    }
+
+    public function kapal()
+    {
+        return $this->belongsTo('App\Kapal','id_kapal','id');
     }
 
 //relasi ke tb pelabuhan

@@ -15,7 +15,9 @@ class reviewController extends Controller
     public function index(){
         
         //$review=\App\Review::where('id_speedboat', $dataUser->id)->get();
-        $review = Review::getAllReview();
+        //ambil Id speedboat/kapal yang dimiliki
+        $idKapal = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
+        $review = Review::with('pembelian','user')->get();
 
         return view('pageAdminSpeedboat.reviewSpeedboat', compact('review'));
 

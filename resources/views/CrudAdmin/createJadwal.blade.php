@@ -78,7 +78,7 @@
                   </select>
               </div>
               <div class="form-group">
-                  <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Tiba</label>
+                  <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
                   <input type="time" step="1" class="form-control" id="waktu_sampai" name="waktu_sampai">
               </div>
               <div class="form-group">

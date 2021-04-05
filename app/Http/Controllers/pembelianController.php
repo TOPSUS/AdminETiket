@@ -43,4 +43,9 @@ class pembelianController extends Controller
         return redirect('Dashboard/Pembelian');
     }
 
+    //pembelian
+    public function create(){
+        return view('CrudAdmin.createPembelian');
+    }
+
 }

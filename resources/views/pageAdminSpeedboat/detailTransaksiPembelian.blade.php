@@ -77,7 +77,7 @@
         <div class="col-sm-4 invoice-col">
           <b>Speedboat</b>
           <address>
-            {{$dataPembelian->jadwal->speedboat->nama_speedboat}}<br>
+            {{$dataPembelian->jadwal->kapal->nama_kapal}}<br>
             From : {{$dataPembelian->jadwal->waktu_berangkat}} - {{$dataPembelian->jadwal->asal->nama_pelabuhan}}<br>
             To :{{$dataPembelian->jadwal->waktu_sampai}} - {{$dataPembelian->jadwal->tujuan->nama_pelabuhan}}<br>
 

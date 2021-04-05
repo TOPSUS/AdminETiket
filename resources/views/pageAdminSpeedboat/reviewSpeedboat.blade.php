@@ -70,19 +70,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($review as $reviewlist)  
-                    @php 
-                    $title=DB::table('tb_speedboat')->select('title')->where('id',$reviewlist->id_speedboat)->get();
-                    @endphp
+                    @foreach($review as $reviewlist=> $rl)  
                         <tr>
-                            <td>{{$reviewlist->id}}</td>
-                            <td>{{$reviewlist->user['nama']}}</td>
-                            <td>@foreach($title as $data){{ $data->title}} @endforeach</td>
-                            <td>{{$reviewlist->review}}</td>
+                            <td>{{$reviewlist+1}}</td>
+                            <td>{{$rl->user->nama}}</td>
+                            <td>{{$rl->pembelian->jadwal->kapal->nama_kapal}}</td>
+                            <td>{{$rl->review}}</td>
                             <td>
                             <ul style="list-style:none">
                                 @for($i=1; $i<=5;$i++)
-                                @if($reviewlist->score >=$i)
+                                @if($rl->score >=$i)
                                     <li style="float:left;color:#F7941D;"><i class="fa fa-star"></i></li>
                                 @else 
                                     <li style="float:left;color:#F7941D;"><i class="far fa-star"></i></li>
@@ -90,12 +87,11 @@
                                 @endfor
                             </ul>
                             </td>
-                            <td>{{$reviewlist->created_at->format('M d D, Y g: i a')}}</td>
+                            <td>{{$rl->created_at}}</td>
                         </tr>  
                     @endforeach
                 </tbody>
             </table>
-            <span style="float:right">{{$review->links()}}</span>
             @else
             <h5 class="text-center">Tidak terdapat data review ! </h6>
             @endif

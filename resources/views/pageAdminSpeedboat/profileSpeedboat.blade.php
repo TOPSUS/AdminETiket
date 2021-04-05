@@ -39,12 +39,9 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              @if(!$profile){
-                <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i> Tambah Data
-                </a>
-              </li>
-              }
-              @endif
+              <li class="breadcrumb-item">Profile Speedboat</a></li>
+              <!-- <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i >Tambah Speedboat</a></li>
+               -->
             </ol>
           </div>
         </div>
@@ -55,6 +52,7 @@
     <section class="content">
 
       <!-- Default box -->
+      @foreach ($profiles as $i => $profile)
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
@@ -106,6 +104,7 @@
         </div>
         <!-- /.card-body -->
       </div>
+      @endforeach
       <!-- /.card -->
       <!-- /.card -->
     </section>

@@ -169,4 +169,8 @@ Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('
 	Route::get('/DetailTransaksi/Approve/{id}', 'crudAdmin\transaksiPembelianController@approve')->name('approveTransaksi');
 	Route::get('/DetailTransaksi/Reject/{id}', 'crudAdmin\transaksiPembelianController@reject')->name('rejectTransaksi');
 
+	//Pembelian
+	//Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+	Route::get('/Pembelian/CreatePembelian', 'pembelianController@create')->name('createPembelian');
+
 Auth::routes();

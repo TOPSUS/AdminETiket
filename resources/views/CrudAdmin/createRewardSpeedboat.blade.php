@@ -53,13 +53,14 @@
           @csrf
             <div class="row card-header">
                 <div class="col">
-                    <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                    <input type="hidden" name="id_speedboat" value="{{$dataRewardSpeedboat->id_speedboat}}">{{$dataRewardSpeedboat->speedboat->nama_speedboat}}
-                  <!--
-                   @foreach($dataRewardSpeedboat as $rewardSpeedboat)
-                     <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
-                    @endforeach
-                  -->
+                <div class="form-group">
+                      <label for="id_kapal" class="font-weight-bold text-dark">Kapal</label>
+                        <select name="id_kapal" class="custom-select" required>
+                            @foreach($speedboat as $sp)
+                            <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="col">
                    

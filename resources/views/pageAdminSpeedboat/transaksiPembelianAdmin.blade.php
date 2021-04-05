@@ -75,7 +75,7 @@
                     <td>{{$pembelian->user->nama}}</td>
                     <td>{{$pembelian->jadwal->waktu_berangkat}}</td>
                     <td>{{$pembelian->jadwal->asal->nama_pelabuhan}}</td>
-                    <td>{{$pembelian->jadwal->speedboat->nama_speedboat}}</td>
+                    <td>{{$pembelian->jadwal->kapal->nama_kapal}}</td>
                     <td>{{$pembelian->tanggal}}</td>
                     <td>{{$pembelian->status}}</td>
                     <td>
