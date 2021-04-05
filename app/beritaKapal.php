@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class beritaSpeedboat extends Model
+class beritaKapal extends Model
 {
     //
     use SoftDeletes;
@@ -22,6 +22,6 @@ class beritaSpeedboat extends Model
 
     public function relasiSpeedboat()
     {
-    	return $this->belongsTo('App\Speedboat','id_speedboat');
+    	return $this->belongsTo('App\Kapal','id_kapal');
     }
 }

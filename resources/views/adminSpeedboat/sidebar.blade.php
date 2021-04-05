@@ -34,12 +34,12 @@
            <li class="nav-item ">
             <a href="{{ route('speedboatProfile') }}" class="nav-link">
               <i class="nav-icon fas fa-ship"></i>
-              <p class="text">Speedboat</p>
+              <p class="text">Kapal</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('createPembelian')}}" class="nav-link">
-              <i class="nav-icon fas fa-credit-card"></i>
+              <i class="nav-icon fas fa-coins"></i>
               <p class="text">Pembelian</p>
             </a>
           </li>

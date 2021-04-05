@@ -58,9 +58,9 @@
                     <tr>
                     <th>Nama Speedboat</th>
                     <th>Asal</th>
-                    <th>Waktu Berangkat</th>
                     <th>Tujuan</th>
-                    <th>Waktu Sampai</th>
+                    <th>Waktu Berangkat</th>
+                    <th>Estimasi Waktu</th>
                     <th>Harga</th>
                     <th>Aksi</th>
                     </tr>
@@ -69,12 +69,12 @@
                 <tbody>
                 @foreach($jadwal as $dataJadwal)
                     <tr>
-                    <td>{{$dataJadwal->speedboat->nama_speedboat}}</td>
+                    <td>{{$dataJadwal->kapal->nama_kapal}}</td>
                     <td>{{$dataJadwal->asal->nama_pelabuhan}}</td>
-                    <td>{{$dataJadwal->waktu_berangkat}}</td>
                     <td>{{$dataJadwal->tujuan->nama_pelabuhan}}</td>
-                    <td>{{$dataJadwal->waktu_sampai}}</td>
-                    <td>{{$dataJadwal->harga}}</td>
+                    <td>{{$dataJadwal->waktu_berangkat}} - {{date('d F Y', strtotime($dataJadwal->tanggal))}}</td>
+                    <td>{{$dataJadwal->estimasi_waktu}} menit</td>
+                    <td>IDR {{number_format($dataJadwal->harga)}}</td>
                     <td>
                     <a data-toggle="modal" class="btn btn-sm bg-danger" data-target="#delete{{$dataJadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
                     <a data-toggle="modal" data-target="#update{{$dataJadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
@@ -99,7 +99,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Jadwal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Jadwal <strong>{{$oldJadwal->kapal->nama_kapal}}</strong></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,8 +131,12 @@
                       <input type="time" step="1" class="form-control" id="waktu_berangkat" placeholder="Masukan Asal Speedboat" name="waktu_berangkat" value="{{$oldJadwal->waktu_berangkat}}" require>
                     </div>
                     <div class="form-group">
-                      <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
-                      <input type="time" step="1" class="form-control" id="waktu_sampai" placeholder="Masukan Tujuan Speedboat" name="waktu_sampai" value="{{$oldJadwal->waktu_sampai}}" require>
+                      <label for="tanggal" class="font-weight-bold text-dark">Tanggal</label>
+                      <input type="date" step="1" class="form-control" id="tanggal" name="tanggal" value="{{$oldJadwal->tanggal}}">
+                    </div>
+                    <div class="form-group">
+                      <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu</label>
+                      <input type="number" step="1" class="form-control" id="estimasi_waktu" placeholder="Masukan Estimasi Waktu" name="estimasi_waktu" value="{{$oldJadwal->estimasi_waktu}}" require>
                     </div>
                     <div class="form-group">
                       <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
@@ -148,34 +152,36 @@
         </div>
     </div>
 </div>
+<!-- Modal Delete -->
+<div class="modal fade" id="delete{{$oldJadwal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <form action="/Jadwal/delete/{{$oldJadwal->id}}" method="POST">
+        <div class="modal-body">
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
+        Apakah anda yakin menghapus jadwal?</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal Delete -->
+
 @endforeach
 <!-- End Modal Update -->
 
- <!-- Modal Delete -->
- <div class="modal fade" id="delete{{$dataJadwal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Delete</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="/Jadwal/delete/{{$dataJadwal->id}}" method="POST">
-                                      <div class="modal-body">
-                                      {{ csrf_field() }}
-                                      {{ method_field('delete') }}
-                                      Apakah anda yakin menghapus jadwal?</b>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
-                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
-                                      </div>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- End Modal Delete -->
+ 
 
 
 

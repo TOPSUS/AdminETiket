@@ -61,24 +61,12 @@
         @csrf 
             <div class="form-group card-header">
               <div class="form-group">
-                <label for="pelabuhan_asal" class="font-weight-bold text-dark">Pelabuhan</label>
-                <select name="id_pelabuhan_asal" id="id_pelabuhan_asal" class="custom-select" required>
-                <option>- Asal -</option>
-                    
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="pelabuhan_tujuan" class="font-weight-bold text-dark">Pelabuhan</label>
-                <select name="id_pelabuhan_tujuan" id="id_pelabuhan_tujuan" class="custom-select" required>
-                <option>- Tujuan -</option>
-                    
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="jadwal" class="font-weight-bold text-dark">Pelabuhan</label>
+                <label for="jadwal" class="font-weight-bold text-dark">Jadwal</label>
                 <select name="jadwal" id="jadwal" class="custom-select" required>
                 <option>- Jadwal -</option>
-                    
+                    @foreach($jadwal as $jadwal)
+                    <option value="{{$jadwal->id}}">{{$jadwal->kapal->nama_kapal}} - {{$jadwal->asal->nama_pelabuhan}} - {{$jadwal->tujuan->nama_pelabuhan}} - {{$jadwal->waktu_berangkat}} - {{$jadwal->estimasi_waktu}} menit - Rp {{$jadwal->harga}}</option>
+                    @endforeach
                 </select>
               </div>
               <div class="form-group">
@@ -90,7 +78,7 @@
                           <span class="fas fa-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
+                    <input type="text" name="quant[2]" class="form-control input-number" value="0" min="1" max="100">
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-success btn-number ml-2" data-type="plus" data-field="quant[2]">
                           <span class="fas fa-plus"></span>
@@ -99,7 +87,9 @@
                 </div>
               </div>
               </div>
-
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Lanjut</button>
+              </div>
               
             
         </form>

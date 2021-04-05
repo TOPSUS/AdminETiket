@@ -55,6 +55,15 @@
         <form method="POST" enctype="multipart/form-data" action="{{route('addJadwal')}}">
         @csrf 
             <div class="form-group card-header">
+            <div class="form-group">
+                <label for="kapal" class="font-weight-bold text-dark">Kapal</label>
+                  <select name="id_kapal" id="id_kapal" class="custom-select" required>
+                    <option>- Pilih Kapal -</option>
+                    @foreach($dataKapal as $kp)
+                    <option value="{{$kp->id}}">{{$kp->nama_kapal}}</option>
+                    @endforeach
+                  </select>
+              </div>
               <div class="form-group">
                 <label for="asal" class="font-weight-bold text-dark">Asal</label>
                   <select name="id_asal_pelabuhan" id="id_asal_pelabuhan" class="custom-select" required>
@@ -64,10 +73,7 @@
                     @endforeach
                   </select>
               </div>
-              <div class="form-group">
-                  <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
-                  <input type="time" step="1" class="form-control" id="waktu_berangkat" name="waktu_berangkat">
-              </div>
+              
               <div class="form-group">
                 <label for="tujuan" class="font-weight-bold text-dark">Tujuan</label>
                   <select name="id_tujuan_pelabuhan" id="id_tujuan_pelabuhan" class="custom-select" required>
@@ -78,8 +84,16 @@
                   </select>
               </div>
               <div class="form-group">
-                  <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
-                  <input type="time" step="1" class="form-control" id="waktu_sampai" name="waktu_sampai">
+                  <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
+                  <input type="time" step="1" class="form-control" id="waktu_berangkat" name="waktu_berangkat">
+              </div>
+              <div class="form-group">
+                  <label for="tanggal" class="font-weight-bold text-dark">Tanggal</label>
+                  <input type="date" step="1" class="form-control" id="tanggal" name="tanggal">
+              </div>
+              <div class="form-group">
+                  <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu</label>
+                  <input type="number" step="1" class="form-control" id="estimasi_waktu" name="estimasi_waktu">
               </div>
               <div class="form-group">
                   <label for="harga" class="font-weight-bold text-dark">Harga</label>

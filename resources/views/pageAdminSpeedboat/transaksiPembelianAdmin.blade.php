@@ -59,8 +59,9 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                    <th class="text-center">No.</th>
                     <th>Nama Pembeli</th>
-                    <th>Jadwal</th>
+                    <th>Keberangkatan</th>
                     <th>Pelabuhan Asal</th>
                     <th>Speedboat</th>
                     <th>Tanggal Pembelian</th>
@@ -70,13 +71,14 @@
                 </thead>
                 
                 <tbody>
-                @foreach($dataPembelian as $pembelian)
+                @foreach($dataPembelian as $sp => $pembelian)
                     <tr>
+                    <td class="text-center">{{$sp+1}}</t>
                     <td>{{$pembelian->user->nama}}</td>
-                    <td>{{$pembelian->jadwal->waktu_berangkat}}</td>
+                    <td class="text-center">{{date('H:i', strtotime($pembelian->jadwal->waktu_berangkat))}}</td>
                     <td>{{$pembelian->jadwal->asal->nama_pelabuhan}}</td>
                     <td>{{$pembelian->jadwal->kapal->nama_kapal}}</td>
-                    <td>{{$pembelian->tanggal}}</td>
+                    <td>{{date('d F Y H:i', strtotime($pembelian->tanggal))}}</td>
                     <td>{{$pembelian->status}}</td>
                     <td>
                     <a class="btn btn-sm btn-primary" href="DetailTransaksi/{{$pembelian->id}}" ><i class="fas fa-eye"></i> 

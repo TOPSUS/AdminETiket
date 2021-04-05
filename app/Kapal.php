@@ -19,4 +19,9 @@ class Kapal extends Model
     {
         return $this->hasMany('App\hakAksesKapal');
     }
+
+    public function relasiJadwal() 
+    {
+        return $this->hasMany('App\Jadwal');
+    }
 }

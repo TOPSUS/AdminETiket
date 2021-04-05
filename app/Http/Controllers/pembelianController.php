@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class pembelianController extends Controller
 {
@@ -45,7 +46,16 @@ class pembelianController extends Controller
 
     //pembelian
     public function create(){
-        return view('CrudAdmin.createPembelian');
+        $IdAdmin=Auth::user()->id;
+        $dataAdmin=\App\User::find($IdAdmin);
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $jadwal=\App\Jadwal::whereIn('id_kapal', $hakAkses)->with('asal','tujuan','kapal')->get();
+        $pelabuhan=\App\Pelabuhan::all();
+        
+        $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
+        $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
+
+        return view('CrudAdmin.createPembelian', compact('jadwal'));
     }
 
 }

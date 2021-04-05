@@ -13,36 +13,36 @@ class jadwalController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $hakAkses=\App\hakAksesSpeedboat::where('id_user', $IdAdmin)->first();
-        $profile=\App\Speedboat::find($hakAkses->id_speedboat);
-        $jadwal=\App\Jadwal::where('id_speedboat', $profile->id)->with('asal','tujuan')->get();
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $jadwal=\App\Jadwal::whereIn('id_kapal', $hakAkses)->with('asal','tujuan','kapal')->get();
         $pelabuhan=\App\Pelabuhan::all();
         
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
-        $speedboat = \App\Speedboat::with('relasiJadwal')->get();
 
-        return view('pageAdminSpeedboat.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan', 'speedboat'));
+        return view('pageAdminSpeedboat.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan'));
 
     }
 
     //Form Jadwal
     public function create(){
+        $kapal=\App\hakAksesKapal::where('id_user', Auth::user()->id)->where('hak_akses','admin')->pluck('id_kapal');
+        $dataKapal=\App\Kapal::whereIn('id', $kapal)->get();
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
-        return view('CrudAdmin.createJadwal', compact('pelabuhanasal','pelabuhantujuan'));
+        return view('CrudAdmin.createJadwal', compact('pelabuhanasal','pelabuhantujuan','dataKapal'));
     }
 
     //Create Jadwal
     public function addJadwal(Request $request){
-        $IdSpeedboat=Auth::user()->id_speedboat;
         $jadwal = new \App\Jadwal();
 
         $jadwal->waktu_berangkat = $request->waktu_berangkat;
-        $jadwal->waktu_sampai = $request->waktu_sampai;
-        $jadwal->id_speedboat = $IdSpeedboat;
+        $jadwal->estimasi_waktu = $request->estimasi_waktu;
+        $jadwal->id_kapal = $request->id_kapal;
         $jadwal->id_asal_pelabuhan = $request->id_asal_pelabuhan;
         $jadwal->id_tujuan_pelabuhan = $request->id_tujuan_pelabuhan;
+        $jadwal->tanggal = $request->tanggal;
         $jadwal->harga = $request->harga;
         $jadwal->save();
         return redirect('/Jadwal');
@@ -51,15 +51,14 @@ class jadwalController extends Controller
 
     //Update Jadwal
     public function editJadwal(Request $request){
-        $IdSpeedboat=Auth::user()->id_speedboat;
         $dataUpdate=\App\Jadwal::find($request->id_jadwal);
 
         $dataUpdate->waktu_berangkat=$request->waktu_berangkat;
         $dataUpdate->id_asal_pelabuhan=$request->id_asal_pelabuhan;
-        $dataUpdate->waktu_sampai=$request->waktu_sampai;
+        $dataUpdate->estimasi_waktu=$request->estimasi_waktu;
         $dataUpdate->id_tujuan_pelabuhan =$request->id_tujuan_pelabuhan;
-        $dataUpdate->id_speedboat = $IdSpeedboat;
         $dataUpdate->harga=$request->harga;
+        $dataUpdate->tanggal = $request->tanggal;
 
         $dataUpdate->save();
         return redirect('/Jadwal');

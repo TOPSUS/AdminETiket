@@ -36,12 +36,12 @@
             <h1>Tambah Berita Pelabuhan</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active"><a href="{{ route('beritaPelabuhan') }}">Berita</a></li>
               <li class="breadcrumb-item"> Tambah Berita
                 </a>
               </li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->

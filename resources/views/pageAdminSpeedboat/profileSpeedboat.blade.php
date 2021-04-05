@@ -34,15 +34,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Speedboat</h1>
+            <h1>Kapal</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item">Profile Speedboat</a></li>
-              <!-- <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i >Tambah Speedboat</a></li>
-               -->
-            </ol>
+              <li class="breadcrumb-item">Profile Kapal</a></li>
+              <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i >Tambah Speedboat</a></li>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -57,13 +56,13 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">{{$profile->nama_speedboat}}</h3>
+              <h3 class="d-inline-block d-sm-none">{{$profile->nama_kapal}}</h3>
               <div class="col-12">
                 <img src="/speedboat_image/{{$profile->foto}}" class="product-image" alt="Product Image">
               </div>
             </div>
             <div class="col-12 col-sm-6">
-              <h3 class="my-3">{{$profile->nama_speedboat}}</h3>
+              <h3 class="my-3">{{$profile->nama_kapal}}</h3>
               <p>{{$profile->deskripsi}}</p>
               <h4 class="mt-3"><small>Max Capacity</small> {{$profile->kapasitas}} </h4>
               
@@ -79,11 +78,8 @@
 
               <div class="">
                   <div class="text-right">
-                    <a href="/ProfileSpeedboat/{{$profile->id}}/delete" class="btn btn-sm bg-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
                     <a data-toggle="modal" data-target="#update{{$profile->id}}" href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Speedboat
+                      <i class="fas fa-edit"></i> Edit Kapal
                     </a>
                   </div>
                 </div>
@@ -118,7 +114,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Kapal {{$profile->nama_kapal}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -126,17 +122,17 @@
             <div class="modal-body">
                 <form action="{{ route('updateSpeedboat') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                    <input type="hidden" name="id_speedboat" value="{{$profile->id}}">
+                    <input type="hidden" name="id_kapal" value="{{$profile->id}}">
                     <div class="form-group">
-                      <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
-                      <input type="text" class="form-control" id="nama_speedboat" placeholder="Masukan Nama Speed Boat" name="nama_speedboat" value="{{$profile->nama_speedboat}}" require>
+                      <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
+                      <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal" name="nama_kapal" value="{{$profile->nama_kapal}}" require>
                     </div>
                     <div class="form-group">
                       <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
                       <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0" value="{{$profile->kapasitas}}" require>
                     </div>
                     <div class="form-group">
-                      <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
+                      <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
                       <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service" value="{{$profile->contact_service}}" require>
                     </div>
                     <div class="form-group">
@@ -160,7 +156,6 @@
     </div>
 </div>
 <!-- End Modal Update -->
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
