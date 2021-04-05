@@ -58,7 +58,7 @@
               <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                 <div class="card bg-light">
                   <div class="card-header text-muted border-bottom-0">
-                    Direktur - {{$direktur->speedboat->nama_speedboat}}
+                    Direktur - 
                   </div>
                   <div class="card-body pt-0">
                     <div class="row">

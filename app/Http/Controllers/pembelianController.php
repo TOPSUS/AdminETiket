@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class pembelianController extends Controller
 {
     //
-    public function view(){
+    public function index(){
         $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
     	return view('Page.approvePembelianView', compact('dataPembelian'));
     }

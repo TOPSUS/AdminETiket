@@ -58,7 +58,7 @@
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
                 <div class="card-header text-muted border-bottom-0">
-                  Direktur - {{$direktur->speedboat->nama_speedboat}}
+                  Direktur - 
                 </div>
                 <div class="card-body pt-0">
                   <div class="row">
@@ -83,6 +83,12 @@
                     </a>
                     <a data-toggle="modal" data-target="#update{{$direktur->id}}" href="#" class="btn btn-sm btn-primary">
                       <i class="fas fa-edit"></i> Edit Profile
+                    </a>
+                    <a href="/Dashboard/CRUD/DirekturData/Speedboat/View/{{$direktur->id}}" class="btn btn-sm btn-success">
+                      <i class="fas fa-eye"></i> Speedboat
+                    </a>
+                    <a href="/Dashboard/CRUD/DirekturData/Kapal/View/{{$direktur->id}}" class="btn btn-sm btn-success">
+                      <i class="fas fa-eye"></i> Kapal
                     </a>
                   </div>
                 </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Speedboat</title>
+  <title>Dashboard | Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,12 +33,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Speedboat</h1>
+            <h1>Data Kapal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-speedboat') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('create-kapal') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -49,22 +49,20 @@
 
    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('add-speedboat')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-kapal')}}">
             @csrf
             <div class="row card-header">
                 <div class="col">
-                    <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
-                    <input type="text" class="form-control" id="nama_speedboat" placeholder="Masukan Nama Speed Boat" name="nama_speedboat">
+                    <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
+                    <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal" name="nama_kapal">
                 </div>
                 <div class="col">
-                    <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
-                    <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0">
                 </div>
             </div>
 
             <div class="row card-header">
                 <div class="col">
-                  <label for="exampleInputFile">Foto Speedboat</label>
+                  <label for="exampleInputFile">Foto Kapal</label>
                   <div class="input-group">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
@@ -76,14 +74,11 @@
                 <div class="col">
                   <label>Tanggal Beroperasi</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="date" step="1" class="form-control" id="tanggal_beroperasi" placeholder="Masukan Asal Speedboat" name="tanggal_beroperasi">
+                        <input type="date" step="1" class="form-control" id="tanggal_beroperasi" name="tanggal_beroperasi">
                         </div>
                     </div>
                 </div>
-              <div class="form-group card-header ">
-                  <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
-                  <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service">
-              </div>
+             
               <div class="form-group card-header ">
                   <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
                   <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi"></textarea>

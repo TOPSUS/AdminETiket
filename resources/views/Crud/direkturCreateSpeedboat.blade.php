@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Speedboat</title>
+  <title>Dashboard | Create Speedboat</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,12 +33,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Speedboat</h1>
+            <h1>Data Speedboat Direktur</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-speedboat') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="/Dashboard/CRUD/DirekturData/Speedboat/Create/{{$id1}}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -46,11 +46,12 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-   <div class="card shadow mb-4">
+<section class="content">
+    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('add-speedboat')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('direktur-addspeedboat')}}">
             @csrf
+            <input type="hidden" value="{{$id1}}" name="id_direktur">
             <div class="row card-header">
                 <div class="col">
                     <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
