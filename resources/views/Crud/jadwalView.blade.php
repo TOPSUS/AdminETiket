@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -59,6 +61,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                    <th>Tanggal</th>
                     <th>Asal</th>
                     <th>Waktu Berangkat</th>
                     <th>Tujuan</th>
@@ -71,6 +74,7 @@
                 <tbody>
                 @foreach($dataJadwal as $jadwal)
                     <tr>
+                    <td>{{$jadwal->tanggal}}</td>
                     <td>{{$jadwal->asal->nama_pelabuhan}}</td>
                     <td>{{$jadwal->waktu_berangkat}}</td>
                     <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
@@ -161,8 +165,6 @@
 @endforeach
 <!-- End Modal Update -->
 
-
-
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
@@ -173,4 +175,9 @@
 <script src="{{ asset ('Lte/dist/js/demo.js') }}"></script>
 
 </body>
+<script>
+$(document).ready( function () {
+    $('#dataTable').DataTable();
+} );
+</script>
 </html>

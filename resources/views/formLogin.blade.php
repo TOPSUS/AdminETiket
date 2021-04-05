@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>E-TIKET Speedboat | Log in</title>
+  <title>E-TIKET Pelabuhan | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ route('logins') }}"><b>Login</b>&nbsp E-Tiket Speedboat</a>
+    <a href="{{ route('logins') }}"><b>Login</b>&nbsp E-Tiket Pelabuhan</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -66,7 +66,8 @@
             </span>
         @endif
           <!-- /.col -->
-          <div class="col-4">
+          <br>
+          <div class="col-5">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
           <!-- /.col -->

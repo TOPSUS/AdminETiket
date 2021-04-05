@@ -32,7 +32,7 @@ class speedboatController extends Controller
     return redirect('/Dashboard/CRUD/CreateSpeedboat');
 }
 
-//Update User
+//Update Speedboat
 public function updateSpeedboat(Request $request){
     $dataUpdate=\App\Speedboat::find($request->id_speedboat);
 
@@ -47,7 +47,7 @@ public function updateSpeedboat(Request $request){
     return redirect()->back();
 }
 
-//Delete User
+//Delete Speedboat
     public function deleteSpeedboat($id){
     $deleteSpeedboat=\App\Speedboat::find($id);
     $deleteSpeedboat->delete();

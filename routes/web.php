@@ -26,6 +26,7 @@ Route::prefix('Admin')->group(function () {
 //Route Page
 Route::get('/Dashboard/Speedboat', 'speedboatController@index')->name('speedboat');
 Route::get('/Dashboard/SpeedboatContact', 'speedboatController@contact')->name('speedboat-contact');
+Route::get('/Dashboard/Ferry', 'kapalController@index')->name('kapal');
 
 //Berita Pelabuhan
 Route::get('/Dashboard/BeritaPelabuhan', 'beritaController@indexPelabuhan')->name('berita-pelabuhan');
@@ -45,6 +46,15 @@ route::delete('/Dashboard/BeritaSpeedboat/{id}/delete','beritaController@deleteB
 Route::get('/Dashboard/Pelabuhan', 'Crud\pelabuhanController@index')->name('pelabuhan');
 Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->name('pelabuhan-contact');
 
+//Direktur Speedboat
+Route::get('/Dashboard/CRUD/DirekturData/Speedboat/View/{id}', 'direkturController@speedboat')->name('direktur-speedboat');
+Route::get('/Dashboard/CRUD/DirekturData/Speedboat/Create/{id}', 'direkturController@createspeedboat')->name('direktur-createspeedboat');
+Route::Post('/Dashboard/CRUD/DirekturData/Speedboat/Add', 'direkturController@addSpeedboat')->name('direktur-addspeedboat');
+
+//Direktur Kapal
+Route::get('/Dashboard/CRUD/DirekturData/Kapal/View/{id}', 'direkturController@kapal')->name('direktur-kapal');
+Route::get('/Dashboard/CRUD/DirekturData/Kapal/Create/{id}', 'direkturController@createkapal')->name('direktur-createkapal');
+Route::Post('/Dashboard/CRUD/DirekturData/Kapal/Add', 'direkturController@addKapal')->name('direktur-addkapal');
 
 
 
@@ -71,12 +81,27 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::post('/Dashboard/CRUD/UpdateSpeedboat','Crud\speedboatController@updateSpeedboat')->name('update-speedboat');
 		Route::get('/Dashboard/CRUD/DeleteSpeedboat/{id}','Crud\speedboatController@deleteSpeedboat')->name('delete-speedboat');
 	
+	//Speedboat
+		Route::get('/Dashboard/CRUD/KapalData', 'Crud\kapalController@view')->name('viewkapal');
+		Route::get('/Dashboard/CRUD/CreateKapal', 'Crud\kapalController@create')->name('create-kapal');
+		Route::post('/Dashboard/CRUD/AddKapal','Crud\kapalController@addKapal')->name('add-kapal');
+		Route::post('/Dashboard/CRUD/UpdateKapal','Crud\kapalController@updateKapal')->name('update-kapal');
+		Route::get('/Dashboard/CRUD/DeleteKapal/{id}','Crud\kapalController@deleteKapal')->name('delete-kapal');
+
+	
 	//Jadwal
 		Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
 		Route::get('/Dashboard/CRUD/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
 		Route::post('/Dashboard/CRUD/AddJadwal','Crud\jadwalController@addJadwal')->name('add-jadwal');
 		Route::post('/Dashboard/CRUD/UpdateJadwal','Crud\jadwalController@updateJadwal')->name('update-jadwal');
 		Route::get('/Dashboard/CRUD/DeleteJadwal/{id}','Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
+	
+	//Jadwal Kapal
+		Route::get('/Dashboard/CRUD/JadwalKapalData', 'Crud\jadwalKapalController@view')->name('viewjadwalkapal');
+		Route::get('/Dashboard/CRUD/CreateJadwalKapal', 'Crud\jadwalKapalController@create')->name('create-jadwalkapal');
+		Route::post('/Dashboard/CRUD/AddJadwalKapal','Crud\jadwalKapalController@addJadwal')->name('add-jadwalkapal');
+		Route::post('/Dashboard/CRUD/UpdateJadwalKapal','Crud\jadwalKapalController@updateJadwal')->name('update-jadwalkapal');
+		Route::get('/Dashboard/CRUD/DeleteJadwalKapal/{id}','Crud\jadwalKapalController@deleteJadwal')->name('delete-jadwalkapal');
 
 	
 	//Pelabuhan
@@ -101,10 +126,12 @@ Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->n
 		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-user');
 
 	//Approve Pembelian
-		Route::get('/Dashboard/Pembelian', 'pembelianController@view')->name('viewpembelian');
-		Route::get('/Dashboard/DetailPembelian/{id}', 'pembelianController@detail')->name('detail-pembelian');
-		Route::get('/Dashboard/DetailPembelian/Approve/{id}', 'pembelianController@approve')->name('approve-pembelian');
-		Route::get('/Dashboard/DetailPembelian/Reject/{id}', 'pembelianController@reject')->name('reject-pembelian');
+		Route::get('/Dashboard/CRUD/Pembelian', 'pembelianController@index')->name('viewpembelian');
+		Route::get('/Dashboard/CRUD/DetailPembelian/{id}', 'pembelianController@detail')->name('detail-pembelian');
+		Route::get('/Dashboard/CRUD/DetailPembelian/Approve/{id}', 'pembelianController@approve')->name('approve-pembelian');
+		Route::get('/Dashboard/CRUD/DetailPembelian/Reject/{id}', 'pembelianController@reject')->name('reject-pembelian');
+	
+
 
 });
 //ROUTE SUPER ADMIN END-----------------------------------------------------------------------------------

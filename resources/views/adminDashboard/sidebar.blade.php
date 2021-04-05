@@ -81,6 +81,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('viewkapal') }}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Kapal</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('viewpelabuhan') }}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Pelabuhan</p>
@@ -90,6 +96,12 @@
                 <a href="{{ route('viewjadwal') }}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Jadwal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('viewjadwalkapal') }}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Jadwal Kapal</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -104,6 +116,7 @@
                   <p>Card</p>
                 </a>
               </li>
+              
             </ul>
           </li>
 
@@ -115,10 +128,22 @@
               <p class="text">Speedboat</p>
             </a>
           </li>
-            <li class="nav-item">
+          <li class="nav-item">
+            <a href="{{ route('kapal') }}" class="nav-link">
+              <i class="nav-icon fas fa-ship"></i>
+              <p class="text">Kapal</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ route('pelabuhan') }}" class="nav-link">
               <i class="nav-icon fas fa-monument"></i>
               <p class="text">Pelabuhan</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('viewpembelian') }}" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p class="text">Pembelian</p>
             </a>
           </li>
 
