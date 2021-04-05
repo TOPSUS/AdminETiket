@@ -5,34 +5,31 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Jadwal extends Model
+class jadwalKapal extends Model
 {
-    //
+ //
     use SoftDeletes;
     protected $guarded = [];
     protected $primarykey ='id';
-    protected $table = 'tb_jadwal';
+    protected $table = 'tb_jadwal_kapal';
     protected $fillable = [
-        'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal','harga','tanggal'
+        'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_kapal','harga','tanggal'
     ];
 
-//relasi ke tb speedboat
-    public function speedboat()
-    {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
-    }
-
-    public function speedboat1()
-    {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
-    }
-
+    //relasi ke tb kapal
     public function kapal()
+    {
+        return $this->belongsTo('App\Kapal','id_kapal','id');
+        
+    }
+    public function kapal1()
     {
         return $this->belongsTo('App\Kapal','id_kapal','id');
     }
 
-//relasi ke tb pelabuhan
+
+
+    //relasi ke tb pelabuhan
     public function asal()
     {
         return $this->belongsTo('App\Pelabuhan','id_asal_pelabuhan','id');
@@ -52,6 +49,7 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Pelabuhan','id_tujuan_pelabuhan');
     }
+
 
 
 }

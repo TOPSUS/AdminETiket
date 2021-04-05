@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class pembelianController extends Controller
 {
     //
-    public function view(){
+    public function index(){
         $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
     	return view('Page.approvePembelianView', compact('dataPembelian'));
     }
@@ -41,6 +41,11 @@ class pembelianController extends Controller
         $pembelian->save();
 
         return redirect('Dashboard/Pembelian');
+    }
+
+    //pembelian
+    public function create(){
+        return view('CrudAdmin.createPembelian');
     }
 
 }

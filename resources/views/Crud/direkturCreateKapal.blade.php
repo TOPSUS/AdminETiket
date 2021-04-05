@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Create Reward</title>
+  <title>Dashboard | Create Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
    <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('adminDashboard/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('adminDashboard/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -33,12 +33,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Reward Speedboat</h1>
+            <h1>Data Kapal Direktur</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('adminSpeedboatHome') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('createRewardSpeedboat') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
+              <li class="breadcrumb-item active"><a href="/Dashboard/CRUD/DirekturData/Kapal/Create/{{$id1}}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -46,35 +46,22 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-   <div class="card shadow mb-4">
+<section class="content">
+    <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('addRewardSpeedboat')}}">
-          @csrf
+        <form method="POST" enctype="multipart/form-data" action="{{route('direktur-addkapal')}}">
+            @csrf
+            <input type="hidden" value="{{$id1}}" name="id_direktur">
             <div class="row card-header">
                 <div class="col">
-                <div class="form-group">
-                      <label for="id_kapal" class="font-weight-bold text-dark">Kapal</label>
-                        <select name="id_kapal" class="custom-select" required>
-                            @foreach($speedboat as $sp)
-                            <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                   
+                    <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
+                    <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal" name="nama_kapal">
                 </div>
             </div>
 
             <div class="row card-header">
                 <div class="col">
-                <label for="exampleInputFile">Nama Reward</label>
-                <input type="text" class="form-control" id="reward" placeholder="Masukan Nama Reward" name="reward">
-                </div>
-
-                <div class="col">
-                <label for="exampleInputFile">Foto Reward</label>
+                  <label for="exampleInputFile">Foto Kapal</label>
                   <div class="input-group">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
@@ -83,18 +70,18 @@
                   </div>
                 </div>
 
-            </div>
-
-            <div class="row card-header">
                 <div class="col">
-                    <label for="berlaku" class="font-weight-bold text-dark">Berlaku Sampai</label>
-                    <input type="date" step="1" class="form-control" id="berlaku" placeholder="Masukan Asal Speedboat" name="berlaku">
+                  <label>Tanggal Beroperasi</label>
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="date" step="1" class="form-control" id="tanggal_beroperasi" placeholder="Masukan Asal Kapal" name="tanggal_beroperasi">
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <label for="minimal_point" class="font-weight-bold text-dark"> Point</label>
-                    <input type="number" class="form-control" id="minimal_point" placeholder="Masukan Point" name="minimal_point" min="0">
-                </div>
-            </div>
+              
+              <div class="form-group card-header ">
+                  <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
+                  <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi"></textarea>
+              </div>
 
             <div class="form-group card-header">
                 <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</button>
@@ -107,7 +94,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  @include('adminSpeedboat/footer')
+  @include('adminDashboard/footer')
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

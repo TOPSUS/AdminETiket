@@ -66,7 +66,7 @@
             </div>
             <div class="form-group card-header">
                 <a href="/BeritaSpeedboat"><button type="button" class="btn btn-secondary">Batal</button></a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Tambah Berita</button>
+                <button type="submit" class="btn btn-success">Tambah Berita</button>
             </div>
         </form>
     </div>

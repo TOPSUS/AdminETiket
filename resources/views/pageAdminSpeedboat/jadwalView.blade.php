@@ -38,10 +38,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('createJadwal') }}"><i class="fas fa-plus"></i> Tambah Jadwal
-                </a>
-              </li>
+              <li><a href="{{ route('createJadwal') }}" class= "btn btn-success text-white"><i class="fas fa-plus"></i> Tambah Jadwal</a></li>
             </ol>
           </div>
         </div>
@@ -59,6 +56,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                    <th>Nama Speedboat</th>
                     <th>Asal</th>
                     <th>Waktu Berangkat</th>
                     <th>Tujuan</th>
@@ -71,6 +69,7 @@
                 <tbody>
                 @foreach($jadwal as $dataJadwal)
                     <tr>
+                    <td>{{$dataJadwal->speedboat->nama_speedboat}}</td>
                     <td>{{$dataJadwal->asal->nama_pelabuhan}}</td>
                     <td>{{$dataJadwal->waktu_berangkat}}</td>
                     <td>{{$dataJadwal->tujuan->nama_pelabuhan}}</td>
@@ -166,7 +165,7 @@
                                       <div class="modal-body">
                                       {{ csrf_field() }}
                                       {{ method_field('delete') }}
-                                      Apakah anda yakin menghapus berita?</b>
+                                      Apakah anda yakin menghapus jadwal?</b>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>

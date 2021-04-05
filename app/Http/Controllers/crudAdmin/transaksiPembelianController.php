@@ -12,8 +12,14 @@ class transaksiPembelianController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
+
+        //Karna setiap admin memiliki banyak kapal
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $idSpeedboat=\App\Kapal::whereIn('id',$hakAkses)->pluck('id');
+
         //$dataPembelian=\App\Pembelian::find($request->id_speedboat);
-        $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
+        $jadwal = \App\Jadwal::whereIn('id_kapal', $idSpeedboat)->pluck('id');
+        $dataPembelian=\App\Pembelian::with('user','jadwal')->whereIn('id_jadwal', $jadwal)->get();
 
     	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('IdAdmin', 'dataPembelian'));
     }

@@ -13,9 +13,10 @@ class profileSpeedboatController extends Controller
     public function profile(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $profile=\App\Speedboat::find($dataAdmin->id_speedboat);
+        $hakAkses=\App\hakAksesSpeedboat::where('id_user', $IdAdmin)->pluck('id_speedboat');
+        $profiles=\App\Speedboat::whereIn('id', $hakAkses)->get();
 
-        return view('pageAdminSpeedboat.profileSpeedboat', compact('profile'));
+        return view('pageAdminSpeedboat.profileSpeedboat', compact('profiles'));
     }
 
     //Form Create Speedboat
@@ -23,18 +24,18 @@ class profileSpeedboatController extends Controller
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
         $profile=\App\Speedboat::find($dataAdmin->id_speedboat);
-        if(!$profile){
+        // if(!$profile){
         return view('CrudAdmin.createSpeedboat');
-        }
-        return redirect()->back();
+        // }
+        // return redirect()->back();
     }
 
     //Create Speedboat
     public function addSpeedboat(Request $request){
         if($request->hasfile('file')) {
             $file = $request->file('file');
-            $file_name = time()."_".$files->getClientOriginalName();
-            $files->move(public_path().'/speedboat_image/', $file_name);
+            $file_name = time()."_".$file->getClientOriginalName();
+            $file->move(public_path().'/speedboat_image/', $file_name);
             \App\Speedboat::create([
                 'nama_speedboat'=>$request->nama_speedboat,
                 'kapasitas'=>$request->kapasitas,

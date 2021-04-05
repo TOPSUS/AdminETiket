@@ -5,23 +5,23 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class beritaSpeedboat extends Model
+class hakAksesKapal extends Model
 {
     //
     use SoftDeletes;
     protected $guarded = [];
-    protected $table = 'tb_berita_speedboat';
+    protected $table = 'tb_hak_akses_kapal';
     protected $fillable = [
-        'id_speedboat','id_user','judul','berita','tanggal','foto'
+        'id_user','id_speedboat','hak_akses',
     ];
 
     public function relasiUser()
     {
-    	return $this->belongsTo('App\User','id_user','id');
+    	return $this->hasOne('App\User','id_user');
     }
 
     public function relasiSpeedboat()
     {
-    	return $this->belongsTo('App\Speedboat','id_speedboat');
+    	return $this->hasOne('App\Speedboat','id_speedboat');
     }
 }

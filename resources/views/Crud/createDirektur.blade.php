@@ -90,10 +90,7 @@
                 <input type="password" class="form-control" id="password"  placeholder="Masukan Password" name="password">
             </div>
 
-            <div class="form-group card-header ">
-                <label for="nama_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                <input type="text" class="form-control" id="nama_speedboat"  placeholder="Masukan Nama Speedboat" name="nama_speedboat">
-            </div>
+          
 
             <div class="form-group card-header">
                 <button type="submit" class="btn btn-success toastrDefaultSuccess"><i class="fas fa-plus"></i> Add Data</button>

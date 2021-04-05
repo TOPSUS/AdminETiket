@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Dashboard | Data Pembelian</title>
+  <title> Dashboard | Jadwal Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('adminDashboard/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('adminDashboard/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -34,12 +34,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Pembelian</h1>
+            <h1>Data Jadwal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('adminSpeedboatHome') }}">Dashboard</a></li>
-              
+              <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
+              <li class="breadcrumb-item active"><a href="{{ route('create-jadwalkapal') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -59,27 +59,27 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                    <th>Nama Pembeli</th>
-                    <th>Jadwal</th>
-                    <th>Pelabuhan Asal</th>
-                    <th>Speedboat</th>
-                    <th>Tanggal Pembelian</th>
-                    <th>Status</th>
+                    <th>Asal</th>
+                    <th>Waktu Berangkat</th>
+                    <th>Tujuan</th>
+                    <th>Waktu Sampai</th>
+                    <th>Kapal</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 
                 <tbody>
-                @foreach($dataPembelian as $pembelian)
+                @foreach($dataJadwalKapal as $jadwal)
                     <tr>
-                    <td>{{$pembelian->user->nama}}</td>
-                    <td>{{$pembelian->jadwal->waktu_berangkat}}</td>
-                    <td>{{$pembelian->jadwal->asal->nama_pelabuhan}}</td>
-                    <td>{{$pembelian->jadwal->kapal->nama_kapal}}</td>
-                    <td>{{$pembelian->tanggal}}</td>
-                    <td>{{$pembelian->status}}</td>
+                    <td>{{$jadwal->asal->nama_pelabuhan}}</td>
+                    <td>{{$jadwal->waktu_berangkat}}</td>
+                    <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
+                    <td>{{$jadwal->waktu_sampai}}</td>
+                    <td>{{$jadwal->kapal->nama_kapal}}</td>
+                    
                     <td>
-                    <a class="btn btn-sm btn-primary" href="DetailTransaksi/{{$pembelian->id}}" ><i class="fas fa-eye"></i> 
+                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteJadwal/{{$jadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" data-target="#update{{$jadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
                     </td>
                     </tr>
                 @endforeach
@@ -93,7 +93,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('adminSpeedboat/footer')
+    @include('adminDashboard/footer')
+
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

@@ -65,8 +65,6 @@ public function createadmin(){
 public function addDirektur(Request $request)
 {
 
-    $dataSpeedboat = \App\Speedboat::create(['nama_speedboat'=>$request->nama_speedboat]);
-
     \App\User::create([
         'nama'=>$request->nama,
         'alamat'=>$request->alamat,
@@ -75,7 +73,6 @@ public function addDirektur(Request $request)
         'email'=>$request->email,
         'password'=>Hash::make($request->password),
         'foto'=>'avatar.png',
-        'id_speedboat'=>$dataSpeedboat->id,
         'role'=>'Direktur',
     ]);
     return redirect('/Dashboard/CRUD/DirekturData');

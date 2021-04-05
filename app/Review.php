@@ -15,16 +15,10 @@ class Review extends Model
         'id_speedboat','id_user','id_pembelian','review','score'
     ];
 
-//relasi ke tb speedboat
-    public function speedboat()
-    {
-        return $this->belongsTo('App\Speedboat','id_speedboat');
-    }
-
 //relasi ke tb user
     public function user()
     {
-        return $this->belongsTo('App\User','id', 'id_user');
+        return $this->belongsTo('App\User','id_user', 'id');
     }
 
 //relasi ke tb pembelian
@@ -34,10 +28,7 @@ class Review extends Model
     }
 
 //getAllReview
-    public static function getAllReview()
-    {
-        return Review::with('id_user')->paginate(10);
-    }
+
     public static function getAllUserReview(){
         return Review::where('id_user',auth()->user()->id)->with('user')->paginate(10);
     }

@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Auth;
 class rewardController extends Controller
 {
     //View Reward Speedboat
-    public function view(){
+    public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
+
+        //Ambil Id kapal
+        $idKapal = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
+        $dataRewardSpeedboat=\App\rewardSpeedboat::whereIn('id_speedboat',$idKapal)->with('speedboat')->get();
         //$speedboat=\App\rewardSpeedboat::get();
 
     	return view('pageAdminSpeedboat.rewardSpeedboatAdmin', compact('dataRewardSpeedboat'));
@@ -21,10 +24,17 @@ class rewardController extends Controller
 
 //Form Create Reward Speedboat
     public function create(){
+<<<<<<< HEAD
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
         //$speedboat=\App\Speedboat::all();
         $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
+=======
+
+        $idSpeedboat = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
+        $speedboat = \App\Kapal::whereIn('id',$idSpeedboat)->get();
+        //$dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
+>>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
 
         return view('CrudAdmin.createRewardSpeedboat', compact('dataRewardSpeedboat'));
         //return view('/RewardSpeedboat/CreateRewardSpeedboat');
@@ -33,19 +43,20 @@ class rewardController extends Controller
 //Create Reward Speedboat
     public function addReward(Request $request)
     {
-        $IdUser=Auth::user()->id;
-        $IdSpeedboat=\App\User::find($IdUser);
         $dataRewardSpeedboat= new \App\rewardSpeedboat();
 
-        $dataRewardSpeedboat-> id_speedboat = $IdSpeedboat->id_speedboat;
+        $dataRewardSpeedboat-> id_speedboat = $request->id_kapal;
         $dataRewardSpeedboat-> reward = $request->reward;
         $dataRewardSpeedboat-> berlaku = $request->berlaku;
         $dataRewardSpeedboat-> minimal_point = $request->minimal_point;
         $dataRewardSpeedboat-> foto = $request->foto;
-        $dataRewardSpeedboat-> id_user = $IdUser;
             
         $dataRewardSpeedboat->save();
+<<<<<<< HEAD
         return redirect('/RewardSpeedboat');
+=======
+        return redirect()->back();
+>>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
     }
 //Update Reward Speedboat
     public function updateReward(Request $request){

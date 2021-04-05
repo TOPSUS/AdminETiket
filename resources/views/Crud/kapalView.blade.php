@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Dashboard | Speedboat Page</title>
+  <title> Dashboard | Kapal Page</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('adminDashboard/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('adminDashboard/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -34,14 +34,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Speedboat</h1>
+            <h1>Data Kapal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item">Profile Speedboat</a></li>
-              <!-- <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i >Tambah Speedboat</a></li>
-               -->
+              <li class="breadcrumb-item active"><a href="{{ route('create-kapal') }}"><i class="fas fa-plus"></i> Tambah Data
+                </a>
+              </li>
             </ol>
           </div>
         </div>
@@ -50,43 +50,42 @@
 
     <!-- Main content -->
     <section class="content">
-
+    @foreach($dataKapal as $kapal)
       <!-- Default box -->
-      @foreach ($profiles as $i => $profile)
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
+        
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">{{$profile->nama_speedboat}}</h3>
               <div class="col-12">
-                <img src="/speedboat_image/{{$profile->foto}}" class="product-image" alt="Product Image">
+                <img src="/speedboat/{{$kapal->foto}}" class="product-image" alt="Product Image">
               </div>
+              
             </div>
             <div class="col-12 col-sm-6">
-              <h3 class="my-3">{{$profile->nama_speedboat}}</h3>
-              <p>{{$profile->deskripsi}}</p>
-              <h4 class="mt-3"><small>Max Capacity</small> {{$profile->kapasitas}} </h4>
-              
+              <h3 class="my-3">{{$kapal->nama_kapal}}</h3>
+              <p>{{$kapal->deskripsi}}</p>
+
               <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
-                  {{$profile->contact_service}}
+                    {{$kapal->tanggal_beroperasi}}
                 </h2>
                 <h4 class="mt-0">
-                  <small>Contact Service </small>
+                  <small>Tanggal Beroperasi </small>
                 </h4>
               </div>
               <br>
-
-              <div class="">
+             <div class="">
                   <div class="text-right">
-                    <a href="/ProfileSpeedboat/{{$profile->id}}/delete" class="btn btn-sm bg-danger">
+                    <a href="/Dashboard/CRUD/DeleteKapal/{{$kapal->id}}" class="btn btn-sm bg-danger">
                       <i class="fas fa-trash-alt"></i>
                     </a>
-                    <a data-toggle="modal" data-target="#update{{$profile->id}}" href="#" class="btn btn-sm btn-primary">
-                      <i class="fas fa-edit"></i> Edit Speedboat
+                    <a data-toggle="modal" data-target="#update{{$kapal->id}}" href="#" class="btn btn-sm btn-primary">
+                      <i class="fas fa-edit"></i> Edit Kapal
                     </a>
                   </div>
                 </div>
+
             </div>
           </div>
           <div class="row mt-4">
@@ -97,24 +96,28 @@
               </div>
             </nav>
             <div class="tab-content p-3" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> {{$profile->deskripsi}} </div>
+              <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> {{$kapal->deskripsi}}</div>
               <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab"> </div>
             </div>
+
           </div>
         </div>
         <!-- /.card-body -->
       </div>
-      @endforeach
       <!-- /.card -->
-      <!-- /.card -->
+    @endforeach
     </section>
+    
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-    @include('adminSpeedboat/footer')
 
-    <!-- Modal Update -->
-  <div class="modal fade" id="update{{$profile->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- /.content-wrapper -->
+  @include('adminDashboard/footer')
+
+<!-- Modal Update -->
+
+@foreach($dataKapal as $oldKapal)
+  <div class="modal fade" id="update{{$oldKapal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -124,29 +127,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('updateSpeedboat') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('update-kapal') }}" method="POST">
                 @csrf
-                    <input type="hidden" name="id_speedboat" value="{{$profile->id}}">
+                    <input type="hidden" name="id_kapal" value="{{$oldKapal->id}}">
                     <div class="form-group">
-                      <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
-                      <input type="text" class="form-control" id="nama_speedboat" placeholder="Masukan Nama Speed Boat" name="nama_speedboat" value="{{$profile->nama_speedboat}}" require>
-                    </div>
-                    <div class="form-group">
-                      <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
-                      <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0" value="{{$profile->kapasitas}}" require>
-                    </div>
-                    <div class="form-group">
-                      <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
-                      <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service" value="{{$profile->contact_service}}" require>
+                      <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
+                      <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Speed Boat" name="nama_kapal" value="{{$oldKapal->nama_kapal}}" require>
                     </div>
                     <div class="form-group">
                       <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
-                      <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi" value="" require> {{$profile->deskripsi}}</textarea>                    
+                      <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi" value="" require> {{$oldKapal->deskripsi}}</textarea>                    
                       </div>
                     <div class="form-group">
-                    <label for="exampleInputFile">Foto Speedboat</label>
+                    <label for="exampleInputFile">Foto Kapal</label>
                       <div class="input-group">
-                          <input type="file" name="file">
+                        <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="foto">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
                       </div>
                     </div>
                   
@@ -159,15 +157,11 @@
         </div>
     </div>
 </div>
+@endforeach
+
 <!-- End Modal Update -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

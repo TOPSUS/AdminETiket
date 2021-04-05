@@ -58,7 +58,7 @@
           @foreach($dataRewardSpeedboat as $rewardSpeedboat)
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
-              <div class="col-12 text-center d-flex">
+              <div class="text-center d-flex">
                       <img src="/reward/{{$rewardSpeedboat->foto}}" alt="" class="img-square" style="width:300px;height:200px;">
                     </div>
                 <div class="card-header text-muted border-bottom-0">
@@ -138,6 +138,10 @@
                     <div class="form-group">
                       <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
                       <input type="hidden" name="id_speedboat" value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}
+<<<<<<< HEAD
+=======
+
+>>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Nama Reward</label>

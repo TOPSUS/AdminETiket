@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Create Jadwal</title>
+  <title>Dashboard | Create Jadwal Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,10 +15,6 @@
   <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -37,12 +33,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Data Jadwal</h1>
+            <h1>Add Data Jadwal Kapal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-jadwal') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('create-jadwalkapal') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -56,7 +52,7 @@
  <!-- Begin Page Content -->
  <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('add-jadwal')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('add-jadwalkapal')}}">
         @csrf 
             <div class="row card-header">
                 <div class="col">
@@ -88,11 +84,12 @@
                     <input type="time" step="1" class="form-control" id="waktu_sampai" placeholder="Masukan Tujuan Kapal" name="waktu_sampai">
                 </div>
             </div>
+
             <div class="form-group card-header ">
-                <label for="id_speedboat" class="font-weight-bold text-dark">Speed Boat</label>
-                <select name="id_speedboat" class="custom-select" required>
-                  @foreach($speedboat as $sb)
-                     <option value="{{$sb->id}}">{{$sb->nama_speedboat}}</option>
+                <label for="id_kapal" class="font-weight-bold text-dark">Pilih Kapal</label>
+                <select name="id_kapal" class="custom-select" required>
+                  @foreach($kapal as $kp)
+                     <option value="{{$kp->id}}">{{$kp->nama_kapal}}</option>
                   @endforeach
                 </select>
             </div>
@@ -129,8 +126,6 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script> $('input[name="daterange"]').daterangepicker(); </script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

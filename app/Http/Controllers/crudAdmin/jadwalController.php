@@ -13,14 +13,16 @@ class jadwalController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $profile=\App\Speedboat::find($dataAdmin->id_speedboat);
+        $hakAkses=\App\hakAksesSpeedboat::where('id_user', $IdAdmin)->first();
+        $profile=\App\Speedboat::find($hakAkses->id_speedboat);
         $jadwal=\App\Jadwal::where('id_speedboat', $profile->id)->with('asal','tujuan')->get();
         $pelabuhan=\App\Pelabuhan::all();
         
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
+        $speedboat = \App\Speedboat::with('relasiJadwal')->get();
 
-        return view('pageAdminSpeedboat.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan'));
+        return view('pageAdminSpeedboat.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan', 'speedboat'));
 
     }
 

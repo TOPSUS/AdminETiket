@@ -11,7 +11,7 @@ class Pembelian extends Model
     protected $guarded = [];
     protected $table = 'tb_pembelian';
     protected $fillable = [
-        'id_jadwal','id_user','bukti','tanggal','status',
+        'id_jadwal','id_user','id_metode_pembayaran','id_golongan','nomor_polisi','bukti','tanggal','status','total_harga','file_tiket',
     ];
 
     public function jadwal()
