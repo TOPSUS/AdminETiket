@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
    <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('direkturKapal/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('direkturKapal/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -52,7 +52,7 @@
  <!-- Begin Page Content -->
  <div class="card shadow mb-4">
     <div class="card shadow">
-        <form method="POST" enctype="multipart/form-data" action="{{route('addJadwal')}}">
+        <form method="POST" enctype="multipart/form-data" action="{{route('addJadwalDirektur')}}">
         @csrf 
             <div class="form-group card-header">
             <div class="form-group">
@@ -93,7 +93,7 @@
               </div>
               <div class="form-group">
                   <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu</label>
-                  <input type="number" step="1" class="form-control" id="estimasi_waktu" placeholder="Masukan Estimasi Waktu" name="estimasi_waktu">
+                  <input type="number" step="1" class="form-control" id="estimasi_waktu" placeholder="Masukan Estimasi Waktu" name=estimasi_waktu">
               </div>
               <div class="form-group">
                   <label for="harga" class="font-weight-bold text-dark">Harga</label>
@@ -114,7 +114,7 @@
   <!-- /.content-wrapper -->
 
 
-  @include('adminSpeedboat/footer')
+  @include('direkturKapal/footer')
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

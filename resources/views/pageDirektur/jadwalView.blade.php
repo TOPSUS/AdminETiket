@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('direkturkapal/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('direkturkapal/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -38,7 +38,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li><a href="{{ route('createJadwal') }}" class= "btn btn-success text-white"><i class="fas fa-plus"></i> Tambah Jadwal</a></li>
+              <li><a href="{{ route('createJadwalDirektur') }}" class= "btn btn-success text-white"><i class="fas fa-plus"></i> Tambah Jadwal</a></li>
             </ol>
           </div>
         </div>
@@ -91,7 +91,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('adminSpeedboat/footer')
+    @include('direkturkapal/footer')
 
 <!-- Modal Update -->
 @foreach($jadwal as $oldJadwal)
