@@ -80,7 +80,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="text-right">
-                    <a href="/Reward/DeleteRewardSpeedboat/{{$rewardSpeedboat->id}}" class="btn btn-sm bg-danger">
+                    <a href="/RewardSpeedboat/DeleteRewardSpeedboat/{{$rewardSpeedboat->id}}" class="btn btn-sm bg-danger">
                       <i class="fas fa-trash-alt"></i>
                     </a>
                     <a data-toggle="modal" data-target="#update{{$rewardSpeedboat->id}}" href="#" class="btn btn-sm btn-primary">
@@ -136,12 +136,12 @@
                 @csrf
                     <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
                     <div class="form-group">
-                      <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                      <input type="hidden" name="id_speedboat" value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}
-<<<<<<< HEAD
-=======
-
->>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
+                      <label for="id_kapal" class="font-weight-bold text-dark">Nama Speedboat</label>
+                        <select name="id_kapal" class="custom-select" required>
+                            @foreach($dataRewardSpeedboat as $sp)
+                            <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Nama Reward</label>

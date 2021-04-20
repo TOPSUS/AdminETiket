@@ -24,17 +24,10 @@ class rewardController extends Controller
 
 //Form Create Reward Speedboat
     public function create(){
-<<<<<<< HEAD
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
         //$speedboat=\App\Speedboat::all();
         $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
-=======
-
-        $idSpeedboat = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
-        $speedboat = \App\Kapal::whereIn('id',$idSpeedboat)->get();
-        //$dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
->>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
 
         return view('CrudAdmin.createRewardSpeedboat', compact('dataRewardSpeedboat'));
         //return view('/RewardSpeedboat/CreateRewardSpeedboat');
@@ -52,11 +45,7 @@ class rewardController extends Controller
         $dataRewardSpeedboat-> foto = $request->foto;
             
         $dataRewardSpeedboat->save();
-<<<<<<< HEAD
         return redirect('/RewardSpeedboat');
-=======
-        return redirect()->back();
->>>>>>> de8f29abeb685219f0ae0744e40e68eb5f1e64a7
     }
 //Update Reward Speedboat
     public function updateReward(Request $request){

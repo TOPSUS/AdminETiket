@@ -81,7 +81,7 @@ Route::Post('/Dashboard/CRUD/DirekturData/Kapal/Add', 'direkturController@addKap
 		Route::post('/Dashboard/CRUD/UpdateSpeedboat','Crud\speedboatController@updateSpeedboat')->name('update-speedboat');
 		Route::get('/Dashboard/CRUD/DeleteSpeedboat/{id}','Crud\speedboatController@deleteSpeedboat')->name('delete-speedboat');
 	
-	//Speedboat
+	//Kapal
 		Route::get('/Dashboard/CRUD/KapalData', 'Crud\kapalController@view')->name('viewkapal');
 		Route::get('/Dashboard/CRUD/CreateKapal', 'Crud\kapalController@create')->name('create-kapal');
 		Route::post('/Dashboard/CRUD/AddKapal','Crud\kapalController@addKapal')->name('add-kapal');
@@ -146,7 +146,7 @@ Route::get('/Register','registerController@index')->name('register');
 Route::get('/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
 Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
 Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
-Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@view')->name('rewardSpeedboatView');
+Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
 Route::get('/Review', 'crudAdmin\reviewController@index')->name('reviewSpeedboat');
 Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
 
@@ -183,7 +183,7 @@ Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('
 	route::delete('/ProfileSpeedboat/{id}/delete','crudAdmin\profileSpeedboatController@deleteSpeedboat')->name('deleteSpeedboat');
 
 	//CRUD Reward Speedboat
-	Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@view')->name('rewardSpeedboatView');
+	Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
 	Route::get('/RewardSpeedboat/CreateRewardSpeedboat', 'crudAdmin\rewardController@create')->name('createRewardSpeedboat');
 	Route::post('/RewardSpeedboat/AddRewardSpeedboat','crudAdmin\rewardController@addReward')->name('addRewardSpeedboat');
 	Route::post('/RewardSpeedboat/UpdateRewardSpeedboat','crudAdmin\rewardController@updateReward')->name('updateRewardSpeedboat');
