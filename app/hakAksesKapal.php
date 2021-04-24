@@ -12,7 +12,7 @@ class hakAksesKapal extends Model
     protected $guarded = [];
     protected $table = 'tb_hak_akses_kapal';
     protected $fillable = [
-        'id_user','id_speedboat','hak_akses',
+        'id_user','id_kapal','hak_akses',
     ];
 
     public function relasiUser()

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Dashboard | Speedboat Page</title>
+  <title> Dashboard | Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('direkturKapal/header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('direkturKapal/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -37,11 +37,9 @@
             <h1>Kapal</h1>
           </div>
           <div class="col-sm-6">
-            <!-- <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item">Profile Kapal</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('createSpeedboats') }}"><i class="fas fa-plus"></i >Tambah Speedboat</a></li>
-            </ol> -->
+            <ol class="breadcrumb float-sm-right">
+            <li><a href="{{ route('formKapal') }}" class= "btn btn-success text-white"><i class="fas fa-plus"></i> Tambah Kapal</a></li>
+            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -78,8 +76,14 @@
 
               <div class="">
                   <div class="text-right">
+                    <a class="btn btn-sm btn-success" href="/Direktur/Kapal/ListAdmin/{{$profile->id}}"> 
+                      <i class="fas fa-users"></i> Admin
+                    </a>
                     <a data-toggle="modal" data-target="#update{{$profile->id}}" href="#" class="btn btn-sm btn-primary">
                       <i class="fas fa-edit"></i> Edit Kapal
+                    </a>
+                    <a data-toggle="modal" data-target="#delete{{$profile->id}}" href="#" class="btn btn-sm btn-danger">
+                      <i class="fas fa-trash"></i> Hapus Kapal
                     </a>
                   </div>
                 </div>
@@ -107,10 +111,11 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('adminSpeedboat/footer')
+    @include('direkturKapal/footer')
 
+  @foreach($profiles as $pp)
     <!-- Modal Update -->
-  <div class="modal fade" id="update{{$profile->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="update{{$pp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,24 +125,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('updateSpeedboat') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('updateKapal') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                    <input type="hidden" name="id_kapal" value="{{$profile->id}}">
+                    <input type="hidden" name="id_kapal" value="{{$pp->id}}">
                     <div class="form-group">
                       <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
-                      <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal" name="nama_kapal" value="{{$profile->nama_kapal}}" require>
+                      <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal" name="nama_kapal" value="{{$pp->nama_kapal}}" require>
                     </div>
                     <div class="form-group">
                       <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
-                      <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0" value="{{$profile->kapasitas}}" require>
+                      <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0" value="{{$pp->kapasitas}}" require>
                     </div>
                     <div class="form-group">
                       <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
-                      <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service" value="{{$profile->contact_service}}" require>
+                      <input type="text" class="form-control" id="contact_service" placeholder="Masukan Kontak Service" name="contact_service" value="{{$pp->contact_service}}" require>
                     </div>
                     <div class="form-group">
                       <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
-                      <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi" value="" require> {{$profile->deskripsi}}</textarea>                    
+                      <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10" placeholder="Deskripsi" value="" require> {{$pp->deskripsi}}</textarea>                    
                       </div>
                     <div class="form-group">
                     <label for="exampleInputFile">Foto Speedboat</label>
@@ -156,6 +161,34 @@
     </div>
 </div>
 <!-- End Modal Update -->
+
+<!-- Modal Delete -->
+<div class="modal fade" id="delete{{$pp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-edit"></i> Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <form action="/Direktur/Kapal/{{$pp->id}}/delete" method="POST">
+        <div class="modal-body">
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
+        Apakah anda yakin menghapus Kapal?</b>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tidak</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Ya</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  @endforeach
+<!-- End Modal Delete -->
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

@@ -13,8 +13,8 @@ class profileSpeedboatController extends Controller
     public function profile(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $hakAkses=\App\hakAksesSpeedboat::where('id_user', $IdAdmin)->pluck('id_speedboat');
-        $profiles=\App\Speedboat::whereIn('id', $hakAkses)->get();
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $profiles=\App\Kapal::whereIn('id', $hakAkses)->get();
 
         return view('pageAdminSpeedboat.profileSpeedboat', compact('profiles'));
     }
@@ -23,11 +23,10 @@ class profileSpeedboatController extends Controller
     public function createSpeedboat(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $profile=\App\Speedboat::find($dataAdmin->id_speedboat);
-        // if(!$profile){
+        $profile=\App\Kapal::find($dataAdmin->id_kapal);
+        
         return view('CrudAdmin.createSpeedboat');
-        // }
-        // return redirect()->back();
+        
     }
 
     //Create Speedboat
@@ -60,13 +59,13 @@ class profileSpeedboatController extends Controller
 
     //Update Speedboat
     public function updateSpeedboat(Request $request){
-    $dataUpdate=\App\Speedboat::find($request->id_speedboat);
+    $dataUpdate=\App\Kapal::find($request->id_kapal);
 
     if($request->hasfile('file')){
         $file = $request->file('file');
         $file_name = time()."_".$file->getClientOriginalName();
         $file->move(public_path().'/speedboat_image/', $file_name);
-        $dataUpdate->nama_speedboat=$request->nama_speedboat;
+        $dataUpdate->nama_kapal=$request->nama_kapal;
         $dataUpdate->kapasitas=$request->kapasitas;
         $dataUpdate->deskripsi=$request->deskripsi;
         $dataUpdate->foto=$file_name;
@@ -76,8 +75,7 @@ class profileSpeedboatController extends Controller
         $dataUpdate->save();
         return redirect('/ProfileSpeedboat');
         } else {
-            dd($request);
-            $dataUpdate->nama_speedboat=$request->nama_speedboat;
+            $dataUpdate->nama_kapal=$request->nama_kapal;
             $dataUpdate->kapasitas=$request->kapasitas;
             $dataUpdate->deskripsi=$request->deskripsi;
             $dataUpdate->contact_service=$request->contact_service;
@@ -90,7 +88,7 @@ class profileSpeedboatController extends Controller
 
     //Delete Speedboat
     public function deleteSpeedboat($id){
-    $deleteSpeedboat=\App\Speedboat::find($id);
+    $deleteSpeedboat=\App\Kapal::find($id);
     $deleteSpeedboat->delete();
 
     return redirect('/ProfileSpeedboat')->with('success','Berita berhasil dihapus!');

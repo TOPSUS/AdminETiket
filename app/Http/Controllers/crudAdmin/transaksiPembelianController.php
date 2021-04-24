@@ -44,7 +44,7 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Terkonfirmasi';
         $pembelian->save();
 
-        return redirect('/DetailTransaksi');
+        return redirect()->back();
     }
 
     //reject
@@ -53,6 +53,6 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Dibatalkan';
         $pembelian->save();
 
-        return redirect('/DetailTransaksi');
+        return redirect()->back();
     }
 }

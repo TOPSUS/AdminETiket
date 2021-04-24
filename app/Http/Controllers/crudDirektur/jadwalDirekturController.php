@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\crudAdmin;
+namespace App\Http\Controllers\crudDirektur;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SoftDeletes;
 
-class jadwalController extends Controller
+class jadwalDirekturController extends Controller
 {
     //View Jadwal
     public function index(){
@@ -20,7 +20,7 @@ class jadwalController extends Controller
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
 
-        return view('pageAdminSpeedboat.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan'));
+        return view('pageDirektur.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan'));
 
     }
 
@@ -30,7 +30,7 @@ class jadwalController extends Controller
         $dataKapal=\App\Kapal::whereIn('id', $kapal)->get();
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
-        return view('CrudAdmin.createJadwal', compact('pelabuhanasal','pelabuhantujuan','dataKapal'));
+        return view('pageDirektur.createJadwal', compact('pelabuhanasal','pelabuhantujuan','dataKapal'));
     }
 
     //Create Jadwal
@@ -45,7 +45,7 @@ class jadwalController extends Controller
         $jadwal->tanggal = $request->tanggal;
         $jadwal->harga = $request->harga;
         $jadwal->save();
-        return redirect('/Jadwal');
+        return redirect('/Direktur/Jadwal');
     }
 
 
@@ -61,15 +61,13 @@ class jadwalController extends Controller
         $dataUpdate->tanggal = $request->tanggal;
 
         $dataUpdate->save();
-        return redirect('/Jadwal');
+        return redirect('/Direktur/Jadwal');
     }
 
     //Delete Jadwal
-    public function deleteJadwalSpeedboat($id){
+    public function deleteJadwal($id){
         $deleteItem = \App\Jadwal::find($id);
         $deleteItem->delete();
-        return redirect('/Jadwal')->with('success','Berita berhasil dihapus!');
+        return redirect('/Direktur/Jadwal')->with('success','Berita berhasil dihapus!');
     }
-
-    
 }
