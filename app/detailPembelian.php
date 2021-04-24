@@ -10,7 +10,7 @@ class detailPembelian extends Model
     protected $guarded = [];
     protected $table = 'tb_detail_pembelian';
     protected $fillable = [
-        'id_pembelian', 'id_card', 'kode_tiket', 'nama_pemegang_tiket', 'no_id_card', 'harga', 'QRCode', 'status',
+        'id_pembelian', 'id_card', 'kode_tiket', 'nama_pemegang_tiket', 'no_id_card', 'harga', 'status',
     ];
 
     //relasi ke tb card

@@ -77,16 +77,16 @@
         <div class="col-sm-4 invoice-col">
           <b>Speedboat</b>
           <address>
-            {{$dataPembelian->jadwal->speedboat->nama_speedboat}}<br>
+            {{$dataPembelian->jadwal->kapal->nama_kapal}}<br>
             From : {{$dataPembelian->jadwal->waktu_berangkat}} - {{$dataPembelian->jadwal->asal->nama_pelabuhan}}<br>
-            To :{{$dataPembelian->jadwal->waktu_sampai}} - {{$dataPembelian->jadwal->tujuan->nama_pelabuhan}}<br>
+            To : {{$dataPembelian->jadwal->tujuan->nama_pelabuhan}}<br>
 
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
           <b>Status</b><br>
-          <b>Date :</b> {{$dataPembelian->tanggal}}<br>
+          <b>Date :</b> {{date('d F Y H:i', strtotime($dataPembelian->tanggal))}}<br>
           <b>Status :</b> {{$dataPembelian->status}}<br>
         </div>
         <!-- /.col -->
@@ -111,9 +111,9 @@
             <tr>
               <td>{{$pembelian->nama_pemegang_tiket}}</td>
               <td>{{$pembelian->kode_tiket}}</td>
-              <td>{{$pembelian->no_id_card}}</td>
+              <td>{{$pembelian->no_id_card}} ({{$pembelian->card->card}})</td>
               <td>{{$pembelian->status}}</td>
-              <td>{{$pembelian->harga}}</td>
+              <td>IDR {{number_format($pembelian->harga)}}</td>
             </tr>
           @endforeach
             </tbody>
@@ -130,11 +130,11 @@
             <table class="table">
               <tr>
                 <th style="width:50%">Price:</th>
-                <td>{{$jumlah}}</td>
+                <td>IDR {{number_format($jumlah)}}</td>
               </tr>
               <tr>
                 <th>Total:</th>
-                <td>{{$jumlah}}</td>
+                <td>IDR {{number_format($jumlah)}}</td>
               </tr>
             </table>
           </div>
@@ -148,12 +148,13 @@
         <div class="col-sm-12"> &nbsp
           <a href="#" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print </a>
           &nbsp
+          @if($dataPembelian->status == "menunggu konfirmasi")
           <a class="btn btn-danger pull-right" style="margin-right: 5px;" href="Reject/{{$dataPembelian->id}}">
             <i class="fa fa-times"></i> Reject
           </a>
           <a class="btn btn-success pull-right" href="Approve/{{$dataPembelian->id}}"><i class="fa fa-check"></i> Approve
           </a> 
-
+          @endif  
         </div>
       </div>
     </section>

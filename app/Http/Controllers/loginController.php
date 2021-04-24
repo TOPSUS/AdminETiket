@@ -31,11 +31,11 @@ class loginController extends Controller
                     }
                     elseif ($data->role=="Admin"){
                         session(['Admin'=>true]);
-                        return redirect('/Home');
+                        return redirect('/Admin/Home');
                     }
                     elseif ($data->role=="Direktur"){
                         session(['Direktur'=>true]);
-                        return redirect('/Love');
+                        return redirect('/Direktur/Home');
                     }
                     else{
                         return redirect('/');

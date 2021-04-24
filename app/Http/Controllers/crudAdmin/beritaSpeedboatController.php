@@ -15,8 +15,10 @@ class beritaSpeedboatController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $berita=\App\beritaSpeedboat::orderBy('created_at','desc')->get();
-        //where('id_user', $dataAdmin->id)->get();
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->first();
+        $profile=\App\Kapal::find($hakAkses->id_kapal);
+
+        $berita=\App\beritaKapal::orderBy('created_at','desc')->where('id_user', $dataAdmin->id)->get();
 
         return view('pageAdminSpeedboat.beritaSpeedboatAdmin', compact('berita'));
 
@@ -31,7 +33,7 @@ class beritaSpeedboatController extends Controller
     public function addBerita(Request $request){
         $IdUser=Auth::user()->id;
         $IdSpeedboat=\App\User::find(Auth::user()->id);
-        $beritaspeedboat = new \App\beritaSpeedboat();
+        $beritaspeedboat = new \App\beritaKapal();
 
 
         $detail = $request->berita;
@@ -59,14 +61,14 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
         $beritaspeedboat->id_user = $IdUser;
-        $beritaspeedboat->id_speedboat = $IdSpeedboat->id_speedboat;
+        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
         $beritaspeedboat->save();
         return redirect('/BeritaSpeedboat');
     }
     
     //edit Berita
     public function editBerita($id){
-    	$Beritaas = \App\beritaSpeedboat::find($id);
+    	$Beritaas = \App\beritaKapal::find($id);
     	return view('CrudAdmin\editBeritaSpeedboat',compact('Beritaas'));
     }
 
@@ -74,7 +76,7 @@ class beritaSpeedboatController extends Controller
     public function updateBeritas($id, Request $request){
         $IdUser=Auth::user()->id;
         $IdSpeedboat=\App\User::find(Auth::user()->id);
-        $beritaspeedboat = \App\beritaSpeedboat::find($id);
+        $beritaspeedboat = \App\beritaKapal::find($id);
 
 
         $detail = $request->berita;
@@ -101,7 +103,7 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
         $beritaspeedboat->id_user = $IdUser;
-        $beritaspeedboat->id_speedboat = $IdSpeedboat->id_speedboat;    
+        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;    
         $beritaspeedboat->update();
         return redirect('/BeritaSpeedboat');
     }

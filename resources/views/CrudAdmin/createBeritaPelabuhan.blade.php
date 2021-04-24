@@ -36,12 +36,12 @@
             <h1>Tambah Berita Pelabuhan</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active"><a href="{{ route('beritaPelabuhan') }}">Berita</a></li>
               <li class="breadcrumb-item"> Tambah Berita
                 </a>
               </li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -75,7 +75,7 @@
             </div>
             <div class="form-group card-header">
                 <a href="/BeritaPelabuhan"><button type="button" class="btn btn-secondary">Batal</button></a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Tambah Berita</button>
+                <button type="submit" class="btn btn-success">Tambah Berita</button>
             </div>
         </form>
     </div>

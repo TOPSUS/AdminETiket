@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $table = 'tb_user';
     
     protected $fillable = [
-        'id_speedboat','nama','alamat','jeniskelamin', 'nohp', 'email', 'password', 'foto', 'role'
+        'nama','alamat','jeniskelamin', 'nohp', 'email', 'password', 'foto', 'role'
     ];
 
     /**
@@ -46,5 +46,12 @@ class User extends Authenticatable
     public function kapal()
     {
         return $this->belongsTo('App\Kapal','id_kapal','id');
+    }
+
+//relasi ke reward speedboat
+    public function reward()
+    {
+    
+    return $this->hasMany('App\rewardSpeedboat');
     }
 }

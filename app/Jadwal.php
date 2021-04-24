@@ -26,6 +26,7 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Kapal','id_kapal','id');
     }
+
 //relasi ke tb pelabuhan
     public function asal()
     {

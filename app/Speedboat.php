@@ -20,4 +20,16 @@ class Speedboat extends Model
     {
         return $this->hasMany('App\rewardSpeedboat');
     }
+
+    //relasi ke hak akses
+    public function relasiHakAkses() 
+    {
+        return $this->hasOne('App\hakAksesSpeedboat');
+    }
+
+    //relasi jadwal
+    public function relasiJadwal() 
+    {
+        return $this->hasMany('App\Jadwal','id_speedboat','id');
+    }
 }

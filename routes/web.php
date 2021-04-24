@@ -81,7 +81,7 @@ Route::Post('/Dashboard/CRUD/DirekturData/Kapal/Add', 'direkturController@addKap
 		Route::post('/Dashboard/CRUD/UpdateSpeedboat','Crud\speedboatController@updateSpeedboat')->name('update-speedboat');
 		Route::get('/Dashboard/CRUD/DeleteSpeedboat/{id}','Crud\speedboatController@deleteSpeedboat')->name('delete-speedboat');
 	
-	//Speedboat
+	//Kapal
 		Route::get('/Dashboard/CRUD/KapalData', 'Crud\kapalController@view')->name('viewkapal');
 		Route::get('/Dashboard/CRUD/CreateKapal', 'Crud\kapalController@create')->name('create-kapal');
 		Route::post('/Dashboard/CRUD/AddKapal','Crud\kapalController@addKapal')->name('add-kapal');
@@ -151,10 +151,10 @@ Route::post('/LoginAdmin','loginController@loginAdmin')->name('loginAdmin');
 Route::get('/Register','registerController@index')->name('register');
 
 //Admin
-Route::get('/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
+Route::get('/Admin/Home', 'Admin\adminSpeedboat@index')->name('adminSpeedboatHome');
 Route::get('/Jadwal', 'crudAdmin\jadwalController@index')->name('jadwalSpeedboat');
 Route::get('/BeritaPelabuhan', 'crudAdmin\beritaPelabuhanController@index')->name('beritaPelabuhan');
-Route::get('/Reward', 'crudAdmin\rewardController@view')->name('rewardSpeedboatView');
+Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
 Route::get('/Review', 'crudAdmin\reviewController@index')->name('reviewSpeedboat');
 Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
 
@@ -185,7 +185,7 @@ Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('
 	//CRUD Speedboat
 	Route::get('/ProfileSpeedboat', 'crudAdmin\profileSpeedboatController@profile')->name('speedboatProfile');
 	Route::get('/ProfileSpeedboat/CreateProfile', 'crudAdmin\profileSpeedboatController@createSpeedboat')->name('createSpeedboats');
-	Route::post('/ProfileSpeedboat/AddBeritaPelabuhan','crudAdmin\profileSpeedboatController@addSpeedboat')->name('addSpeedboat');
+	Route::post('/ProfileSpeedboat/AddProfile','crudAdmin\profileSpeedboatController@addSpeedboat')->name('addSpeedboat');
 	Route::get('/ProfileSpeedboat/{id}/edit','crudAdmin\profileSpeedboatController@editSpeedboat');
     route::post('/ProfileSpeedboat/update','crudAdmin\profileSpeedboatController@updateSpeedboat')->name('updateSpeedboat');
 	route::delete('/ProfileSpeedboat/{id}/delete','crudAdmin\profileSpeedboatController@deleteSpeedboat')->name('deleteSpeedboat');
@@ -196,12 +196,40 @@ Route::get('/Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('
 	Route::post('/RewardSpeedboat/AddRewardSpeedboat','crudAdmin\rewardController@addReward')->name('addRewardSpeedboat');
 	Route::post('/RewardSpeedboat/UpdateRewardSpeedboat','crudAdmin\rewardController@updateReward')->name('updateRewardSpeedboat');
 	Route::get('/RewardSpeedboat/DeleteRewardSpeedboat/{id}','crudAdmin\rewardController@deleteReward')->name('deleteRewardSpeedboat');
-
 	
 	//Transaksi Pembelian
 	Route::get('Transaksi', 'crudAdmin\transaksiPembelianController@index')->name('transaksiPembelian');
 	Route::get('/DetailTransaksi/{id}', 'crudAdmin\transaksiPembelianController@detail')->name('detailTransaksi');
 	Route::get('/DetailTransaksi/Approve/{id}', 'crudAdmin\transaksiPembelianController@approve')->name('approveTransaksi');
 	Route::get('/DetailTransaksi/Reject/{id}', 'crudAdmin\transaksiPembelianController@reject')->name('rejectTransaksi');
+
+	//Pembelian
+	//Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
+	Route::get('/Pembelian/CreatePembelian', 'pembelianController@create')->name('createPembelian');
+
+//ROUTE ADMIN END-----------------------------------------------------------------------------------
+
+//DIREKTUR
+Route::get('/Direktur/Home', 'Admin\direkturController@index')->name('direkturHome');
+
+//CRUD Jadwal
+Route::get('/Direktur/Jadwal', 'crudDirektur\jadwalDirekturController@index')->name('jadwalDirektur');
+Route::get('/Direktur/Jadwal/CreateJadwal', 'crudDirektur\jadwalDirekturController@create')->name('createJadwalDirektur');
+Route::post('/Direktur/Jadwal/AddJadwal','crudDirektur\jadwalDirekturController@addJadwal')->name('addJadwalDirektur');
+route::post('/Direktur/Jadwal/update','crudDirektur\jadwalDirekturController@editJadwal')->name('editJadwalDirektur');
+route::delete('/Direktur/Jadwal/delete/{id}','crudDirektur\jadwalDirekturController@deleteJadwal')->name('deleteJadwalDirektur');
+
+//CRUD Kapal
+Route::get('/Direktur/Kapal', 'crudDirektur\kapalDirekturController@profile')->name('kapalProfile');
+Route::get('/Direktur/Kapal/CreateProfile', 'crudDirektur\kapalDirekturController@formKapal')->name('formKapal');
+Route::post('/Direktur/Kapal/AddProfile','crudDirektur\kapalDirekturController@createKapal')->name('createKapal');
+Route::get('/Direktur/Kapal/{id}/edit','crudDirektur\kapalDirekturController@editKapal');
+route::post('/Direktur/Kapal/update','crudDirektur\kapalDirekturController@updateKapal')->name('updateKapal');
+route::delete('/Direktur/Kapal/{id}/delete','crudDirektur\kapalDirekturController@deleteKapal')->name('deleteKapal');
+
+Route::get('/Direktur/Kapal/ListAdmin/{id}', 'crudDirektur\kapalDirekturController@viewAdmin')->name('listAdmin');
+route::post('/Direktur/Kapal/updateAdmin','crudDirektur\kapalDirekturController@updateAdmin')->name('updateAdmin');
+route::delete('/Direktur/Kapal/{id}/deleteAdmin','crudDirektur\kapalDirekturController@deleteAdmin')->name('deleteAdmin');
+Route::post('/Direktur/Kapal/AddAdmin','crudDirektur\kapalDirekturController@createAdmin')->name('createAdmin');
 
 Auth::routes();

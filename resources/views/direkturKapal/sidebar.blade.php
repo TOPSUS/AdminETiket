@@ -14,7 +14,7 @@
           <img src="{{ asset('Lte/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block">Direktur</a>
         </div>
       </div>
 
@@ -32,15 +32,9 @@
           <li class="nav-header">Page</li>
           <li class="nav-item has-treeview">
            <li class="nav-item ">
-            <a href="{{ route('speedboatProfile') }}" class="nav-link">
+            <a href="{{ route('kapalProfile') }}" class="nav-link">
               <i class="nav-icon fas fa-ship"></i>
               <p class="text">Kapal</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{route('createPembelian')}}" class="nav-link">
-              <i class="nav-icon fas fa-coins"></i>
-              <p class="text">Pembelian</p>
             </a>
           </li>
           <li class="nav-item">
@@ -50,45 +44,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('jadwalSpeedboat') }}" class="nav-link">
+            <a href="{{ route('jadwalDirektur') }}" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p class="text">Jadwal</p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-newspaper"></i>
-              <p>
-                Berita
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item has-treeview">
-                <a href="{{ route('beritaPelabuhan') }}" class="nav-link">
-                  <i class="nav-icon fas fa-newspaper"></i>
-                  <p>Pelabuhan</p>
-                </a>
-              </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('beritaSpeedboat') }}" class="nav-link">
-                  <i class="nav-icon fas fa-newspaper"></i>
-                  <p>Speedboat</p>
-                </a>
-              </li>
-            </ul>
           <li class="nav-item">
             <a href="{{ route('rewardSpeedboatView') }}" class="nav-link">
-              <i class="nav-icon fas fa-gift"></i>
-              <p class="text">Reward</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('reviewSpeedboat') }}" class="nav-link">
-              <i class="nav-icon fas fa-star"></i>
-              <p class="text">Review</p>
+              <i class="nav-icon fas fa-newspaper"></i>
+              <p class="text">Laporan</p>
             </a>
           </li>
           </li>

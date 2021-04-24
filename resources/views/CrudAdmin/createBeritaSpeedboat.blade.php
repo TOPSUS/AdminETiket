@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard | Create Berita Speedboat</title>
+  <title>Dashboard | Create Berita Kapal</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,15 +33,15 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tambah Berita Speedboat</h1>
+            <h1>Tambah Berita Kapal</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active"><a href="{{ route('beritaSpeedboat') }}">Berita</a></li>
               <li class="breadcrumb-item"> Tambah Berita
                 </a>
               </li>
-            </ol>
+            </ol> -->
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -66,7 +66,7 @@
             </div>
             <div class="form-group card-header">
                 <a href="/BeritaSpeedboat"><button type="button" class="btn btn-secondary">Batal</button></a>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Tambah Berita</button>
+                <button type="submit" class="btn btn-success">Tambah Berita</button>
             </div>
         </form>
     </div>

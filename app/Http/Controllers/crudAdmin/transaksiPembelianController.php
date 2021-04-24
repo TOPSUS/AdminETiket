@@ -12,15 +12,21 @@ class transaksiPembelianController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        //$dataPembelian=\App\Pembelian::find($request->id_speedboat);
-        $dataPembelian=\App\Pembelian::with('user','jadwal')->get();
 
-    	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('dataPembelian'));
+        //Karna setiap admin memiliki banyak kapal
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $idSpeedboat=\App\Kapal::whereIn('id',$hakAkses)->pluck('id');
+
+        //$dataPembelian=\App\Pembelian::find($request->id_speedboat);
+        $jadwal = \App\Jadwal::whereIn('id_kapal', $idSpeedboat)->pluck('id');
+        $dataPembelian=\App\Pembelian::with('user','jadwal')->whereIn('id_jadwal', $jadwal)->get();
+
+    	return view('pageAdminSpeedboat.transaksiPembelianAdmin', compact('IdAdmin', 'dataPembelian'));
     }
     //View Detail
     public function detail($id){
         $IdAdmin=Auth::user()->id;
-        $IdSpeedboat=\App\User::find(Auth::user()->id);
+        $IdSpeedboat=\App\User::find($IdAdmin);
     	$dataPembelian=\App\Pembelian::with('user','jadwal','detailPembelian')->where('id',$id)->first();
         $detailPembelian=\App\detailPembelian::where('id_pembelian',$dataPembelian->id)->get();
         $jumlah=0; 
@@ -38,7 +44,7 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Terkonfirmasi';
         $pembelian->save();
 
-        return redirect('/DetailTransaksi');
+        return redirect()->back();
     }
 
     //reject
@@ -47,6 +53,6 @@ class transaksiPembelianController extends Controller
         $pembelian->status='Dibatalkan';
         $pembelian->save();
 
-        return redirect('/DetailTransaksi');
+        return redirect()->back();
     }
 }
