@@ -101,6 +101,13 @@
             </div>
 
             <div class="form-group card-header">
+                <label for="tipe_pelabuhan" class="font-weight-bold text-dark">Tipe Pelabuhan</label>
+                    <br><input type="radio" name="tipe_pelabuhan" value="feri"> Ferry &nbsp &nbsp
+                    <input type="radio" name="tipe_pelabuhan" value="speedboat"> Speedboat &nbsp &nbsp
+                    <input type="radio" name="tipe_pelabuhan" value="speedboat & feri"> Speedboat dan Ferry &nbsp &nbsp
+            </div>
+
+            <div class="form-group card-header">
                 <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</button>
             </div>
         </form>

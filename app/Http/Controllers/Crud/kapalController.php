@@ -9,7 +9,7 @@ class kapalController extends Controller
 {
 //
     public function view(){
-        $dataKapal=\App\Kapal::all();
+        $dataKapal=\App\Kapal::where('tipe_kapal','feri')->get();
     	return view('Crud.kapalView', compact('dataKapal'));
     }
     

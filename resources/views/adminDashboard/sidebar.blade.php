@@ -98,12 +98,12 @@
                   <p>Jadwal</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('viewjadwalkapal') }}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Jadwal Kapal</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="{{ route('viewreward') }}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
@@ -114,6 +114,13 @@
                 <a href="{{ route('viewcard') }}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Card</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('viewgolongan') }}" class="nav-link">
+                  <i class="far fa-edit nav-icon"></i>
+                  <p>Golongan</p>
                 </a>
               </li>
               

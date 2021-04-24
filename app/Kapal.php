@@ -12,6 +12,6 @@ class Kapal extends Model
     protected $guarded = [];
     protected $table = 'tb_kapal';
     protected $fillable = [
-        'nama_kapal','deskripsi','foto','tanggal_beroperasi',
+        'nama_kapal','kapasitas','deskripsi','foto','contact_service','tanggal_beroperasi','tipe_kapal'
     ];
 }

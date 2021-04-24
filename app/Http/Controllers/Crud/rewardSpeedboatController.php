@@ -9,14 +9,14 @@ class rewardSpeedboatController extends Controller
 {
 //View Reward Speedboat
     public function view(){
-        $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
-        $speedboat=\App\Speedboat::all();
-    	return view('Crud.rewardSpeedboatView', compact('speedboat','dataRewardSpeedboat'));
+        $dataRewardSpeedboat=\App\rewardSpeedboat::with('kapal')->get();
+        $kapal=\App\Kapal::where('tipe_kapal','speedboat')->get();
+    	return view('Crud.rewardSpeedboatView', compact('kapal','dataRewardSpeedboat'));
     }
 
 //Form Create Reward Speedboat
     public function create(){
-        $speedboat=\App\Speedboat::all();
+        $speedboat=\App\Kapal::where('tipe_kapal','kapal')->get();
 
         return view('Crud.createRewardSpeedboat', compact('speedboat'));
     }

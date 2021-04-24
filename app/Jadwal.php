@@ -13,20 +13,19 @@ class Jadwal extends Model
     protected $primarykey ='id';
     protected $table = 'tb_jadwal';
     protected $fillable = [
-        'waktu_berangkat','id_asal_pelabuhan','waktu_sampai','id_tujuan_pelabuhan','id_speedboat','harga','tanggal'
+        'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal','harga','tanggal'
     ];
 
-//relasi ke tb speedboat
-    public function speedboat()
+//relasi ke tb kapal
+    public function kapal()
     {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
+        return $this->belongsTo('App\Kapal','id_kapal','id');
+        
     }
-
-    public function speedboat1()
+    public function kapal1()
     {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
+        return $this->belongsTo('App\Kapal','id_kapal','id');
     }
-
 //relasi ke tb pelabuhan
     public function asal()
     {

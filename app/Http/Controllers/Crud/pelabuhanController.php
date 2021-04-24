@@ -38,11 +38,12 @@ public function addPelabuhan(Request $request)
         'foto'=>$request->foto,
         'lama_beroperasi'=>$request->lama_beroperasi,
         'status'=>$request->status,
+        'tipe_pelabuhan'=>$request->tipe_pelabuhan,
     ]);
     return redirect('/Dashboard/CRUD/CreatePelabuhan');
 }
 
-//Update User
+//Update Pelabuhan
 public function updatePelabuhan(Request $request){
     $dataUpdate=\App\Pelabuhan::find($request->id_pelabuhan);
 
@@ -53,12 +54,13 @@ public function updatePelabuhan(Request $request){
     $dataUpdate->foto=$request->foto;
     $dataUpdate->lama_beroperasi=$request->lama_beroperasi;
     $dataUpdate->status=$request->status;
+    $dataUpdate->tipe_pelabuhan=$request->tipe_pelabuhan;
 
     $dataUpdate->save();
     return redirect()->back();
 }
 
-//Delete User
+//Delete Pelabuhan
     public function deletePelabuhan($id){
     $deletePelabuhan=\App\Pelabuhan::find($id);
     $deletePelabuhan->delete();

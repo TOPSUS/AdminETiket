@@ -8,7 +8,7 @@ class speedboatController extends Controller
 {
     //
      public function index(){
-        $dataSpeedboat=\App\Speedboat::all();
+        $dataSpeedboat=\App\Kapal::where('tipe_kapal','speedboat')->get();
     	return view('Page.Speedboat',compact('dataSpeedboat'));
     }
 

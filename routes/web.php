@@ -123,13 +123,21 @@ Route::Post('/Dashboard/CRUD/DirekturData/Kapal/Add', 'direkturController@addKap
 		Route::get('/Dashboard/CRUD/CreateCard', 'Crud\cardController@create')->name('create-card');
 		Route::post('/Dashboard/CRUD/AddCard','Crud\cardController@addCard')->name('add-card');
 		Route::post('/Dashboard/CRUD/UpdateCard','Crud\cardController@updateCard')->name('update-card');
-		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-user');
+		Route::get('/Dashboard/CRUD/DeleteCard/{id}','Crud\cardController@deleteCard')->name('delete-card');
 
 	//Approve Pembelian
 		Route::get('/Dashboard/CRUD/Pembelian', 'pembelianController@index')->name('viewpembelian');
 		Route::get('/Dashboard/CRUD/DetailPembelian/{id}', 'pembelianController@detail')->name('detail-pembelian');
 		Route::get('/Dashboard/CRUD/DetailPembelian/Approve/{id}', 'pembelianController@approve')->name('approve-pembelian');
 		Route::get('/Dashboard/CRUD/DetailPembelian/Reject/{id}', 'pembelianController@reject')->name('reject-pembelian');
+	
+	//Card
+		Route::get('/Dashboard/CRUD/Golongan', 'Crud\golonganController@view')->name('viewgolongan');
+		Route::get('/Dashboard/CRUD/CreateGolongan', 'Crud\golonganController@create')->name('create-golongan');
+		Route::post('/Dashboard/CRUD/AddGolongan','Crud\golonganController@addGolongan')->name('add-golongan');
+		Route::post('/Dashboard/CRUD/UpdateGolongan','Crud\golonganController@updateGolongan')->name('update-golongan');
+		Route::get('/Dashboard/CRUD/DeleteGolongan/{id}','Crud\golonganController@deleteGolongan')->name('delete-golongan');
+		
 	
 
 

@@ -58,11 +58,11 @@
           @foreach($dataRewardSpeedboat as $rewardSpeedboat)
             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
               <div class="card bg-light">
-              <div class="col-12 text-center d-flex">
+              <div class="text-center d-flex">
                       <img src="/reward/{{$rewardSpeedboat->foto}}" alt="" class="img-square" style="width:300px;height:200px;">
                     </div>
                 <div class="card-header text-muted border-bottom-0">
-                  Reward - {{$rewardSpeedboat->speedboat->nama_speedboat}}
+                  Reward - {{$rewardSpeedboat->kapal->nama_kapal}}
                 </div>
                 
                 <div class="card-body pt-0">
@@ -136,11 +136,11 @@
                 @csrf
                     <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
                     <div class="form-group">
-                      <label for="id_speedboat" class="font-weight-bold text-dark">Nama Speedboat</label>
-                      <select name="id_speedboat" class="custom-select" required>
-                      <option value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->speedboat->nama_speedboat}}</option>
-                          @foreach($speedboat as $sp)
-                          <option value="{{$sp->id}}">{{$sp->nama_speedboat}}</option>
+                      <label for="id_kapal" class="font-weight-bold text-dark">Nama Speedboat</label>
+                      <select name="id_kapal" class="custom-select" required>
+                      <option value="{{$oldRewardSpeedboat->id_speedboat}}">{{$oldRewardSpeedboat->kapal->nama_kapal}}</option>
+                          @foreach($kapal as $sp)
+                          <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
                           @endforeach
                      </select>
                     </div>

@@ -148,6 +148,22 @@
                         <input type="radio" name="role" value="Tidak Beroperasi" checked> Tidak Beroperasi &nbsp &nbsp
                         @endif
                     </div>
+                    <label for="InputName" class="font-weight-bold text-dark">Tipe Pelabuhan</label>
+                      <br>
+                      @if($oldPelabuhan->tipe_pelabuhan == "feri")
+                        <input type="radio" name="tipe_pelabuhan" value="feri" checked> Ferry &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat"> Speedboat &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat & feri"> Speedboat dan Ferry &nbsp &nbsp
+                        @elseif($oldPelabuhan->tipe_pelabuhan == "speedboat")
+                        <input type="radio" name="tipe_pelabuhan" value="feri"> Ferry &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat" checked> Speedboat &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat & feri"> Speedboat dan Ferry &nbsp &nbsp
+                        @else
+                        <input type="radio" name="tipe_pelabuhan" value="feri"> Ferry &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat"> Speedboat &nbsp &nbsp
+                        <input type="radio" name="tipe_pelabuhan" value="speedboat & feri" checked> Speedboat dan Ferry &nbsp &nbsp
+                        @endif
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
