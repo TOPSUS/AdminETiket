@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Dashboard | Jadwal</title>
+  <title> Dashboard | Golongan</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -37,12 +37,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Jadwal</h1>
+            <h1>Data Golongan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active"><a href="{{ route('create-jadwal') }}"><i class="fas fa-plus"></i> Tambah Data
+              <li class="breadcrumb-item active"><a href="{{ route('create-golongan') }}"><i class="fas fa-plus"></i> Tambah Data
                 </a>
               </li>
             </ol>
@@ -70,28 +70,24 @@
                 <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                    <th>Tanggal</th>
-                    <th>Asal</th>
-                    <th>Waktu Berangkat</th>
-                    <th>Tujuan</th>
-                    <th>Waktu Sampai</th>
-                    <th>Speed Boat</th>
+                    <th>Pelabuhan</th>
+                    <th>Golongan</th>
+                    <th>Keterangan</th>
+                    <th>Harga</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 
                 <tbody>
-                @foreach($dataJadwal as $jadwal)
+                @foreach($dataGolongan as $golongan)
                     <tr>
-                    <td>{{$jadwal->tanggal}}</td>
-                    <td>{{$jadwal->asal->nama_pelabuhan}}</td>
-                    <td>{{$jadwal->waktu_berangkat}}</td>
-                    <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
-                    <td>{{$jadwal->estimasi_waktu}}</td>
-                    <td>{{$jadwal->kapal->nama_kapal}}</td>
+                    <td>{{$golongan->pelabuhan->nama_pelabuhan}}</td>
+                    <td>{{$golongan->golongan}}</td>
+                    <td>{{$golongan->keterangan}}</td>
+                    <td>{{$golongan->harga}}</td>
                     <td>
-                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteJadwal/{{$jadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
-                    <a data-toggle="modal" data-target="#update{{$jadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
+                    <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteGolongan/{{$golongan->id}}"> <i class="fas fa-trash-alt"></i></a>
+                    <a data-toggle="modal" data-target="#update{{$golongan->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Golongan
                     </td>
                     </tr>
                 @endforeach
@@ -111,60 +107,41 @@
     @include('adminDashboard/footer')
 
 <!-- Modal Update -->
-@foreach($dataJadwal as $oldJadwal)
-  <div class="modal fade" id="update{{$oldJadwal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($dataGolongan as $oldGolongan)
+  <div class="modal fade" id="update{{$oldGolongan->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data Jadwal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Gologan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('update-jadwal') }}" method="POST">
+                <form action="{{ route('update-golongan') }}" method="POST">
                 @csrf
-                    <input type="hidden" name="id_jadwal" value="">
+                    <input type="hidden" name="id_golongan" value="{{$oldGolongan->id}}">
                     <div class="form-group">
-                    <label for="id_asal_pelabuhan" class="font-weight-bold text-dark">Asal Pelabuhan</label>
-                      <select name="id_asal_pelabuhan" class="custom-select" required>
-                        <option value="{{$oldJadwal->id_asal_pelabuhan}}">{{$oldJadwal->asal->nama_pelabuhan}}</option>
+                    <label for="id_pelabuhan" class="font-weight-bold text-dark">Pelabuhan</label>
+                      <select name="id_pelabuhan" class="custom-select" required>
+                        <option value="{{$oldGolongan->id_pelabuhan}}">{{$oldGolongan->pelabuhan->nama_pelabuhan}}</option>
                         @foreach($pelabuhan as $pb)
                         <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
                         @endforeach
                       </select>
+                    </div>       
+                    <div class="form-group">
+                      <label for="golongan" class="font-weight-bold text-dark">Golongan</label>
+                      <input type="text" step="1" class="form-control" id="golongan" placeholder="Masukan Golongan" name="golongan" value="{{$oldGolongan->golongan}}" require>
                     </div>
                     <div class="form-group">
-                      <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan Pelabuhan</label>
-                        <select name="id_tujuan_pelabuhan" class="custom-select" required>
-                          <option value="{{$oldJadwal->id_tujuan_pelabuhan}}">{{$oldJadwal->tujuan->nama_pelabuhan}}</option>
-                            @foreach($pelabuhan as $pb)
-                            <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
-                            @endforeach
-                        </select>
-                    </div>                
-                    <div class="form-group">
-                      <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
-                      <input type="time" step="1" class="form-control" id="waktu_berangkat" placeholder="Masukan Asal Speedboat" name="waktu_berangkat" value="{{$oldJadwal->waktu_berangkat}}" require>
+                      <label for="keterangan" class="font-weight-bold text-dark">Deskripsi</label>
+                      <textarea class="form-control" name="keterangan" id="keterangan" rows="10" placeholder="Deskripsi" value="" require> {{$oldGolongan->keterangan}}</textarea>                    
                     </div>
                     <div class="form-group">
-                      <label for="waktu_sampai" class="font-weight-bold text-dark">Waktu Sampai</label>
-                      <input type="time" step="1" class="form-control" id="waktu_sampai" placeholder="Masukan Tujuan Speedboat" name="waktu_sampai" value="{{$oldJadwal->waktu_sampai}}" require>
+                      <label for="harga" class="font-weight-bold text-dark">Harga</label>
+                      <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga" name="harga" value="{{$oldGolongan->harga}}" require>
                     </div>
-                    <div class="form-group">
-                      <label for="id_kapal" class="font-weight-bold text-dark">Speed Boat</label>
-                      <select name="id_kapal" class="custom-select" required>
-                        <option value="{{$oldJadwal->id_kapal}}">{{$oldJadwal->kapal->nama_kapal}}</option>
-                              @foreach($speedboat as $sb)
-                              <option value="{{$sb->id}}">{{$sb->nama_kapal}}</option>
-                              @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
-                      <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga Tiket" name="harga" value="{{$oldJadwal->harga}}" require>
-                    </div>
-                
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
@@ -176,7 +153,6 @@
 </div>
 @endforeach
 <!-- End Modal Update -->
-
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->

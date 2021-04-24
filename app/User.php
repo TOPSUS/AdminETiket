@@ -43,9 +43,9 @@ class User extends Authenticatable
     ];
 
 //relasi ke tb speedboat
-    public function speedboat()
+    public function kapal()
     {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
+        return $this->belongsTo('App\Kapal','id_kapal','id');
     }
 
 //relasi ke reward speedboat

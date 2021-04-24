@@ -16,18 +16,13 @@ class Jadwal extends Model
         'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal','harga','tanggal'
     ];
 
-//relasi ke tb speedboat
-    public function speedboat()
-    {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
-    }
-
-    public function speedboat1()
-    {
-        return $this->belongsTo('App\Speedboat','id_speedboat','id');
-    }
-
+//relasi ke tb kapal
     public function kapal()
+    {
+        return $this->belongsTo('App\Kapal','id_kapal','id');
+        
+    }
+    public function kapal1()
     {
         return $this->belongsTo('App\Kapal','id_kapal','id');
     }

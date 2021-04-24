@@ -15,12 +15,12 @@ class userController extends Controller
     }
 
     public function viewdirektur(){
-        $dataDirektur=\App\User::where('role','Direktur')->with('speedboat')->get();
+        $dataDirektur=\App\User::where('role','Direktur')->with('kapal')->get();
     	return view('Crud.userDirektur', compact('dataDirektur'));
     }
 
     public function viewadmin(){
-        $dataAdmin=\App\User::where('role','Admin')->with('speedboat')->get();
+        $dataAdmin=\App\User::where('role','Admin')->with('kapal')->get();
     	return view('Crud.userAdmin', compact('dataAdmin'));
     }
 
@@ -41,7 +41,7 @@ public function createdirektur(){
 
 //FORM CREATE ADMIN
 public function createadmin(){
-    $dataSpeedboat=\App\Speedboat::all();
+    $dataSpeedboat=\App\Kapal::where('tipe_kapal','speedboat')->get();
     return view('Crud.createAdmin', compact('dataSpeedboat'));
 }
 
@@ -58,7 +58,7 @@ public function createadmin(){
 			'foto'=>'avatar.png',
             'role'=>$request->role,
 		]);
-        return redirect('/Dashboard/CRUD/CustomerData');
+        return redirect('/Dashboard/CRUD/CustomerData')->with('success','Data berhasil dibuat!');
 	}
 
 //CREATE DIREKTUR
@@ -89,7 +89,7 @@ public function addAdmin(Request $request)
         'email'=>$request->email,
         'password'=>Hash::make($request->password),
         'foto'=>'avatar.png',
-        'id_speedboat'=>$request->id_speedboat,
+        'id_kapal'=>$request->id_kapal,
         'role'=>'Admin',
     ]);
     return redirect('/Dashboard/CRUD/AdminData');

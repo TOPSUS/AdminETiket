@@ -9,7 +9,7 @@ class speedboatController extends Controller
 {
     //
      public function view(){
-        $dataSpeedboat=\App\Speedboat::all();
+        $dataSpeedboat=\App\Kapal::where('tipe_kapal','speedboat')->get();
     	return view('Crud.speedboatView', compact('dataSpeedboat'));
 
     }

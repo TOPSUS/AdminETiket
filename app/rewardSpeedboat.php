@@ -15,8 +15,8 @@ class rewardSpeedboat extends Model
         'id_speedboat','reward','berlaku','minimal_point','foto',
     ];
 
-//relasi ke tb speedboat
-    public function speedboat()
+//relasi ke tb kapal
+    public function kapal()
     {
         return $this->belongsTo('App\Kapal','id_speedboat','id');
     }
