@@ -59,7 +59,7 @@ class beritaController extends Controller
         $dataBerita->save();
         return redirect('/Dashboard/BeritaPelabuhan');
     }
-    
+
 //DeleteBerita Pelabuhan
     public function deleteBeritaPelabuhan($id){
         $deleteItem = \App\beritaPelabuhan::find($id);
@@ -67,11 +67,11 @@ class beritaController extends Controller
         return redirect('/Dashboard/BeritaPelabuhan')->with('success','Berita berhasil dihapus!');
     }
 //------------------------------------------------------------
-    
+
 //View Berita Speedboat
     public function indexSpeedboat(){
-        $dataBeritaSpeedboat=\App\beritaSpeedboat::with('relasiSpeedboat')->get();
-        $beritaSpeedboat=\App\beritaSpeedboat::all();
+        $dataBeritaSpeedboat=\App\beritaKapal::with('relasiSpeedboat')->get();
+        $beritaSpeedboat=\App\beritaKapal::all();
         return view('Page.beritaSpeedboat',compact('dataBeritaSpeedboat'));
     }
 
@@ -84,7 +84,7 @@ class beritaController extends Controller
 //Create Berita Speedboat
     public function addBeritaSpeedboat(Request $request){
         $IdUser=Auth::user()->id;
-        $dataBerita = new \App\beritaSpeedboat();
+        $dataBerita = new \App\beritaKapal();
 
 
         $detail = $request->berita;
@@ -116,10 +116,10 @@ class beritaController extends Controller
         $dataBerita->save();
         return redirect('/Dashboard/BeritaSpeedboat');
     }
-    
+
 //DeleteBerita Pelabuhan
     public function deleteBeritaSpeedboat($id){
-        $deleteItem = \App\beritaSpeedboat::find($id);
+        $deleteItem = \App\beritaKapal::find($id);
         $deleteItem->delete();
         return redirect('/Dashboard/BeritaSpeedboat')->with('success','Berita berhasil dihapus!');
     }
