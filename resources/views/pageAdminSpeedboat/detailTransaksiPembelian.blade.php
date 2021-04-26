@@ -64,7 +64,7 @@
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-          
+
           <address>
             <strong>{{$dataPembelian->user->nama}}</strong><br>
             Address :{{$dataPembelian->user->alamat}}<br>
@@ -146,15 +146,8 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-sm-12"> &nbsp
-          <a href="#" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print </a>
+          <a href="/e-ticket/{{$dataPembelian->id}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print </a>
           &nbsp
-          @if($dataPembelian->status == "menunggu konfirmasi")
-          <a class="btn btn-danger pull-right" style="margin-right: 5px;" href="Reject/{{$dataPembelian->id}}">
-            <i class="fa fa-times"></i> Reject
-          </a>
-          <a class="btn btn-success pull-right" href="Approve/{{$dataPembelian->id}}"><i class="fa fa-check"></i> Approve
-          </a> 
-          @endif  
         </div>
       </div>
     </section>
@@ -163,7 +156,7 @@
   </div>
   <!-- /.content-wrapper -->
         </div>
-       
+
       </div>
       <!-- /.card -->
 

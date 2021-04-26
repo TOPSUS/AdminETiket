@@ -16,7 +16,7 @@ class rewardController extends Controller
 
         //Ambil Id kapal
         $idKapal = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
-        $dataRewardSpeedboat=\App\rewardSpeedboat::whereIn('id_speedboat',$idKapal)->with('speedboat')->get();
+        $dataRewardSpeedboat=\App\rewardSpeedboat::whereIn('id_speedboat',$idKapal)->with('kapal')->get();
         //$speedboat=\App\rewardSpeedboat::get();
 
     	return view('pageAdminSpeedboat.rewardSpeedboatAdmin', compact('dataRewardSpeedboat'));
@@ -27,7 +27,7 @@ class rewardController extends Controller
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
         //$speedboat=\App\Speedboat::all();
-        $dataRewardSpeedboat=\App\rewardSpeedboat::with('speedboat')->get();
+        $dataRewardSpeedboat=\App\rewardSpeedboat::with('kapal')->get();
 
         return view('CrudAdmin.createRewardSpeedboat', compact('dataRewardSpeedboat'));
         //return view('/RewardSpeedboat/CreateRewardSpeedboat');
@@ -43,7 +43,7 @@ class rewardController extends Controller
         $dataRewardSpeedboat-> berlaku = $request->berlaku;
         $dataRewardSpeedboat-> minimal_point = $request->minimal_point;
         $dataRewardSpeedboat-> foto = $request->foto;
-            
+
         $dataRewardSpeedboat->save();
         return redirect('/RewardSpeedboat');
     }

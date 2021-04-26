@@ -29,4 +29,9 @@ class Pembelian extends Model
         return $this->hasMany('\App\detailPembelian','id_pembelian');
     }
 
+    public function golongans()
+    {
+        return $this->belongsTo('\App\Golongan','id_golongan');
+    }
+
 }

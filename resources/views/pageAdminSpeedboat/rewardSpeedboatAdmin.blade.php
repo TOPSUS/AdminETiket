@@ -62,9 +62,9 @@
                       <img src="/reward/{{$rewardSpeedboat->foto}}" alt="" class="img-square" style="width:300px;height:200px;">
                     </div>
                 <div class="card-header text-muted border-bottom-0">
-                  Reward - {{$rewardSpeedboat->speedboat->nama_speedboat}}
+                  Reward - {{$rewardSpeedboat->kapal->nama_kapal}}
                 </div>
-                
+
                 <div class="card-body pt-0">
                   <div class="row">
                     <div class="col-7">
@@ -75,7 +75,7 @@
                         <li class="medium"><span class="fa-li"><i class="fas fa-lg fa-stopwatch"></i></span> Masa Berlaku : <br>{{$rewardSpeedboat->berlaku}}</li>
                       </ul>
                     </div>
-                   
+
                   </div>
                 </div>
                 <div class="card-footer">
@@ -159,7 +159,7 @@
                       <label for="InputName" class="font-weight-bold text-dark">Foto</label>
                       <input type="file" id="exampleInputFile" name="foto">
                     </div>
-                  
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
