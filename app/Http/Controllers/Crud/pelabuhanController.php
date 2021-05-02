@@ -30,34 +30,66 @@ class pelabuhanController extends Controller
 //Create Pelabuhan
 public function addPelabuhan(Request $request)
 {
-    \App\Pelabuhan::create([
-        'nama_pelabuhan'=>$request->nama_pelabuhan,
-        'lokasi_pelabuhan'=>$request->lokasi_pelabuhan,
-        'alamat_kantor'=>$request->alamat_kantor,
-        'deskripsi'=>$request->deskripsi,
-        'foto'=>$request->foto,
-        'lama_beroperasi'=>$request->lama_beroperasi,
-        'status'=>$request->status,
-        'tipe_pelabuhan'=>$request->tipe_pelabuhan,
-    ]);
-    return redirect('/Dashboard/CRUD/CreatePelabuhan');
+    if ($request->hasfile('file')) {
+        $file = $request->file('file');
+        $file_name = time() . "_" . $file->getClientOriginalName();
+        $file->move(public_path() . '/pelabuhan/', $file_name);
+        \App\Pelabuhan::create([
+            'nama_pelabuhan'=>$request->nama_pelabuhan,
+            'lokasi_pelabuhan'=>$request->lokasi_pelabuhan,
+            'alamat_kantor'=>$request->alamat_kantor,
+            'foto'=>$file_name,
+            'lama_beroperasi'=>$request->lama_beroperasi,
+            'status'=>$request->status,
+            'tipe_pelabuhan'=>$request->tipe_pelabuhan,
+        ]);
+        return redirect('/Dashboard/CRUD/PelabuhanData');
+    } else {
+        \App\Pelabuhan::create([
+            'nama_pelabuhan'=>$request->nama_pelabuhan,
+            'lokasi_pelabuhan'=>$request->lokasi_pelabuhan,
+            'alamat_kantor'=>$request->alamat_kantor,
+            'lama_beroperasi'=>$request->lama_beroperasi,
+            'status'=>$request->status,
+            'tipe_pelabuhan'=>$request->tipe_pelabuhan,
+        ]);
+        return redirect('/Dashboard/CRUD/PelabuhanData');
+    }
+
 }
 
 //Update Pelabuhan
 public function updatePelabuhan(Request $request){
     $dataUpdate=\App\Pelabuhan::find($request->id_pelabuhan);
 
-    $dataUpdate->nama_pelabuhan=$request->nama_pelabuhan;
-    $dataUpdate->lokasi_pelabuhan=$request->lokasi_pelabuhan;
-    $dataUpdate->alamat_kantor=$request->alamat_kantor;
-    $dataUpdate->deskripsi=$request->deskripsi;
-    $dataUpdate->foto=$request->foto;
-    $dataUpdate->lama_beroperasi=$request->lama_beroperasi;
-    $dataUpdate->status=$request->status;
-    $dataUpdate->tipe_pelabuhan=$request->tipe_pelabuhan;
+    if($dataUpdate){
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $file->move(public_path() . '/pelabuhan/', $file_name);
+            $dataUpdate->nama_pelabuhan=$request->nama_pelabuhan;
+            $dataUpdate->lokasi_pelabuhan=$request->lokasi_pelabuhan;
+            $dataUpdate->alamat_kantor=$request->alamat_kantor;
+            $dataUpdate->foto=$file_name;
+            $dataUpdate->lama_beroperasi=$request->lama_beroperasi;
+            $dataUpdate->status=$request->status;
+            $dataUpdate->tipe_pelabuhan=$request->tipe_pelabuhan;
+            $dataUpdate->save();
+            return redirect()->back();
+        } else {
+            $dataUpdate->nama_pelabuhan=$request->nama_pelabuhan;
+            $dataUpdate->lokasi_pelabuhan=$request->lokasi_pelabuhan;
+            $dataUpdate->alamat_kantor=$request->alamat_kantor;
+            $dataUpdate->lama_beroperasi=$request->lama_beroperasi;
+            $dataUpdate->status=$request->status;
+            $dataUpdate->tipe_pelabuhan=$request->tipe_pelabuhan;
+            $dataUpdate->save();
+            return redirect()->back();
+        }
+    }
 
-    $dataUpdate->save();
-    return redirect()->back();
+
+
 }
 
 //Delete Pelabuhan

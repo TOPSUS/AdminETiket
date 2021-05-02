@@ -12,7 +12,7 @@ class Pelabuhan extends Model
     protected $guarded = [];
     protected $table = 'tb_pelabuhan';
     protected $fillable = [
-        'kode_pelabuhan','nama_pelabuhan','lokasi_pelabuhan','alamat_kantor', 'lama_beroperasi','deskripsi', 'foto','tipe_pelabuhan', 
+        'kode_pelabuhan','nama_pelabuhan','lokasi_pelabuhan','alamat_kantor', 'lama_beroperasi','deskripsi', 'foto','tipe_pelabuhan','status',
     ];
     public function asal()
     {

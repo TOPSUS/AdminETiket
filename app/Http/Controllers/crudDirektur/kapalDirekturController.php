@@ -26,24 +26,48 @@ class kapalDirekturController extends Controller
 
     //Create Kapal
     public function createKapal(Request $request){
-        $kapal = \App\Kapal::create([
-            'nama_kapal'=>$request->nama_kapal,
-            'kapasitas'=>$request->kapasitas,
-            'deskripsi'=>$request->deskripsi,
-            'contact_service'=>$request->contact_service,
-            'tanggal_beroperasi'=>$request->tanggal_beroperasi,
-            'tipe_kapal'=>$request->tipe_kapal,           
-        ]);
-        
-        if($kapal){
-            $hakAkses = \App\hakAksesKapal::create([
-                'id_user'=>Auth::user()->id,
-                'id_kapal'=>$kapal->id,
-                'hak_akses'=>'Direktur',
-            ]);
-        }
 
-        return redirect('/Direktur/Kapal');
+        if($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time()."_".$file->getClientOriginalName();
+            $file->move(public_path().'/kapal_image/', $file_name);
+            $kapal = \App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'contact_service'=>$request->contact_service,
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'tipe_kapal'=>$request->tipe_kapal,
+                'foto'=>$file_name
+            ]);
+
+            if($kapal){
+                $hakAkses = \App\hakAksesKapal::create([
+                    'id_user'=>Auth::user()->id,
+                    'id_kapal'=>$kapal->id,
+                    'hak_akses'=>'Direktur',
+                ]);
+            }
+            return redirect('/Direktur/Kapal');
+        } else {
+            $kapal = \App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'contact_service'=>$request->contact_service,
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'tipe_kapal'=>$request->tipe_kapal,
+            ]);
+
+            if($kapal){
+                $hakAkses = \App\hakAksesKapal::create([
+                    'id_user'=>Auth::user()->id,
+                    'id_kapal'=>$kapal->id,
+                    'hak_akses'=>'Direktur',
+                ]);
+            }
+            return redirect('/Direktur/Kapal');
+        }
     }
 
     //Update Kapal
@@ -69,7 +93,7 @@ class kapalDirekturController extends Controller
             $dataUpdate->deskripsi=$request->deskripsi;
             $dataUpdate->contact_service=$request->contact_service;
             $dataUpdate->tanggal_beroperasi=$request->tanggal_beroperasi;
-    
+
             $dataUpdate->save();
             return redirect('/Direktur/Kapal');
         }
@@ -115,7 +139,7 @@ class kapalDirekturController extends Controller
     public function updateAdmin(Request $request){
         $dataUpdate = \App\User::find($request->id_user);
         if($dataUpdate){
-            
+
             if($request->password != null){
                 $dataUpdate->nama=$request->nama;
                 $dataUpdate->email=$request->email;

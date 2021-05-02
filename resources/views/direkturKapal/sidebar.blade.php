@@ -24,11 +24,11 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="{{ route('adminSpeedboatHome') }}" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard </p>
             </a>
-          
+
           <li class="nav-header">Page</li>
           <li class="nav-item has-treeview">
            <li class="nav-item ">
@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('transaksiPembelian') }}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-credit-card"></i>
               <p class="text">Transaksi</p>
             </a>
@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('rewardSpeedboatView') }}" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-newspaper"></i>
               <p class="text">Laporan</p>
             </a>

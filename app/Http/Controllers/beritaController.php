@@ -24,6 +24,7 @@ class beritaController extends Controller
     	return view('Page.createBeritaPelabuhan', compact('dataPelabuhan'));
     }
 
+
 //Create Berita Pelabuhan
     public function addBeritaPelabuhan(Request $request){
         $IdUser=Auth::user()->id;
@@ -60,6 +61,44 @@ class beritaController extends Controller
         return redirect('/Dashboard/BeritaPelabuhan');
     }
 
+    public function editFormBeritaPelabuhan($id){
+        $berita = \App\beritaPelabuhan::find($id)->first();
+        return view('Page.editBeritaPelabuhan',compact('berita'));
+    }
+
+    //Update Berita
+    public function updateBeritaPelabuhan(Request $request){
+        $IdUser=Auth::user()->id;
+        $dataBerita = \App\beritaPelabuhan::find($request->id_berita)->first();
+        $detail = $request->berita;
+        libxml_use_internal_errors(true);
+        $dom = new \domdocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $count => $image) {
+            $src = $image->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimeType = $groups['mime'];
+                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                Storage::disk('public')->put($path, file_get_contents($src));
+                $image->removeAttribute('src');
+                $link = asset('storage'.$path);
+                $image->setAttribute('src', $link);
+                //array_push($arrImage, $path);
+            }
+        }
+
+        $detail = $dom->savehtml();
+        $dataBerita->berita = $detail;
+        $dataBerita->judul = $request->judul;
+        $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        $dataBerita->id_user = $IdUser;
+        $dataBerita->save();
+        return redirect('/Dashboard/BeritaPelabuhan');
+    }
+
 //DeleteBerita Pelabuhan
     public function deleteBeritaPelabuhan($id){
         $deleteItem = \App\beritaPelabuhan::find($id);
@@ -77,7 +116,7 @@ class beritaController extends Controller
 
 //Form Create Speedboat
     public function createBeritaSpeedboat(){
-        $dataSpeedboat=\App\Speedboat::all();
+        $dataSpeedboat=\App\Kapal::all();
     	return view('Page.createBeritaSpeedboat', compact('dataSpeedboat'));
     }
 
@@ -112,7 +151,45 @@ class beritaController extends Controller
         $dataBerita->judul = $request->judul;
         $dataBerita->tanggal = Carbon::now()->toDateTimeString();
         $dataBerita->id_user = $IdUser;
-        $dataBerita->id_speedboat = $request->id_speedboat;
+        $dataBerita->id_kapal = $request->id_kapal;
+        $dataBerita->save();
+        return redirect('/Dashboard/BeritaSpeedboat');
+    }
+
+    public function editFormBeritaSpeedboat($id){
+        $berita = \App\beritaKapal::find($id)->first();
+        return view('Page.editBeritaSpeedboat',compact('berita'));
+    }
+
+    //Update Berita
+    public function updateBeritaSpeedboat(Request $request){
+        $IdUser=Auth::user()->id;
+        $dataBerita = \App\beritaKapal::find($request->id_berita)->first();
+        $detail = $request->berita;
+        libxml_use_internal_errors(true);
+        $dom = new \domdocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $count => $image) {
+            $src = $image->getAttribute('src');
+            if (preg_match('/data:image/', $src)) {
+                preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
+                $mimeType = $groups['mime'];
+                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                Storage::disk('public')->put($path, file_get_contents($src));
+                $image->removeAttribute('src');
+                $link = asset('storage'.$path);
+                $image->setAttribute('src', $link);
+                //array_push($arrImage, $path);
+            }
+        }
+
+        $detail = $dom->savehtml();
+        $dataBerita->berita = $detail;
+        $dataBerita->judul = $request->judul;
+        $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        $dataBerita->id_user = $IdUser;
         $dataBerita->save();
         return redirect('/Dashboard/BeritaSpeedboat');
     }

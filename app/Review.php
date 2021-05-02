@@ -12,7 +12,7 @@ class Review extends Model
     protected $guarded = [];
     protected $table = 'tb_review';
     protected $fillable = [
-        'id_speedboat','id_user','id_pembelian','review','score'
+        'id_user','id_pembelian','review','score'
     ];
 
 //relasi ke tb user

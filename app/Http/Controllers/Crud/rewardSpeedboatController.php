@@ -16,7 +16,7 @@ class rewardSpeedboatController extends Controller
 
 //Form Create Reward Speedboat
     public function create(){
-        $speedboat=\App\Kapal::where('tipe_kapal','kapal')->get();
+        $speedboat=\App\Kapal::where('tipe_kapal','speedboat')->get();
 
         return view('Crud.createRewardSpeedboat', compact('speedboat'));
     }
@@ -24,27 +24,51 @@ class rewardSpeedboatController extends Controller
 //Create Reward Speedboat
     public function addRewardSpeedboat(Request $request)
     {
-        \App\rewardSpeedboat::create([
-            'id_speedboat'=>$request->id_speedboat,
-            'reward'=>$request->reward,
-            'berlaku'=>$request->berlaku,
-            'minimal_point'=>$request->minimal_point,
-            'foto'=>$request->foto,
-        ]);   
-        return view('Crud.rewardSpeedboatView');
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $file->move(public_path() . '/reward/', $file_name);
+            \App\rewardSpeedboat::create([
+                'id_speedboat'=>$request->id_speedboat,
+                'reward'=>$request->reward,
+                'berlaku'=>$request->berlaku,
+                'minimal_point'=>$request->minimal_point,
+                'foto'=>$file_name,
+            ]);
+            return redirect('/Dashboard/CRUD/RewardSpeedboatData');
+        } else {
+            \App\rewardSpeedboat::create([
+                'id_speedboat'=>$request->id_speedboat,
+                'reward'=>$request->reward,
+                'berlaku'=>$request->berlaku,
+                'minimal_point'=>$request->minimal_point,
+            ]);
+            return redirect('/Dashboard/CRUD/RewardSpeedboatData');
+        }
+
     }
 //Update Reward Speedboat
     public function updateRewardSpeedboat(Request $request){
         $dataUpdate=\App\rewardSpeedboat::find($request->id_reward_speedboat);
-
-        $dataUpdate->id_speedboat =$request->id_speedboat ;
-        $dataUpdate->reward=$request->reward;
-        $dataUpdate->berlaku=$request->berlaku;
-        $dataUpdate->minimal_point =$request->minimal_point;
-        $dataUpdate->foto =$request->foto;
-
-        $dataUpdate->save();
-        return redirect()->back();
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $file->move(public_path() . '/reward/', $file_name);
+            $dataUpdate->id_speedboat =$request->id_speedboat;
+            $dataUpdate->reward=$request->reward;
+            $dataUpdate->berlaku=$request->berlaku;
+            $dataUpdate->minimal_point =$request->minimal_point;
+            $dataUpdate->foto=$file_name;
+            $dataUpdate->save();
+            return redirect()->back();
+        } else {
+            $dataUpdate->id_speedboat =$request->id_speedboat;
+            $dataUpdate->reward=$request->reward;
+            $dataUpdate->berlaku=$request->berlaku;
+            $dataUpdate->minimal_point =$request->minimal_point;
+            $dataUpdate->save();
+            return redirect()->back();
+        }
 }
 
 //Delete Reward Speedboat

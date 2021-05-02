@@ -200,6 +200,8 @@ class pembelianController extends Controller
             $output = $pdf->output();
             $filename = Str::random($data->id);
             file_put_contents($filename . '.pdf', $output);
+            $data->file_tiket = $filename.'.pdf';
+            $data->save();
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/
             return redirect()->back();

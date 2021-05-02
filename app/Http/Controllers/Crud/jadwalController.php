@@ -11,18 +11,18 @@ class jadwalController extends Controller
 //View Jadwal
     public function view(){
         $dataJadwal=\App\Jadwal::with('kapal','asal','tujuan')->get();
-        $speedboat=\App\Kapal::all();
+        $kapal=\App\Kapal::all();
         $pelabuhan=\App\Pelabuhan::all();
-    	return view('Crud.jadwalView', compact('dataJadwal','speedboat','pelabuhan'));
+    	return view('Crud.jadwalView', compact('dataJadwal','kapal','pelabuhan'));
     }
 
 //Form Create
     public function create(){
-        //Menampilkan data di form 
-        $speedboat=\App\Kapal::all();
+        //Menampilkan data di form
+        $kapal=\App\Kapal::all();
         $pelabuhan=\App\Pelabuhan::all();
 
-    	return view('Crud.createJadwal', compact('speedboat','pelabuhan'));
+    	return view('Crud.createJadwal', compact('kapal','pelabuhan'));
     }
 
 //Create Jadwal
@@ -37,7 +37,7 @@ class jadwalController extends Controller
             \App\Jadwal::create([
                 'waktu_berangkat'=>$request->waktu_berangkat,
                 'id_asal_pelabuhan'=>$request->id_asal_pelabuhan,
-                'waktu_sampai'=>$request->waktu_sampai,
+                'estimasi_waktu'=>$request->estimasi_waktu,
                 'id_tujuan_pelabuhan'=>$request->id_tujuan_pelabuhan,
                 'id_kapal'=>$request->id_kapal,
                 'tanggal'=>$pd->toDateString(),
@@ -54,7 +54,7 @@ class jadwalController extends Controller
 
         $dataUpdate->waktu_berangkat=$request->waktu_berangkat;
         $dataUpdate->id_asal_pelabuhan=$request->id_asal_pelabuhan;
-        $dataUpdate->waktu_sampai=$request->waktu_sampai;
+        $dataUpdate->estimasi_waktu=$request->estimasi_waktu;
         $dataUpdate->id_tujuan_pelabuhan =$request->id_tujuan_pelabuhan;
         $dataUpdate->id_kapal =$request->id_kapal;
         $dataUpdate->harga=$request->harga;

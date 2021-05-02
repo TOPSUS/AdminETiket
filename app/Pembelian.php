@@ -16,7 +16,7 @@ class Pembelian extends Model
 
     public function jadwal()
     {
-        return $this->belongsTo('\App\Jadwal','id_jadwal');
+        return $this->belongsTo('\App\Jadwal','id_jadwal','id');
     }
 
     public function user()
