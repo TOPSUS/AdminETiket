@@ -47,8 +47,10 @@ class pembelianController extends Controller
             if ($data) {
                 $pdf = \PDF::loadView('pdf.myPDF', compact('data'));
                 $output = $pdf->output();
-                $filename = Str::random($data->id);
+                $filename = time().Str::random(5);
                 file_put_contents($filename . '.pdf', $output);
+                $data->file_tiket = $filename . '.pdf';
+                $data->save();
                 /*$fileName =  $data->tanggal. '.' . 'pdf' ;
                 $pdf->save($path . '/' . $fileName);*/
 
@@ -103,7 +105,7 @@ class pembelianController extends Controller
         if ($request->golongan != 0) {
             $pembelian = \App\Pembelian::create([
                 'id_user' => Auth::user()->id,
-                'id_jadwal'=>$request->jadwal,
+                'id_jadwal' => $request->jadwal,
                 'id_metode_pembayaran' => null,
                 'id_golongan' => $request->golongan,
                 'nomor_polisi' => $request->nomor_polisi,
@@ -115,7 +117,7 @@ class pembelianController extends Controller
         } else {
             $pembelian = \App\Pembelian::create([
                 'id_user' => Auth::user()->id,
-                'id_jadwal'=>$request->jadwal,
+                'id_jadwal' => $request->jadwal,
                 'id_metode_pembayaran' => null,
                 'id_golongan' => null,
                 'nomor_polisi' => null,
@@ -148,8 +150,8 @@ class pembelianController extends Controller
                     'id_pembelian' => $pembelian->id,
                     'id_card' => $cardid->id,
                     'kode_tiket' => $kodeTiket,
-                    'nama_pemegang_tiket' => implode("",$name),
-                    'no_id_card' => implode("",$cardnumber[$key]),
+                    'nama_pemegang_tiket' => implode("", $name),
+                    'no_id_card' => implode("", $cardnumber[$key]),
                     'harga' => $hargaGolongan,
                     'status' => "Not Used",
                 ]);
@@ -159,12 +161,27 @@ class pembelianController extends Controller
                     'id_pembelian' => $pembelian->id,
                     'id_card' => $cardid->id,
                     'kode_tiket' => $kodeTiket,
-                    'nama_pemegang_tiket' => implode("",$name),
-                    'no_id_card' => implode("",$cardnumber[$key]),
+                    'nama_pemegang_tiket' => implode("", $name),
+                    'no_id_card' => implode("", $cardnumber[$key]),
                     'harga' => $hargaTiket->harga,
                     'status' => "Not Used",
                 ]);
             }
+        }
+
+        $data = \App\Pembelian::where('id', $pembelian->id)->with('golongans', 'detailPembelian', 'jadwal', 'user')->where('status', 'terkonfirmasi')->first();
+        //return view('pdf.myPDF',compact('data'));
+        if ($data) {
+            $pdf = \PDF::loadView('pdf.myPDF', compact('data'));
+            $output = $pdf->output();
+            $filename = time() . Str::random(5);
+            file_put_contents($filename . '.pdf', $output);
+            $data->file_tiket = $filename . '.pdf';
+            $data->save();
+            /*$fileName =  $data->tanggal. '.' . 'pdf' ;
+            $pdf->save($path . '/' . $fileName);*/
+
+            return redirect()->back();
         }
         return redirect('/Transaksi');
     }
@@ -181,12 +198,12 @@ class pembelianController extends Controller
     public function getGolongan($id)
     {
         $pelabuhan = \App\Jadwal::where('id', $id)->first();
-        $kapal = \App\Kapal::where('id',$pelabuhan->id_kapal)->first();
-        if($kapal->tipe_kapal = 'feri'){
+        $kapal = \App\Kapal::where('id', $pelabuhan->id_kapal)->first();
+        if ($kapal->tipe_kapal = 'feri') {
             $golongan = \App\Golongan::where('id_pelabuhan', $pelabuhan->id_asal_pelabuhan)->get();
             return response()->json($golongan);
         } else {
-            return response()->json(['error'=>'Tidak terdapat golongan'],404);
+            return response()->json(['error' => 'Tidak terdapat golongan'], 404);
         }
     }
 
@@ -200,7 +217,7 @@ class pembelianController extends Controller
             $output = $pdf->output();
             $filename = Str::random($data->id);
             file_put_contents($filename . '.pdf', $output);
-            $data->file_tiket = $filename.'.pdf';
+            $data->file_tiket = $filename . '.pdf';
             $data->save();
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/

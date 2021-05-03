@@ -70,7 +70,7 @@ class rewardController extends Controller
     {
         $dataUpdate = \App\rewardSpeedboat::find($request->id_reward_speedboat);
 
-        $dataUpdate->id_speedboat = $IdSpeedboat->id_speedboat;
+        $dataUpdate->id_speedboat = $request->id_kapal;
         $dataUpdate->reward = $request->reward;
         $dataUpdate->berlaku = $request->berlaku;
         $dataUpdate->minimal_point = $request->minimal_point;
