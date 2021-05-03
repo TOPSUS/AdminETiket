@@ -65,11 +65,11 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->save();
         return redirect('/BeritaSpeedboat');
     }
-    
+
     //edit Berita
     public function editBerita($id){
     	$Beritaas = \App\beritaKapal::find($id);
-    	return view('CrudAdmin\editBeritaSpeedboat',compact('Beritaas'));
+    	return view('CrudAdmin.editBeritaSpeedboat',compact('Beritaas'));
     }
 
     //Update Berita
@@ -103,11 +103,11 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
         $beritaspeedboat->id_user = $IdUser;
-        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;    
+        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
         $beritaspeedboat->update();
         return redirect('/BeritaSpeedboat');
     }
-  
+
     public function deleteBeritas($id){
         $deleteItem = \App\beritaSpeedboat::find($id);
         $deleteItem->delete();

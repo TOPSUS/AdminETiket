@@ -59,12 +59,12 @@ class beritaPelabuhanController extends Controller
         $beritas->save();
         return redirect('/BeritaPelabuhan');
     }
-    
+
     //edit Berita
     public function editBerita($id){
     	$Beritaa = \App\beritaPelabuhan::find($id);
         $pelabuhans=\App\Pelabuhan::all();
-    	return view('CrudAdmin\editBeritaPelabuhan',compact('Beritaa','pelabuhans'));
+    	return view('CrudAdmin.editBeritaPelabuhan',compact('Beritaa','pelabuhans'));
     }
 
     //Update Berita
@@ -97,11 +97,11 @@ class beritaPelabuhanController extends Controller
         $beritaPelabuhan->judul = $request->judul;
         $beritaPelabuhan->tanggal = Carbon::now()->toDateTimeString();
         $beritaPelabuhan->id_user = $IdUser;
-        $beritaPelabuhan->id_pelabuhan = $request->id_pelabuhan;    
+        $beritaPelabuhan->id_pelabuhan = $request->id_pelabuhan;
         $beritaPelabuhan->update();
         return redirect('/BeritaPelabuhan');
     }
-  
+
     public function deleteBerita($id){
         $deleteItem = \App\beritaPelabuhan::find($id);
         $deleteItem->delete();
