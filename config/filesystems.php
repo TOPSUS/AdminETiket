@@ -50,14 +50,14 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => 'D:/UNUD/Semester 6/Topik Khusus MDI/E-Tiket/Topsus E-Tiket Website/core/storage/app/public_html',
+            'root' => storage_path('app/public'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         'admin' => [
             'driver'=>'local',
-            'root'=>'D:/UNUD/Semester 6/Topik Khusus MDI/E-Tiket/Topsus E-Tiket Website/core/storage/app/public_html',
+            'root'=>'/home/espeedbo/core/storage/app/public_html',
             'url'=>env('APP_URL').'/storages',
             'visibility'=> 'public',
         ],
