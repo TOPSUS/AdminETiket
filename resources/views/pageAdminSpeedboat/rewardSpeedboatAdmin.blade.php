@@ -60,7 +60,7 @@
                             <div class="col-xl-3 col-sm-3 col-md-3 d-flex">
                                 <div class="card bg-light">
                                     <div class="text-center d-flex">
-                                        <img src="/reward/{{$rewardSpeedboat->foto}}" alt=""
+                                        <img src="{{asset('/storage/reward_image/'.$rewardSpeedboat->foto)}}" alt=""
                                              class="img-square img-fluid"
                                              style="width:300px;height:200px;">
                                     </div>
@@ -126,7 +126,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('updateRewardSpeedboat') }}" method="POST">
+                        <form action="{{ route('updateRewardSpeedboat') }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
                             <div class="form-group">
@@ -158,7 +158,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile" class="font-weight-bold text-dark">Foto</label>
-                                <input type="file" id="exampleInputFile" name="foto">
+                                <input type="file" id="exampleInputFile" name="file">
                             </div>
 
                             <div class="modal-footer">

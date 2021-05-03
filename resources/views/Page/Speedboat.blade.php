@@ -53,15 +53,15 @@
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
-        
+
             <div class="col-12 col-sm-6">
               <div class="col-12">
-                <img src="/speedboat/{{$speedboat->foto}}" class="product-image" alt="Product Image">
+                <img src="{{asset('/storage/kapal_image/'.$speedboat->foto)}}" class="product-image" alt="Product Image">
               </div>
-              
+
             </div>
             <div class="col-12 col-sm-6">
-              <h3 class="my-3">{{$speedboat->nama_speedboat}}</h3>
+              <h3 class="my-3">{{$speedboat->nama_kapal}}</h3>
               <p>{{$speedboat->deskripsi}}</p>
               <h4 class="mt-3"><small>Max Capacity</small> {{$speedboat->kapasitas}} </h4>
               <div class="bg-gray py-2 px-3 mt-4">
@@ -73,7 +73,7 @@
                 </h4>
               </div>
               <br>
-             
+
             </div>
           </div>
           <div class="row mt-4">

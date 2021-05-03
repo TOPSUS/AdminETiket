@@ -5,6 +5,7 @@ namespace App\Http\Controllers\crudAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class rewardController extends Controller
@@ -44,7 +45,7 @@ class rewardController extends Controller
         if($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time()."_".$file->getClientOriginalName();
-            $file->move(public_path().'/reward/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/reward_image', $file);
             $dataRewardSpeedboat = new \App\rewardSpeedboat();
             $dataRewardSpeedboat->id_speedboat = $request->id_kapal;
             $dataRewardSpeedboat->reward = $request->reward;
@@ -69,15 +70,24 @@ class rewardController extends Controller
     public function updateReward(Request $request)
     {
         $dataUpdate = \App\rewardSpeedboat::find($request->id_reward_speedboat);
-
-        $dataUpdate->id_speedboat = $request->id_kapal;
-        $dataUpdate->reward = $request->reward;
-        $dataUpdate->berlaku = $request->berlaku;
-        $dataUpdate->minimal_point = $request->minimal_point;
-        $dataUpdate->foto = $request->foto;
-
-        $dataUpdate->save();
-        return redirect()->back();
+        if($request->hasfile('file')) {
+            $file = $request->file('file');
+            $stored = Storage::disk('admin')->putFile('/reward_image', $file);
+            $dataUpdate->id_speedboat = $request->id_kapal;
+            $dataUpdate->reward = $request->reward;
+            $dataUpdate->berlaku = $request->berlaku;
+            $dataUpdate->minimal_point = $request->minimal_point;
+            $dataUpdate->foto = basename($stored);
+            $dataUpdate->save();
+            return redirect()->back();
+        } else {
+            $dataUpdate->id_speedboat = $request->id_kapal;
+            $dataUpdate->reward = $request->reward;
+            $dataUpdate->berlaku = $request->berlaku;
+            $dataUpdate->minimal_point = $request->minimal_point;
+            $dataUpdate->save();
+            return redirect()->back();
+        }
     }
 
 //Delete Reward Speedboat
@@ -85,7 +95,6 @@ class rewardController extends Controller
     {
         $deleteRewardSpeedboat = \App\rewardSpeedboat::find($id);
         $deleteRewardSpeedboat->delete();
-
         return redirect()->back();
     }
 }

@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class pembelianController extends Controller
@@ -40,19 +41,40 @@ class pembelianController extends Controller
     {
         $pembelian = \App\Pembelian::where('id', $id)->first();
         if ($pembelian) {
-            $pembelian->status = 'Terkonfirmasi';
+            $pembelian->status = 'terkonfirmasi';
             $pembelian->save();
             $data = \App\Pembelian::where('id', $id)->with('golongans', 'detailPembelian', 'jadwal', 'user')->where('status', 'terkonfirmasi')->first();
             //return view('pdf.myPDF',compact('data'));
             if ($data) {
                 $pdf = \PDF::loadView('pdf.myPDF', compact('data'));
                 $output = $pdf->output();
-                $filename = time().Str::random(5);
-                file_put_contents($filename . '.pdf', $output);
-                $data->file_tiket = $filename . '.pdf';
+                $filename = time() . Str::random(5) . '.pdf';
+                Storage::disk('admin')->put('/test_pdf/' . $filename, $output);
+                $data->file_tiket = $filename;
                 $data->save();
-                /*$fileName =  $data->tanggal. '.' . 'pdf' ;
-                $pdf->save($path . '/' . $fileName);*/
+
+                $user = \App\User::find($data->id_user);
+                if ($user->fcm_token != null) {
+                    $notif = \App\UserNotification::create([
+                        'user_id' => $user->id,
+                        'title' => 'Pembayaran telah dikonfirmasi',
+                        'body' => 'Pembayaran anda telah dikonfirmasi, silahkan melakukan pengecekan pada e-ticket.',
+                        'notification_by' => 0,
+                        'status' => 0,
+                        'type' => 1,
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]);
+                    if ($notif) {
+                        $ch = curl_init("https://fcm.googleapis.com/fcm/send");
+                        $header = array("Content-Type:application/json", "Authorization: key=AAAAe4OwHhY:APA91bFoIIsUBcJ_OK26_PGnG6HK9JMEZ5D3BbxbR1BfNqOlbTdiAlawdHjlO8caYMl6QS5ok-1P4uV20MPHDZIBUl_JQ0umbjmyi7v5OHXihlA8OHsEjisA2mtlwtq7DRHUZr4C-VVK");
+                        $data = json_encode(array("to" => $user->fcm_token, "priority" => 10, "data" => array("title" => "Pembayaran dikonfirmasi", "body" => "Pembayaran anda telah dikonfirmasi, silahkan melakukan pengecekan pada e-ticket.", "id" => $notif->id, "status" => $notif->status, "type" => $notif->type, "created_at" => date('Y-m-d H:i:s'), "notification_by" => $notif->notification_by)));
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+                        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                        curl_setopt($ch, CURLOPT_POST, 1);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                        curl_exec($ch);
+                    }
+                }
 
                 return redirect()->back();
             }
@@ -174,9 +196,9 @@ class pembelianController extends Controller
         if ($data) {
             $pdf = \PDF::loadView('pdf.myPDF', compact('data'));
             $output = $pdf->output();
-            $filename = time() . Str::random(5);
-            file_put_contents($filename . '.pdf', $output);
-            $data->file_tiket = $filename . '.pdf';
+            $filename = time() . Str::random(5) . '.pdf';
+            Storage::disk('admin')->put('/test_pdf/' . $filename, $output);
+            $data->file_tiket = $filename;
             $data->save();
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/
@@ -215,9 +237,9 @@ class pembelianController extends Controller
         if ($data) {
             $pdf = \PDF::loadView('pdf.myPDF', compact('data'));
             $output = $pdf->output();
-            $filename = Str::random($data->id);
-            file_put_contents($filename . '.pdf', $output);
-            $data->file_tiket = $filename . '.pdf';
+            $filename = time() . Str::random(5) . '.pdf';
+            Storage::disk('admin')->put('/test_pdf/' . $filename, $output);
+            $data->file_tiket = $filename;
             $data->save();
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/
@@ -237,7 +259,9 @@ class pembelianController extends Controller
         //return view('pdf.myPDF',compact('data'));
         if ($data) {
             if ($data->file_tiket) {
-                return response()->file($data->file_tiket);
+                if (Storage::disk('admin')->exists($data->file_tiket)) {
+                    return Storage::disk('admin')->get('/test_pdf/' . $data->file_tiket);
+                }
             }
         }
 

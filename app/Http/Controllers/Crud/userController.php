@@ -55,7 +55,6 @@ public function createadmin(){
 			'nohp'=>$request->nohp,
 			'email'=>$request->email,
 			'password'=>Hash::make($request->password),
-			'foto'=>'avatar.png',
             'role'=>$request->role,
 		]);
         return redirect('/Dashboard/CRUD/CustomerData')->with('success','Data berhasil dibuat!');
@@ -72,7 +71,6 @@ public function addDirektur(Request $request)
         'nohp'=>$request->nohp,
         'email'=>$request->email,
         'password'=>Hash::make($request->password),
-        'foto'=>'avatar.png',
         'role'=>'Direktur',
     ]);
     return redirect('/Dashboard/CRUD/DirekturData');
@@ -88,7 +86,6 @@ public function addAdmin(Request $request)
         'nohp'=>$request->nohp,
         'email'=>$request->email,
         'password'=>Hash::make($request->password),
-        'foto'=>'avatar.png',
         'id_kapal'=>$request->id_kapal,
         'role'=>'Admin',
     ]);
@@ -105,7 +102,6 @@ public function addAdmin(Request $request)
         $dataUpdate->jeniskelamin=$request->jeniskelamin;
         $dataUpdate->nohp=$request->nohp;
         $dataUpdate->email=$request->email;
-        $dataUpdate->foto=$request->foto;
         $dataUpdate->role=$request->role;
 
         $dataUpdate->save();

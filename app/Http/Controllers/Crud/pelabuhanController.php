@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class pelabuhanController extends Controller
 {
@@ -33,12 +34,12 @@ public function addPelabuhan(Request $request)
     if ($request->hasfile('file')) {
         $file = $request->file('file');
         $file_name = time() . "_" . $file->getClientOriginalName();
-        $file->move(public_path() . '/pelabuhan/', $file_name);
+        $stored = Storage::disk('admin')->putFile('/image_pelabuhan', $file);
         \App\Pelabuhan::create([
             'nama_pelabuhan'=>$request->nama_pelabuhan,
             'lokasi_pelabuhan'=>$request->lokasi_pelabuhan,
             'alamat_kantor'=>$request->alamat_kantor,
-            'foto'=>$file_name,
+            'foto'=>basename($stored),
             'lama_beroperasi'=>$request->lama_beroperasi,
             'status'=>$request->status,
             'tipe_pelabuhan'=>$request->tipe_pelabuhan,
@@ -66,11 +67,11 @@ public function updatePelabuhan(Request $request){
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/pelabuhan/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/image_pelabuhan', $file);
             $dataUpdate->nama_pelabuhan=$request->nama_pelabuhan;
             $dataUpdate->lokasi_pelabuhan=$request->lokasi_pelabuhan;
             $dataUpdate->alamat_kantor=$request->alamat_kantor;
-            $dataUpdate->foto=$file_name;
+            $dataUpdate->foto=basename($stored);
             $dataUpdate->lama_beroperasi=$request->lama_beroperasi;
             $dataUpdate->status=$request->status;
             $dataUpdate->tipe_pelabuhan=$request->tipe_pelabuhan;
@@ -87,9 +88,6 @@ public function updatePelabuhan(Request $request){
             return redirect()->back();
         }
     }
-
-
-
 }
 
 //Delete Pelabuhan

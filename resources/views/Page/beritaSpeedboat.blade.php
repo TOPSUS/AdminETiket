@@ -84,7 +84,7 @@
                                             <span
                                                 class="description">{{date('d F Y', strtotime($berita->created_at)) }}</span>
                                             <span
-                                                class="description">{{$berita->relasiSpeedboat->nama_speedboat}}</span>
+                                                class="description">{{$berita->relasiSpeedboat->nama_kapal}}</span>
                                         </div>
                                         <!-- /.user-block -->
                                         <h3 style="text-align:center;"><strong>{{$berita->judul}}</strong></h3>

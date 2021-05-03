@@ -58,7 +58,7 @@
                             <div class="col-12 col-sm-6">
                                 <h3 class="d-inline-block d-sm-none">{{$profile->nama_kapal}}</h3>
                                 <div class="col-12">
-                                    <img src="/kapal_image/{{$profile->foto}}" class="product-image"
+                                    <img src="{{asset('/storage/kapal_image/'.$profile->foto)}}" class="product-image"
                                          alt="Product Image">
                                 </div>
                             </div>

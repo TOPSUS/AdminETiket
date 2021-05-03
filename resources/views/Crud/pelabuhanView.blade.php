@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="col-3 col-sm-3">
                                 <div class="col-12">
-                                    <img src="/pelabuhan/{{$pelabuhan->foto}}" class="img-fluid img-thumbnail"
+                                    <img src="{{asset('/storage/image_pelabuhan/'.$pelabuhan->foto)}}" class="img-fluid img-thumbnail"
                                          alt="Pelabuhan" style="" >
                                 </div>
                             </div>

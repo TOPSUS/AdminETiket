@@ -5,6 +5,7 @@ namespace App\Http\Controllers\crudAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class profileSpeedboatController extends Controller
 {
@@ -36,14 +37,13 @@ class profileSpeedboatController extends Controller
     {
         if ($request->hasfile('file')) {
             $file = $request->file('file');
-            $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/kapal_image/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
             \App\Speedboat::create([
                 'nama_speedboat' => $request->nama_speedboat,
                 'kapasitas' => $request->kapasitas,
                 'deskripsi' => $request->deskripsi,
                 'tanggal_beroperasi' => $request->tanggal_beroperasi,
-                'foto' => $file_name,
+                'foto' => basename($stored),
                 'contact_service' => $request->contact_service,
             ]);
             return redirect('/ProfileSpeedboat');
@@ -67,12 +67,11 @@ class profileSpeedboatController extends Controller
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');
-            $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/kapal_image/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/kapal_image',$file);
             $dataUpdate->nama_kapal = $request->nama_kapal;
             $dataUpdate->kapasitas = $request->kapasitas;
             $dataUpdate->deskripsi = $request->deskripsi;
-            $dataUpdate->foto = $file_name;
+            $dataUpdate->foto = basename($stored);
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
 

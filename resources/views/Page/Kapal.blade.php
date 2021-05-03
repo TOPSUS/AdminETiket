@@ -53,12 +53,12 @@
       <div class="card card-solid">
         <div class="card-body">
           <div class="row">
-        
+
             <div class="col-12 col-sm-6">
               <div class="col-12">
-                <img src="/speedboat/{{$kapal->foto}}" class="product-image" alt="Product Image">
+                <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image" alt="Product Image">
               </div>
-              
+
             </div>
             <div class="col-12 col-sm-6">
               <h3 class="my-3">{{$kapal->nama_kapal}}</h3>

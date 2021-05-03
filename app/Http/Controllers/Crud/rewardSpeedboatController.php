@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class rewardSpeedboatController extends Controller
 {
@@ -27,13 +28,13 @@ class rewardSpeedboatController extends Controller
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/reward/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/reward_image', $file);
             \App\rewardSpeedboat::create([
                 'id_speedboat'=>$request->id_speedboat,
                 'reward'=>$request->reward,
                 'berlaku'=>$request->berlaku,
                 'minimal_point'=>$request->minimal_point,
-                'foto'=>$file_name,
+                'foto'=>basename($stored),
             ]);
             return redirect('/Dashboard/CRUD/RewardSpeedboatData');
         } else {
@@ -53,12 +54,12 @@ class rewardSpeedboatController extends Controller
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/reward/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/reward_image', $file);
             $dataUpdate->id_speedboat =$request->id_speedboat;
             $dataUpdate->reward=$request->reward;
             $dataUpdate->berlaku=$request->berlaku;
             $dataUpdate->minimal_point =$request->minimal_point;
-            $dataUpdate->foto=$file_name;
+            $dataUpdate->foto=basename($stored);
             $dataUpdate->save();
             return redirect()->back();
         } else {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class kapalDirekturController extends Controller
 {
@@ -30,7 +31,7 @@ class kapalDirekturController extends Controller
         if($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time()."_".$file->getClientOriginalName();
-            $file->move(public_path().'/kapal_image/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
             $kapal = \App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
                 'kapasitas'=>$request->kapasitas,
@@ -38,7 +39,7 @@ class kapalDirekturController extends Controller
                 'contact_service'=>$request->contact_service,
                 'tanggal_beroperasi'=>$request->tanggal_beroperasi,
                 'tipe_kapal'=>$request->tipe_kapal,
-                'foto'=>$file_name
+                'foto'=>basename($stored),
             ]);
 
             if($kapal){
@@ -77,11 +78,11 @@ class kapalDirekturController extends Controller
     if($request->hasfile('file')){
         $file = $request->file('file');
         $file_name = time()."_".$file->getClientOriginalName();
-        $file->move(public_path().'/speedboat_image/', $file_name);
+        $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
         $dataUpdate->nama_kapal=$request->nama_kapal;
         $dataUpdate->kapasitas=$request->kapasitas;
         $dataUpdate->deskripsi=$request->deskripsi;
-        $dataUpdate->foto=$file_name;
+        $dataUpdate->foto=basename($stored);
         $dataUpdate->contact_service=$request->contact_service;
         $dataUpdate->tanggal_beroperasi=$request->tanggal_beroperasi;
 

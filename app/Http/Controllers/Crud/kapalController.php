@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class kapalController extends Controller
 {
@@ -23,13 +24,13 @@ class kapalController extends Controller
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/kapal_image/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
             \App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
                 'kapasitas'=>$request->kapasitas,
                 'deskripsi'=>$request->deskripsi,
                 'contact_service'=>$request->contact_service,
-                'foto'=>$file_name,
+                'foto'=>basename($stored),
                 'tanggal_beroperasi'=>$request->tanggal_beroperasi,
                 'tipe_kapal'=>'feri'
 
@@ -55,12 +56,12 @@ class kapalController extends Controller
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
-            $file->move(public_path() . '/kapal_image/', $file_name);
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
             $dataUpdate->nama_kapal=$request->nama_kapal;
             $dataUpdate->kapasitas = $request->kapasitas;
             $dataUpdate->deskripsi = $request->deskripsi;
             $dataUpdate->contact_service = $request->contact_service;
-            $dataUpdate->foto=$file_name;
+            $dataUpdate->foto=basename($stored);
             $dataUpdate->tanggal_beroperasi=$request->tanggal_beroperasi;
             $dataUpdate->save();
             return redirect()->back();

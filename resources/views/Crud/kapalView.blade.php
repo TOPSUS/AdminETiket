@@ -59,7 +59,7 @@
 
                             <div class="col-12 col-sm-6">
                                 <div class="col-12">
-                                    <img src="/kapal_image/{{$kapal->foto}}" class="product-image" alt="Product Image">
+                                    <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image" alt="Product Image">
                                 </div>
 
                             </div>

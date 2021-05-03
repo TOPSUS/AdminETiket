@@ -60,7 +60,7 @@
                             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                                 <div class="card bg-light">
                                     <div class="text-center d-flex">
-                                        <img src="/reward/{{$rewardSpeedboat->foto}}" alt="" class="img-square"
+                                        <img src="{{asset('/storage/reward_image/'.$rewardSpeedboat->foto)}}" alt="" class="img-square"
                                              style="width:300px;height:200px;">
                                     </div>
                                     <div class="card-header text-muted border-bottom-0">
