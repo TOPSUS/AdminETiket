@@ -11,6 +11,7 @@ class beritaPelabuhan extends Model
     use SoftDeletes;
     protected $guarded = [];
     protected $table = 'tb_berita_pelabuhan';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id_pelabuhan','id_user','judul','berita','tanggal','foto'
     ];
@@ -22,5 +23,5 @@ class beritaPelabuhan extends Model
     {
     	return $this->belongsTo('App\User','id_user','id');
     }
-    
+
 }

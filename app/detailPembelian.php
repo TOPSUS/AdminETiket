@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class detailPembelian extends Model
 {
     //
+    use SoftDeletes;
     protected $guarded = [];
     protected $table = 'tb_detail_pembelian';
     protected $fillable = [
@@ -16,12 +18,12 @@ class detailPembelian extends Model
     //relasi ke tb card
     public function card()
     {
-        return $this->belongsTo('App\Card','id_card','id');
+        return $this->belongsTo('App\Card','id_card','id')->withTrashed();;
     }
 
     //relasi ke tb pembelian
     public function pembelian()
     {
-        return $this->belongsTo('App\Pembelian','id_pembelian','id');
+        return $this->belongsTo('App\Pembelian','id_pembelian','id')->withTrashed();;
     }
 }

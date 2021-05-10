@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class direkturController extends Controller
 {
 
 //Speedboat Direktur
     public function speedboat($id){
-        $dataHakAkses=\App\hakAksesSpeedboat::where('id_user',$id)->where('hak_akses','Direktur')->get();
-        return view('Crud.direkturSpeedboat', compact('dataHakAkses'));
+        $user_id = $id;
+        $dataHakAkses=\App\hakAksesKapal::where('id_user',$id)->where('hak_akses','Direktur')->pluck('id_kapal');
+        $dataKapal = \App\Kapal::whereIn('id',$dataHakAkses)->get();
+        return view('Crud.direkturSpeedboat', compact('dataKapal','user_id'));
     }
 
 //Form Create Speedboat
@@ -23,27 +26,51 @@ class direkturController extends Controller
 
 //Create Speedboat
     public function addSpeedboat(Request $request){
-        $dataSpeedboat=\App\Speedboat::create([
-            'nama_speedboat'=>$request->nama_speedboat,
-            'kapasitas'=>$request->kapasitas,
-            'deskripsi'=>$request->deskripsi,
-            'tanggal_beroperasi'=>$request->tanggal_beroperasi,
-            'foto'=>$request->foto,
-            'contact_service'=>$request->contact_service,
-        ]);
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
+            $dataSpeedboat=\App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'foto'=>basename($stored),
+                'tipe_kapal'=>'speedboat',
+                'contact_service'=>$request->contact_service,
+            ]);
 
-        \App\hakAksesSpeedboat::create([
-            'id_user'=>$request->id_direktur,
-            'id_speedboat'=>$dataSpeedboat->id,
-            'hak_akses'=>'Direktur',
-        ]);
-        return redirect('/Dashboard/CRUD/DirekturData/Speedboat/'.$request->id_direktur);
+            \App\hakAksesKapal::create([
+                'id_user'=>$request->id_direktur,
+                'id_kapal'=>$dataSpeedboat->id,
+                'hak_akses'=>'Direktur',
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur);
+        } else {
+            $dataSpeedboat=\App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'contact_service'=>$request->contact_service,
+            ]);
+
+            \App\hakAksesKapal::create([
+                'id_user'=>$request->id_direktur,
+                'id_kapal'=>$dataSpeedboat->id,
+                'hak_akses'=>'Direktur',
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur);
+        }
+
     }
 
 //Kapal Direktur
     public function kapal($id){
-        $dataHakAkses=\App\hakAksesKapal::where('id_user',$id)->where('hak_akses','Direktur')->get();
-        return view('Crud.direkturKapal', compact('dataHakAkses'));
+        $user_id = $id;
+        $dataHakAkses=\App\hakAksesKapal::where('id_user',$id)->where('hak_akses','Direktur')->pluck('id_kapal');
+        $dataKapal = \App\Kapal::whereIn('id',$dataHakAkses)->get();
+        return view('Crud.direkturKapal', compact('dataKapal', 'user_id'));
     }
 
 //Form Create Kapal
@@ -54,19 +81,46 @@ class direkturController extends Controller
 
 //Create Kapal
     public function addKapal(Request $request){
-        $dataKapal=\App\Kapal::create([
-            'nama_kapal'=>$request->nama_kapal,
-            'deskripsi'=>$request->deskripsi,
-            'foto'=>$request->foto,
-            'tanggal_beroperasi'=>$request->tanggal_beroperasi,
-        ]);
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
+            $dataKapal=\App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'foto'=>basename($stored),
+                'tipe_kapal'=>'feri',
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'contact_service'=>$request->contact_service,
+            ]);
 
-        \App\hakAksesKapal::create([
-            'id_user'=>$request->id_direktur,
-            'id_kapal'=>$dataKapal->id,
-            'hak_akses'=>'Direktur',
-        ]);
-        return redirect('/Dashboard/CRUD/DirekturData/Kapal/'.$request->id_direktur);
+            \App\hakAksesKapal::create([
+                'id_user'=>$request->id_direktur,
+                'id_kapal'=>$dataKapal->id,
+                'hak_akses'=>'Direktur',
+                'contact_service'=>$request->contact_service,
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur);
+        } else {
+            $dataKapal=\App\Kapal::create([
+                'nama_kapal'=>$request->nama_kapal,
+                'kapasitas'=>$request->kapasitas,
+                'deskripsi'=>$request->deskripsi,
+                'tipe_kapal'=>'feri',
+                'tanggal_beroperasi'=>$request->tanggal_beroperasi,
+                'contact_service'=>$request->contact_service,
+            ]);
+
+            \App\hakAksesKapal::create([
+                'id_user'=>$request->id_direktur,
+                'id_kapal'=>$dataKapal->id,
+                'hak_akses'=>'Direktur',
+                'contact_service'=>$request->contact_service,
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur);
+        }
+
     }
 
 }

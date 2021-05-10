@@ -82,10 +82,15 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col">
+                            <label>Kapasitas</label>
+                            <div class="input-group date" id="kapasitas">
+                                <input type="number" step="1" class="form-control" id="kapasitas" name="kapasitas">
+                            </div>
+                        </div>
                         <div class="col">
                             <label>Tanggal Beroperasi</label>
-                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                            <div class="input-group date" id="tanggal_beroperasi">
                                 <input type="date" step="1" class="form-control" id="tanggal_beroperasi"
                                        name="tanggal_beroperasi">
                             </div>

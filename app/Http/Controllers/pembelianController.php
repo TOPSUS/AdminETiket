@@ -8,6 +8,7 @@ use App\Jadwal;
 use App\Pembelian;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -208,6 +209,8 @@ class pembelianController extends Controller
         return redirect('/Transaksi');
     }
 
+
+    //AJAX IDCARD Pembelian
     public function idCard()
     {
         $card = \App\Card::pluck('card');
@@ -217,6 +220,8 @@ class pembelianController extends Controller
         return response()->json($encoded);
     }
 
+
+    //AJAX GOLONGAN di Pembelian
     public function getGolongan($id)
     {
         $pelabuhan = \App\Jadwal::where('id', $id)->first();
@@ -259,15 +264,12 @@ class pembelianController extends Controller
         //return view('pdf.myPDF',compact('data'));
         if ($data) {
             if ($data->file_tiket) {
-                if (Storage::disk('admin')->exists($data->file_tiket)) {
-                    return Storage::disk('admin')->get('/test_pdf/' . $data->file_tiket);
+                if (Storage::disk('admin')->exists('/test_pdf/' . $data->file_tiket)) {
+                    $file = response()->file(Storage::disk('admin')->path('/test_pdf/' . $data->file_tiket));
+
+                    return $file;
                 }
             }
         }
-
-        /*$data = tb_detail_pembelian::where('id_detail_pembelian',1)->first();
-        $pdf = \PDF::loadView('pdf.myPDF',$data);
-
-        return $pdf->save('mypdf.pdf')->download('laporan-pdf.pdf');*/
     }
 }
