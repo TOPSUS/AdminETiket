@@ -15,13 +15,13 @@ class beritaController extends Controller
     public function indexPelabuhan(){
         $dataBerita=\App\beritaPelabuhan::with('relasiPelabuhan')->get();
         $pelabuhan=\App\beritaPelabuhan::all();
-    	return view('Page.beritaPelabuhan',compact('dataBerita'));
+        return view('Page.beritaPelabuhan',compact('dataBerita'));
     }
 
 //Form Create Pelabuhan
     public function createBeritaPelabuhan(){
         $dataPelabuhan=\App\Pelabuhan::all();
-    	return view('Page.createBeritaPelabuhan', compact('dataPelabuhan'));
+        return view('Page.createBeritaPelabuhan', compact('dataPelabuhan'));
     }
 
 
@@ -62,7 +62,7 @@ class beritaController extends Controller
     }
 
     public function editFormBeritaPelabuhan($id){
-        $berita = \App\beritaPelabuhan::find($id)->first();
+        $berita = \App\beritaPelabuhan::find($id);
         return view('Page.editBeritaPelabuhan',compact('berita'));
     }
 
@@ -117,7 +117,7 @@ class beritaController extends Controller
 //Form Create Speedboat
     public function createBeritaSpeedboat(){
         $dataSpeedboat=\App\Kapal::all();
-    	return view('Page.createBeritaSpeedboat', compact('dataSpeedboat'));
+        return view('Page.createBeritaSpeedboat', compact('dataSpeedboat'));
     }
 
 //Create Berita Speedboat
@@ -157,7 +157,7 @@ class beritaController extends Controller
     }
 
     public function editFormBeritaSpeedboat($id){
-        $berita = \App\beritaKapal::find($id)->first();
+        $berita = \App\beritaKapal::find($id);
         return view('Page.editBeritaSpeedboat',compact('berita'));
     }
 

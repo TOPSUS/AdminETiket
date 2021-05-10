@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/ooof', function () {
+    Artisan::call('storage:link');
+});
 
 //Route Login Register
 Route::get('/', 'loginController@index')->name('logins');
@@ -81,11 +84,11 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/CreateUser', 'Crud\userController@create')->name('create-user');
     Route::get('/Dashboard/CRUD/CreateDirektur', 'Crud\userController@createdirektur')->name('create-direktur');
     Route::get('/Dashboard/CRUD/CreateAdmin', 'Crud\userController@createadmin')->name('create-admin');
-    Route::post('/Dashboard/CRUD/AddAdmin', 'Crud\UserController@addAdmin')->name('add-admin');
-    Route::post('/Dashboard/CRUD/AddDirektur', 'Crud\UserController@addDirektur')->name('add-direktur');
-    Route::post('/Dashboard/CRUD/AddUser', 'Crud\UserController@addUser')->name('add-user');
-    Route::post('/Dashboard/CRUD/UpdateCustomer', 'Crud\UserController@updateUser')->name('update-user');
-    Route::get('/Dashboard/CRUD/DeleteUser/{id}', 'Crud\UserController@deleteUser')->name('delete-user');
+    Route::post('/Dashboard/CRUD/AddAdmin', 'Crud\userController@addAdmin')->name('add-admin');
+    Route::post('/Dashboard/CRUD/AddDirektur', 'Crud\userController@addDirektur')->name('add-direktur');
+    Route::post('/Dashboard/CRUD/AddUser', 'Crud\userController@addUser')->name('add-user');
+    Route::post('/Dashboard/CRUD/UpdateCustomer', 'Crud\userController@updateUser')->name('update-user');
+    Route::get('/Dashboard/CRUD/DeleteUser/{id}', 'Crud\userController@deleteUser')->name('delete-user');
 
     //Speedboat
     Route::get('/Dashboard/CRUD/SpeedboatData', 'Crud\speedboatController@view')->name('viewspeedboat');

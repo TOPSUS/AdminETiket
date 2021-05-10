@@ -16,22 +16,22 @@ class Pembelian extends Model
 
     public function jadwal()
     {
-        return $this->belongsTo('\App\Jadwal','id_jadwal','id');
+        return $this->belongsTo('\App\Jadwal','id_jadwal','id')->withTrashed();
     }
 
     public function user()
     {
-        return $this->belongsTo('\App\User','id_user');
+        return $this->belongsTo('\App\User','id_user')->withTrashed();
     }
 
     public function detailPembelian()
     {
-        return $this->hasMany('\App\detailPembelian','id_pembelian');
+        return $this->hasMany('\App\detailPembelian','id_pembelian')->withTrashed();
     }
 
     public function golongans()
     {
-        return $this->belongsTo('\App\Golongan','id_golongan');
+        return $this->belongsTo('\App\Golongan','id_golongan')->withTrashed();
     }
 
 }

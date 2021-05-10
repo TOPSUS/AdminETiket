@@ -98,9 +98,6 @@
                                     <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
                                        href="#product-desc" role="tab" aria-controls="product-desc"
                                        aria-selected="true">Description</a>
-                                    <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab"
-                                       href="#product-rating" role="tab" aria-controls="product-rating"
-                                       aria-selected="false">Rating</a>
                                 </div>
                             </nav>
                             <div class="tab-content p-3" id="nav-tabContent">

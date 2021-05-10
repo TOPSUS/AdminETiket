@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Golongan extends Model
 {
     //
+    use SoftDeletes;
     protected $guarded = [];
     protected $table ='tb_golongan';
     protected $fillable = [

@@ -22,6 +22,6 @@ class hakAksesKapal extends Model
 
     public function relasiSpeedboat()
     {
-    	return $this->hasOne('App\Speedboat','id_speedboat');
+    	return $this->belongsTo('App\Speedboat','id_speedboat');
     }
 }
