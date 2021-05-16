@@ -86,7 +86,7 @@ class beritaController extends Controller
         }
 
         $IdUser=Auth::user()->id;
-        $dataBerita = \App\beritaPelabuhan::find($request->id_berita)->first();
+        $dataBerita = \App\beritaPelabuhan::find($request->id_berita);
         $detail = $request->berita;
         libxml_use_internal_errors(true);
         $dom = new \domdocument();
@@ -205,7 +205,7 @@ class beritaController extends Controller
         }
 
         $IdUser=Auth::user()->id;
-        $dataBerita = \App\beritaKapal::find($request->id_berita)->first();
+        $dataBerita = \App\beritaKapal::find($request->id_berita);
         $detail = $request->berita;
         libxml_use_internal_errors(true);
         $dom = new \domdocument();
