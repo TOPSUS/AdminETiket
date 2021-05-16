@@ -17,11 +17,11 @@ class beritaPelabuhan extends Model
     ];
     public function relasiPelabuhan()
     {
-    	return $this->belongsTo('App\Pelabuhan','id_pelabuhan');
+    	return $this->belongsTo('App\Pelabuhan','id_pelabuhan')->withTrashed();
     }
     public function relasiUser()
     {
-    	return $this->belongsTo('App\User','id_user','id');
+    	return $this->belongsTo('App\User','id_user','id')->withTrashed();
     }
 
 }

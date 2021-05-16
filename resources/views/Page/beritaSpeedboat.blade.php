@@ -51,7 +51,7 @@
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="card">
+                    <div class="card container-fluid">
 
 
                         <!-- /.card-header -->

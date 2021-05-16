@@ -17,11 +17,11 @@ class beritaKapal extends Model
 
     public function relasiUser()
     {
-    	return $this->belongsTo('App\User','id_user','id');
+    	return $this->belongsTo('App\User','id_user','id')->withTrashed();
     }
 
     public function relasiSpeedboat()
     {
-    	return $this->belongsTo('App\Kapal','id_kapal');
+    	return $this->belongsTo('App\Kapal','id_kapal')->withTrashed();
     }
 }

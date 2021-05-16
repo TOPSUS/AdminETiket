@@ -47,6 +47,8 @@ class beritaController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -86,6 +88,8 @@ class beritaController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -142,6 +146,8 @@ class beritaController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -181,6 +187,8 @@ class beritaController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }

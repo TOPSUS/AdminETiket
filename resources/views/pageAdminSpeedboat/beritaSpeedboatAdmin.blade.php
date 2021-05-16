@@ -42,7 +42,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="card col-12">
+                    <div class="card container-fluid">
                         <div class="card-body">
                             @if(Session::has('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
