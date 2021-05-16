@@ -61,6 +61,11 @@
                                           required> {!! $Beritaas->berita !!}</textarea>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="file" class="font-weight-bold text-dark">Foto</label>
+                            <input type="file" class="form-control" id="file" placeholder="Masukan Judul Berita"
+                                   name="file">
+                        </div>
                         <div class="form-group card-header">
                             <a href="/BeritaSpeedboat">
                                 <button type="button" class="btn btn-secondary">Batal</button>

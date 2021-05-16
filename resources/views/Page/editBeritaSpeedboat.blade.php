@@ -33,7 +33,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Berita Pelabuhan</h1>
+                        <h1>Update Berita Pelabuhan</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -57,6 +57,11 @@
                                 <label for="judul" class="font-weight-bold text-dark">Judul</label>
                                 <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita"
                                        name="judul" value="{{$berita->judul}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="file" class="font-weight-bold text-dark">Foto</label>
+                                <input type="file" class="form-control" id="file" placeholder="Masukan Judul Berita"
+                                       name="file">
                             </div>
                             <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>
