@@ -26,10 +26,14 @@ class beritaPelabuhanController extends Controller
 
     //Create Berita
     public function addBerita(Request $request){
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_pelabuhan', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $beritas = new \App\beritaPelabuhan();
-
-
         $detail = $request->berita;
         libxml_use_internal_errors(true);
         $dom = new \domdocument();
@@ -46,6 +50,8 @@ class beritaPelabuhanController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -54,6 +60,9 @@ class beritaPelabuhanController extends Controller
         $beritas->berita = $detail;
         $beritas->judul = $request->judul;
         $beritas->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $beritas->foto = basename($stored);
+        }
         $beritas->id_user = $IdUser;
         $beritas->id_pelabuhan = $request->id_pelabuhan;
         $beritas->save();
@@ -69,6 +78,12 @@ class beritaPelabuhanController extends Controller
 
     //Update Berita
     public function updateBerita($id, Request $request){
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_pelabuhan', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $beritaPelabuhan = \App\beritaPelabuhan::find($id);
 
@@ -89,6 +104,8 @@ class beritaPelabuhanController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -96,6 +113,9 @@ class beritaPelabuhanController extends Controller
         $beritaPelabuhan->berita = $detail;
         $beritaPelabuhan->judul = $request->judul;
         $beritaPelabuhan->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $beritaPelabuhan->foto = basename($stored);
+        }
         $beritaPelabuhan->id_user = $IdUser;
         $beritaPelabuhan->id_pelabuhan = $request->id_pelabuhan;
         $beritaPelabuhan->update();

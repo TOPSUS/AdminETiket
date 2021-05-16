@@ -27,10 +27,15 @@ class beritaController extends Controller
 
 //Create Berita Pelabuhan
     public function addBeritaPelabuhan(Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_pelabuhan', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $dataBerita = new \App\beritaPelabuhan();
-
-
         $detail = $request->berita;
         libxml_use_internal_errors(true);
         $dom = new \domdocument();
@@ -57,6 +62,9 @@ class beritaController extends Controller
         $dataBerita->berita = $detail;
         $dataBerita->judul = $request->judul;
         $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $dataBerita->foto = basename($stored);
+        }
         $dataBerita->id_user = $IdUser;
         $dataBerita->id_pelabuhan = $request->id_pelabuhan;
         $dataBerita->save();
@@ -70,6 +78,13 @@ class beritaController extends Controller
 
     //Update Berita
     public function updateBeritaPelabuhan(Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_pelabuhan', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $dataBerita = \App\beritaPelabuhan::find($request->id_berita)->first();
         $detail = $request->berita;
@@ -98,6 +113,9 @@ class beritaController extends Controller
         $dataBerita->berita = $detail;
         $dataBerita->judul = $request->judul;
         $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $dataBerita->foto = basename($stored);
+        }
         $dataBerita->id_user = $IdUser;
         $dataBerita->save();
         return redirect('/Dashboard/BeritaPelabuhan');
@@ -126,6 +144,13 @@ class beritaController extends Controller
 
 //Create Berita Speedboat
     public function addBeritaSpeedboat(Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_espeed', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $dataBerita = new \App\beritaKapal();
 
@@ -156,6 +181,9 @@ class beritaController extends Controller
         $dataBerita->berita = $detail;
         $dataBerita->judul = $request->judul;
         $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $dataBerita->foto = basename($stored);
+        }
         $dataBerita->id_user = $IdUser;
         $dataBerita->id_kapal = $request->id_kapal;
         $dataBerita->save();
@@ -169,6 +197,13 @@ class beritaController extends Controller
 
     //Update Berita
     public function updateBeritaSpeedboat(Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_espeed', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $dataBerita = \App\beritaKapal::find($request->id_berita)->first();
         $detail = $request->berita;
@@ -197,6 +232,9 @@ class beritaController extends Controller
         $dataBerita->berita = $detail;
         $dataBerita->judul = $request->judul;
         $dataBerita->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $dataBerita->foto = basename($stored);
+        }
         $dataBerita->id_user = $IdUser;
         $dataBerita->save();
         return redirect('/Dashboard/BeritaSpeedboat');

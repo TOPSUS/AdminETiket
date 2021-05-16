@@ -31,6 +31,13 @@ class beritaSpeedboatController extends Controller
 
     //Create Berita
     public function addBerita(Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_espeed', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $IdSpeedboat=\App\User::find(Auth::user()->id);
         $beritaspeedboat = new \App\beritaKapal();
@@ -52,6 +59,8 @@ class beritaSpeedboatController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -60,6 +69,9 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->berita = $detail;
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $beritaspeedboat->foto = basename($stored);
+        }
         $beritaspeedboat->id_user = $IdUser;
         $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
         $beritaspeedboat->save();
@@ -74,6 +86,13 @@ class beritaSpeedboatController extends Controller
 
     //Update Berita
     public function updateBeritas($id, Request $request){
+
+        if ($request->hasfile('file')) {
+            $file = $request->file('file');
+            $file_name = time() . "_" . $file->getClientOriginalName();
+            $stored = Storage::disk('admin')->putFile('/image_berita_espeed', $file);
+        }
+
         $IdUser=Auth::user()->id;
         $IdSpeedboat=\App\User::find(Auth::user()->id);
         $beritaspeedboat = \App\beritaKapal::find($id);
@@ -95,6 +114,8 @@ class beritaSpeedboatController extends Controller
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
+                $image->removeAttribute('style');
+                $image->setAttribute('class','img-fluid');
                 //array_push($arrImage, $path);
             }
         }
@@ -102,6 +123,9 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->berita = $detail;
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
+        if($stored){
+            $beritaspeedboat->foto = basename($stored);
+        }
         $beritaspeedboat->id_user = $IdUser;
         $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
         $beritaspeedboat->update();

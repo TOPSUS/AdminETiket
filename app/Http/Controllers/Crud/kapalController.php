@@ -47,8 +47,6 @@ class kapalController extends Controller
             ]);
             return redirect('/Dashboard/CRUD/KapalData');
         }
-
-
     }
 //Update Kapal
     public function updateKapal(Request $request){

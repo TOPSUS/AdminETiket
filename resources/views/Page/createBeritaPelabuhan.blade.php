@@ -70,6 +70,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label for="file" class="font-weight-bold text-dark">Foto</label>
+                                <input type="file" class="form-control" id="file" placeholder="Masukan Judul Berita"
+                                       name="file">
+                            </div>
+                            <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>
                                 <textarea id="berita" class="summernote" name="berita" required></textarea>
                             </div>
