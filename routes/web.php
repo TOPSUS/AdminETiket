@@ -16,6 +16,10 @@ Route::get('/ooof', function () {
     Artisan::call('storage:link');
 });
 
+route::get('/test-blog',function (){
+   return view('blog');
+});
+
 //Route Login Register
 Route::get('/', 'loginController@index')->name('logins');
 Route::get('/Logout', 'loginController@logoutAdmin')->name('logouts');

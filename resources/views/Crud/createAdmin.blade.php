@@ -73,7 +73,7 @@
                 </div>
                 <div class="col">
                 <label for="email" class="font-weight-bold text-dark">Jenis Kelamin</label><br>
-                    <input class="custom-radio" type="radio" name="jeniskelamin" value="Laki-laki"> Laki-laki 
+                    <input class="custom-radio" type="radio" name="jeniskelamin" value="Laki-laki"> Laki-laki
                       <span class="fas fa-mars"></span>&nbsp &nbsp
                       <input class="custom-radio" type="radio" name="jeniskelamin" value="Perempuan"> Perempuan
                       <span class="fas fa-venus"></span>
@@ -95,7 +95,7 @@
                 <select name="id_speedboat" id="id_speedboat" class="custom-select" required>
                 <option>- Pilih Speedboat -</option>
                     @foreach($dataSpeedboat as $speedboat)
-                    <option value="{{$speedboat->id}}">{{$speedboat->nama_speedboat}}</option>
+                    <option value="{{$speedboat->id}}">{{$speedboat->nama_kapal}}</option>
                     @endforeach
                 </select>
             </div>
