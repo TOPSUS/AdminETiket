@@ -50,13 +50,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('reportKapal')}}" class="nav-link">
               <i class="nav-icon fas fa-newspaper"></i>
               <p class="text">Laporan</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('reviewKapalDirektur') }}" class="nav-link">
+            <a href="{{route('reviewKapal')}}" class="nav-link">
               <i class="nav-icon fas fa-star"></i>
               <p class="text">Review</p>
             </a>
