@@ -100,9 +100,6 @@
                                     <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
                                        href="#product-desc" role="tab" aria-controls="product-desc"
                                        aria-selected="true">Description</a>
-                                    <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab"
-                                       href="#product-rating" role="tab" aria-controls="product-rating"
-                                       aria-selected="false">Rating</a>
                                 </div>
                             </nav>
                             <div class="tab-content p-3" id="nav-tabContent">
@@ -156,6 +153,18 @@
                                 <input type="text" class="form-control" id="contact_service"
                                        placeholder="Masukan Kontak Service" name="contact_service"
                                        value="{{$pp->contact_service}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <input type="date" class="form-control" id="tanggal_beroperasi"
+                                       placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
+                                       value="{{date('Y-m-d', strtotime($pp->tanggal_beroperasi))}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_service" class="font-weight-bold text-dark">Reward Point</label>
+                                <input type="number" class="form-control" id="reward_point"
+                                       placeholder="Reward poin per transaksi" name="reward_point"
+                                       value="{{$pp->poin}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>

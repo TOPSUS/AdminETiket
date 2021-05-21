@@ -68,10 +68,11 @@ class profileSpeedboatController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama_kapal'=>'required',
-            'kapasitas'=>'required',
+            'kapasitas'=>'required|numeric',
             'deskripsi'=>'required',
-            'contact_service'=>'required',
-            'tanggal_beroperasi'=>'required',
+            'contact_service'=>'required|numeric',
+            'tanggal_beroperasi'=>'required|date',
+            'poin_reward'=>'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -89,17 +90,19 @@ class profileSpeedboatController extends Controller
             $dataUpdate->foto = basename($stored);
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
+            $dataUpdate->poin = $request->poin_reward;
             $dataUpdate->save();
-            return redirect('/ProfileKapal');
+            return redirect('/ProfileKapal')->with('success', 'Data berhasil diupdate!');
         } else {
             $dataUpdate->nama_kapal = $request->nama_kapal;
             $dataUpdate->kapasitas = $request->kapasitas;
             $dataUpdate->deskripsi = $request->deskripsi;
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
+            $dataUpdate->poin = $request->poin_reward;
 
             $dataUpdate->save();
-            return redirect('/ProfileKapal');
+            return redirect('/ProfileKapal')->with('success', 'Data berhasil diupdate!');
         }
     }
 
@@ -109,7 +112,7 @@ class profileSpeedboatController extends Controller
         $deleteSpeedboat = \App\Kapal::find($id);
         $deleteSpeedboat->delete();
 
-        return redirect('/ProfileSpeedboat')->with('success', 'Berita berhasil dihapus!');
+        return redirect('/ProfileSpeedboat')->with('success', 'Data berhasil dihapus!');
     }
 
 

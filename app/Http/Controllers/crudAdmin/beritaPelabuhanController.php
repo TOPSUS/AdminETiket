@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use SoftDeletes;
 
 class beritaPelabuhanController extends Controller
@@ -26,6 +27,20 @@ class beritaPelabuhanController extends Controller
 
     //Create Berita
     public function addBerita(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'id_pelabuhan'=>'required|not_in:0',
+            'file'=>'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -60,13 +75,15 @@ class beritaPelabuhanController extends Controller
         $beritas->berita = $detail;
         $beritas->judul = $request->judul;
         $beritas->tanggal = Carbon::now()->toDateTimeString();
-        if($stored){
-            $beritas->foto = basename($stored);
+        if($request->hasFile()){
+            if($stored){
+                $beritas->foto = basename($stored);
+            }
         }
         $beritas->id_user = $IdUser;
         $beritas->id_pelabuhan = $request->id_pelabuhan;
         $beritas->save();
-        return redirect('/BeritaPelabuhan');
+        return redirect('/BeritaPelabuhan')->with('success','Berita berhasil ditambahkan!');
     }
 
     //edit Berita
@@ -78,6 +95,19 @@ class beritaPelabuhanController extends Controller
 
     //Update Berita
     public function updateBerita($id, Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'id_pelabuhan'=>'required|not_in:0',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -113,18 +143,20 @@ class beritaPelabuhanController extends Controller
         $beritaPelabuhan->berita = $detail;
         $beritaPelabuhan->judul = $request->judul;
         $beritaPelabuhan->tanggal = Carbon::now()->toDateTimeString();
-        if($stored){
-            $beritaPelabuhan->foto = basename($stored);
+        if($request->hasFile()){
+            if($stored){
+                $beritaPelabuhan->foto = basename($stored);
+            }
         }
         $beritaPelabuhan->id_user = $IdUser;
         $beritaPelabuhan->id_pelabuhan = $request->id_pelabuhan;
         $beritaPelabuhan->update();
-        return redirect('/BeritaPelabuhan');
+        return redirect('/BeritaPelabuhan')->with('success','Berita berhasil update!');
     }
 
     public function deleteBerita($id){
         $deleteItem = \App\beritaPelabuhan::find($id);
         $deleteItem->delete();
-        return redirect('/BeritaPelabuhan')->with('success','Berita berhasil dihapus!');
+        return redirect('/BeritaPelabuhan')->with('info','Berita berhasil dihapus!');
     }
 }

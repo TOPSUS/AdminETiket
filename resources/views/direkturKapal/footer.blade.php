@@ -7,3 +7,4 @@
     <!-- Default to the left -->
     <strong>Copyright &copy; 2021 <a href="https://adminlte.io">E-Tiket</a>.</strong> All rights reserved.
   </footer>
+@include('sweetalert::alert')

@@ -157,6 +157,12 @@
                                        value="{{date('Y-m-d', strtotime($pp->tanggal_beroperasi))}}" require>
                             </div>
                             <div class="form-group">
+                                <label for="poin_reward" class="font-weight-bold text-dark">Poin Reward</label>
+                                <input type="number" class="form-control" id="poin_reward"
+                                       name="poin_reward" placeholder="Reward poin per transaksi"
+                                       value="{{$pp->poin}}" require>
+                            </div>
+                            <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
                                 <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
                                           placeholder="Deskripsi" value="" require> {{$pp->deskripsi}}</textarea>
