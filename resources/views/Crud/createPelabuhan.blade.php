@@ -56,7 +56,7 @@
                         <div class="col">
                             <label for="kode_pelabuhan" class="font-weight-bold text-dark">Kode Pelabuhan</label>
                             <input type="text" class="form-control @error('kode_pelabuhan') is-invalid @enderror" id="kode_pelabuhan"
-                                   placeholder="Masukan Nama Pelabuhan" name="kode_pelabuhan">
+                                   placeholder="Masukan Kode Pelabuhan" name="kode_pelabuhan">
                             @error('kode_pelabuhan')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

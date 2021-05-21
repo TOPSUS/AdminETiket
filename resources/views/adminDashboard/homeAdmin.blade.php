@@ -65,7 +65,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>100</h3>
+                <h3>{{ $dataUser }}</h3>
 
                 <p>Data User</p>
               </div>
@@ -80,7 +80,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53</h3>
+                <h3>{{ $dataSpeedboat }}</h3>
                 <p>Jumlah Speedboat</p>
               </div>
               <div class="icon">
@@ -95,7 +95,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53</h3>
+                <h3>{{ $dataKapal }}</h3>
                 <p>Jumlah Kapal</p>
               </div>
               <div class="icon">
@@ -110,7 +110,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>3</h3>
+                <h3>{{ $dataPelabuhan }}</h3>
 
                 <p>Jumlah Pelabuhan</p>
               </div>
