@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminDashboard.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminDashboard.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -124,7 +124,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('adminDashboard/footer')
+@include('adminDashboard.footer')
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->

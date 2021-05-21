@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminDashboard/header')
+    @include('adminDashboard.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminDashboard/sidebar')
+   @include('adminDashboard.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -77,7 +77,7 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                 @foreach($dataGolongan as $golongan)
                     <tr>
@@ -94,9 +94,9 @@
                 </tbody>
                 </table>
             </div>
-      
+
         </div>
-        
+
       </div>
       <!-- /.card -->
 
@@ -104,7 +104,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('adminDashboard/footer')
+    @include('adminDashboard.footer')
 
 <!-- Modal Update -->
 @foreach($dataGolongan as $oldGolongan)
@@ -129,14 +129,14 @@
                         <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
                         @endforeach
                       </select>
-                    </div>       
+                    </div>
                     <div class="form-group">
                       <label for="golongan" class="font-weight-bold text-dark">Golongan</label>
                       <input type="text" step="1" class="form-control" id="golongan" placeholder="Masukan Golongan" name="golongan" value="{{$oldGolongan->golongan}}" require>
                     </div>
                     <div class="form-group">
                       <label for="keterangan" class="font-weight-bold text-dark">Deskripsi</label>
-                      <textarea class="form-control" name="keterangan" id="keterangan" rows="10" placeholder="Deskripsi" value="" require> {{$oldGolongan->keterangan}}</textarea>                    
+                      <textarea class="form-control" name="keterangan" id="keterangan" rows="10" placeholder="Deskripsi" value="" require> {{$oldGolongan->keterangan}}</textarea>
                     </div>
                     <div class="form-group">
                       <label for="harga" class="font-weight-bold text-dark">Harga</label>

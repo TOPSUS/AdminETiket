@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminDashboard.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminDashboard.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -87,7 +87,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    @include('adminDashboard/footer')
+    @include('adminDashboard.footer')
 
     @foreach($dataCard as $oldCard)
         <div class="modal fade" id="update{{$oldCard->id}}" tabindex="-1" role="dialog"

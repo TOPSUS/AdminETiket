@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminDashboard.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminDashboard.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -114,7 +114,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('adminDashboard/footer')
+@include('adminDashboard.footer')
 <!-- Modal Update -->
     @foreach($dataSAdmin as $oldSAdmin)
         <div class="modal fade" id="update{{$oldSAdmin->id}}" tabindex="-1" role="dialog"

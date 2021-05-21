@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminDashboard/header')
+    @include('adminDashboard.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminDashboard/sidebar')
+   @include('adminDashboard.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -67,7 +67,7 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                 @foreach($dataJadwalKapal as $jadwal)
                     <tr>
@@ -76,7 +76,7 @@
                     <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
                     <td>{{$jadwal->waktu_sampai}}</td>
                     <td>{{$jadwal->kapal->nama_kapal}}</td>
-                    
+
                     <td>
                     <a class="btn btn-sm bg-danger" href="/Dashboard/CRUD/DeleteJadwal/{{$jadwal->id}}"> <i class="fas fa-trash-alt"></i></a>
                     <a data-toggle="modal" data-target="#update{{$jadwal->id}}" class="btn btn-sm btn-primary" href="#" ><i class="fas fa-edit"></i> Edit Jadwal
@@ -93,7 +93,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('adminDashboard/footer')
+    @include('adminDashboard.footer')
 
 
 <!-- jQuery -->

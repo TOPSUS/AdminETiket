@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('adminSpeedboat/header')
+    @include('adminSpeedboat.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('adminSpeedboat/sidebar')
+   @include('adminSpeedboat.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -39,9 +39,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('adminSpeedboatHome') }}">Dashboard</a></li>
-              
-                </a>
-              </li>
             </ol>
           </div>
         </div>
@@ -69,7 +66,7 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                 @foreach($dataPembelian as $sp => $pembelian)
                     <tr>
@@ -81,7 +78,7 @@
                     <td>{{date('d F Y H:i', strtotime($pembelian->tanggal))}}</td>
                     <td>{{$pembelian->status}}</td>
                     <td>
-                    <a class="btn btn-sm btn-primary" href="DetailTransaksi/{{$pembelian->id}}" ><i class="fas fa-eye"></i> 
+                    <a class="btn btn-sm btn-primary" href="/DetailTransaksi/{{$pembelian->id}}" ><i class="fas fa-eye"></i>
                     </td>
                     </tr>
                 @endforeach
