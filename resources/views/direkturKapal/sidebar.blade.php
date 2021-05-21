@@ -55,6 +55,12 @@
               <p class="text">Laporan</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('reviewKapalDirektur') }}" class="nav-link">
+              <i class="nav-icon fas fa-star"></i>
+              <p class="text">Review</p>
+            </a>
+          </li>
           </li>
 
           <li class="nav-header">About Us</li>

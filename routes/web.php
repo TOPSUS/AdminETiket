@@ -252,3 +252,4 @@ Route::group(['middleware' => 'Direktur'], function () {
 });
 
 Auth::routes();
+
