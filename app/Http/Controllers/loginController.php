@@ -45,13 +45,13 @@ class loginController extends Controller
                         return redirect('/Direktur/Home');
                     }
                 } else {
-                    return redirect()->back()->withInput($request->only('email'))->with('error', 'tidak dapat melakukan login, harap menghubungi contact service yang tersedia!!');
+                    return redirect()->back()->withInput($request->only('email'))->with('info', 'tidak dapat melakukan login, harap menghubungi contact service yang tersedia!!');
                 }
             } else {
-                return redirect()->back()->withInput($request->only('email'))->with('error', 'Password yang anda masukan salah!!');
+                return redirect()->back()->withInput($request->only('email'))->with('info', 'Password yang anda masukan salah!!');
             }
         }
-        return redirect()->back()->withInput($request->only('email'))->with('error', 'Email yang anda masukan salah!!');
+        return redirect()->back()->withInput($request->only('email'))->with('info', 'Email yang anda masukan salah!!');
     }
 
     public function logoutAdmin(Request $request)

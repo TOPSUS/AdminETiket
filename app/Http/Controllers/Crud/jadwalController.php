@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class jadwalController extends Controller
 {
@@ -28,6 +29,22 @@ class jadwalController extends Controller
 //Create Jadwal
     public function addJadwal(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'daterange' => 'required',
+            'waktu_berangkat'=>'required',
+            'id_asal_pelabuhan'=>'required',
+            'estimasi_waktu'=>'required|numeric',
+            'id_tujuan_pelabuhan'=>'required',
+            'id_kapal'=>'required',
+            'harga'=>'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $data = $request->daterange;
         $period = explode(' - ',$data);
         $date1 = \Carbon\Carbon::parse($period[0])->format('Y-m-d');
@@ -44,12 +61,28 @@ class jadwalController extends Controller
                 'harga'=>$request->harga,
             ]);
         }
-        return redirect('/Dashboard/CRUD/JadwalData');
+        return redirect('/Dashboard/CRUD/JadwalData')->with('success','Data berhasil ditambahkan!!');
 
     }
 
 //Update Jadwal
     public function updateJadwal(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'waktu_berangkat'=>'required',
+            'id_asal_pelabuhan'=>'required',
+            'estimasi_waktu'=>'required|numeric',
+            'id_tujuan_pelabuhan'=>'required',
+            'id_kapal'=>'required',
+            'harga'=>'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $dataUpdate=\App\Jadwal::find($request->id_jadwal);
 
         $dataUpdate->waktu_berangkat=$request->waktu_berangkat;
@@ -58,17 +91,16 @@ class jadwalController extends Controller
         $dataUpdate->id_tujuan_pelabuhan =$request->id_tujuan_pelabuhan;
         $dataUpdate->id_kapal =$request->id_kapal;
         $dataUpdate->harga=$request->harga;
-
         $dataUpdate->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Data berhasil diupdate!');
     }
 
-//Delete User
+//Delete Jadwal
     public function deleteJadwal($id){
         $deleteJadwal=\App\Jadwal::find($id);
         $deleteJadwal->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info','Data berhasil dihapus!');
     }
 
 

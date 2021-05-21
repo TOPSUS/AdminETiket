@@ -18,7 +18,7 @@ class rewardSpeedboat extends Model
 //relasi ke tb kapal
     public function kapal()
     {
-        return $this->belongsTo('App\Kapal','id_speedboat','id');
+        return $this->belongsTo('App\Kapal','id_speedboat','id')->withTrashed();
     }
 
 }

@@ -58,17 +58,26 @@
                         <div class="form-group card-header">
                             <div class="form-group">
                                 <label for="judul" class="font-weight-bold text-dark">Judul</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita"
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Masukan Judul Berita"
                                        name="judul" value="{{$berita->judul}}">
+                                @error('judul')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="file" class="font-weight-bold text-dark">Foto</label>
-                                <input type="file" class="form-control" id="file" placeholder="Masukan Judul Berita"
+                                <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" placeholder="Masukan Judul Berita"
                                        name="file">
+                                @error('file')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>
-                                <textarea id="berita" class="summernote" name="berita" required>{{$berita->berita}}</textarea>
+                                <textarea id="berita" class="summernote @error('berita') is-invalid @enderror" name="berita" required>{{$berita->berita}}</textarea>
+                                @error('berita')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group card-header">

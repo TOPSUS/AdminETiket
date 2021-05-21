@@ -57,7 +57,7 @@
                                     <div class="post">
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm"
-                                                 src="{{ asset ('Lte/dist/img/avatar3.png') }}" alt="User Image">
+                                                 src="{{asset('/storage/image_users/'.$beritaPelabuhan->relasiUser->foto)}}" alt="User Image">
                                             <span class="username"><a href="#">{{$beritaPelabuhan->relasiUser->nama}}</a></span>
                                             <a class="float-right btn-tool" data-toggle="modal" data-target="#delete{{$beritaPelabuhan->id}}"><i class="fas fa-times"></i></a>
                                             <a href="BeritaPelabuhan/{{$beritaPelabuhan->id}}/edit" class="float-right btn-tool"><i class="fas fa-pen"></i></a>

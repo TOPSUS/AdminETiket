@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
-use SoftDeletes;
+use Illuminate\Support\Facades\Validator;
 
 class beritaController extends Controller
 {
@@ -27,6 +27,19 @@ class beritaController extends Controller
 
 //Create Berita Pelabuhan
     public function addBeritaPelabuhan(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'id_pelabuhan'=>'required|not_in:0',
+            'file'=> 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/Dashboard/BeritaPelabuhan/Create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');
@@ -78,6 +91,18 @@ class beritaController extends Controller
 
     //Update Berita
     public function updateBeritaPelabuhan(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'file'=> 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/Dashboard/BeritaPelabuhan/Create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');
@@ -145,6 +170,19 @@ class beritaController extends Controller
 //Create Berita Speedboat
     public function addBeritaSpeedboat(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'id_kapal'=>'required|not_in:0',
+            'file'=> 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/Dashboard/BeritaSpeedboat/Create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -197,6 +235,18 @@ class beritaController extends Controller
 
     //Update Berita
     public function updateBeritaSpeedboat(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'file'=> 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/Dashboard/BeritaSpeedboat/Create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');

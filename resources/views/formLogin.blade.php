@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
     {!! NoCaptcha::renderJs() !!}
 </head>
 <body class="hold-transition login-page">
@@ -31,18 +32,8 @@
 
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
-                    @if (\Session::has('error'))
-                        <div class="alert alert-error">
-                            <ul>
-                                <li><strong>{!! \Session::get('error') !!}</strong></li>
-                            </ul>
-                        </div>
-                    @endif
                     <form action="{{ route ('loginAdmin') }}" method="post">
                         @csrf
-                        @if ($errors->has('email'))
-                            <span class="help-block"><strong>Masukan Email Anda!</strong></span>
-                        @endif
                         <div class="input-group mb-3">
                             <input type="email" class="form-control" placeholder="Email" name="email">
                             <div class="input-group-append">
@@ -51,11 +42,6 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($errors->has('email'))
-                            <span class="help-block">
-              <strong>Masukan Password Anda!</strong>
-          </span>
-                        @endif
                         <div class="input-group mb-3">
                             <input type="password" class="form-control" placeholder="Password" name="password">
                             <div class="input-group-append">
@@ -65,11 +51,6 @@
                             </div>
                         </div>
                         {!! app('captcha')->display() !!}
-                        @if ($errors->has('g-recaptcha-response'))
-                            <span class="help-block">
-                <strong>Captcha Salah</strong>
-            </span>
-                    @endif
                     <!-- /.col -->
                         <br>
                         <div class="col-5">
@@ -95,6 +76,6 @@
     <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset ('Lte/dist/js/adminlte.min.js') }}"></script>
-
+    @include('sweetalert::alert')
 </body>
 </html>

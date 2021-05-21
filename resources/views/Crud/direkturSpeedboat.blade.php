@@ -56,15 +56,20 @@
             @if($hak->tipe_kapal=='speedboat')
                 <!-- Default box -->
                     <div class="card card-solid">
+                        @if (\Session::has('error'))
+                            <div class="alert alert-danger">
+                                <ul style="list-style-type:none">
+                                    <li><strong>{!! \Session::get('error') !!}</strong></li>
+                                </ul>
+                            </div>
+                        @endif
                         <div class="card-body">
                             <div class="row">
-
                                 <div class="col-12 col-sm-6">
                                     <div class="col-12">
                                         <img src="{{asset('/storage/kapal_image/'.$hak->foto)}}" class="product-image"
                                              alt="Product Image">
                                     </div>
-
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <h3 class="my-3">{{$hak->nama_kapal}}</h3>

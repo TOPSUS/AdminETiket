@@ -151,6 +151,12 @@
                                        value="{{$pp->contact_service}}" require>
                             </div>
                             <div class="form-group">
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <input type="date" class="form-control" id="tanggal_beroperasi"
+                                       name="tanggal_beroperasi"
+                                       value="{{date('Y-m-d', strtotime($pp->tanggal_beroperasi))}}" require>
+                            </div>
+                            <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
                                 <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
                                           placeholder="Deskripsi" value="" require> {{$pp->deskripsi}}</textarea>

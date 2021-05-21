@@ -55,12 +55,12 @@
             <div class="card card-solid">
                 <div class="card-body pb-0">
                     <div class="row d-flex align-items-stretch">
-
                         @foreach($dataRewardSpeedboat as $rewardSpeedboat)
                             <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                                 <div class="card bg-light">
                                     <div class="text-center d-flex">
-                                        <img src="{{asset('/storage/reward_image/'.$rewardSpeedboat->foto)}}" alt="" class="img-square"
+                                        <img src="{{asset('/storage/reward_image/'.$rewardSpeedboat->foto)}}" alt=""
+                                             class="img-square"
                                              style="width:300px;height:200px;">
                                     </div>
                                     <div class="card-header text-muted border-bottom-0">
@@ -129,7 +129,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('update-rewardspeedboat') }}" enctype="multipart/form-data" method="POST">
+                        <form action="{{ route('update-rewardspeedboat') }}" enctype="multipart/form-data"
+                              method="POST">
                             @csrf
                             <input type="hidden" name="id_reward_speedboat" value="{{$oldRewardSpeedboat->id}}">
                             <div class="form-group">

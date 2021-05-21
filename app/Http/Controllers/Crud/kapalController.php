@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Crud;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class kapalController extends Controller
 {
@@ -21,6 +22,22 @@ class kapalController extends Controller
 
 //Create Kapal
     public function addKapal(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'nama_kapal' => 'required',
+            'kapasitas'=>'required',
+            'deskripsi'=>'required',
+            'contact_service'=>'required|numeric',
+            'tanggal_beroperasi'=>'required',
+            'file'=>'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -35,7 +52,7 @@ class kapalController extends Controller
                 'tipe_kapal'=>'feri'
 
             ]);
-            return redirect('/Dashboard/CRUD/KapalData');;
+            return redirect('/Dashboard/CRUD/KapalData')->with('success','Data berhasil ditambahkan');
         } else {
             \App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
@@ -45,13 +62,29 @@ class kapalController extends Controller
                 'tanggal_beroperasi'=>$request->tanggal_beroperasi,
                 'tipe_kapal'=>'feri'
             ]);
-            return redirect('/Dashboard/CRUD/KapalData');
+            return redirect('/Dashboard/CRUD/KapalData')->with('success','Data berhasil ditambahkan!!');
         }
     }
 //Update Kapal
     public function updateKapal(Request $request){
+
         $dataUpdate=\App\Kapal::find($request->id_kapal);
         if ($request->hasfile('file')) {
+            $validator = Validator::make($request->all(), [
+                'nama_kapal' => 'required',
+                'kapasitas'=>'required',
+                'deskripsi'=>'required',
+                'contact_service'=>'required|numeric',
+                'tanggal_beroperasi'=>'required',
+                'file'=>'required|file|image',
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
             $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
@@ -62,15 +95,28 @@ class kapalController extends Controller
             $dataUpdate->foto=basename($stored);
             $dataUpdate->tanggal_beroperasi=$request->tanggal_beroperasi;
             $dataUpdate->save();
-            return redirect()->back();
+            return redirect()->back()->with('success','Data berhasil diupdate');;
         } else {
+            $validator = Validator::make($request->all(), [
+                'nama_kapal' => 'required',
+                'kapasitas'=>'required',
+                'deskripsi'=>'required',
+                'contact_service'=>'required|numeric',
+                'tanggal_beroperasi'=>'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
             $dataUpdate->nama_kapal = $request->nama_kapal;
             $dataUpdate->kapasitas = $request->kapasitas;
             $dataUpdate->deskripsi = $request->deskripsi;
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
             $dataUpdate->save();
-            return redirect()->back();
+            return redirect()->back()->with('success','Data berhasil diupdate');;
         }
     }
 
@@ -79,6 +125,6 @@ class kapalController extends Controller
         $deleteKapal=\App\Kapal::find($id);
         $deleteKapal->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info','Data berhasil dihapus!');
         }
 }

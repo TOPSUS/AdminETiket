@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Crud;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class speedboatController extends Controller
 {
@@ -25,6 +26,21 @@ class speedboatController extends Controller
 //Create Speedboat
     public function addSpeedboat(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nama_speedboat' => 'required',
+            'kapasitas' => 'required',
+            'deskripsi' => 'required',
+            'tanggal_beroperasi' => 'required',
+            'file' => 'required',
+            'contact_service' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -38,7 +54,7 @@ class speedboatController extends Controller
                 'tipe_kapal' => 'speedboat',
                 'contact_service' => $request->contact_service,
             ]);
-            return redirect('/Dashboard/CRUD/CreateSpeedboat');
+            return redirect('Dashboard/CRUD/SpeedboatData')->with('success','Data Berhasil ditambahkan!');;
 
         } else {
             \App\Kapal::create([
@@ -49,15 +65,32 @@ class speedboatController extends Controller
                 'tipe_kapal' => 'speedboat',
                 'contact_service' => $request->contact_service,
             ]);
-            return redirect('/Dashboard/CRUD/CreateSpeedboat');
+            return redirect('Dashboard/CRUD/SpeedboatData')->with('success','Data Berhasil ditambahkan!');;
         }
     }
 
 //Update Speedboat
     public function updateSpeedboat(Request $request)
     {
+
+
         $dataUpdate = \App\Kapal::find($request->id_kapal);
         if ($request->hasfile('file')) {
+            $validator = Validator::make($request->all(), [
+                'nama_speedboat' => 'required',
+                'kapasitas' => 'required',
+                'deskripsi' => 'required',
+                'tanggal_beroperasi' => 'required',
+                'file' => 'required',
+                'contact_service' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
             $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
@@ -69,8 +102,21 @@ class speedboatController extends Controller
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
             $dataUpdate->save();
-            return redirect()->back();
+            return redirect()->back()->with('success','Data Berhasil diupdate!');
         } else {
+            $validator = Validator::make($request->all(), [
+                'nama_speedboat' => 'required',
+                'kapasitas' => 'required',
+                'deskripsi' => 'required',
+                'tanggal_beroperasi' => 'required',
+                'contact_service' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
             $dataUpdate->nama_kapal = $request->nama_speedboat;
             $dataUpdate->kapasitas = $request->kapasitas;
             $dataUpdate->deskripsi = $request->deskripsi;
@@ -78,10 +124,8 @@ class speedboatController extends Controller
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
             $dataUpdate->save();
-            return redirect()->back();
+            return redirect()->back()->with('success','Data Berhasil diupdate!');
         }
-
-
     }
 
 //Delete Speedboat
@@ -90,7 +134,7 @@ class speedboatController extends Controller
         $deleteSpeedboat = \App\Kapal::find($id);
         $deleteSpeedboat->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info','Data Berhasil dihapus!');
     }
 
 }
