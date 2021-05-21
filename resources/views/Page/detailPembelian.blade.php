@@ -66,7 +66,7 @@
                         <div class="col-sm-4 invoice-col">
 
                             <address>
-                                <strong>{{$dataPembelian->user->nama}}</strong><br>
+                                <strong>Atas nama : {{$dataPembelian->user->nama}}</strong><br>
                                 Address :{{$dataPembelian->user->alamat}}<br>
                                 Phone :{{$dataPembelian->user->nohp}}<br>
                                 Email: {{$dataPembelian->user->email}}
@@ -75,20 +75,18 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
-                            <b>Speedboat</b>
+                            <b>Keberangkatan</b>
                             <address>
                                 {{$dataPembelian->jadwal->kapal->nama_kapal}}<br>
                                 From : {{$dataPembelian->jadwal->waktu_berangkat}}
                                 - {{$dataPembelian->jadwal->asal->nama_pelabuhan}}<br>
                                 To :{{$dataPembelian->jadwal->waktu_sampai}}
-                                - {{$dataPembelian->jadwal->tujuan->nama_pelabuhan}}<br>
-
+                                {{$dataPembelian->jadwal->tujuan->nama_pelabuhan}}<br>
                             </address>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
-                            <b>Status</b><br>
-                            <b>Date :</b> {{$dataPembelian->tanggal}}<br>
+                            <b>Date :</b> {{date('d F y', strtotime($dataPembelian->tanggal))}}<br>
                             <b>Status :</b> {{$dataPembelian->status}}<br>
                         </div>
                         <!-- /.col -->
@@ -115,7 +113,7 @@
                                         <td>{{$pembelian->kode_tiket}}</td>
                                         <td>{{$pembelian->no_id_card}}</td>
                                         <td>{{$pembelian->status}}</td>
-                                        <td>{{$pembelian->harga}}</td>
+                                        <td>{{number_format($pembelian->harga)}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -132,11 +130,11 @@
                             <table class="table">
                                 <tr>
                                     <th style="width:50%">Price:</th>
-                                    <td>{{$jumlah}}</td>
+                                    <td>IDR. {{number_format($jumlah)}}</td>
                                 </tr>
                                 <tr>
                                     <th>Total:</th>
-                                    <td>{{$jumlah}}</td>
+                                    <td>IDR. {{number_format($jumlah)}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -148,17 +146,19 @@
                 <!-- this row will not appear when printing -->
                 <div class="row no-print">
                     <div class="col-sm-12"> &nbsp
-                        <a href="/e-ticket/{{$dataPembelian->id}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print
+                        <a href="/e-ticket/{{$dataPembelian->id}}" target="_blank" class="btn btn-default pull-right"><i
+                                class="fa fa-print"></i> Print
                         </a>
                         &nbsp
-                        <a class="btn btn-danger pull-right" style="margin-right: 5px;"
-                           href="Reject/{{$dataPembelian->id}}">
-                            <i class="fa fa-times"></i> Reject
-                        </a>
-                        <a class="btn btn-success pull-right" href="Approve/{{$dataPembelian->id}}"><i
-                                class="fa fa-check"></i> Approve
-                        </a>
-
+                        @if($dataPembelian->status=="menunggu konfirmasi")
+                            <a class="btn btn-danger pull-right" style="margin-right: 5px;"
+                               href="Reject/{{$dataPembelian->id}}">
+                                <i class="fa fa-times"></i> Reject
+                            </a>
+                            <a class="btn btn-success pull-right" href="Approve/{{$dataPembelian->id}}"><i
+                                    class="fa fa-check"></i> Approve
+                            </a>
+                        @endif
                     </div>
                 </div>
         </section>

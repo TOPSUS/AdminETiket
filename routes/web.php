@@ -35,6 +35,8 @@ Route::post('/beli', 'pembelianController@beli')->name('testBeli');
 Route::get('/berita/public/pelabuhan/{id}','publicBeritaController@pelabuhan');
 Route::get('/berita/public/kapal/{id}','publicBeritaController@kapal');
 
+route::get('/cetakpdf','report@cetakPDF');
+
 //ROUTE SUPER ADMIN -----------------------------------------------------------------------------------
 Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard', 'Admin\adminController@index')->name('admin-home');

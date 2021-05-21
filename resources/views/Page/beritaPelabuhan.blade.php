@@ -68,7 +68,7 @@
                                     <div class="post">
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm"
-                                                 src="{{ asset ('Lte/dist/img/avatar3.png') }}" alt="User Image">
+                                                 src="{{asset('/storage/image_users/'.$berita->relasiUser->foto)}}">
                                             <span class="username"><a href="#">{{$berita->relasiUser->nama}}</a>
 
                           <a class="float-right btn-tool" data-toggle="modal" data-target="#delete{{$berita->id}}"><i

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\crudAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use SoftDeletes;
 
 class jadwalController extends Controller
@@ -16,7 +17,7 @@ class jadwalController extends Controller
         $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
         $jadwal=\App\Jadwal::whereIn('id_kapal', $hakAkses)->with('asal','tujuan','kapal')->get();
         $pelabuhan=\App\Pelabuhan::all();
-        
+
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
 
@@ -35,6 +36,23 @@ class jadwalController extends Controller
 
     //Create Jadwal
     public function addJadwal(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'waktu_berangkat'=>'required',
+            'estimasi_waktu'=>'required|numeric',
+            'id_kapal'=>'required|numeric',
+            'id_asal_pelabuhan'=>'required|numeric',
+            'id_tujuan_pelabuhan'=>'required|numeric',
+            'tanggal'=>'required|date',
+            'harga'=>'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $jadwal = new \App\Jadwal();
 
         $jadwal->waktu_berangkat = $request->waktu_berangkat;
@@ -45,31 +63,47 @@ class jadwalController extends Controller
         $jadwal->tanggal = $request->tanggal;
         $jadwal->harga = $request->harga;
         $jadwal->save();
-        return redirect('/Jadwal');
+        if($jadwal){
+            return redirect('/Jadwal')->with('success','Data berhasil ditambahkan!');
+        }
+        return redirect('/Jadwal')->with('errors','Ooops, sepertinya terjadi kesalahan, data tidak tersimpan!');
+
     }
 
 
     //Update Jadwal
     public function editJadwal(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'waktu_berangkat'=>'required',
+            'estimasi_waktu'=>'required|numeric',
+            'id_asal_pelabuhan'=>'required|numeric',
+            'id_tujuan_pelabuhan'=>'required|numeric',
+            'tanggal'=>'required|date',
+            'harga'=>'required|numeric'
+        ]);
+
         $dataUpdate=\App\Jadwal::find($request->id_jadwal);
+        if($dataUpdate){
+            $dataUpdate->waktu_berangkat=$request->waktu_berangkat;
+            $dataUpdate->id_asal_pelabuhan=$request->id_asal_pelabuhan;
+            $dataUpdate->estimasi_waktu=$request->estimasi_waktu;
+            $dataUpdate->id_tujuan_pelabuhan =$request->id_tujuan_pelabuhan;
+            $dataUpdate->harga=$request->harga;
+            $dataUpdate->tanggal = $request->tanggal;
+            $dataUpdate->save();
+            return redirect('/Jadwal')->with('success','Data berhasil di update');
+        }
+        return redirect('/Jadwal')->with('errors','Data tidak ditemukan!');
 
-        $dataUpdate->waktu_berangkat=$request->waktu_berangkat;
-        $dataUpdate->id_asal_pelabuhan=$request->id_asal_pelabuhan;
-        $dataUpdate->estimasi_waktu=$request->estimasi_waktu;
-        $dataUpdate->id_tujuan_pelabuhan =$request->id_tujuan_pelabuhan;
-        $dataUpdate->harga=$request->harga;
-        $dataUpdate->tanggal = $request->tanggal;
-
-        $dataUpdate->save();
-        return redirect('/Jadwal');
     }
 
     //Delete Jadwal
     public function deleteJadwalSpeedboat($id){
         $deleteItem = \App\Jadwal::find($id);
         $deleteItem->delete();
-        return redirect('/Jadwal')->with('success','Berita berhasil dihapus!');
+        return redirect('/Jadwal')->with('info','Berita berhasil dihapus!');
     }
 
-    
+
 }

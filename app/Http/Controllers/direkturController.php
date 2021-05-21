@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class direkturController extends Controller
 {
@@ -26,6 +27,22 @@ class direkturController extends Controller
 
 //Create Speedboat
     public function addSpeedboat(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'nama_kapal'=>'required',
+            'kapasitas'=>'required|numeric|min:0',
+            'deskripsi'=>'required',
+            'tanggal_beroperasi'=>'required',
+            'file'=>'required|file|image',
+            'contact_service'=>'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
@@ -81,6 +98,20 @@ class direkturController extends Controller
 
 //Create Kapal
     public function addKapal(Request $request){
+        $validator = Validator::make($request->all(), [
+            'nama_kapal'=>'required',
+            'kapasitas'=>'required|numeric|min:0',
+            'deskripsi'=>'required',
+            'tanggal_beroperasi'=>'required',
+            'file'=>'required|file|image',
+            'contact_service'=>'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();

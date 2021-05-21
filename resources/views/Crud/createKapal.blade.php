@@ -55,52 +55,65 @@
                     <div class="row card-header">
                         <div class="col">
                             <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
-                            <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal"
+                            <input type="text" class="form-control @error('nama_kapal') is-invalid @enderror" id="nama_kapal" placeholder="Masukan Nama Kapal"
                                    name="nama_kapal">
+                            @error('nama_kapal')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                     </div>
                     <div class="row card-header">
                         <div class="col">
                             <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
-                            <input type="number" class="form-control" id="kapasitas" placeholder="Masukan Nama Kapal"
+                            <input type="number" class="form-control @error('kapasitas') is-invalid @enderror" id="kapasitas" placeholder="Masukan Nama Kapal"
                                    name="kapasitas">
+                            @error('kapasitas')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col">
                             <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
-                            <input type="text" class="form-control" id="contact_service" placeholder="Masukan Nama Kapal"
+                            <input type="text" class="form-control @error('contact_service') is-invalid @enderror" id="contact_service"
+                                   placeholder="Masukan Nama Kapal"
                                    name="contact_service">
+                            @error('contact_service')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row card-header">
                         <div class="col">
                             <label for="exampleInputFile">Foto Kapal</label>
-                            <div class="input-group">
+                            <div class="form-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                                    <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="exampleInputFile" name="file">
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    @error('file')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label>Kapasitas</label>
-                            <div class="input-group date" id="kapasitas">
-                                <input type="number" step="1" class="form-control" id="kapasitas" name="kapasitas">
                             </div>
                         </div>
                         <div class="col">
                             <label>Tanggal Beroperasi</label>
                             <div class="input-group date" id="tanggal_beroperasi">
-                                <input type="date" step="1" class="form-control" id="tanggal_beroperasi"
+                                <input type="date" step="1" class="form-control @error('tanggal_beroperasi') is-invalid @enderror" id="tanggal_beroperasi"
                                        name="tanggal_beroperasi">
+                                @error('tanggal_beroperasi')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group card-header ">
                         <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
-                        <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
+                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="10"
                                   placeholder="Deskripsi"></textarea>
+                        @error('deskripsi')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group card-header">

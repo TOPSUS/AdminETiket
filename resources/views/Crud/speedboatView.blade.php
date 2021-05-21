@@ -59,7 +59,8 @@
 
                             <div class="col-12 col-sm-6">
                                 <div class="col-12">
-                                    <img  src="{{asset('/storage/kapal_image/'.$speedboat->foto)}}" class="product-image img-fluid"
+                                    <img src="{{asset('/storage/kapal_image/'.$speedboat->foto)}}"
+                                         class="product-image img-fluid"
                                          alt="Product Image" style="width: 80%;">
                                 </div>
 
@@ -150,6 +151,12 @@
                                        value="{{$oldSpeedboat->kapasitas}}" require>
                             </div>
                             <div class="form-group">
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <input type="date" class="form-control" id="tanggal_beroperasi"
+                                       placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
+                                       value="{{date('Y-m-d', strtotime($oldSpeedboat->tanggal_beroperasi))}}" require>
+                            </div>
+                            <div class="form-group">
                                 <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
                                 <input type="text" class="form-control" id="contact_service"
                                        placeholder="Masukan Kontak Service" name="contact_service"
@@ -160,13 +167,14 @@
                                 <br>@if($oldSpeedboat->tipe_kapal=='feri')
                                     <input type="radio" name="tipe_kapal" value="feri" checked> Ferry &nbsp &nbsp
                                     <input type="radio" name="tipe_kapal" value="speedboat"> Speedboat &nbsp &nbsp
-                                    @elseif($oldSpeedboat->tipe_kapal=='speedboat')
-                                    <input type="radio" name="tipe_kapal" value="feri" > Ferry &nbsp &nbsp
-                                    <input type="radio" name="tipe_kapal" value="speedboat" checked> Speedboat &nbsp &nbsp
-                                    @else
-                                    <input type="radio" name="tipe_kapal" value="feri" > Ferry &nbsp &nbsp
+                                @elseif($oldSpeedboat->tipe_kapal=='speedboat')
+                                    <input type="radio" name="tipe_kapal" value="feri"> Ferry &nbsp &nbsp
+                                    <input type="radio" name="tipe_kapal" value="speedboat" checked> Speedboat &nbsp
+                                    &nbsp
+                                @else
+                                    <input type="radio" name="tipe_kapal" value="feri"> Ferry &nbsp &nbsp
                                     <input type="radio" name="tipe_kapal" value="speedboat"> Speedboat &nbsp &nbsp
-                                    @endif
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>

@@ -123,6 +123,7 @@ class kapalDirekturController extends Controller
             'email'=>$request->email,
             'nohp'=>$request->no_hp,
             'password'=>Hash::make($request->password),
+            'role'=>'Admin',
         ]);
 
         if($admin){

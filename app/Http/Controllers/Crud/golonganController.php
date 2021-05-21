@@ -15,7 +15,7 @@ class golonganController extends Controller
     }
 //Form Create
     public function create(){
-        //Menampilkan data di form 
+        //Menampilkan data di form
         $pelabuhan=\App\Pelabuhan::all();
 
         return view('Crud.createGolongan', compact('pelabuhan'));
@@ -24,6 +24,19 @@ class golonganController extends Controller
 //Create Golongan
     public function addGolongan(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'id_pelabuhan'=> 'required',
+            'golongan'=> 'required',
+            'keterangan'=> 'required',
+            'harga'=> 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         \App\Golongan::create([
             'id_pelabuhan'=>$request->id_pelabuhan,
             'golongan'=>$request->golongan,
@@ -44,7 +57,7 @@ class golonganController extends Controller
         $dataUpdate->harga =$request->harga;
 
         $dataUpdate->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Data berhasil diupdate!');
     }
 
 //Delete Golongan
@@ -52,6 +65,6 @@ class golonganController extends Controller
         $deleteGolongan=\App\Golongan::find($id);
         $deleteGolongan->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('info','Data berhasil di hapus!');
     }
 }

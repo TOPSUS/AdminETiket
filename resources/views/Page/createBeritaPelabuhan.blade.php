@@ -57,22 +57,31 @@
                         <div class="form-group card-header">
                             <div class="form-group">
                                 <label for="judul" class="font-weight-bold text-dark">Judul</label>
-                                <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita"
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" placeholder="Masukan Judul Berita"
                                        name="judul">
+                                @error('judul')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="pelabuhan" class="font-weight-bold text-dark">Pelabuhan</label>
-                                <select name="id_pelabuhan" id="id_pelabuhan" class="custom-select" required>
-                                    <option>- Pilih Pelabuhan -</option>
+                                <select name="id_pelabuhan" id="id_pelabuhan" class="custom-select @error('id_pelabuhan') is-invalid @enderror" required>
+                                    <option value="">- Pilih Pelabuhan -</option>
                                     @foreach($dataPelabuhan as $pelabuhan)
                                         <option value="{{$pelabuhan->id}}">{{$pelabuhan->nama_pelabuhan}}</option>
                                     @endforeach
                                 </select>
+                                @error('id_pelabuhan')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="file" class="font-weight-bold text-dark">Foto</label>
-                                <input type="file" class="form-control" id="file" placeholder="Masukan Judul Berita"
+                                <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" placeholder="Masukan Judul Berita"
                                        name="file">
+                                @error('file')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>

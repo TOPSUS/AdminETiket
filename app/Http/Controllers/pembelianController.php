@@ -151,9 +151,9 @@ class pembelianController extends Controller
             ]);
         }
 
-        $ticketname[] = $request->input('name');
-        $card[] = $request->input('card_id');
-        $cardnumber[] = $request->input('card');
+        $ticketname = $request->input('name');
+        $card = $request->input('card_id');
+        $cardnumber = $request->input('card');
         foreach ($ticketname as $key => $name) {
             //dikarenakan value card di blade itu diencode yang menyebabkan <space> menjadi +, maka dirubah tanda + menjadi space untuk keperluan pencarian id card
             $cardName = str_replace('+', ' ', $card[$key]);
@@ -173,8 +173,8 @@ class pembelianController extends Controller
                     'id_pembelian' => $pembelian->id,
                     'id_card' => $cardid->id,
                     'kode_tiket' => $kodeTiket,
-                    'nama_pemegang_tiket' => implode("", $name),
-                    'no_id_card' => implode("", $cardnumber[$key]),
+                    'nama_pemegang_tiket' => $name,
+                    'no_id_card' => $cardnumber[$key],
                     'harga' => $hargaGolongan,
                     'status' => "Not Used",
                 ]);
@@ -184,8 +184,8 @@ class pembelianController extends Controller
                     'id_pembelian' => $pembelian->id,
                     'id_card' => $cardid->id,
                     'kode_tiket' => $kodeTiket,
-                    'nama_pemegang_tiket' => implode("", $name),
-                    'no_id_card' => implode("", $cardnumber[$key]),
+                    'nama_pemegang_tiket' => $name,
+                    'no_id_card' => $cardnumber[$key],
                     'harga' => $hargaTiket->harga,
                     'status' => "Not Used",
                 ]);
@@ -204,9 +204,9 @@ class pembelianController extends Controller
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/
 
-            return redirect()->back();
+            return redirect('/Transaksi')->with('success','Transaksi Berhasil');
         }
-        return redirect('/Transaksi');
+        return redirect('/Transaksi')->with('info','Terjadi kesalahan dalam pembuatan tiket');
     }
 
 
@@ -259,17 +259,17 @@ class pembelianController extends Controller
 
     public function etickets($id_pembelian)
     {
-
         $data = \App\Pembelian::where('id', $id_pembelian)->first();
         //return view('pdf.myPDF',compact('data'));
         if ($data) {
             if ($data->file_tiket) {
                 if (Storage::disk('admin')->exists('/test_pdf/' . $data->file_tiket)) {
                     $file = response()->file(Storage::disk('admin')->path('/test_pdf/' . $data->file_tiket));
-
                     return $file;
                 }
             }
+            return back()->with('errors','Pembelian belum terkonfirmasi');
         }
+        return back()->with('errors','Data tidak ditemukan');
     }
 }

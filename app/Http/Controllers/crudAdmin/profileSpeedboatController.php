@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class profileSpeedboatController extends Controller
 {
@@ -65,6 +66,20 @@ class profileSpeedboatController extends Controller
     {
         $dataUpdate = \App\Kapal::find($request->id_kapal);
 
+        $validator = Validator::make($request->all(), [
+            'nama_kapal'=>'required',
+            'kapasitas'=>'required',
+            'deskripsi'=>'required',
+            'contact_service'=>'required',
+            'tanggal_beroperasi'=>'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         if ($request->hasfile('file')) {
             $file = $request->file('file');
             $stored = Storage::disk('admin')->putFile('/kapal_image',$file);
@@ -74,7 +89,6 @@ class profileSpeedboatController extends Controller
             $dataUpdate->foto = basename($stored);
             $dataUpdate->contact_service = $request->contact_service;
             $dataUpdate->tanggal_beroperasi = $request->tanggal_beroperasi;
-
             $dataUpdate->save();
             return redirect('/ProfileKapal');
         } else {
