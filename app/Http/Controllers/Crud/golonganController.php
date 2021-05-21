@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class golonganController extends Controller
 {
@@ -49,6 +50,20 @@ class golonganController extends Controller
 
 //Update Golongan
     public function updateGolongan(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'id_pelabuhan'=> 'required',
+            'golongan'=> 'required',
+            'keterangan'=> 'required',
+            'harga'=> 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $dataUpdate=\App\Golongan::find($request->id_golongan);
 
         $dataUpdate->id_pelabuhan=$request->id_pelabuhan;

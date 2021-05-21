@@ -57,6 +57,7 @@
                             <div class="form-group">
                                 <label for="id_kapal" class="font-weight-bold text-dark">Kapal</label>
                                 <select name="id_kapal" class="custom-select @error('id_kapal') is-invalid @enderror" required>
+                                    <option value="">-- Pilih Kapal --</option>
                                     @foreach($kapal as $sp)
                                         <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
                                     @endforeach
@@ -78,7 +79,7 @@
                         </div>
                         <div class="col">
                             <label for="exampleInputFile">Foto Reward</label>
-                            <div class="input-group">
+                            <div class="form-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
                                     <label class="custom-file-label @error('file') is-invalid @enderror" for="exampleInputFile">Choose file</label>

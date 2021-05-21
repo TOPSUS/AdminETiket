@@ -61,7 +61,7 @@ class beritaPelabuhanController extends Controller
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
                 $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
-                Storage::disk('public')->put($path, file_get_contents($src));
+                Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
@@ -129,8 +129,8 @@ class beritaPelabuhanController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
-                Storage::disk('public')->put($path, file_get_contents($src));
+                $path = '/image/pages/pelabuhan/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);

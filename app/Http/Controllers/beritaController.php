@@ -60,7 +60,7 @@ class beritaController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                $path = '/image/pages/pelabuhan/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
                 Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
@@ -123,7 +123,7 @@ class beritaController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                $path = '/image/pages/pelabuhan/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
                 Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
@@ -204,7 +204,7 @@ class beritaController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                $path = '/image/pages/kapal/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
                 Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
@@ -267,7 +267,7 @@ class beritaController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                $path = '/image/pages/kapal/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
                 Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);

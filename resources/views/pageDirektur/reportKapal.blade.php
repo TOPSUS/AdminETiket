@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('direkturKapal/header')
+    @include('direkturKapal.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('direkturKapal/sidebar')
+   @include('direkturKapal.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -42,7 +42,7 @@
             </ol>
           </div>
 
-          
+
           <div class="container">
             <div class="row">
               <div class="container-fluid">
@@ -88,8 +88,8 @@
                     <th>Tanggal Pembelian</th>
                     </tr>
                 </thead>
-                
-                
+
+
                 </table>
             </div>
             </div>
@@ -99,7 +99,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('direkturKapal/footer')
+    @include('direkturKapal.footer')
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

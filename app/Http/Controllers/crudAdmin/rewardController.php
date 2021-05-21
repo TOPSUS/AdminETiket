@@ -49,7 +49,7 @@ class rewardController extends Controller
             'reward' => 'required',
             'file'=>'required|file|image',
             'berlaku'=>'required|date',
-            'minimal_pint'=>'required|numeric'
+            'minimal_point'=>'required|numeric'
         ]);
 
         if ($validator->fails()) {
@@ -90,7 +90,7 @@ class rewardController extends Controller
             'reward' => 'required',
             'file'=>'required|file|image',
             'berlaku'=>'required|date',
-            'minimal_pint'=>'required|numeric'
+            'minimal_point'=>'required|numeric'
         ]);
 
         if ($validator->fails()) {
