@@ -231,6 +231,7 @@ Route::group(['middleware' => 'Admin'], function () {
 Route::group(['middleware' => 'Direktur'], function () {
 //DIREKTUR
     Route::get('/Direktur/Home', 'Admin\direkturController@index')->name('direkturHome');
+	Route::get('/Direktur/Review', 'crudDirektur\reviewDirekturController@index')->name('reviewKapal');
 
 //CRUD Jadwal
     Route::get('/Direktur/Jadwal', 'crudDirektur\jadwalDirekturController@index')->name('jadwalDirektur');
@@ -251,6 +252,12 @@ Route::group(['middleware' => 'Direktur'], function () {
     route::post('/Direktur/Kapal/updateAdmin', 'crudDirektur\kapalDirekturController@updateAdmin')->name('updateAdmin');
     route::delete('/Direktur/Kapal/{id}/deleteAdmin', 'crudDirektur\kapalDirekturController@deleteAdmin')->name('deleteAdmin');
     Route::post('/Direktur/Kapal/AddAdmin', 'crudDirektur\kapalDirekturController@createAdmin')->name('createAdmin');
+
+//Report
+	Route::get('/Direktur/Report', 'crudDirektur\reportController@index')->name('reportKapal');
+	Route::post('/Direktur/Report/Transaksi/Search', 'crudDirektur\reportController@fetch_data')->name('reportTransaksiSearch');
+	Route::get('/Direktur/Report/Cetak', 'crudDirektur\reportController@cetakPDF')->name('reportCetak');
+
 });
 
 Auth::routes();
