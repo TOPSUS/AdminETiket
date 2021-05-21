@@ -16,6 +16,10 @@ Route::get('/ooof', function () {
     Artisan::call('storage:link');
 });
 
+Route::get('/ooof2', function () {
+    Artisan::call('sweetalert:publish');
+});
+
 route::get('/test-blog',function (){
    return view('blog');
 });
