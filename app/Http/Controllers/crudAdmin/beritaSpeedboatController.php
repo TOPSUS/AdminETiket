@@ -41,7 +41,7 @@ class beritaSpeedboatController extends Controller
             'file'=> 'required|file|image',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()){
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -69,8 +69,8 @@ class beritaSpeedboatController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
-                Storage::disk('public')->put($path, file_get_contents($src));
+                $path = '/image/pages/kapal/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);
@@ -136,8 +136,8 @@ class beritaSpeedboatController extends Controller
             if (preg_match('/data:image/', $src)) {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimeType = $groups['mime'];
-                $path = '/image/pages/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
-                Storage::disk('public')->put($path, file_get_contents($src));
+                $path = '/image/pages/kapal/'.$request->judul.'/content/'. uniqid('', true) . '.' . $mimeType;
+                Storage::disk('admin')->put($path, file_get_contents($src));
                 $image->removeAttribute('src');
                 $link = asset('storage'.$path);
                 $image->setAttribute('src', $link);

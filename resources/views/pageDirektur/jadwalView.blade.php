@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('direkturkapal/header')
+    @include('direkturkapal.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('direkturkapal/sidebar')
+   @include('direkturkapal.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -65,7 +65,7 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                 @foreach($jadwal as $dataJadwal)
                     <tr>
@@ -91,7 +91,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-    @include('direkturkapal/footer')
+    @include('direkturkapal.footer')
 
 <!-- Modal Update -->
 @foreach($jadwal as $oldJadwal)
@@ -125,7 +125,7 @@
                             <option value="{{$pt->id}}">{{$pt->nama_pelabuhan}}</option>
                             @endforeach
                         </select>
-                    </div>                
+                    </div>
                     <div class="form-group">
                       <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
                       <input type="time" step="1" class="form-control" id="waktu_berangkat" placeholder="Masukan Asal Speedboat" name="waktu_berangkat" value="{{$oldJadwal->waktu_berangkat}}" require>
@@ -142,7 +142,7 @@
                       <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
                       <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga Tiket" name="harga" value="{{$oldJadwal->harga}}" require>
                     </div>
-                
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-success">Simpan</button>
@@ -181,7 +181,7 @@
 @endforeach
 <!-- End Modal Update -->
 
- 
+
 
 
 

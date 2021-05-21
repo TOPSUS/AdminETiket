@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('direkturKapal/header')
+@include('direkturKapal.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('direkturKapal/sidebar')
+@include('direkturKapal.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -95,7 +95,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('direkturKapal/footer')
+@include('direkturKapal.footer')
 
 <!-- Datatable Script -->
 

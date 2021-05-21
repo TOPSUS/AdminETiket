@@ -85,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>
-                                <textarea id="berita" class="summernote" name="berita @error('berita') is-invalid @enderror" required></textarea>
+                                <textarea id="berita" class="summernote@error('berita') is-invalid @enderror" name="berita" required></textarea>
                                 @error('berita')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
    <!-- Navbar -->
-    @include('direkturKapal/header')
+    @include('direkturKapal.header')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   @include('direkturKapal/sidebar')
+   @include('direkturKapal.sidebar')
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -53,7 +53,7 @@
  <div class="card shadow mb-4">
     <div class="card shadow">
         <form method="POST" enctype="multipart/form-data" action="{{route('addJadwalDirektur')}}">
-        @csrf 
+        @csrf
             <div class="form-group card-header">
             <div class="form-group">
                 <label for="kapal" class="font-weight-bold text-dark">Kapal</label>
@@ -73,7 +73,7 @@
                     @endforeach
                   </select>
               </div>
-              
+
               <div class="form-group">
                 <label for="tujuan" class="font-weight-bold text-dark">Tujuan</label>
                   <select name="id_tujuan_pelabuhan" id="id_tujuan_pelabuhan" class="custom-select" required>
