@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('transaksiPembelianDirektur')}}" class="nav-link">
               <i class="nav-icon fas fa-credit-card"></i>
               <p class="text">Transaksi</p>
             </a>

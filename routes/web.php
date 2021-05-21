@@ -258,6 +258,10 @@ Route::group(['middleware' => 'Direktur'], function () {
 	Route::post('/Direktur/Report/Transaksi/Search', 'crudDirektur\reportController@fetch_data')->name('reportTransaksiSearch');
 	Route::get('/Direktur/Report/Cetak', 'crudDirektur\reportController@cetakPDF')->name('reportCetak');
 
+//Transaksi
+	Route::get('/Direktur/Transaksi', 'crudDirektur\transaksiPembelianController@index')->name('transaksiPembelianDirektur');
+	Route::get('/Direktur/DetailTransaksi/{id}', 'crudDirektur\transaksiPembelianController@detail')->name('detailTransaksiDirektur');
+
 });
 
 Auth::routes();
