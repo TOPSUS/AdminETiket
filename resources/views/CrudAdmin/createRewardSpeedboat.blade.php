@@ -56,26 +56,35 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="id_kapal" class="font-weight-bold text-dark">Kapal</label>
-                                <select name="id_kapal" class="custom-select" required>
+                                <select name="id_kapal" class="custom-select @error('id_kapal') is-invalid @enderror" required>
                                     @foreach($kapal as $sp)
                                         <option value="{{$sp->id}}">{{$sp->nama_kapal}}</option>
                                     @endforeach
                                 </select>
+                                @error('id_kapal')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row card-header">
                         <div class="col">
                             <label for="exampleInputFile">Nama Reward</label>
-                            <input type="text" class="form-control" id="reward" placeholder="Masukan Nama Reward"
+                            <input type="text" class="form-control @error('reward') is-invalid @enderror" id="reward" placeholder="Masukan Nama Reward"
                                    name="reward">
+                            @error('reward')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col">
                             <label for="exampleInputFile">Foto Reward</label>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    <label class="custom-file-label @error('file') is-invalid @enderror" for="exampleInputFile">Choose file</label>
+                                    @error('file')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -83,13 +92,19 @@
                     <div class="row card-header">
                         <div class="col">
                             <label for="berlaku" class="font-weight-bold text-dark">Berlaku Sampai</label>
-                            <input type="date" step="1" class="form-control" id="berlaku"
+                            <input type="date" step="1" class="form-control @error('berlaku') is-invalid @enderror" id="berlaku"
                                    placeholder="Masukan Asal Speedboat" name="berlaku">
+                            @error('berlaku')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col">
                             <label for="minimal_point" class="font-weight-bold text-dark"> Point</label>
-                            <input type="number" class="form-control" id="minimal_point" placeholder="Masukan Point"
+                            <input type="number" class="form-control @error('minimal_point') is-invalid @enderror" id="minimal_point " placeholder="Masukan Point"
                                    name="minimal_point" min="0">
+                            @error('minimal_point')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 

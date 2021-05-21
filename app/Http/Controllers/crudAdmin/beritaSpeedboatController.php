@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use SoftDeletes;
 
 class beritaSpeedboatController extends Controller
@@ -15,10 +16,9 @@ class beritaSpeedboatController extends Controller
     public function index(){
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
-        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->first();
-        $profile=\App\Kapal::find($hakAkses->id_kapal);
+        $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
 
-        $berita=\App\beritaKapal::orderBy('created_at','desc')->where('id_user', $dataAdmin->id)->get();
+        $berita=\App\beritaKapal::orderBy('created_at','desc')->whereIn('id_kapal', $hakAkses)->get();
 
         return view('pageAdminSpeedboat.beritaSpeedboatAdmin', compact('berita'));
 
@@ -26,11 +26,26 @@ class beritaSpeedboatController extends Controller
 
     //Form Berita
     public function create(){
-        return view('CrudAdmin.createBeritaSpeedboat');
+        $akses = \App\hakAksesKapal::where('id_user',Auth::user()->id)->pluck('id_kapal');
+        $kapal = \App\Kapal::whereIn('id',$akses)->get();
+        return view('CrudAdmin.createBeritaSpeedboat',compact('kapal'));
     }
 
     //Create Berita
     public function addBerita(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+            'id_kapal'=>'required|not_in:0',
+            'file'=> 'required|file|image',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');
@@ -73,9 +88,9 @@ class beritaSpeedboatController extends Controller
             $beritaspeedboat->foto = basename($stored);
         }
         $beritaspeedboat->id_user = $IdUser;
-        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
+        $beritaspeedboat->id_kapal =$request->id_kapal;
         $beritaspeedboat->save();
-        return redirect('/BeritaSpeedboat');
+        return redirect('/BeritaSpeedboat')->with('success','Berita berhasil Ditambahkan!');
     }
 
     //edit Berita
@@ -86,6 +101,18 @@ class beritaSpeedboatController extends Controller
 
     //Update Berita
     public function updateBeritas($id, Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'berita' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
 
         if ($request->hasfile('file')) {
             $file = $request->file('file');
@@ -123,17 +150,18 @@ class beritaSpeedboatController extends Controller
         $beritaspeedboat->berita = $detail;
         $beritaspeedboat->judul = $request->judul;
         $beritaspeedboat->tanggal = Carbon::now()->toDateTimeString();
-        if($stored){
-            $beritaspeedboat->foto = basename($stored);
+        if ($request->hasfile('file')) {
+            if ($stored) {
+                $beritaspeedboat->foto = basename($stored);
+            }
         }
         $beritaspeedboat->id_user = $IdUser;
-        $beritaspeedboat->id_kapal = $IdSpeedboat->id_kapal;
         $beritaspeedboat->update();
-        return redirect('/BeritaSpeedboat');
+        return redirect('/BeritaSpeedboat')->with('info','Berita berhasil diupdate!');
     }
 
     public function deleteBeritas($id){
-        $deleteItem = \App\beritaSpeedboat::find($id);
+        $deleteItem = \App\beritaKapal::find($id);
         $deleteItem->delete();
         return redirect('/BeritaSpeedboat')->with('success','Berita berhasil dihapus!');
     }

@@ -55,6 +55,7 @@
                                 <input type="text" class="form-control" id="judul" placeholder="Masukan Judul Berita"
                                        value="{{$Beritaas->judul}}" name="judul">
                             </div>
+
                             <div class="form-group">
                                 <label for="berita" class="font-weight-bold text-dark">Berita</label>
                                 <textarea id="berita" class="summernote" name="berita"

@@ -36,7 +36,7 @@ class beritaController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/Dashboard/BeritaPelabuhan/Create')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }
