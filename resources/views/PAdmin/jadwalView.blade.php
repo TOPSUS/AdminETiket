@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Dashboard | Data Pembelian</title>
+    <title> Dashboard | Jadwal</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminPelabuhan.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminPelabuhan.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,11 +37,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Pembelian</h1>
+                        <h1>Data Jadwal</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('adminPelabuhanHome') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('create-detailjadwal') }}"><i
+                                        class="fas fa-plus"></i> Tambah Data
+                                </a>
                             </li>
                         </ol>
                     </div>
@@ -69,31 +72,43 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Pembeli</th>
-                            <th>Jadwal</th>
-                            <th>Pelabuhan Asal</th>
-                            <th>Speedboat</th>
-                            <th>Tanggal Pembelian</th>
+                            <th>Hari</th>
+                            <th>Asal</th>
+                            <th>Waktu Berangkat</th>
+                            <th>Tujuan</th>
+                            <th>Estimasi Waktu</th>
+                            <th>Kapal</th>
                             <th>Status</th>
-                            <th>Aksi</th>
                         </tr>
                         </thead>
 
-
                         <tbody>
-                        @foreach($dataPembelian as $pb => $pembelian)
+                        @foreach($detailJadwal as $j => $jadwal)
                             <tr>
-                                <td>{{$pb+1}}</td>
-                                <td>{{$pembelian->user->nama}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->waktu_berangkat}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
-                                <td>{{$pembelian->jadwal->hari}}/{{$pembelian->tanggal}}</td>
-                                <td>{{$pembelian->status}}</td>
-                                <td>
-                                    <a class="btn btn-sm btn-primary" href="DetailPembelian/{{$pembelian->id}}"><i
-                                            class="fas fa-eye"></i>
+                                <td>{{$j+1}}</td>
+                                <td>{{$jadwal->hari}}</td>
+                                <td>{{$jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
+                                <td>{{$jadwal->relasiJadwal->waktu_berangkat}}</td>
+                                <td>{{$jadwal->relasiJadwal->tujuan->nama_pelabuhan}}</td>
+                                <td>{{$jadwal->relasiJadwal->estimasi_waktu}}</td>
+                                <td>{{$jadwal->relasiJadwal->kapal->nama_kapal}}</td>
+                                <td><!-- Default switch -->
+                                @if($jadwal->status=="aktif")
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}" checked>
+                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Aktif</label>
+                                    
+                                </div>
+                                @else
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}">
+                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Tidak Aktif</label>
+                                    
+                                </div>
+                                @endif
                                 </td>
+                                
+                               
                             </tr>
                         @endforeach
                         </tbody>
@@ -109,14 +124,16 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-@include('adminDashboard/footer')
+@include('adminPelabuhan.footer')
+
+
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset ('Lte/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset ('Lte//dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset ('Lte/dist/js/demo.js') }}"></script>
 <!-- DataTables -->
@@ -143,7 +160,5 @@
         });
     });
 </script>
-
-
 </body>
 </html>

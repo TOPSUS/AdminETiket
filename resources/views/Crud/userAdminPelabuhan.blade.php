@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard | User Speedboat</title>
+    <title>Dashboard | User Pelabuhan</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,12 +33,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Head Admin</h1>
+                        <h1>Data Admin Pelabuhan</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-direktur') }}"><i
+                            <li class="breadcrumb-item active"><a href="{{ route('create-adminpelabuhan') }}"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                             </li>
@@ -55,54 +55,50 @@
             <div class="card card-solid">
                 <div class="card-body pb-0">
                     <div class="row d-flex align-items-stretch">
-                        @foreach($dataDirektur as $direktur)
+                        @foreach($dataAdmin as $admin)
                             <div class="col-4 col-sm-4 col-md-4 align-items-stretch">
                                 <div class="card bg-light">
                                     <div class="card-header text-muted border-bottom-0">
-                                        Head Admin
+                                        Admin Pelabuhan 
                                     </div>
                                     <div class="card-body pt-0">
                                         <div class="row">
                                             <div class="col-7">
-                                                <h2 class="lead"><b>{{$direktur->nama}}</b></h2>
+                                                <h2 class="lead"><b>{{$admin->nama}}</b></h2>
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-building"></i></span>
-                                                        Address: {{$direktur->alamat}}</li>
+                                                        Address: {{$admin->alamat}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-phone"></i></span> Phone
-                                                        : {{$direktur->nohp}}</li>
+                                                        : {{$admin->nohp}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-envelope"></i></span> Email
-                                                        : {{$direktur->email}}</li>
+                                                        : {{$admin->email}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-venus-mars"></i></span> Gender
-                                                        : {{$direktur->jeniskelamin}}</li>
+                                                        : {{$admin->jeniskelamin}}</li>
                                                 </ul>
                                             </div>
                                             <div class="col-5 text-center">
-                                                <img src="{{asset('/storage/image_users/'.$direktur->foto)}}" alt=""
+                                                <img src="{{asset('/storage/image_users/'.$admin->foto)}}" alt=""
                                                      class="img-circle img-fluid">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
                                         <div class="text-right">
-                                            <a href="/Dashboard/CRUD/DeleteUser/{{$direktur->id}}"
+                                            <a href="/Dashboard/CRUD/DeleteUser/{{$admin->id}}"
                                                class="btn btn-sm bg-danger">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
-                                            <a data-toggle="modal" data-target="#update{{$direktur->id}}" href="#"
+                                            <a data-toggle="modal" data-target="#update{{$admin->id}}" href="#"
                                                class="btn btn-sm btn-primary">
                                                 <i class="fas fa-edit"></i> Edit Profile
                                             </a>
-                                            <a href="/Dashboard/CRUD/DirekturData/Speedboat/View/{{$direktur->id}}"
+                                            <a href="/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/View/{{$admin->id}}"
                                                class="btn btn-sm btn-success">
-                                                <i class="fas fa-eye"></i> Speedboat
-                                            </a>
-                                            <a href="/Dashboard/CRUD/DirekturData/Kapal/View/{{$direktur->id}}"
-                                               class="btn btn-sm btn-success">
-                                                <i class="fas fa-eye"></i> Kapal
+                                                <i class="fas fa-eye"></i> Pelabuhan
                                             </a>
                                         </div>
                                     </div>
@@ -139,8 +135,8 @@
 @include('adminDashboard.footer')
 
 <!-- Modal Update -->
-    @foreach($dataDirektur as $oldDirektur)
-        <div class="modal fade" id="update{{$oldDirektur->id}}" tabindex="-1" role="dialog"
+    @foreach($dataAdmin as $oldAdmin)
+        <div class="modal fade" id="update{{$oldAdmin->id}}" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -153,25 +149,25 @@
                     <div class="modal-body">
                         <form action="{{ route('update-user') }}" enctype="multipart/form-data" method="POST">
                             @csrf
-                            <input type="hidden" name="id_user" value="{{$oldDirektur->id}}">
+                            <input type="hidden" name="id_user" value="{{$oldAdmin->id}}">
                             <div class="form-group">
                                 <label for="nama" class="font-weight-bold text-dark">Nama</label>
                                 <input type="text" class="form-control" id="nama" placeholder="Masukan Nama" name="nama"
-                                       value="{{$oldDirektur->nama}}" require>
+                                       value="{{$oldAdmin->nama}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="font-weight-bold text-dark">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Masukan E-mail"
-                                       name="email" value="{{$oldDirektur->email}}" require>
+                                       name="email" value="{{$oldAdmin->email}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="nohp" class="font-weight-bold text-dark">No Hp</label>
                                 <input type="text" class="form-control" id="nohp" placeholder="Masukan No Telp"
-                                       name="nohp" value="{{$oldDirektur->nohp}}" require>
+                                       name="nohp" value="{{$oldAdmin->nohp}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="font-weight-bold text-dark">Jenis Kelamin</label><br>
-                                @if($oldDirektur->jeniskelamin == 'Laki-laki')
+                                @if($oldAdmin->jeniskelamin == 'Laki-laki')
                                     <input class="custom-radio" type="radio" name="jeniskelamin" value="Laki-laki"
                                            checked> Laki-laki
                                     <span class="fas fa-mars"></span>&nbsp &nbsp
@@ -190,29 +186,39 @@
                             <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Alamat</label>
                                 <input type="text" class="form-control" id="alamat" placeholder="Masukan Alamat"
-                                       name="alamat" value="{{$oldDirektur->alamat}}" require>
+                                       name="alamat" value="{{$oldAdmin->alamat}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="InputName" class="font-weight-bold text-dark">Role/Jabatan</label>
-                                <br>@if($oldDirektur->role == "Customer")
+                                <br>@if($oldAdmin->role == "Customer")
                                     <input type="radio" name="role" value="Customer" checked> Customer &nbsp &nbsp
                                     <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
                                     <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                                    <input type="radio" name="role" value="PAdmin"> Admin Pelabuhan&nbsp &nbsp
                                     <input type="radio" name="role" value="SAdmin"> Super Admin
-                                @elseif($oldDirektur->role == "Direktur")
+                                @elseif($oldAdmin->role == "Direktur")
                                     <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
                                     <input type="radio" name="role" value="Direktur" checked> Direktur &nbsp &nbsp
                                     <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                                    <input type="radio" name="role" value="PAdmin"> Admin Pelabuhan&nbsp &nbsp
                                     <input type="radio" name="role" value="SAdmin"> Super Admin
-                                @elseif($oldDirektur->role == "Admin")
+                                @elseif($oldAdmin->role == "Admin")
                                     <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
                                     <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
                                     <input type="radio" name="role" value="Admin" checked> Admin &nbsp &nbsp
+                                    <input type="radio" name="role" value="PAdmin"> Admin Pelabuhan&nbsp &nbsp
+                                    <input type="radio" name="role" value="SAdmin"> Super Admin
+                                @elseif($oldAdmin->role == "PAdmin")
+                                    <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
+                                    <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
+                                    <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                                    <input type="radio" name="role" value="PAdmin" checked> Admin Pelabuhan&nbsp &nbsp
                                     <input type="radio" name="role" value="SAdmin"> Super Admin
                                 @else
                                     <input type="radio" name="role" value="Customer"> Customer &nbsp &nbsp
                                     <input type="radio" name="role" value="Direktur"> Direktur &nbsp &nbsp
                                     <input type="radio" name="role" value="Admin"> Admin &nbsp &nbsp
+                                    <input type="radio" name="role" value="PAdmin" checked> Admin Pelabuhan&nbsp &nbsp
                                     <input type="radio" name="role" value="SAdmin" checked> Super Admin
                                 @endif
                             </div>

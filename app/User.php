@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Kapal','id_kapal','id');
     }
 
+//relasi ke tb pelabuhan
+    public function pelabuhan()
+    {
+        return $this->belongsTo('App\Pelabuhan','id_pelabuhan','id');
+    }
+
 //relasi ke reward speedboat
     public function reward()
     {

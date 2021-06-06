@@ -26,6 +26,11 @@ class userController extends Controller
     	return view('Crud.userAdmin', compact('dataAdmin'));
     }
 
+    public function viewadminpelabuhan(){
+        $dataAdmin=\App\User::where('role','PAdmin')->with('pelabuhan')->get();
+    	return view('Crud.userAdminPelabuhan', compact('dataAdmin'));
+    }
+
     public function viewsuperadmin(){
         $dataSAdmin=\App\User::where('role','SAdmin')->get();
     	return view('Crud.userSuperAdmin', compact('dataSAdmin'));
@@ -45,6 +50,12 @@ public function createdirektur(){
 public function createadmin(){
     $dataSpeedboat=\App\Kapal::all();
     return view('Crud.createAdmin', compact('dataSpeedboat'));
+}
+
+//FORM CREATE ADMIN PELABUHAN
+public function createadminpelabuhan(){
+    $dataPelabuhan=\App\Pelabuhan::all();
+    return view('Crud.createAdminPelabuhan', compact('dataPelabuhan'));
 }
 
 //CREATE USER
@@ -81,67 +92,107 @@ public function createadmin(){
 	}
 
 //CREATE DIREKTUR
-public function addDirektur(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'nama'=>'required',
-        'alamat'=>'required',
-        'jeniskelamin'=>'required',
-        'nohp'=>'required|numeric',
-        'email'=>'required|unique:App\User,email',
-        'password'=>'required',
-    ]);
+    public function addDirektur(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama'=>'required',
+            'alamat'=>'required',
+            'jeniskelamin'=>'required',
+            'nohp'=>'required|numeric',
+            'email'=>'required|unique:App\User,email',
+            'password'=>'required',
+        ]);
 
-    if ($validator->fails()) {
-        return back()
-            ->withErrors($validator)
-            ->withInput();
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        \App\User::create([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'jeniskelamin'=>$request->jeniskelamin,
+            'nohp'=>$request->nohp,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'role'=>'Direktur',
+        ]);
+        return redirect('/Dashboard/CRUD/DirekturData')->with('success','Data berhasil dibuat!');
     }
-
-    \App\User::create([
-        'nama'=>$request->nama,
-        'alamat'=>$request->alamat,
-        'jeniskelamin'=>$request->jeniskelamin,
-        'nohp'=>$request->nohp,
-        'email'=>$request->email,
-        'password'=>Hash::make($request->password),
-        'role'=>'Direktur',
-    ]);
-    return redirect('/Dashboard/CRUD/DirekturData')->with('success','Data berhasil dibuat!');
-}
 
 //CREATE Admin
-public function addAdmin(Request $request)
-{
+    public function addAdmin(Request $request)
+    {
 
-    $validator = Validator::make($request->all(), [
-        'nama'=>'required',
-        'alamat'=>'required',
-        'jeniskelamin'=>'required',
-        'nohp'=>'required|numeric',
-        'email'=>'required|unique:App\User,email',
-        'password'=>'required',
-        'id_speedboat'=>'required|not_in:0',
-    ]);
+        $validator = Validator::make($request->all(), [
+            'nama'=>'required',
+            'alamat'=>'required',
+            'jeniskelamin'=>'required',
+            'nohp'=>'required|numeric',
+            'email'=>'required|unique:App\User,email',
+            'password'=>'required',
+            'id_speedboat'=>'required|not_in:0',
+        ]);
 
-    if ($validator->fails()) {
-        return back()
-            ->withErrors($validator)
-            ->withInput();
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        \App\User::create([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'jeniskelamin'=>$request->jeniskelamin,
+            'nohp'=>$request->nohp,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'id_speedboat'=>$request->id_speedboat,
+            'role'=>'Admin',
+        ]);
+        return redirect('/Dashboard/CRUD/AdminData')->with('success','Data berhasil dibuat!');
     }
 
-    \App\User::create([
-        'nama'=>$request->nama,
-        'alamat'=>$request->alamat,
-        'jeniskelamin'=>$request->jeniskelamin,
-        'nohp'=>$request->nohp,
-        'email'=>$request->email,
-        'password'=>Hash::make($request->password),
-        'id_speedboat'=>$request->id_speedboat,
-        'role'=>'Admin',
-    ]);
-    return redirect('/Dashboard/CRUD/AdminData')->with('success','Data berhasil dibuat!');
-}
+//CREATE Admin Pelabuhan
+    public function addAdminPelabuhan(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'nama'=>'required',
+            'alamat'=>'required',
+            'jeniskelamin'=>'required',
+            'nohp'=>'required|numeric',
+            'email'=>'required|unique:App\User,email',
+            'password'=>'required',
+            'id_pelabuhan'=>'required|not_in:0',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $padmin = \App\User::create([
+            'nama'=>$request->nama,
+            'alamat'=>$request->alamat,
+            'jeniskelamin'=>$request->jeniskelamin,
+            'nohp'=>$request->nohp,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'id_pelabuhan'=>$request->id_speedboat,
+            'role'=>'PAdmin',
+        ]);
+        $hakakses= \App\hakAksesPelabuhan::create([
+            'id_user'=>$padmin->id,
+            'id_pelabuhan'=>$request->id_pelabuhan,
+            'hak_akses'=>'PAdmin',
+
+        ]);
+        
+        return redirect('/Dashboard/CRUD/AdminPelabuhanData')->with('success','Data berhasil dibuat!');
+    }
 
 
 //Update User

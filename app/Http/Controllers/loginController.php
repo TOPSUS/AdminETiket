@@ -17,6 +17,8 @@ class loginController extends Controller
             return redirect('/Admin/Home');
         } elseif (session('Direktur')) {
             return redirect('/Direktur/Home');
+        } elseif (session('PAdmin')) {
+            return redirect('/AdminPelabuhan/Home');
         } else {
             return view('formLogin');
         }
@@ -43,9 +45,12 @@ class loginController extends Controller
                     } elseif ($data->role == "Direktur") {
                         session(['Direktur' => true]);
                         return redirect('/Direktur/Home');
+                    } elseif ($data->role == "PAdmin") {
+                        session(['PAdmin' => true]);
+                        return redirect('/AdminPelabuhan/Home');
                     }
                 } else {
-                    return redirect()->back()->withInput($request->only('email'))->with('info', 'tidak dapat melakukan login, harap menghubungi contact service yang tersedia!!');
+                    return redirect()->back()->withInput($request->only('email'))->with('info', 'Tidak dapat melakukan Login, harap menghubungi contact service yang tersedia!!');
                 }
             } else {
                 return redirect()->back()->withInput($request->only('email'))->with('info', 'Password yang anda masukan salah!!');

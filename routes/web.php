@@ -71,7 +71,11 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::Post('/Dashboard/BeritaSpeedboat/update/post', 'beritaController@updateBeritaSpeedboat')->name('update-beritaSpeedboat');
     route::delete('/Dashboard/BeritaSpeedboat/{id}/delete', 'beritaController@deleteBeritaSpeedboat')->name('delete-beritaSpeedboat');
 
-//
+//Admin Pelabuhan
+    Route::get('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/View/{id}', 'Admin\adminPelabuhanController@pelabuhan')->name('padmin-pelabuhan');
+    Route::get('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/Create/{id}', 'Admin\adminPelabuhanController@createpelabuhan')->name('padmin-createpelabuhan');
+    Route::Post('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/Add', 'Admin\adminPelabuhanController@addPelabuhan')->name('padmin-addpelabuhan');
+    
     Route::get('/Dashboard/Pelabuhan', 'Crud\pelabuhanController@index')->name('pelabuhan');
     Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->name('pelabuhan-contact');
 
@@ -85,16 +89,21 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/DirekturData/Kapal/Create/{id}', 'direkturController@createkapal')->name('direktur-createkapal');
     Route::Post('/Dashboard/CRUD/DirekturData/Kapal/Add', 'direkturController@addKapal')->name('direktur-addkapal');
 
+
+
 //Route CRUD
     //User
     Route::get('/Dashboard/CRUD/CustomerData', 'Crud\userController@viewcustomer')->name('viewuser-customer');
     Route::get('/Dashboard/CRUD/DirekturData', 'Crud\userController@viewdirektur')->name('viewuser-direktur');
     Route::get('/Dashboard/CRUD/AdminData', 'Crud\userController@viewadmin')->name('viewuser-admin');
+    Route::get('/Dashboard/CRUD/AdminPelabuhanData', 'Crud\userController@viewadminpelabuhan')->name('viewuser-adminpelabuhan');
     Route::get('/Dashboard/CRUD/SuperAdminData', 'Crud\userController@viewsuperadmin')->name('viewuser-superadmin');
     Route::get('/Dashboard/CRUD/CreateUser', 'Crud\userController@create')->name('create-user');
     Route::get('/Dashboard/CRUD/CreateDirektur', 'Crud\userController@createdirektur')->name('create-direktur');
     Route::get('/Dashboard/CRUD/CreateAdmin', 'Crud\userController@createadmin')->name('create-admin');
+    Route::get('/Dashboard/CRUD/CreateAdminPelabuhan', 'Crud\userController@createadminpelabuhan')->name('create-adminpelabuhan');
     Route::post('/Dashboard/CRUD/AddAdmin', 'Crud\userController@addAdmin')->name('add-admin');
+    Route::post('/Dashboard/CRUD/AddAdminPelabuhan', 'Crud\userController@addAdminPelabuhan')->name('add-adminpelabuhan');
     Route::post('/Dashboard/CRUD/AddDirektur', 'Crud\userController@addDirektur')->name('add-direktur');
     Route::post('/Dashboard/CRUD/AddUser', 'Crud\userController@addUser')->name('add-user');
     Route::post('/Dashboard/CRUD/UpdateCustomer', 'Crud\userController@updateUser')->name('update-user');
@@ -115,18 +124,18 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/DeleteKapal/{id}', 'Crud\kapalController@deleteKapal')->name('delete-kapal');
 
     //Jadwal
-    Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
-    Route::get('/Dashboard/CRUD/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
-    Route::post('/Dashboard/CRUD/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal');
-    Route::post('/Dashboard/CRUD/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal');
-    Route::get('/Dashboard/CRUD/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
+    //Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
+    //Route::get('/Dashboard/CRUD/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
+    //Route::post('/Dashboard/CRUD/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal');
+    //Route::post('/Dashboard/CRUD/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal');
+    //Route::get('/Dashboard/CRUD/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
 
     //Jadwal Kapal
-    Route::get('/Dashboard/CRUD/JadwalKapalData', 'Crud\jadwalKapalController@view')->name('viewjadwalkapal');
-    Route::get('/Dashboard/CRUD/CreateJadwalKapal', 'Crud\jadwalKapalController@create')->name('create-jadwalkapal');
-    Route::post('/Dashboard/CRUD/AddJadwalKapal', 'Crud\jadwalKapalController@addJadwal')->name('add-jadwalkapal');
-    Route::post('/Dashboard/CRUD/UpdateJadwalKapal', 'Crud\jadwalKapalController@updateJadwal')->name('update-jadwalkapal');
-    Route::get('/Dashboard/CRUD/DeleteJadwalKapal/{id}', 'Crud\jadwalKapalController@deleteJadwal')->name('delete-jadwalkapal');
+    //Route::get('/Dashboard/CRUD/JadwalKapalData', 'Crud\jadwalKapalController@view')->name('viewjadwalkapal');
+    //Route::get('/Dashboard/CRUD/CreateJadwalKapal', 'Crud\jadwalKapalController@create')->name('create-jadwalkapal');
+    //Route::post('/Dashboard/CRUD/AddJadwalKapal', 'Crud\jadwalKapalController@addJadwal')->name('add-jadwalkapal');
+    //Route::post('/Dashboard/CRUD/UpdateJadwalKapal', 'Crud\jadwalKapalController@updateJadwal')->name('update-jadwalkapal');
+    //Route::get('/Dashboard/CRUD/DeleteJadwalKapal/{id}', 'Crud\jadwalKapalController@deleteJadwal')->name('delete-jadwalkapal');
 
     //Pelabuhan
     Route::get('/Dashboard/CRUD/PelabuhanData', 'Crud\pelabuhanController@view')->name('viewpelabuhan');
@@ -267,6 +276,50 @@ Route::group(['middleware' => 'Direktur'], function () {
 	Route::get('/Direktur/DetailTransaksi/{id}', 'crudDirektur\transaksiPembelianController@detail')->name('detailTransaksiDirektur');
 
 });
+
+//ROUTE ADMIN END-----------------------------------------------------------------------------------
+
+//ROUTE ADMIN PELABUHAN START-----------------------------------------------------------------------------------
+Route::group(['middleware' => 'PAdmin'], function () {
+    
+//ADMIN PELABUHAN
+    Route::get('/AdminPelabuhan/Home', 'Admin\adminPelabuhanController@index')->name('adminPelabuhanHome');
+
+    //Pelabuhan
+    Route::get('/AdminPelabuhan/Pelabuhan/View', 'PAdmin\pelabuhanController@view')->name('pelabuhan-view');
+    Route::get('/AdminPelabuhan/Pelabuhan/CreatePelabuhan', 'PAdmin\pelabuhanController@createpelabuhan')->name('pelabuhan-create');
+    Route::post('/AdminPelabuhan/Pelabuhan/AddPelabuhan', 'PAdmin\pelabuhanController@addPelabuhan')->name('pelabuhan-add');
+    Route::post('/AdminPelabuhan/Pelabuhan/UpdatePelabuhan', 'PAdmin\pelabuhanController@updatePelabuhan')->name('pelabuhan-update');
+    Route::get('/AdminPelabuhan/Pelabuhan/DeletePelabuhan/{id}', 'PAdmin\pelabuhanController@deletePelabuhan')->name('pelabuhan-delete');
+    Route::get('/AdminPelabuhan/Pelabuhan/Kapal/{id}', 'PAdmin\pelabuhanController@viewKapal')->name('pelabuhan-kapal');
+
+    //Verif Kapal
+    Route::get('/AdminPelabuhan/VerifikasiKapal/View', 'PAdmin\verifKapalController@index')->name('verifkapal-view');
+    Route::get('/AdminPelabuhan/VerifikasiKapal/DetailVerifikasiKapal/{id}', 'PAdmin\verifKapalController@detail')->name('verifkapal-detail');
+    Route::get('/AdminPelabuhan/VerifikasiKapal/DetailVerifikasiKapal/Approve/{id}', 'PAdmin\verifKapalController@approve')->name('verifkapal-approve');
+    Route::get('/AdminPelabuhan/VerifikasiKapal/DetailVerifikasiKapal/Reject/{id}', 'PAdmin\verifKapalController@reject')->name('verifkapal-reject');
+
+    //Berita Pelabuhan
+    Route::get('/AdminPelabuhan/BeritaPelabuhan', 'PAdmin\beritaController@indexPelabuhan')->name('berita-pelabuhan');
+    Route::get('/AdminPelabuhan/BeritaPelabuhan/Create', 'PAdmin\beritaController@createBeritaPelabuhan')->name('create-beritaPelabuhan');
+    Route::Post('/AdminPelabuhan/BeritaPelabuhan/AddBerita', 'PAdmin\beritaController@addBeritaPelabuhan')->name('add-beritaPelabuhan');
+    Route::get('/AdminPelabuhan/BeritaPelabuhan/{id}/update','PAdmin\beritaController@editFormBeritaPelabuhan')->name('form-updateBeritaPelabuhan');
+    Route::Post('/AdminPelabuhan/BeritaPelabuhan/update/post', 'PAdmin\beritaController@updateBeritaPelabuhan')->name('update-beritaPelabuhan');
+    route::delete('/AdminPelabuhan/BeritaPelabuhan/{id}/delete', 'PAdmin\beritaController@deleteBeritaPelabuhan')->name('delete-BeritaPelabuhan');
+
+    //Manajemen Jadwal
+    Route::get('/AdminPelabuhan/JadwalData/{hari}', 'PAdmin\jadwalController@view')->name('viewjadwal');
+    Route::get('/AdminPelabuhan/JadwalData/', 'PAdmin\jadwalController@viewMaster')->name('master-jadwal');
+    Route::get('/AdminPelabuhan/CreateJadwal', 'PAdmin\jadwalController@create')->name('create-jadwal');
+    Route::get('/AdminPelabuhan/CreateDetailJadwal', 'PAdmin\jadwalController@createdetail')->name('create-detailjadwal');
+    Route::post('/AdminPelabuhan/AddJadwal', 'PAdmin\jadwalController@addJadwal')->name('add-jadwal');
+    Route::post('/AdminPelabuhan/UpdateJadwal', 'PAdmin\jadwalController@updateJadwal')->name('update-jadwal');
+    Route::get('/AdminPelabuhan/DeleteJadwal/{id}', 'PAdmin\jadwalController@deleteJadwal')->name('delete-jadwal');
+
+
+
+});    
+
 
 Auth::routes();
 

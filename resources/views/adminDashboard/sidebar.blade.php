@@ -54,9 +54,20 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('viewuser-superadmin') }}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Super Admin</p>
+                                    </a>
+                                <li class="nav-item">
                                     <a href="{{ route('viewuser-direktur') }}" class="nav-link">
                                         <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Direktur</p>
+                                        <p>Head Admin</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('viewuser-adminpelabuhan') }}" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Admin Pelabuhan</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -65,11 +76,7 @@
                                         <p>Admin</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('viewuser-superadmin') }}" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Super Admin</p>
-                                    </a>
+                                
                                 </li>
                                 </li>
                             </ul>
@@ -92,14 +99,16 @@
                                 <p>Pelabuhan</p>
                             </a>
                         </li>
+                        <!--
                         <li class="nav-item">
-                            <a href="{{ route('viewjadwal') }}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>
                                 <p>Jadwal</p>
                             </a>
                         </li>
+                        -->
                     <!-- <li class="nav-item">
-                <a href="{{ route('viewjadwalkapal') }}" class="nav-link">
+                <a href="" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>Jadwal Kapal</p>
                 </a>
