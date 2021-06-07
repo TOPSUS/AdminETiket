@@ -89,11 +89,34 @@ class pembelianController extends Controller
     //reject
     public function reject($id)
     {
-        $pembelian = \App\Pembelian::where('id', $id)->first();
+
+        $pembelian = \App\Pembelian::where('id', $id)->with('golongans', 'detailPembelian', 'jadwal', 'user')->first();
         $pembelian->status = 'Dibatalkan';
         $pembelian->save();
 
-        return redirect('Dashboard/Pembelian');
+        $user = \App\User::find($pembelian->id_user);
+        if ($user->fcm_token != null) {
+            $notif = \App\UserNotification::create([
+                'user_id' => $user->id,
+                'title' => 'Pembayaran dibatalkan',
+                'body' => 'Pembayaran anda dibatalkan oleh super admin',
+                'notification_by' => 0,
+                'status' => 3,
+                'type' => 1,
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+            if ($notif) {
+                $ch = curl_init("https://fcm.googleapis.com/fcm/send");
+                $header = array("Content-Type:application/json", "Authorization: key=AAAAe4OwHhY:APA91bFoIIsUBcJ_OK26_PGnG6HK9JMEZ5D3BbxbR1BfNqOlbTdiAlawdHjlO8caYMl6QS5ok-1P4uV20MPHDZIBUl_JQ0umbjmyi7v5OHXihlA8OHsEjisA2mtlwtq7DRHUZr4C-VVK");
+                $data = json_encode(array("to" => $user->fcm_token, "priority" => 10, "data" => array("title" => "Pembayaran dibatalkan", "body" => "Pembayaran anda dibatalkan oleh super admin", "id" => $notif->id, "status" => $notif->status, "type" => $notif->type, "created_at" => date('Y-m-d H:i:s'), "notification_by" => $notif->notification_by)));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_exec($ch);
+            }
+        }
+        return redirect('Dashboard/CRUD/Pembelian')->with('success', 'Pembayaran dibatalkan');
     }
 
     //pembelian
@@ -124,7 +147,7 @@ class pembelianController extends Controller
 
         if ($request->jadwal) {
             $detailJadwal = detailJadwal::where('id', $request->jadwal)->first();
-            $hargaTiket = Jadwal::where('id',$detailJadwal->id_jadwal)->first();
+            $hargaTiket = Jadwal::where('id', $detailJadwal->id_jadwal)->first();
             $total = $penumpang * $hargaTiket->harga + $hargaGolongan;
         }
 
@@ -212,7 +235,8 @@ class pembelianController extends Controller
         return redirect('/Transaksi')->with('info', 'Terjadi kesalahan dalam pembuatan tiket');
     }
 
-    public function kaka(){
+    public function kaka()
+    {
         $card = \App\Card::pluck('card');
         foreach ($card as $cd) {
             $encoded[] = urlencode($cd);
