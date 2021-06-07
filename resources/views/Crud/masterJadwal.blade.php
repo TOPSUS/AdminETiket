@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-jadwal') }}"><i
+                            <li class="breadcrumb-item active"><a href="{{ route('create-jadwal-sa') }}"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                             </li>
@@ -90,12 +90,12 @@
                                 <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
                                 <td>{{$jadwal->estimasi_waktu}}</td>
                                 <td>{{$jadwal->kapal->nama_kapal}}</td>
-                               
-                                
+
+
                                 <td>
-                                    <a class="btn btn-sm bg-danger" href="">
+                                    <a class="btn btn-sm bg-danger" href="/Dashboard/DeleteJadwal/{{$jadwal->id}}">
                                         <i class="fas fa-trash-alt"></i></a>
-                                    <a data-toggle="modal" data-target=""
+                                    <a data-toggle="modal" data-target="#update{{$jadwal->id}}"
                                        class="btn btn-sm btn-primary" href="#"><i class="fas fa-edit"></i> Edit Jadwal
                                 </td>
                             </tr>
@@ -111,9 +111,108 @@
 
     </section>
     <!-- /.content -->
+    @include('adminDashboard.footer')
 </div>
+
+@foreach($dataJadwal as $jj)
+    <div class="modal fade" id="update{{$jj->id}}" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Master Jadwal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{route('update-jadwal-sa')}}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_jadwal" value="{{$jj->id}}">
+                        <div class="row card-header">
+                            <div class="col-xl-6 col-sm-12 col-md-6">
+                                <label for="id_asal_pelabuhan_{{$jj->id}}" class="font-weight-bold text-dark">Asal Pelabuhan</label>
+                                <select name="" id="id_asal_pelabuhan_{{$jj->id}}"
+                                        class="custom-select @error('id_asal_pelabuhan') is-invalid @enderror" disabled required>
+                                    <option value="{{$jj->asal->id}}">{{$jj->asal->nama_pelabuhan}}</option>
+                                </select>
+                                <input type="hidden" value="{{$jj->asal->id}}" name="id_asal_pelabuhan">
+                                @error('id_asal_pelabuhan')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-xl-6 col-sm-12 col-md-6">
+                                <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan
+                                    Pelabuhan</label>
+                                <select name=""
+                                        class="custom-select @error('id_tujuan_pelabuhan') is-invalid @enderror"
+                                        required disabled>
+                                    <option value="{{$jj->tujuan->id}}">{{$jj->tujuan->nama_pelabuhan}}</option>
+                                </select>
+                                <input type="hidden" value="{{$jj->asal->id}}" name="id_tujuan_pelabuhan">
+                                @error('id_tujuan_pelabuhan')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row card-header">
+                            <div class="col-xl-6 col-sm-12 col-md-6">
+                                <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu
+                                    (Menit)</label>
+                                <input type="number" min="0"
+                                       class="form-control @error('estimasi_waktu') is-invalid @enderror"
+                                       id="estimasi_waktu"
+                                       placeholder="Masukan Estimasi Waktu" name="estimasi_waktu" value="{{$jj->estimasi_waktu}}">
+                                @error('estimasi_waktu')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-xl-6 col-sm-12 col-md-6">
+                                <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
+                                <input type="time" step="1"
+                                       class="form-control @error('waktu_berangkat') is-invalid @enderror"
+                                       id="waktu_berangkat"
+                                       placeholder="Masukan Asal Kapal" name="waktu_berangkat" value="{{$jj->waktu_berangkat}}">
+                                @error('waktu_berangkat')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group card-header ">
+                            <label for="id_kapal_{{$jj->id}}" class="font-weight-bold text-dark">Kapal Pilihan</label>
+                            <select name="" id="id_kapal_{{$jj->id}}"
+                                    class="custom-select @error('id_kapal') is-invalid @enderror"
+                                    required disabled>
+                                <option value="{{$jj->kapal->id}}">{{$jj->kapal->nama_kapal}}</option>
+                            </select>
+                            <input type="hidden" value="{{$jj->kapal->id}}" name="id_kapal">
+                            @error('id_kapal')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="row card-header">
+                            <div class="col">
+                                <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
+                                <input type="text" step="1" class="form-control @error('harga') is-invalid @enderror"
+                                       id="harga"
+                                       placeholder="Masukan Harga Tiket" name="harga" value="{{$jj->harga}}">
+                                @error('harga')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 <!-- /.content-wrapper -->
-@include('adminDashboard.footer')
+
 
 
 

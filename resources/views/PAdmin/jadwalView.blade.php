@@ -7,6 +7,7 @@
     <title> Dashboard | Jadwal</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset ('Lte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -37,7 +38,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Jadwal</h1>
+                        <h1>Data Jadwal Harian</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -95,20 +96,20 @@
                                 <td><!-- Default switch -->
                                 @if($jadwal->status=="aktif")
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}" checked>
-                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Aktif</label>
-                                    
+                                    <input type="checkbox" class="custom-control-input" onclick="statusJadwal({{$jadwal->id}})" id="customSwitch_{{$jadwal->id}}" checked>
+                                    <label class="custom-control-label" id="label_{{$jadwal->id}}" for="customSwitch_{{$jadwal->id}}">Aktif</label>
+
                                 </div>
                                 @else
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}">
-                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Tidak Aktif</label>
-                                    
+                                    <input type="checkbox" class="custom-control-input" onclick="statusJadwal({{$jadwal->id}})" id="customSwitch_{{$jadwal->id}}">
+                                    <label class="custom-control-label" id="label_{{$jadwal->id}}" for="customSwitch_{{$jadwal->id}}">Tidak Aktif</label>
+
                                 </div>
                                 @endif
                                 </td>
-                                
-                               
+
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -122,9 +123,10 @@
 
     </section>
     <!-- /.content -->
+    @include('adminPelabuhan.footer')
 </div>
 <!-- /.content-wrapper -->
-@include('adminPelabuhan.footer')
+
 
 
 
@@ -144,6 +146,50 @@
 
 <!-- page script -->
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        }
+    });
+
+    function statusJadwal(id) {
+        var checkBox = document.getElementById("customSwitch_" + id);
+        if (checkBox.checked == true) {
+            $.ajax({
+                url: "/ajax/jadwal/turnOn",
+                type: "POST",
+                data: {
+                    id: id,
+                },
+                success: function (result) {
+                    document.getElementById("customSwitch_" + id).checked = true;
+                    document.getElementById("label_"+id).innerHTML = 'Aktif';
+                },
+                error: function (result) {
+                    document.getElementById("customSwitch_" + id).checked = false;
+                    document.getElementById("label_"+id).innerHTML = 'Tidak Aktif';
+                }
+            });
+        } else {
+            $.ajax({
+                url: "/ajax/jadwal/turnOff",
+                type: "POST",
+                data: {
+                    id: id,
+                },
+                success: function (result) {
+                    document.getElementById("customSwitch_" + id).checked = false;
+                    document.getElementById("label_"+id).innerHTML = 'Tidak Aktif';
+                },
+                error: function (result) {
+                    document.getElementById("customSwitch_" + id).checked = true;
+                    document.getElementById("label_"+id).innerHTML = 'Aktif';
+                }
+            });
+        }
+    }
+
     $(function () {
         $("#example1").DataTable({
             "responsive": true,

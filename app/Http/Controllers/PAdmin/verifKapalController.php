@@ -13,8 +13,8 @@ class verifKapalController extends Controller
     //
     public function index()
     {
-        $dataVerifikasiKapal = \App\anggotaPelabuhan::with('relasiPelabuhan', 'relasiKapal')->get();
-       
+        $hakAkses = \App\hakAksesPelabuhan::where('id_user', Auth::user()->id)->pluck('id_pelabuhan');
+        $dataVerifikasiKapal = \App\anggotaPelabuhan::whereIn('id_pelabuhan',$hakAkses)->with('relasiPelabuhan', 'relasiKapal')->get();
         return view('PAdmin.verifikasiKapal', compact('dataVerifikasiKapal'));
     }
 
@@ -22,9 +22,9 @@ class verifKapalController extends Controller
     public function detail($id)
     {
         $dataVerifikasiKapal = \App\anggotaPelabuhan::where('id', $id)->with('relasiPelabuhan', 'relasiKapal')->first();
-        
+
         return view('PAdmin.detailVerifikasiKapal', compact('dataVerifikasiKapal'));
- 
+
     }
 
     //approve
@@ -44,7 +44,7 @@ class verifKapalController extends Controller
         $dataVerifikasiKapal->status = 'reject';
         $dataVerifikasiKapal->save();
 
-        return redirect('AdminPelabuhan/VerifikasiKapal/View')->with('danger','Data Berhasil di Reject');
+        return redirect('AdminPelabuhan/VerifikasiKapal/View')->with('info','Kapal Berhasil di Reject');
     }
- 
+
 }

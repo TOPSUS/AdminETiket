@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminPelabuhan.header')
+@include('adminDashboard.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminPelabuhan.sidebar')
+@include('adminDashboard.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -41,8 +41,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('adminPelabuhanHome') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-detailjadwal') }}"><i
+                            <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('create-detailjadwal-sa') }}"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                             </li>
@@ -57,7 +57,7 @@
             <!-- Begin Page Content -->
             <div class="card shadow mb-4">
                 <div class="card shadow">
-                    <form method="POST" enctype="multipart/form-data" action="{{route('add-jadwal-detail')}}">
+                    <form method="POST" enctype="multipart/form-data" action="{{route('add-jadwal-detail-sa')}}">
                         @csrf
                         <div class="row card-header">
                             <div class="col">
@@ -108,7 +108,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('adminPelabuhan.footer')
+@include('adminDashboard.footer')
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->

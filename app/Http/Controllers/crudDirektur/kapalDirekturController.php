@@ -17,9 +17,9 @@ class kapalDirekturController extends Controller
         $IdAdmin = Auth::user()->id;
         $dataAdmin = \App\User::find($IdAdmin);
         $hakAkses = \App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
+        $anggota = \App\anggotaPelabuhan::whereIn('id_kapal',$hakAkses)->with('relasiKapal','relasiPelabuhan')->get();
         $profiles = \App\Kapal::whereIn('id', $hakAkses)->get();
-
-        return view('pageDirektur.profileKapal', compact('profiles'));
+        return view('pageDirektur.profileKapal', compact('profiles','anggota'));
     }
 
     //Form Kapal
@@ -76,7 +76,7 @@ class kapalDirekturController extends Controller
                 'id_kapal'=>$kapal->id,
                 'id_pelabuhan'=>$request->id_pelabuhan,
                 'status'=>'pending',
-    
+
             ]);
             return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
         } else {
@@ -101,7 +101,7 @@ class kapalDirekturController extends Controller
                 'id_kapal'=>$kapal->id,
                 'id_pelabuhan'=>$request->id_pelabuhan,
                 'status'=>'pending',
-    
+
             ]);
             return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
         }
@@ -195,6 +195,7 @@ class kapalDirekturController extends Controller
             'nohp' => $request->no_hp,
             'password' => Hash::make($request->password),
             'role' => 'Admin',
+            'foto'=>'avatar5.png',
         ]);
 
         if ($admin) {
@@ -214,7 +215,7 @@ class kapalDirekturController extends Controller
         $dataUpdate = \App\User::find($request->id_user);
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'nohp' => 'required|numeric',
+            'no_hp' => 'required|numeric',
             'password' => 'required',
         ]);
 

@@ -32,13 +32,18 @@ Route::get('/Register', 'registerController@index')->name('register');
 
 Route::get('/e-ticket-generate/{id_pembelian}', 'pembelianController@eTicketGenerate');
 Route::get('/e-ticket/{id_pembelian}', 'pembelianController@etickets');
-Route::get('/admin/id-card', 'pembelianController@idCard');
-Route::get('/getgolongan/{id}', 'pembelianController@getGolongan');
-Route::post('/beli', 'pembelianController@beli')->name('testBeli');
+
+Route::get('/getGolongans/{id}','pembelianController@getGolongans');
+
+Route::get('/id-card/get', 'pembelianController@kaka');
 
 Route::get('/berita/public/pelabuhan/{id}','publicBeritaController@pelabuhan');
 Route::get('/berita/public/kapal/{id}','publicBeritaController@kapal');
 
+route::get('/kapal/list/{id}','PAdmin\jadwalController@ajaxList')->name('listKapalBasedOnAsalPelabuhan');
+route::post('/ajax/jadwal/turnOn','PAdmin\jadwalController@ajaxTurnOn')->name('status-aktif-jadwal');
+route::post('/ajax/jadwal/turnOff','PAdmin\jadwalController@ajaxTurnOff')->name('status-nonaktif-jadwal');
+Route::post('/ajax/kapal/pelabuhan','direkturController@ajaxPelabuhan');
 route::get('/cetakpdf','report@cetakPDF');
 
 //ROUTE SUPER ADMIN -----------------------------------------------------------------------------------
@@ -75,7 +80,7 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/View/{id}', 'Admin\adminPelabuhanController@pelabuhan')->name('padmin-pelabuhan');
     Route::get('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/Create/{id}', 'Admin\adminPelabuhanController@createpelabuhan')->name('padmin-createpelabuhan');
     Route::Post('/Dashboard/CRUD/AdminPelabuhanData/Pelabuhan/Add', 'Admin\adminPelabuhanController@addPelabuhan')->name('padmin-addpelabuhan');
-    
+
     Route::get('/Dashboard/Pelabuhan', 'Crud\pelabuhanController@index')->name('pelabuhan');
     Route::get('/Dashboard/PelabuhanContact', 'Crud\pelabuhanController@contact')->name('pelabuhan-contact');
 
@@ -140,12 +145,13 @@ Route::group(['middleware' => 'SAdmin'], function () {
     //Manajemen Jadwal
     Route::get('/Dashboard/JadwalData/{hari}', 'Crud\jadwalController@view')->name('viewjadwal-sa');
     Route::get('/Dashboard/MasterData/', 'Crud\jadwalController@viewMaster')->name('master-jadwal-sa');
-    Route::get('/Dashboard/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
-    Route::get('/Dashboard/CreateDetailJadwal', 'Crud\jadwalController@createdetail')->name('create-detailjadwal');
-    Route::post('/Dashboard/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal');
-    Route::post('/Dashboard/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal');
-    Route::get('/Dashboard/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
-    
+    Route::get('/Dashboard/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal-sa');
+    Route::get('/Dashboard/CreateDetailJadwal', 'Crud\jadwalController@createdetail')->name('create-detailjadwal-sa');
+    Route::post('/Dashboard/AddJadwal/Detail', 'Crud\jadwalController@addJadwalDetail')->name('add-jadwal-detail-sa');
+    Route::post('/Dashboard/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal-sa');
+    Route::post('/Dashboard/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal-sa');
+    Route::get('/Dashboard/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal-sa');
+
     //Pelabuhan
     Route::get('/Dashboard/CRUD/PelabuhanData', 'Crud\pelabuhanController@view')->name('viewpelabuhan');
     Route::get('/Dashboard/CRUD/CreatePelabuhan', 'Crud\pelabuhanController@create')->name('create-pelabuhan');
@@ -242,9 +248,7 @@ Route::group(['middleware' => 'Admin'], function () {
 
 //Pembelian
 //Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
-    Route::get('/Pembelian/CreatePembelian', 'pembelianController@create')->name('createPembelian');
-    Route::get('/admin/id-card', 'pembelianController@idCard');
-    Route::get('/getgolongan/{id}', 'pembelianController@getGolongan');
+
     Route::post('/beli', 'pembelianController@beli')->name('testBeli');
 });
 
@@ -290,7 +294,7 @@ Route::group(['middleware' => 'Direktur'], function () {
 
 //ROUTE ADMIN PELABUHAN START-----------------------------------------------------------------------------------
 Route::group(['middleware' => 'PAdmin'], function () {
-    
+
 //ADMIN PELABUHAN
     Route::get('/AdminPelabuhan/Home', 'Admin\adminPelabuhanController@index')->name('adminPelabuhanHome');
 
@@ -322,12 +326,17 @@ Route::group(['middleware' => 'PAdmin'], function () {
     Route::get('/AdminPelabuhan/CreateJadwal', 'PAdmin\jadwalController@create')->name('create-jadwal');
     Route::get('/AdminPelabuhan/CreateDetailJadwal', 'PAdmin\jadwalController@createdetail')->name('create-detailjadwal');
     Route::post('/AdminPelabuhan/AddJadwal', 'PAdmin\jadwalController@addJadwal')->name('add-jadwal');
+    Route::post('/AdminPelabuhan/AddJadwal/Detail','PAdmin\jadwalController@addJadwalDetail')->name('add-jadwal-detail');
     Route::post('/AdminPelabuhan/UpdateJadwal', 'PAdmin\jadwalController@updateJadwal')->name('update-jadwal');
     Route::get('/AdminPelabuhan/DeleteJadwal/{id}', 'PAdmin\jadwalController@deleteJadwal')->name('delete-jadwal');
 
+    Route::get('/Pembelian/CreatePembelian', 'pembelianController@create')->name('createPembelian');
+    Route::post('/beli', 'pembelianController@beli')->name('testBeli');
 
+    Route::get('/AdminPelabuhan/Transaksi/Detail','PAdmin\TransaksiController@index')->name('transaksi-pa');
+    Route::get('/AdminPelabuhan/DetailTransaksi/{id}', 'PAdmin\TransaksiController@detail')->name('detail-transaksi-pa');
 
-});    
+});
 
 
 Auth::routes();

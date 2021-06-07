@@ -25,11 +25,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminSpeedboat/header')
+@include('adminPelabuhan.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminSpeedboat/sidebar')
+@include('adminPelabuhan.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -60,17 +60,21 @@
                 <form method="POST" enctype="multipart/form-data" action="{{route('testBeli')}}">
                     @csrf
                     <div class="form-group card-header">
-                        <div class="form-group">
-                            <label for="jadwal" class="font-weight-bold text-dark">Jadwal</label>
-                            <select name="jadwal" id="jadwal" class="custom-select" required>
-                                <option>- Jadwal -</option>
-                                @foreach($jadwal as $jadwal)
-                                    <option value="{{$jadwal->id}}">{{$jadwal->kapal->nama_kapal}}
-                                        - {{$jadwal->asal->nama_pelabuhan}} - {{$jadwal->tujuan->nama_pelabuhan}}
-                                        - {{$jadwal->waktu_berangkat}} - {{$jadwal->estimasi_waktu}} menit -
-                                        Rp {{$jadwal->harga}}</option>
-                                @endforeach
-                            </select>
+                        <div class="row col-12">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="jadwal" class="font-weight-bold text-dark">Jadwal</label>
+                                    <select name="jadwal" id="jadwal" class="custom-select" required>
+                                        <option>- Jadwal -</option>
+                                        @foreach($jadwal as $jadwal)
+                                            <option value="{{$jadwal->id}}">[Hari {{$jadwal->hari}}] - [ KAPAL {{$jadwal->relasiJadwal->kapal->nama_kapal}} ]
+                                                - [ Asal {{$jadwal->relasiJadwal->asal->nama_pelabuhan}} ] -  [ Tujuan {{$jadwal->relasiJadwal->tujuan->nama_pelabuhan}} ]
+                                                - [ Jam {{$jadwal->relasiJadwal->waktu_berangkat}} ] - [ Estimasi {{$jadwal->relasiJadwal->estimasi_waktu}} menit ] -
+                                                Rp {{$jadwal->relasiJadwal->harga}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-6">
@@ -128,7 +132,7 @@
 </div>
 <!-- /.content-wrapper -->
 
-@include('adminSpeedboat/footer')
+@include('adminPelabuhan.footer')
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -156,11 +160,12 @@
 
         $('select[name="jadwal"]').on('change', function () {
             let jadwalid = $(this).val();
+            console.log(jadwalid);
             $('select[name="golongan"]').empty();
             $('select[name="golongan"]').append('<option value="0"> Penumpang </option>');
             if (jadwalid) {
                 jQuery.ajax({
-                    url: "/getgolongan/" + jadwalid,
+                    url: "/getGolongans/" + jadwalid,
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
@@ -218,7 +223,7 @@
                         $('#dynamic_field').append('<tr id="numbercardrow' + i + '" class="dynamic-added"><td style="width:10%;"></td><td><input type="text" name="card[]" placeholder="Enter your Card ID" class="form-control"/></td>' +
                             '</tr>');
                         $.ajax({
-                            url: '/admin/id-card',
+                            url: '/id-card/get',
                             method: "GET",
                             success: function (data) {
                                 jQuery.each(data, function (index, values) {
@@ -294,7 +299,7 @@
             $('#dynamic_field').append('<tr id="numbercardrow' + i + '" class="dynamic-added"><td><input type="text" name="card[]" placeholder="Enter your Card ID" class="form-control"/></td>' +
                 '</tr>');
             $.ajax({
-                url: '/admin/id-card',
+                url: '/id-card/get',
                 method: "GET",
                 success: function (data) {
                     jQuery.each(data, function (index, values) {

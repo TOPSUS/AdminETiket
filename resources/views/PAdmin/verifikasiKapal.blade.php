@@ -72,7 +72,7 @@
                             <th>Nama Kapal</th>
                             <th>Jenis Kapal</th>
                             <th>Kapasitas</th>
-                            <th>Pelabuhan</th>
+                            <th>Basis Pelabuhan</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>

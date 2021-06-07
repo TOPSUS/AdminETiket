@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Dashboard | Jadwal</title>
+    <title> Dashboard | Data Pembelian</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset ('Lte/dist/css/adminlte.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset ('Lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset ('Lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -24,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('direkturkapal.header')
+@include('adminPelabuhan.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('direkturkapal.sidebar')
+@include('adminPelabuhan.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,11 +34,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Jadwal Keberangkatan</h1>
+                        <h1>Data Pembelian</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-
+                            <li class="breadcrumb-item"><a href="{{ route('adminSpeedboatHome') }}">Dashboard</a></li>
                         </ol>
                     </div>
                 </div>
@@ -59,26 +56,31 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Hari</th>
-                                <th>Nama Kapal</th>
-                                <th>Asal</th>
-                                <th>Tujuan</th>
-                                <th>Waktu Berangkat</th>
-                                <th>Estimasi Waktu</th>
-                                <th>Harga</th>
+                                <th class="text-center">No.</th>
+                                <th>Nama Pembeli</th>
+                                <th>Keberangkatan</th>
+                                <th>Pelabuhan Asal</th>
+                                <th>Speedboat</th>
+                                <th>Tanggal Pembelian</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($jadwal as $dataJadwal)
+                            @foreach($dataPembelian as $sp => $pembelian)
                                 <tr>
-                                    <td>{{$dataJadwal->hari}}</td>
-                                    <td>{{$dataJadwal->relasiJadwal->kapal->nama_kapal}}</td>
-                                    <td>{{$dataJadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
-                                    <td>{{$dataJadwal->relasiJadwal->tujuan->nama_pelabuhan}}</td>
-                                    <td>{{$dataJadwal->relasiJadwal->waktu_berangkat}}</td>
-                                    <td>{{$dataJadwal->relasiJadwal->estimasi_waktu}} menit</td>
-                                    <td>IDR {{number_format($dataJadwal->relasiJadwal->harga)}}</td>
+                                    <td class="text-center">{{$sp+1}}</t>
+                                    <td>{{$pembelian->user->nama}}</td>
+                                    <td class="text-center">{{date('H:i', strtotime($pembelian->jadwal->waktu_berangkat))}}</td>
+                                    <td>{{$pembelian->jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
+                                    <td>{{$pembelian->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
+                                    <td>{{date('d F Y H:i', strtotime($pembelian->tanggal))}}</td>
+                                    <td>{{$pembelian->status}}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary" href="/AdminPelabuhan/DetailTransaksi/{{$pembelian->id}}"><i
+                                                class="fas fa-eye"></i>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -89,12 +91,11 @@
             <!-- smpe sini -->
         </section>
         <!-- /.content -->
-
     </div>
-@include('direkturkapal.footer')
-</div>
+    <!-- /.content-wrapper -->
+@include('adminPelabuhan.footer')
 
-    <!-- jQuery -->
+<!-- jQuery -->
     <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -102,26 +103,6 @@
     <script src="{{ asset ('Lte/dist/js/adminlte.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset ('Lte/dist/js/demo.js') }}"></script>
-    <script src="{{ asset ('Lte//plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset ('Lte//plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset ('Lte//plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset ('Lte//plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script>
-        $(function () {
-            $("#dataTable").DataTable({
-                "responsive": true,
-                "autoWidth": false,
-            });
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
+
 </body>
 </html>

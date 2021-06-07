@@ -85,6 +85,7 @@ public function createadminpelabuhan(){
 			'email'=>$request->email,
 			'password'=>Hash::make($request->password),
             'role'=>$request->role,
+            'foto'=>'avatar5.png',
 		]);
         if($request->role != 'SAdmin'){
             return redirect('/Dashboard/CRUD/CustomerData')->with('success','Data berhasil dibuat!');
@@ -117,6 +118,7 @@ public function createadminpelabuhan(){
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'role'=>'Direktur',
+            'foto'=>'avatar5.png',
         ]);
         return redirect('/Dashboard/CRUD/DirekturData')->with('success','Data berhasil dibuat!');
     }
@@ -150,6 +152,7 @@ public function createadminpelabuhan(){
             'password'=>Hash::make($request->password),
             'id_speedboat'=>$request->id_speedboat,
             'role'=>'Admin',
+            'foto'=>'avatar5.png',
         ]);
         return redirect('/Dashboard/CRUD/AdminData')->with('success','Data berhasil dibuat!');
     }
@@ -188,9 +191,9 @@ public function createadminpelabuhan(){
             'id_user'=>$padmin->id,
             'id_pelabuhan'=>$request->id_pelabuhan,
             'hak_akses'=>'PAdmin',
-
+            'foto'=>'avatar5.png',
         ]);
-        
+
         return redirect('/Dashboard/CRUD/AdminPelabuhanData')->with('success','Data berhasil dibuat!');
     }
 
@@ -220,6 +223,7 @@ public function createadminpelabuhan(){
                 'jeniskelamin'=>'required',
                 'nohp'=>'required|numeric',
                 'role'=>'required',
+                'foto'=>'avatar5.png',
             ]);
 
             if ($validator->fails()) {
@@ -253,8 +257,6 @@ public function createadminpelabuhan(){
             $dataUpdate->save();
             return redirect()->back()->with('success','Data Berhasil diupdate!');;
         }
-
-
     }
 
 //Delete User

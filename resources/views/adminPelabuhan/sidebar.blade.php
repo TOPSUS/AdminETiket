@@ -21,74 +21,86 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview menu-open">
+                <li class="nav-item has-treeview">
                     <a href="{{ route('adminPelabuhanHome') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>Manajemen Jadwal
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/senin" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Senin</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/selasa" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Selasa</p>
-                                    </a>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/rabu" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Rabu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/kamis" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Kamis</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/jumat" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Jumat</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/sabtu" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Sabtu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/AdminPelabuhan/JadwalData/minggu" class="nav-link">
-                                        <i class="far fa-dot-circle nav-icon"></i>
-                                        <p>Minggu</p>
-                                    </a>
-                                </li>
-                                
-                                </li>
-                                </li>
-                            </ul>
-
-                <li class="nav-header">Page</li>
+                </li>
+                <li class="nav-header">Manajemen Pelabuhan</li>
+                <li class="nav-item">
+                    <a href="{{ route('verifkapal-view') }}" class="nav-link">
+                        <i class="nav-icon fas fa-ship"></i>
+                        <p class="text">Verifikasi Kapal</p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-edit nav-icon"></i>
+                        <p>Manajemen Jadwal
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/senin" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Senin</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/selasa" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Selasa</p>
+                            </a>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/rabu" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Rabu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/kamis" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Kamis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/jumat" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Jumat</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/sabtu" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Sabtu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminPelabuhan/JadwalData/minggu" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Minggu</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('master-jadwal') }}" class="nav-link">
                         <i class="nav-icon fas fa-calendar-week"></i>
                         <p class="text">Master Jadwal</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('createPembelian')}}" class="nav-link">
+                        <i class="nav-icon fas fa-coins"></i>
+                        <p class="text">Pembelian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('transaksi-pa')}}" class="nav-link">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p class="text">Transaksi</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -98,26 +110,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('verifkapal-view') }}" class="nav-link">
-                        <i class="nav-icon fas fa-ship"></i>
-                        <p class="text">Verifikasi Kapal</p>
-                    </a>
-                </li>
-                
-                <li class="nav-item">
                     <a href="{{ route('berita-pelabuhan') }}" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p class="text">Berita Pelabuhan</p>
                     </a>
                 </li>
-                        </li>
-                        
-                    </ul>
-                    
             </ul>
-            
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>

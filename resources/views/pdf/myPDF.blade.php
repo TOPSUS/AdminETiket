@@ -109,7 +109,7 @@
                         <td>
                             <b style="font-size: 20px;">
                                 E-Ticket</b><br/>
-                            Pelayaran {{$data->jadwal->kapal->tipe_kapal}}<br/>
+                            Pelayaran {{$data->jadwal->relasiJadwal->kapal->tipe_kapal}}<br/>
                             <b style="font-size: 10px;">
                                 Created #: {{date('D F Y H:m', strtotime($data->created_at))}}
                             </b>
@@ -146,27 +146,27 @@
 
         <tr class="item">
             <td>Pelabuhan Asal</td>
-            <td>{{$data->jadwal->asal->nama_pelabuhan}}</td>
+            <td>{{$data->jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
         </tr>
 
         <tr class="item">
             <td>Pelabuhan Tujuan</td>
-            <td>{{$data->jadwal->tujuan->nama_pelabuhan}}</td>
+            <td>{{$data->jadwal->relasiJadwal->tujuan->nama_pelabuhan}}</td>
         </tr>
 
         <tr class="item">
             <td>Nama Kapal</td>
-            <td>{{$data->jadwal->kapal->nama_kapal}}</td>
+            <td>{{$data->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
         </tr>
 
         <tr class="item">
             <td>Tanggal Keberangkatan</td>
-            <td>{{$data->jadwal->tanggal}}</td>
+            <td>{{$data->tanggal}}</td>
         </tr>
 
         <tr class="item ">
             <td>Jam Keberangkatan</td>
-            <td>{{$data->jadwal->waktu_berangkat}}</td>
+            <td>{{$data->jadwal->relasiJadwal->waktu_berangkat}}</td>
         </tr>
 
         <!--detail pesanan-->
@@ -219,14 +219,14 @@
                             <td>
                                 <b style="font-size: 20px;">
                                     E-Ticket</b><br/>
-                                Pelayaran {{$data->jadwal->kapal->tipe_kapal}}<br/>
+                                Pelayaran {{$data->jadwal->relasiJadwal->kapal->tipe_kapal}}<br/>
                                 <b style="font-size: 12px;">
-                                    <!--waktu-->{{date('H:m', strtotime($data->jadwal->waktu_berangkat))}},
-                                    <!--tanggal-->{{date('D F Y', strtotime($data->jadwal->tanggal))}},
-                                    <!--asal-->{{$data->jadwal->asal->nama_pelabuhan}}
+                                    <!--waktu-->{{date('H:m', strtotime($data->jadwal->relasiJadwal->waktu_berangkat))}},
+                                    <!--tanggal-->{{date('D F Y', strtotime($data->jadwal->relasiJadwal->tanggal))}},
+                                    <!--asal-->{{$data->jadwal->relasiJadwal->asal->nama_pelabuhan}}
                                     -
-                                    <!--tujuan-->{{$data->jadwal->tujuan->nama_pelabuhan}},
-                                    <!--nama kapal-->{{$data->jadwal->kapal->nama_kapal}}
+                                    <!--tujuan-->{{$data->jadwal->relasiJadwal->tujuan->nama_pelabuhan}},
+                                    <!--nama kapal-->{{$data->jadwal->relasiJadwal->kapal->nama_kapal}}
                                 </b>
                             </td>
 

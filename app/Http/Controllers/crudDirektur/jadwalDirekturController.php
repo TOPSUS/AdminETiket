@@ -14,11 +14,12 @@ class jadwalDirekturController extends Controller
         $IdAdmin=Auth::user()->id;
         $dataAdmin=\App\User::find($IdAdmin);
         $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
-        $jadwal=\App\Jadwal::whereIn('id_kapal', $hakAkses)->with('asal','tujuan','kapal')->get();
+        $dataJadwal=\App\Jadwal::whereIn('id_kapal', $hakAkses)->pluck('id');
+        $jadwal = \App\detailJadwal::whereIn('id_jadwal',$dataJadwal)->with('relasiJadwal')->get();
         $pelabuhan=\App\Pelabuhan::all();
-        
         $pelabuhanasal=\App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan=\App\Pelabuhan::with('tujuan')->get();
+
 
         return view('pageDirektur.jadwalView', compact('jadwal', 'pelabuhan', 'pelabuhanasal', 'pelabuhantujuan'));
 

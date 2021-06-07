@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\detailJadwal;
 use App\Golongan;
 use App\Http\Controllers\Controller;
 use App\Jadwal;
@@ -100,14 +101,15 @@ class pembelianController extends Controller
     {
         $IdAdmin = Auth::user()->id;
         $dataAdmin = \App\User::find($IdAdmin);
-        $hakAkses = \App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
-        $jadwal = \App\Jadwal::whereIn('id_kapal', $hakAkses)->with('asal', 'tujuan', 'kapal')->get();
+        $dataPelabuhan = \App\hakAksesPelabuhan::where('id_user', Auth::user()->id)->pluck('id_pelabuhan');
+        $datajadwal = \App\Jadwal::whereIn('id_asal_pelabuhan', $dataPelabuhan)->pluck('id');
+        $jadwal = \App\detailJadwal::whereIn('id_jadwal', $datajadwal)->with('relasiJadwal')->get();
         $pelabuhan = \App\Pelabuhan::all();
 
         $pelabuhanasal = \App\Pelabuhan::with('asal')->get();
         $pelabuhantujuan = \App\Pelabuhan::with('tujuan')->get();
 
-        return view('CrudAdmin.createPembelian', compact('jadwal'));
+        return view('PAdmin.createPembelian', compact('jadwal'));
     }
 
     public function beli(Request $request)
@@ -121,7 +123,8 @@ class pembelianController extends Controller
         }
 
         if ($request->jadwal) {
-            $hargaTiket = Jadwal::where('id', $request->jadwal)->first();
+            $detailJadwal = detailJadwal::where('id', $request->jadwal)->first();
+            $hargaTiket = Jadwal::where('id',$detailJadwal->id_jadwal)->first();
             $total = $penumpang * $hargaTiket->harga + $hargaGolongan;
         }
 
@@ -204,15 +207,12 @@ class pembelianController extends Controller
             /*$fileName =  $data->tanggal. '.' . 'pdf' ;
             $pdf->save($path . '/' . $fileName);*/
 
-            return redirect('/Transaksi')->with('success','Transaksi Berhasil');
+            return redirect('/Transaksi')->with('success', 'Transaksi Berhasil');
         }
-        return redirect('/Transaksi')->with('info','Terjadi kesalahan dalam pembuatan tiket');
+        return redirect('/Transaksi')->with('info', 'Terjadi kesalahan dalam pembuatan tiket');
     }
 
-
-    //AJAX IDCARD Pembelian
-    public function idCard()
-    {
+    public function kaka(){
         $card = \App\Card::pluck('card');
         foreach ($card as $cd) {
             $encoded[] = urlencode($cd);
@@ -220,14 +220,14 @@ class pembelianController extends Controller
         return response()->json($encoded);
     }
 
-
     //AJAX GOLONGAN di Pembelian
-    public function getGolongan($id)
+    public function getGolongans($id)
     {
-        $pelabuhan = \App\Jadwal::where('id', $id)->first();
-        $kapal = \App\Kapal::where('id', $pelabuhan->id_kapal)->first();
-        if ($kapal->tipe_kapal = 'feri') {
-            $golongan = \App\Golongan::where('id_pelabuhan', $pelabuhan->id_asal_pelabuhan)->get();
+        $detailJadwal = \App\detailJadwal::where('id', $id)->first();
+        $jadwal = \App\Jadwal::where('id', $detailJadwal->id_jadwal)->first();
+        $kapal = \App\Kapal::where('id', $jadwal->id_kapal)->first();
+        if ($kapal->tipe_kapal == 'feri') {
+            $golongan = \App\Golongan::where('id_pelabuhan', $jadwal->id_asal_pelabuhan)->get();
             return response()->json($golongan);
         } else {
             return response()->json(['error' => 'Tidak terdapat golongan'], 404);
@@ -268,8 +268,8 @@ class pembelianController extends Controller
                     return $file;
                 }
             }
-            return back()->with('errors','Pembelian belum terkonfirmasi');
+            return back()->with('errors', 'File tiket tidak ada');
         }
-        return back()->with('errors','Data tidak ditemukan');
+        return back()->with('errors', 'Data tidak ditemukan');
     }
 }

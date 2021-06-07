@@ -50,25 +50,25 @@
         <section class="content">
 
             <!-- Default box -->
-            @foreach ($profiles as $i => $profile)
+            @foreach ($anggota as $i => $profile)
                 <div class="card card-solid">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12 col-sm-6">
-                                <h3 class="d-inline-block d-sm-none">{{$profile->nama_kapal}}</h3>
+                                <h3 class="d-inline-block d-sm-none">{{$profile->relasiKapal->nama_kapal}}</h3>
                                 <div class="col-12">
-                                    <img src="/kapal_image/{{$profile->foto}}" class="product-image"
+                                    <img src="/kapal_image/{{$profile->relasiKapal->foto}}" class="product-image"
                                          alt="Product Image">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <h3 class="my-3">{{$profile->nama_kapal}}</h3>
-                                <p>{{$profile->deskripsi}}</p>
-                                <h4 class="mt-3"><small>Max Capacity</small> {{$profile->kapasitas}} </h4>
-
+                                <h3 class="my-3">{{$profile->relasiKapal->nama_kapal}}</h3>
+                                <p>{{$profile->relasiKapal->deskripsi}}</p>
+                                <p>Basis Pelabuhan : <strong>{{$profile->relasiPelabuhan->nama_pelabuhan}} ({{ucwords($profile->status)}})</strong></p>
+                                <h4 class="mt-3"><small>Max Capacity</small> {{$profile->relasiKapal->kapasitas}}</h4>
                                 <div class="bg-gray py-2 px-3 mt-4">
                                     <h2 class="mb-0">
-                                        {{$profile->contact_service}}
+                                        {{$profile->relasiKapal->contact_service}}
                                     </h2>
                                     <h4 class="mt-0">
                                         <small>Contact Service </small>
@@ -79,14 +79,14 @@
                                 <div class="">
                                     <div class="text-right">
                                         <a class="btn btn-sm btn-success"
-                                           href="/Direktur/Kapal/ListAdmin/{{$profile->id}}">
+                                           href="/Direktur/Kapal/ListAdmin/{{$profile->relasiKapal->id}}">
                                             <i class="fas fa-users"></i> Admin
                                         </a>
-                                        <a data-toggle="modal" data-target="#update{{$profile->id}}" href="#"
+                                        <a data-toggle="modal" data-target="#update{{$profile->relasiKapal->id}}" href="#"
                                            class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i> Edit Kapal
                                         </a>
-                                        <a data-toggle="modal" data-target="#delete{{$profile->id}}" href="#"
+                                        <a data-toggle="modal" data-target="#delete{{$profile->relasiKapal->id}}" href="#"
                                            class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i> Hapus Kapal
                                         </a>
@@ -121,14 +121,14 @@
     <!-- /.content-wrapper -->
 @include('direkturKapal.footer')
 
-@foreach($profiles as $pp)
+@foreach($anggota as $pp)
     <!-- Modal Update -->
-        <div class="modal fade" id="update{{$pp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="update{{$pp->relasiKapal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Kapal {{$pp->nama_kapal}}</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Kapal {{$pp->relasiKapal->nama_kapal}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -136,40 +136,41 @@
                     <div class="modal-body">
                         <form action="{{ route('updateKapal') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="id_kapal" value="{{$pp->id}}">
+                            <input type="hidden" name="id_kapal" value="{{$pp->relasiKapal->id}}">
                             <div class="form-group">
                                 <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
                                 <input type="text" class="form-control" id="nama_kapal" placeholder="Masukan Nama Kapal"
-                                       name="nama_kapal" value="{{$pp->nama_kapal}}" require>
+                                       name="nama_kapal" value="{{$pp->relasiKapal->nama_kapal}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
                                 <input type="number" class="form-control" id="kapasitas"
                                        placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0"
-                                       value="{{$pp->kapasitas}}" require>
+                                       value="{{$pp->relasiKapal->kapasitas}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
                                 <input type="text" class="form-control" id="contact_service"
                                        placeholder="Masukan Kontak Service" name="contact_service"
-                                       value="{{$pp->contact_service}}" require>
+                                       value="{{$pp->relasiKapal->contact_service}}" require>
                             </div>
                             <div class="form-group">
-                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal
+                                    Beroperasi</label>
                                 <input type="date" class="form-control" id="tanggal_beroperasi"
                                        placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
-                                       value="{{date('Y-m-d', strtotime($pp->tanggal_beroperasi))}}" require>
+                                       value="{{date('Y-m-d', strtotime($pp->relasiKapal->tanggal_beroperasi))}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="contact_service" class="font-weight-bold text-dark">Reward Point</label>
                                 <input type="number" class="form-control" id="reward_point"
                                        placeholder="Reward poin per transaksi" name="reward_point"
-                                       value="{{$pp->poin}}" require>
+                                       value="{{$pp->relasiKapal->poin}}" require>
                             </div>
                             <div class="form-group">
                                 <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
                                 <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
-                                          placeholder="Deskripsi" value="" require> {{$pp->deskripsi}}</textarea>
+                                          placeholder="Deskripsi" value="" require> {{$pp->relasiKapal->deskripsi}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Foto Speedboat</label>
@@ -190,7 +191,7 @@
         <!-- End Modal Update -->
 
         <!-- Modal Delete -->
-        <div class="modal fade" id="delete{{$pp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="delete{{$pp->relasiKapal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -200,7 +201,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/Direktur/Kapal/{{$pp->id}}/delete" method="POST">
+                    <form action="/Direktur/Kapal/{{$pp->relasiKapal->id}}/delete" method="POST">
                         <div class="modal-body">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}

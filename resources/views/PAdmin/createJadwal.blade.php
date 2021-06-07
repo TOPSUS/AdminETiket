@@ -62,7 +62,8 @@
                         <div class="row card-header">
                             <div class="col">
                                 <label for="id_asal_pelabuhan" class="font-weight-bold text-dark">Asal Pelabuhan</label>
-                                <select name="id_asal_pelabuhan" class="custom-select @error('id_asal_pelabuhan') is-invalid @enderror" required>
+                                <select name="id_asal_pelabuhan" id="id_asal_pelabuhan"
+                                        class="custom-select @error('id_asal_pelabuhan') is-invalid @enderror" required>
                                     <option value="">-- Asal Pelabuhan --</option>
                                     @foreach($pelabuhan as $asal)
                                         <option value="{{$asal->id}}">{{$asal->nama_pelabuhan}}</option>
@@ -75,7 +76,9 @@
                             <div class="col">
                                 <label for="id_tujuan_pelabuhan" class="font-weight-bold text-dark">Tujuan
                                     Pelabuhan</label>
-                                <select name="id_tujuan_pelabuhan" class="custom-select @error('id_tujuan_pelabuhan') is-invalid @enderror" required>
+                                <select name="id_tujuan_pelabuhan"
+                                        class="custom-select @error('id_tujuan_pelabuhan') is-invalid @enderror"
+                                        required>
                                     <option value="">-- Tujuan Pelabuhan --</option>
                                     @foreach($pelabuhan as $tujuan)
                                         <option value="{{$tujuan->id}}">{{$tujuan->nama_pelabuhan}}</option>
@@ -87,28 +90,22 @@
                             </div>
                         </div>
                         <div class="row card-header">
-                            <div class="col-xl-6 col-sm-6 col-md-6">
-                                <label for="daterange" class="font-weight-bold text-dark">Tanggal</label>
-                                <input type="text" name="daterange" class="form-control @error('daterange') is-invalid @enderror" id="daterange">
-                                @error('daterange')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-xl-2 col-sm-2 col-md-2">
-                                <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu (Menit)</label>
-                                <input type="number" min="0" class="form-control @error('estimasi_waktu') is-invalid @enderror" id="estimasi_waktu"
+                            <div class="col-xl-4 col-sm-4 col-md-4">
+                                <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu
+                                    (Menit)</label>
+                                <input type="number" min="0"
+                                       class="form-control @error('estimasi_waktu') is-invalid @enderror"
+                                       id="estimasi_waktu"
                                        placeholder="Masukan Estimasi Waktu" name="estimasi_waktu">
                                 @error('estimasi_waktu')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
-                        </div>
-
-                        <div class="row card-header">
-                        <div class="col-xl-4 col-sm-4 col-md-4">
+                            <div class="col-xl-4 col-sm-4 col-md-4">
                                 <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
-                                <input type="time" step="1" class="form-control @error('waktu_berangkat') is-invalid @enderror" id="waktu_berangkat"
+                                <input type="time" step="1"
+                                       class="form-control @error('waktu_berangkat') is-invalid @enderror"
+                                       id="waktu_berangkat"
                                        placeholder="Masukan Asal Kapal" name="waktu_berangkat">
                                 @error('waktu_berangkat')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -116,35 +113,36 @@
                             </div>
                             <div class="col-xl-4 col-sm-4 col-md-4">
                                 <label for="waktu_kembali" class="font-weight-bold text-dark">Waktu Kembali</label>
-                                <input type="time" step="1" class="form-control @error('waktu_kembali') is-invalid @enderror" id="waktu_kembali"
+                                <input type="time" step="1"
+                                       class="form-control @error('waktu_kembali') is-invalid @enderror"
+                                       id="waktu_kembali"
                                        placeholder="Masukan Asal Kapal" name="waktu_kembali">
                                 @error('waktu_kembali')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        
                         <div class="form-group card-header ">
                             <label for="id_kapal" class="font-weight-bold text-dark">Kapal Pilihan</label>
-                            <select name="id_kapal" class="custom-select @error('id_kapal') is-invalid @enderror" required>
-                                @foreach($kapal as $sb)
-                                    <option value="{{$sb->id}}">{{$sb->nama_kapal}}</option>
-                                @endforeach
+                            <select name="id_kapal" id="id_kapal"
+                                    class="custom-select @error('id_kapal') is-invalid @enderror"
+                                    required>
+                                <option value="">-- Pilih Kapal --</option>
                             </select>
                             @error('id_kapal')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="row card-header">
                             <div class="col">
                                 <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
-                                <input type="text" step="1" class="form-control @error('harga') is-invalid @enderror" id="harga"
+                                <input type="text" step="1" class="form-control @error('harga') is-invalid @enderror"
+                                       id="harga"
                                        placeholder="Masukan Harga Tiket" name="harga">
+                                @error('harga')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('harga')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
                         </div>
 
                         <div class="form-group card-header">
@@ -178,5 +176,30 @@
 <script src="{{ asset ('Lte//dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset ('Lte/dist/js/demo.js') }}"></script>
+<script>
+    $('#id_asal_pelabuhan').on('change', function () {
+        if ($('#id_asal_pelabuhan').val() != '') {
+            $.ajax({
+                url: '/kapal/list/' + $('#id_asal_pelabuhan').val(),
+                method: "GET",
+                success: function (data) {
+                    $('#id_kapal').empty();
+                    $('#id_kapal').append('<option value="">-- Pilih Kapal --</option>');
+                    jQuery.each(data, function (index, values) {
+                        kapal_select = '<option value=' + values.id + '>' + values.nama_kapal + '</option>';
+                        $('#id_kapal').append(kapal_select);
+                    });
+                },
+                error: function () {
+                    $('#id_kapal').empty();
+                    $('#id_kapal').append('<option value="">-- Pilih Kapal --</option>');
+                }
+            });
+        } else {
+            $('#id_kapal').empty();
+            $('#id_kapal').append('<option value="">-- Pilih Kapal --</option>');
+        }
+    });
+</script>
 </body>
 </html>

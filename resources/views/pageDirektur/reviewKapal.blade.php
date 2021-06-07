@@ -64,7 +64,7 @@
                                     <tr>
                                         <td>{{$reviewlist+1}}</td>
                                         <td>{{$rl->user->nama}}</td>
-                                        <td>{{$rl->pembelian->jadwal->kapal->nama_kapal}}</td>
+                                        <td>{{$rl->pembelian->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
                                         <td>{{$rl->review}}</td>
                                         <td>
                                             <ul style="list-style:none">

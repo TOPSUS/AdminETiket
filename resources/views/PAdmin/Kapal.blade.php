@@ -39,7 +39,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('pelabuhan-view') }}">Pelabuhan</a></li>
-                            
+
                             </li>
                         </ol>
                     </div>
@@ -57,14 +57,14 @@
 
                             <div class="col-12 col-sm-6">
                                 <div class="col-12">
-                                    <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image" alt="Product Image">
+                                    <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image"
+                                         alt="Product Image">
                                 </div>
 
                             </div>
                             <div class="col-12 col-sm-6">
                                 <h3 class="my-3">{{$kapal->nama_kapal}}</h3>
                                 <p>{{$kapal->deskripsi}}</p>
-
                                 <div class="bg-gray py-2 px-3 mt-4">
                                     <h2 class="mb-0">
                                         @if($kapal->tanggal_beroperasi!=null)
@@ -72,25 +72,30 @@
                                         @endif
                                     </h2>
                                     <h4 class="mt-0">
-                                        <small>Tanggal Beroperasi </small>
+                                        <small class="text-warning">Tanggal Beroperasi </small>
                                     </h4>
                                 </div>
-                                <br>
-                                
-
+                                <div class="bg-gray py-2 px-3 mt-4">
+                                    <h2 class="mb-0">
+                                    {{ucwords($kapal->tipe_kapal)}}
+                                </h2>
+                                <h4 class="mt-0">
+                                    <small class="text-warning">Tipe Kapal </small>
+                                </h4>
                             </div>
                         </div>
-                        <div class="row mt-4">
-                            <nav class="w-100">
-                                <div class="nav nav-tabs" id="product-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
-                                       href="#product-desc" role="tab" aria-controls="product-desc"
-                                       aria-selected="true">Description</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content p-3" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="product-desc" role="tabpanel"
-                                     aria-labelledby="product-desc-tab"> {{$kapal->deskripsi}}</div>
+                    </div>
+                    <div class="row mt-4">
+                        <nav class="w-100">
+                            <div class="nav nav-tabs" id="product-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
+                                   href="#product-desc" role="tab" aria-controls="product-desc"
+                                   aria-selected="true">Description</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content p-3" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="product-desc" role="tabpanel"
+                                 aria-labelledby="product-desc-tab"> {{$kapal->deskripsi}}</div>
                                 <div class="tab-pane fade" id="product-rating" role="tabpanel"
                                      aria-labelledby="product-rating-tab"></div>
                             </div>
@@ -109,7 +114,7 @@
     <!-- /.content-wrapper -->
 @include('adminPelabuhan.footer')
 
-    <!-- jQuery -->
+<!-- jQuery -->
     <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset ('Lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

@@ -37,12 +37,7 @@
                         <p class="text">Kapal</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('createPembelian')}}" class="nav-link">
-                        <i class="nav-icon fas fa-coins"></i>
-                        <p class="text">Pembelian</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('transaksiPembelian') }}" class="nav-link">
                         <i class="nav-icon fas fa-credit-card"></i>
