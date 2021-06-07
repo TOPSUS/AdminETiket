@@ -21,11 +21,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('direkturkapal.header')
+@include('direkturKapal.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('direkturkapal.sidebar')
+@include('direkturKapal.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -89,7 +89,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-@include('direkturkapal.footer')
+@include('direkturKapal.footer')
 
 <!-- Modal Create -->
     <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

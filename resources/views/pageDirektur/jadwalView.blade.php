@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('direkturkapal.header')
+@include('direkturKapal.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('direkturkapal.sidebar')
+@include('direkturKapal.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -91,7 +91,7 @@
         <!-- /.content -->
 
     </div>
-@include('direkturkapal.footer')
+@include('direkturKapal.footer')
 </div>
 
     <!-- jQuery -->
