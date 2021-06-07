@@ -27,6 +27,18 @@
                         <p>Dashboard </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('createPembelian')}}" class="nav-link">
+                        <i class="nav-icon fas fa-coins"></i>
+                        <p class="text">Pembelian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('transaksi-pa')}}" class="nav-link">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p class="text">Transaksi</p>
+                    </a>
+                </li>
                 <li class="nav-header">Manajemen Pelabuhan</li>
                 <li class="nav-item">
                     <a href="{{ route('verifkapal-view') }}" class="nav-link">
@@ -92,21 +104,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('createPembelian')}}" class="nav-link">
-                        <i class="nav-icon fas fa-coins"></i>
-                        <p class="text">Pembelian</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('transaksi-pa')}}" class="nav-link">
-                        <i class="nav-icon fas fa-credit-card"></i>
-                        <p class="text">Transaksi</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('pelabuhan-view') }}" class="nav-link">
                         <i class="nav-icon fas fa-monument"></i>
                         <p class="text">Pelabuhan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('golongan-pa') }}" class="nav-link">
+                        <i class="nav-icon fas fa-circle-notch"></i>
+                        <p class="text">Golongan</p>
                     </a>
                 </li>
                 <li class="nav-item">

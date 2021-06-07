@@ -12,7 +12,7 @@ class Golongan extends Model
     protected $guarded = [];
     protected $table ='tb_golongan';
     protected $fillable = [
-        'id_pelabuhan','golongan','keterangan','harga'
+        'id_pelabuhan','golongan','keterangan','harga','max_penumpang'
     ];
 
 //relasi ke tb pelabuhan

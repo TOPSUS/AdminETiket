@@ -67,7 +67,7 @@ class rewardController extends Controller
             $dataRewardSpeedboat->reward = $request->reward;
             $dataRewardSpeedboat->berlaku = $request->berlaku;
             $dataRewardSpeedboat->minimal_point = $request->minimal_point;
-            $dataRewardSpeedboat->foto = $file_name;
+            $dataRewardSpeedboat->foto = basename($stored);
             $dataRewardSpeedboat->save();
             return redirect('/RewardSpeedboat')->with('success','Data berhasil ditambahkan!');
         } else {

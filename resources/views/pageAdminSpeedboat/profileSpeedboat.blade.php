@@ -83,6 +83,12 @@
                                            class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i> Edit Kapal
                                         </a>
+                                        @if($profile->tipe_kapal == 'feri')
+                                            <a href="/Golongan/Kapal/{{$profile->id}}"
+                                               class="btn btn-sm btn-danger">
+                                                <i class="fas fa-circle-notch"></i> Golongan
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -93,16 +99,11 @@
                                     <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab"
                                        href="#product-desc" role="tab" aria-controls="product-desc"
                                        aria-selected="true">Description</a>
-                                    <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab"
-                                       href="#product-rating" role="tab" aria-controls="product-rating"
-                                       aria-selected="false">Rating</a>
                                 </div>
                             </nav>
                             <div class="tab-content p-3" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="product-desc" role="tabpanel"
                                      aria-labelledby="product-desc-tab"> {{$profile->deskripsi}} </div>
-                                <div class="tab-pane fade" id="product-rating" role="tabpanel"
-                                     aria-labelledby="product-rating-tab"></div>
                             </div>
                         </div>
                     </div>
@@ -151,7 +152,8 @@
                                        value="{{$pp->contact_service}}" require>
                             </div>
                             <div class="form-group">
-                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal
+                                    Beroperasi</label>
                                 <input type="date" class="form-control" id="tanggal_beroperasi"
                                        name="tanggal_beroperasi"
                                        value="{{date('Y-m-d', strtotime($pp->tanggal_beroperasi))}}" require>
@@ -213,7 +215,7 @@
             </div>
         </div>
 @endforeach
-    <!-- End Modal Update -->
+<!-- End Modal Update -->
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->

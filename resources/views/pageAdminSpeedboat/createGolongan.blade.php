@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard.header')
+@include('adminSpeedboat.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard.sidebar')
+@include('adminSpeedboat.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -41,8 +41,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-golongan') }}"><i
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="#"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                             </li>
@@ -57,64 +57,33 @@
             <!-- Begin Page Content -->
             <div class="card shadow mb-4">
                 <div class="card shadow">
-                    <form method="POST" enctype="multipart/form-data" action="{{route('add-golongan')}}">
+                    <form method="POST" enctype="multipart/form-data" action="{{route('post-detail-golongan-kapal')}}">
                         @csrf
+                        <input type="hidden" name="id_kapal" value="{{$anggota->id_kapal}}">
                         <div class="row card-header">
                             <div class="col">
-                                <label for="id_pelabuhan" class="font-weight-bold text-dark"> Pelabuhan</label>
-                                <select name="id_pelabuhan"
-                                        class="custom-select @error('id_pelabuhan') is-invalid @enderror" required>
-                                    @foreach($pelabuhan as $pl)
-                                        <option value="{{$pl->id}}">{{$pl->nama_pelabuhan}}</option>
+                                <label for="id_golongan" class="font-weight-bold text-dark"> Golongan</label>
+                                <select name="id_golongan" class="custom-select @error('id_pelabuhan') is-invalid @enderror" required>
+                                    <option value="">--Pilih Golongan--</option>
+                                    @foreach($golongan as $pl)
+                                        <option value="{{$pl->id}}">{{$pl->golongan}}</option>
                                     @endforeach
                                 </select>
-                                @error('id_pelabuhan')
+                                @error('id_golongan')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="row card-header">
                             <div class="col">
-                                <label for="golongan" class="font-weight-bold text-dark">Golongan</label>
-                                <input type="text" class="form-control @error('golongan') is-invalid @enderror"
-                                       id="golongan" placeholder="Masukan Golongan"
-                                       name="golongan">
-                                @error('golongan')
+                                <label for="jumlah" class="font-weight-bold text-dark">Jumlah Maksimum</label>
+                                <input type="number" class="form-control @error('harga') is-invalid @enderror" id="jumlah" placeholder="Jumlah maksimum golongan pada kapal"
+                                       name="jumlah">
+                                @error('jumlah')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group card-header ">
-                            <label for="keterangan" class="font-weight-bold text-dark">Keterangan</label>
-                            <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
-                                      id="keterangan" rows="10"
-                                      placeholder="Keterangan"></textarea>
-                            @error('keterangan')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="row card-header">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <label for="harga" class="font-weight-bold text-dark">Harga</label>
-                                <input type="text" class="form-control @error('harga') is-invalid @enderror" id="harga"
-                                       placeholder="Masukan Harga"
-                                       name="harga">
-                                @error('harga')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <label for="max_penumpang" class="font-weight-bold text-dark">Maksimum Penumpang</label>
-                                <input type="number" min="0" max="50" class="form-control @error('max_penumpang') is-invalid @enderror" id="max_penumpang"
-                                       placeholder="Masukan Maksimum Penumpang"
-                                       name="max_penumpang">
-                                @error('max_penumpang')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="form-group card-header">
                             <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</button>
                         </div>
@@ -127,7 +96,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('adminDashboard.footer')
+@include('adminSpeedboat.footer')
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->

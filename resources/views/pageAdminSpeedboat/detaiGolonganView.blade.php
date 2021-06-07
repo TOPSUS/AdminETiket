@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard.header')
+@include('adminSpeedboat.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard.sidebar')
+@include('adminSpeedboat.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,12 +37,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Golongan</h1>
+                        <h1>Data Golongan | {{$kapal->nama_kapal}}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-golongan') }}"><i
+                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="/Golongan/Create/Kapal/{{$kapal->id}}"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                             </li>
@@ -72,11 +72,10 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Pelabuhan</th>
+                            <th>Kapal</th>
                             <th>Golongan</th>
+                            <th>Jumlah</th>
                             <th>Keterangan</th>
-                            <th>Maksimum Penumpang</th>
-                            <th>Harga</th>
                             <th>Aksi</th>
                         </tr>
                         </thead>
@@ -85,14 +84,13 @@
                         @foreach($dataGolongan as $index => $golongan)
                             <tr>
                                 <td>{{$index+1}}</td>
-                                <td>{{$golongan->pelabuhan->nama_pelabuhan}}</td>
-                                <td>{{$golongan->golongan}}</td>
-                                <td>{{$golongan->keterangan}}</td>
-                                <td>{{$golongan->max_penumpang}}</td>
-                                <td>{{$golongan->harga}}</td>
+                                <td>{{$golongan->kapal->nama_kapal}}</td>
+                                <td>{{$golongan->golongan->golongan}}</td>
+                                <td>{{$golongan->jumlah}}</td>
+                                <td>{{$golongan->golongan->keterangan}}</td>
                                 <td>
                                     <a class="btn btn-sm bg-danger"
-                                       href="/Dashboard/CRUD/DeleteGolongan/{{$golongan->id}}"> <i
+                                       href="/Golongan/Delete/{{$golongan->id}}"> <i
                                             class="fas fa-trash-alt"></i></a>
                                     <a data-toggle="modal" data-target="#update{{$golongan->id}}"
                                        class="btn btn-sm btn-primary" href="#"><i class="fas fa-edit"></i> Edit Golongan
@@ -112,7 +110,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-@include('adminDashboard.footer')
+@include('adminSpeedboat.footer')
 
 <!-- Modal Update -->
 @foreach($dataGolongan as $oldGolongan)
@@ -127,39 +125,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('update-golongan') }}" method="POST">
+                    <form action="{{route('update-detail-golongan-kapal')}}" method="POST">
                         @csrf
-                        <input type="hidden" name="id_golongan" value="{{$oldGolongan->id}}">
+                        <input type="hidden" name="id" value="{{$oldGolongan->id}}">
                         <div class="form-group">
-                            <label for="id_pelabuhan" class="font-weight-bold text-dark">Pelabuhan</label>
-                            <select name="id_pelabuhan" class="custom-select" required>
+                            <label for="id_golongan" class="font-weight-bold text-dark">Golongan</label>
+                            <select class="custom-select" required disabled>
                                 <option
-                                    value="{{$oldGolongan->id_pelabuhan}}">{{$oldGolongan->pelabuhan->nama_pelabuhan}}</option>
-                                @foreach($pelabuhan as $pb)
-                                    <option value="{{$pb->id}}">{{$pb->nama_pelabuhan}}</option>
-                                @endforeach
+                                    value="{{$oldGolongan->golongan->id}}">{{$oldGolongan->golongan->golongan}}</option>
                             </select>
+                            <input type="hidden" name="id_golongan" value="{{$oldGolongan->golongan->id}}">
                         </div>
                         <div class="form-group">
-                            <label for="golongan" class="font-weight-bold text-dark">Golongan</label>
-                            <input type="text" step="1" class="form-control" id="golongan"
-                                   placeholder="Masukan Golongan" name="golongan" value="{{$oldGolongan->golongan}}"
-                                   require>
+                            <label for="golongan" class="font-weight-bold text-dark">Kapal</label>
+                            <select class="custom-select" required disabled>
+                                <option
+                                    value="{{$oldGolongan->kapal->id}}">{{$oldGolongan->kapal->nama_kapal}}</option>
+                            </select>
+                            <input type="hidden" name="id_kapal" value="{{$oldGolongan->kapal->id}}">
                         </div>
                         <div class="form-group">
-                            <label for="keterangan" class="font-weight-bold text-dark">Deskripsi</label>
-                            <textarea class="form-control" name="keterangan" id="keterangan" rows="10"
-                                      placeholder="Deskripsi" value="" require> {{$oldGolongan->keterangan}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="harga" class="font-weight-bold text-dark">Harga</label>
-                            <input type="text" step="1" class="form-control" id="harga" placeholder="Masukan Harga"
-                                   name="harga" value="{{$oldGolongan->harga}}" require>
-                        </div>
-                        <div class="form-group">
-                            <label for="max_penumpang" class="font-weight-bold text-dark">Maksimum Penumpang</label>
-                            <input type="number" min="0" max="50" class="form-control" id="max_penumpang" placeholder="Masukan Maksimum Penumpang"
-                                   name="max_penumpang" value="{{$oldGolongan->max_penumpang}}" require>
+                            <label for="jumlah" class="font-weight-bold text-dark">Jumlah</label>
+                            <input type="text" step="1" class="form-control" id="jumlah" placeholder="Masukan Jumlah maksimum golongan kapal"
+                                   name="jumlah" value="{{$oldGolongan->jumlah}}" require>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>

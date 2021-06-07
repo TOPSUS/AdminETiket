@@ -93,7 +93,7 @@
                             <div class="col-xl-4 col-sm-4 col-md-4">
                                 <label for="estimasi_waktu" class="font-weight-bold text-dark">Estimasi Waktu
                                     (Menit)</label>
-                                <input type="number" min="0"
+                                <input type="number" min="0" max="600"
                                        class="form-control @error('estimasi_waktu') is-invalid @enderror"
                                        id="estimasi_waktu"
                                        placeholder="Masukan Estimasi Waktu" name="estimasi_waktu">

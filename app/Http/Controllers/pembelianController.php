@@ -101,8 +101,8 @@ class pembelianController extends Controller
                 'title' => 'Pembayaran dibatalkan',
                 'body' => 'Pembayaran anda dibatalkan oleh super admin',
                 'notification_by' => 0,
-                'status' => 3,
-                'type' => 1,
+                'status' => 0,
+                'type' => 3,
                 'created_at' => date('Y-m-d H:i:s')
             ]);
             if ($notif) {

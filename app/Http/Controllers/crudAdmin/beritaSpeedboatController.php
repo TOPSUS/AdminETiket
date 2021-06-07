@@ -18,7 +18,7 @@ class beritaSpeedboatController extends Controller
         $dataAdmin=\App\User::find($IdAdmin);
         $hakAkses=\App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
 
-        $berita=\App\beritaKapal::orderBy('created_at','desc')->whereIn('id_kapal', $hakAkses)->get();
+        $berita=\App\beritaKapal::orderBy('created_at','desc')->whereIn('id_kapal', $hakAkses)->orderBy('created_at','DESC')->get();
 
         return view('pageAdminSpeedboat.beritaSpeedboatAdmin', compact('berita'));
 

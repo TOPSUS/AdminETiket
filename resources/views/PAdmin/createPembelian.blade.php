@@ -103,8 +103,8 @@
                                                     <span class="fas fa-minus"></span>
                                             </button>
                                         </span>
-                                    <input type="text" name="quant" class="form-control input-number" value="0"
-                                           min="0" max="100">
+                                    <input type="text" name="quant" class="form-control input-number" value=""
+                                           min="0" max="100" required readonly>
                                     <span class="input-group-btn">
                                             <button type="button" class="btn btn-success btn-number ml-2"
                                                     data-type="plus" data-field="quant">

@@ -59,7 +59,8 @@
 
                             <div class="col-12 col-sm-6">
                                 <div class="col-12">
-                                    <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image" alt="Product Image">
+                                    <img src="{{asset('/storage/kapal_image/'.$kapal->foto)}}" class="product-image"
+                                         alt="Product Image">
                                 </div>
 
                             </div>
@@ -167,7 +168,8 @@
                                     Beroperasi</label>
                                 <input type="date" class="form-control" id="tanggal_beroperasi"
                                        placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
-                                       value="@if($oldKapal->tanggal_beroperasi!=null){{date('Y-m-d', strtotime($oldKapal->tanggal_beroperasi))}}@endif" require>
+                                       value="@if($oldKapal->tanggal_beroperasi!=null){{date('Y-m-d', strtotime($oldKapal->tanggal_beroperasi))}}@endif"
+                                       require>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Foto Kapal</label>

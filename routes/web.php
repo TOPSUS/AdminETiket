@@ -249,7 +249,13 @@ Route::group(['middleware' => 'Admin'], function () {
 //Pembelian
 //Route::get('/RewardSpeedboat', 'crudAdmin\rewardController@index')->name('rewardSpeedboatView');
 
-    Route::post('/beli', 'pembelianController@beli')->name('testBeli');
+    //Route::post('/beli', 'pembelianController@beli')->name('testBeli');
+
+    Route::get('/Golongan/Kapal/{id}','crudAdmin\golonganController@index')->name('golongan-kapal-a');
+    Route::get('/Golongan/Create/Kapal/{id}','crudAdmin\golonganController@create')->name('golongan-create-kapal-a');
+    Route::post('/Golongan/Create/Post','crudAdmin\golonganController@post')->name('post-detail-golongan-kapal');
+    Route::post('/Golongan/Update/Post','crudAdmin\golonganController@update')->name('update-detail-golongan-kapal');
+    Route::get('/Golongan/Delete/{id}','crudAdmin\golonganController@delete')->name('delete-detail-golongan');
 });
 
 //ROUTE ADMIN END-----------------------------------------------------------------------------------
@@ -335,6 +341,12 @@ Route::group(['middleware' => 'PAdmin'], function () {
 
     Route::get('/AdminPelabuhan/Transaksi/Detail','PAdmin\TransaksiController@index')->name('transaksi-pa');
     Route::get('/AdminPelabuhan/DetailTransaksi/{id}', 'PAdmin\TransaksiController@detail')->name('detail-transaksi-pa');
+
+    Route::get('/AdminPelabuhan/Golongan','PAdmin\golonganController@index')->name('golongan-pa');
+    Route::get('/AdminPelabuhan/Golongan/Create','PAdmin\golonganController@create')->name('golongan-create-pa');
+    Route::post('/AdminPelabuhan/Golongan/Create/Post','PAdmin\golonganController@addGolongan')->name('golongan-add-pa');
+    Route::post('/AdminPelabuhan/Golongan/Update/Post','PAdmin\golonganController@updateGolongan')->name('golongan-update-pa');
+    Route::get('/AdminPelabuhan/Golongan/Delete/{id}','PAdmin\golonganController@deleteGolongan')->name('golongan-delete-pa');
 
 });
 
