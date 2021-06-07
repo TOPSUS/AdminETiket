@@ -38,8 +38,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li><a href="{{ route('createJadwal') }}" class="btn btn-success text-white"><i
-                                        class="fas fa-plus"></i> Tambah Jadwal</a></li>
+                            
                         </ol>
                     </div>
                 </div>
@@ -63,7 +62,6 @@
                                 <th>Waktu Berangkat</th>
                                 <th>Estimasi Waktu</th>
                                 <th>Harga</th>
-                                <th>Aksi</th>
                             </tr>
                             </thead>
 
@@ -77,14 +75,7 @@
                                         - {{date('d F Y', strtotime($dataJadwal->tanggal))}}</td>
                                     <td>{{$dataJadwal->estimasi_waktu}} menit</td>
                                     <td>IDR {{number_format($dataJadwal->harga)}}</td>
-                                    <td>
-                                        <a data-toggle="modal" class="btn btn-sm bg-danger"
-                                           data-target="#delete{{$dataJadwal->id}}"> <i
-                                                class="fas fa-trash-alt"></i></a>
-                                        <a data-toggle="modal" data-target="#update{{$dataJadwal->id}}"
-                                           class="btn btn-sm btn-primary" href="#"><i class="fas fa-edit"></i> Edit
-                                            Jadwal
-                                    </td>
+                                    
                                 </tr>
                             @endforeach
                             </tbody>

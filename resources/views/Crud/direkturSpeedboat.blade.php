@@ -125,6 +125,86 @@
 
     <!-- /.content-wrapper -->
 @include('adminDashboard.footer')
+<!-- Modal Update -->
+@foreach($dataKapal as $oldSpeedboat)
+        <div class="modal fade" id="update{{$oldSpeedboat->id}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('update-speedboat') }}" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_kapal" value="{{$oldSpeedboat->id}}">
+                            <div class="form-group">
+                                <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
+                                <input type="text" class="form-control" id="nama_speedboat"
+                                       placeholder="Masukan Nama Speed Boat" name="nama_speedboat"
+                                       value="{{$oldSpeedboat->nama_kapal}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
+                                <input type="number" class="form-control" id="kapasitas"
+                                       placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0"
+                                       value="{{$oldSpeedboat->kapasitas}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal Beroperasi</label>
+                                <input type="date" class="form-control" id="tanggal_beroperasi"
+                                       placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
+                                       value="{{date('Y-m-d', strtotime($oldSpeedboat->tanggal_beroperasi))}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
+                                <input type="text" class="form-control" id="contact_service"
+                                       placeholder="Masukan Kontak Service" name="contact_service"
+                                       value="{{$oldSpeedboat->contact_service}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_service" class="font-weight-bold text-dark">Kontak Service</label>
+                                <br>@if($oldSpeedboat->tipe_kapal=='feri')
+                                    <input type="radio" name="tipe_kapal" value="feri" checked> Ferry &nbsp &nbsp
+                                    <input type="radio" name="tipe_kapal" value="speedboat"> Speedboat &nbsp &nbsp
+                                @elseif($oldSpeedboat->tipe_kapal=='speedboat')
+                                    <input type="radio" name="tipe_kapal" value="feri"> Ferry &nbsp &nbsp
+                                    <input type="radio" name="tipe_kapal" value="speedboat" checked> Speedboat &nbsp
+                                    &nbsp
+                                @else
+                                    <input type="radio" name="tipe_kapal" value="feri"> Ferry &nbsp &nbsp
+                                    <input type="radio" name="tipe_kapal" value="speedboat"> Speedboat &nbsp &nbsp
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
+                                          placeholder="Deskripsi" value=""
+                                          require> {{$oldSpeedboat->deskripsi}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Foto Speedboat</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="file">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endforeach
+<!-- End Modal Update -->
 
 
 

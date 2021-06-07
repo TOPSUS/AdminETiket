@@ -113,6 +113,74 @@
 
     <!-- /.content-wrapper -->
 @include('adminDashboard.footer')
+<!-- Modal Update -->
+
+@foreach($dataKapal as $oldKapal)
+        <div class="modal fade" id="update{{$oldKapal->id}}" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('update-kapal') }}" enctype="multipart/form-data" method="POST">
+                            @csrf
+                            <input type="hidden" name="id_kapal" value="{{$oldKapal->id}}">
+                            <div class="form-group">
+                                <label for="nama_kapal" class="font-weight-bold text-dark">Nama Kapal</label>
+                                <input type="text" class="form-control" id="nama_kapal"
+                                       placeholder="Masukan Nama Speed Boat" name="nama_kapal"
+                                       value="{{$oldKapal->nama_kapal}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" id="deskripsi" rows="10"
+                                          placeholder="Deskripsi" value="" require> {{$oldKapal->deskripsi}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
+                                <input type="number" class="form-control" id="kapasitas"
+                                       placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0"
+                                       value="{{$oldKapal->kapasitas}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
+                                <input type="text" class="form-control" id="contact_service"
+                                       placeholder="Masukan Kontak Service" name="contact_service"
+                                       value="{{$oldKapal->contact_service}}" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="tanggal_beroperasi" class="font-weight-bold text-dark">Tanggal
+                                    Beroperasi</label>
+                                <input type="date" class="form-control" id="tanggal_beroperasi"
+                                       placeholder="Masukan Kontak Service" name="tanggal_beroperasi"
+                                       value="@if($oldKapal->tanggal_beroperasi!=null){{date('Y-m-d', strtotime($oldKapal->tanggal_beroperasi))}}@endif" require>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Foto Kapal</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="file">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endforeach
+
+<!-- End Modal Update -->
 
 
 

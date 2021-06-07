@@ -72,43 +72,32 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Hari</th>
                             <th>Asal</th>
                             <th>Waktu Berangkat</th>
                             <th>Tujuan</th>
                             <th>Estimasi Waktu</th>
                             <th>Kapal</th>
-                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        @foreach($detailJadwal as $j => $jadwal)
+                        @foreach($dataJadwal as $j => $jadwal)
                             <tr>
                                 <td>{{$j+1}}</td>
-                                <td>{{$jadwal->hari}}</td>
-                                <td>{{$jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
-                                <td>{{$jadwal->relasiJadwal->waktu_berangkat}}</td>
-                                <td>{{$jadwal->relasiJadwal->tujuan->nama_pelabuhan}}</td>
-                                <td>{{$jadwal->relasiJadwal->estimasi_waktu}}</td>
-                                <td>{{$jadwal->relasiJadwal->kapal->nama_kapal}}</td>
-                                <td><!-- Default switch -->
-                                @if($jadwal->status=="aktif")
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}" checked>
-                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Aktif</label>
-                                    
-                                </div>
-                                @else
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1{{$jadwal->id}}">
-                                    <label class="custom-control-label" for="customSwitch1{{$jadwal->id}}">Tidak Aktif</label>
-                                    
-                                </div>
-                                @endif
-                                </td>
-                                
+                                <td>{{$jadwal->asal->nama_pelabuhan}}</td>
+                                <td>{{$jadwal->waktu_berangkat}}</td>
+                                <td>{{$jadwal->tujuan->nama_pelabuhan}}</td>
+                                <td>{{$jadwal->estimasi_waktu}}</td>
+                                <td>{{$jadwal->kapal->nama_kapal}}</td>
                                
+                                
+                                <td>
+                                    <a class="btn btn-sm bg-danger" href="">
+                                        <i class="fas fa-trash-alt"></i></a>
+                                    <a data-toggle="modal" data-target=""
+                                       class="btn btn-sm btn-primary" href="#"><i class="fas fa-edit"></i> Edit Jadwal
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

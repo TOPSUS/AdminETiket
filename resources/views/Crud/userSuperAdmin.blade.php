@@ -68,13 +68,13 @@
                                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-building"></i></span>
-                                                        Address: {{$sadmin->nama}}</li>
+                                                        Address: {{$sadmin->alamat}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-phone"></i></span> Phone
                                                         : {{$sadmin->nohp}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-envelope"></i></span> Email
-                                                        : {{\Illuminate\Support\Str::limit($sadmin->alamat,25)}}</li>
+                                                        : {{\Illuminate\Support\Str::limit($sadmin->email,25)}}</li>
                                                     <li class="small"><span class="fa-li"><i
                                                                 class="fas fa-lg fa-venus-mars"></i></span> Gender
                                                         : {{$sadmin->jeniskelamin}}</li>

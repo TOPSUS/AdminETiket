@@ -20,7 +20,8 @@ class speedboatController extends Controller
 //Form Create Speedboat
     public function create()
     {
-        return view('Crud.createSpeedboat');
+        $dataPelabuhan=\App\Pelabuhan::whereIn('tipe_pelabuhan',['speedboat','speedboat & feri'])->get();
+        return view('Crud.createSpeedboat',compact('dataPelabuhan'));
     }
 
 //Create Speedboat
@@ -45,7 +46,7 @@ class speedboatController extends Controller
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
             $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
-            \App\Kapal::create([
+            $anggota =\App\Kapal::create([
                 'nama_kapal' => $request->nama_speedboat,
                 'kapasitas' => $request->kapasitas,
                 'deskripsi' => $request->deskripsi,
@@ -54,16 +55,28 @@ class speedboatController extends Controller
                 'tipe_kapal' => 'speedboat',
                 'contact_service' => $request->contact_service,
             ]);
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$anggota->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
             return redirect('Dashboard/CRUD/SpeedboatData')->with('success','Data Berhasil ditambahkan!');;
 
         } else {
-            \App\Kapal::create([
+            $anggota = \App\Kapal::create([
                 'nama_kapal' => $request->nama_speedboat,
                 'kapasitas' => $request->kapasitas,
                 'deskripsi' => $request->deskripsi,
                 'tanggal_beroperasi' => $request->tanggal_beroperasi,
                 'tipe_kapal' => 'speedboat',
                 'contact_service' => $request->contact_service,
+            ]);
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$anggota->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
             ]);
             return redirect('Dashboard/CRUD/SpeedboatData')->with('success','Data Berhasil ditambahkan!');;
         }

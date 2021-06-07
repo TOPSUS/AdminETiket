@@ -117,8 +117,8 @@
                                         <td class="text-center">{{$sp+1}}</t>
                                         <td>{{$pembelian->user->nama}}</td>
                                         <td class="text-center">{{date('H:i', strtotime($pembelian->jadwal->waktu_berangkat))}}</td>
-                                        <td>{{$pembelian->jadwal->asal->nama_pelabuhan}}</td>
-                                        <td>{{$pembelian->jadwal->kapal->nama_kapal}}</td>
+                                        <td>{{$pembelian->jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
+                                        <td>{{$pembelian->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
                                         <td>{{date('d F Y H:i', strtotime($pembelian->tanggal))}}</td>
                                         <td>{{$pembelian->status}}</td>
                                         <td>

@@ -10,11 +10,19 @@ class jadwalController extends Controller
 {
 
 //View Jadwal
-    public function view(){
-        $dataJadwal=\App\Jadwal::with('kapal','asal','tujuan')->get();
-        $kapal=\App\Kapal::all();
-        $pelabuhan=\App\Pelabuhan::all();
-    	return view('Crud.jadwalView', compact('dataJadwal','kapal','pelabuhan'));
+    public function view($hari){
+        $dataJadwal=\App\Jadwal::all()->pluck('id');
+        $detailJadwal=\App\detailJadwal::whereIn('id_jadwal',$dataJadwal)->where('hari',$hari)->where('status','aktif')->with('relasiJadwal')->get();
+        
+        return view('Crud.jadwalView', compact('detailJadwal'));
+    }
+
+//View Jadwal
+    public function viewMaster(){
+    $dataJadwal=\App\Jadwal::with('asal','tujuan','kapal')->get();
+    $detailJadwal=\App\detailJadwal::with('relasiJadwal')->get();
+
+    return view('Crud.masterJadwal', compact('dataJadwal'));
     }
 
 //Form Create
@@ -23,7 +31,16 @@ class jadwalController extends Controller
         $kapal=\App\Kapal::all();
         $pelabuhan=\App\Pelabuhan::all();
 
-    	return view('Crud.createJadwal', compact('kapal','pelabuhan'));
+        return view('Crud.createJadwal', compact('kapal','pelabuhan'));
+    }
+
+//Form Create Detail Jadwal
+    public function createdetail(){
+    //Menampilkan data di form
+    $hakAkses=\App\hakAksesPelabuhan::where('id_user', Auth::user()->id)->pluck('id_pelabuhan');
+    $dataJadwal=\App\Jadwal::with('asal','tujuan','kapal')->whereIn('id_asal_pelabuhan',$hakAkses)->get();
+
+    return view('Crud.createDetailJadwal', compact('dataJadwal'));
     }
 
 //Create Jadwal

@@ -102,7 +102,11 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-xl-4 col-sm-4 col-md-4">
+                            
+                        </div>
+
+                        <div class="row card-header">
+                        <div class="col-xl-4 col-sm-4 col-md-4">
                                 <label for="waktu_berangkat" class="font-weight-bold text-dark">Waktu Berangkat</label>
                                 <input type="time" step="1" class="form-control @error('waktu_berangkat') is-invalid @enderror" id="waktu_berangkat"
                                        placeholder="Masukan Asal Kapal" name="waktu_berangkat">
@@ -110,7 +114,16 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-xl-4 col-sm-4 col-md-4">
+                                <label for="waktu_kembali" class="font-weight-bold text-dark">Waktu Kembali</label>
+                                <input type="time" step="1" class="form-control @error('waktu_kembali') is-invalid @enderror" id="waktu_kembali"
+                                       placeholder="Masukan Asal Kapal" name="waktu_kembali">
+                                @error('waktu_kembali')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
+                        
                         <div class="form-group card-header ">
                             <label for="id_kapal" class="font-weight-bold text-dark">Kapal Pilihan</label>
                             <select name="id_kapal" class="custom-select @error('id_kapal') is-invalid @enderror" required>
@@ -122,6 +135,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="row card-header">
                             <div class="col">
                                 <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>

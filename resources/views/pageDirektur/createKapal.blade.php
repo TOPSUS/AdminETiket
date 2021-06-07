@@ -117,6 +117,21 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="form-group card-header">
+                            <label for="pelabuhan" class="font-weight-bold text-dark">Basis Pelabuhan</label>
+                            <select name="id_pelabuhan" id="id_pelabuhan"
+                                    class="custom-select @error('id_pelabuhan') is-invalid @enderror" required>
+                                <option value="">- Pilih Pelabuhan -</option>
+                                @foreach($dataPelabuhan as $pelabuhan)
+                                    <option value="{{$pelabuhan->id}}">{{$pelabuhan->nama_pelabuhan}}</option>
+                                @endforeach
+                            </select>
+                            @error('id_pelabuhan')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                     <div class="form-group card-header ">
                         <label for="deskripsi" class="font-weight-bold text-dark">Deskripsi</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="10"

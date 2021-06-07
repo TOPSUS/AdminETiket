@@ -25,7 +25,8 @@ class kapalDirekturController extends Controller
     //Form Kapal
     public function formKapal()
     {
-        return view('pageDirektur.createKapal');
+        $dataPelabuhan=\App\Pelabuhan::all();
+        return view('pageDirektur.createKapal',compact('dataPelabuhan'));
     }
 
     //Create Kapal
@@ -70,6 +71,13 @@ class kapalDirekturController extends Controller
                     'hak_akses' => 'Direktur',
                 ]);
             }
+
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$kapal->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
             return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
         } else {
             $kapal = \App\Kapal::create([
@@ -89,6 +97,12 @@ class kapalDirekturController extends Controller
                     'hak_akses' => 'Direktur',
                 ]);
             }
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$kapal->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
             return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
         }
     }

@@ -22,7 +22,8 @@ class direkturController extends Controller
 //Form Create Speedboat
     public function createspeedboat($id){
         $id1=$id;
-        return view('Crud.direkturCreateSpeedboat', compact('id1'));
+        $dataPelabuhan=\App\Pelabuhan::whereIn('tipe_pelabuhan',['speedboat','speedboat & feri'])->get();
+        return view('Crud.direkturCreateSpeedboat', compact('id1','dataPelabuhan'));
     }
 
 //Create Speedboat
@@ -62,7 +63,13 @@ class direkturController extends Controller
                 'id_kapal'=>$dataSpeedboat->id,
                 'hak_akses'=>'Direktur',
             ]);
-            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur);
+
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$dataSpeedboat->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur)->with('success','Data Berhasil Ditambahkan!');
         } else {
             $dataSpeedboat=\App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
@@ -77,7 +84,13 @@ class direkturController extends Controller
                 'id_kapal'=>$dataSpeedboat->id,
                 'hak_akses'=>'Direktur',
             ]);
-            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur);
+
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$dataSpeedboat->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Speedboat/View/'.$request->id_direktur)->with('success','Data Berhasil Ditambahkan!');
         }
 
     }
@@ -93,7 +106,8 @@ class direkturController extends Controller
 //Form Create Kapal
     public function createkapal($id){
         $id1=$id;
-        return view('Crud.direkturCreateKapal', compact('id1'));
+        $dataPelabuhan=\App\Pelabuhan::whereIn('tipe_pelabuhan',['feri','speedboat & feri'])->get();
+        return view('Crud.direkturCreateKapal', compact('id1','dataPelabuhan'));
     }
 
 //Create Kapal
@@ -132,7 +146,14 @@ class direkturController extends Controller
                 'hak_akses'=>'Direktur',
                 'contact_service'=>$request->contact_service,
             ]);
-            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur);
+
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$dataKapal->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur)->with('success','Data Berhasil Ditambahkan!');
         } else {
             $dataKapal=\App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
@@ -149,7 +170,14 @@ class direkturController extends Controller
                 'hak_akses'=>'Direktur',
                 'contact_service'=>$request->contact_service,
             ]);
-            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur);
+
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$dataKapal->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
+            return redirect('/Dashboard/CRUD/DirekturData/Kapal/View/'.$request->id_direktur)->with('success','Data Berhasil Ditambahkan!');
         }
 
     }

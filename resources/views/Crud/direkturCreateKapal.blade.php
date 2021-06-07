@@ -33,7 +33,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Create Kapal Direktur</h1>
+                        <h1>Create Kapal Head Admin</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -113,6 +113,21 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="form-group card-header">
+                            <label for="pelabuhan" class="font-weight-bold text-dark">Basis Pelabuhan</label>
+                            <select name="id_pelabuhan" id="id_pelabuhan"
+                                    class="custom-select @error('id_pelabuhan') is-invalid @enderror" required>
+                                <option value="">- Pilih Pelabuhan -</option>
+                                @foreach($dataPelabuhan as $pelabuhan)
+                                    <option value="{{$pelabuhan->id}}">{{$pelabuhan->nama_pelabuhan}}</option>
+                                @endforeach
+                            </select>
+                            @error('id_pelabuhan')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
 
                         <div class="form-group card-header ">
                             <label for="alamat" class="font-weight-bold text-dark">Deskripsi</label>

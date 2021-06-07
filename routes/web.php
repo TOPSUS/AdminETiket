@@ -124,19 +124,28 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/DeleteKapal/{id}', 'Crud\kapalController@deleteKapal')->name('delete-kapal');
 
     //Jadwal
-    //Route::get('/Dashboard/CRUD/JadwalData', 'Crud\jadwalController@view')->name('viewjadwal');
+    //Route::get('/Dashboard/CRUD/JadwalData/{hari}', 'Crud\jadwalController@view')->name('viewjadwal');
     //Route::get('/Dashboard/CRUD/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
     //Route::post('/Dashboard/CRUD/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal');
     //Route::post('/Dashboard/CRUD/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal');
     //Route::get('/Dashboard/CRUD/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
 
     //Jadwal Kapal
-    //Route::get('/Dashboard/CRUD/JadwalKapalData', 'Crud\jadwalKapalController@view')->name('viewjadwalkapal');
+    //Route::get('/Dashboard/CRUD/JadwalKapalData', 'Crud\jadwalKapalController@view')->name('masterjadwal');
     //Route::get('/Dashboard/CRUD/CreateJadwalKapal', 'Crud\jadwalKapalController@create')->name('create-jadwalkapal');
     //Route::post('/Dashboard/CRUD/AddJadwalKapal', 'Crud\jadwalKapalController@addJadwal')->name('add-jadwalkapal');
     //Route::post('/Dashboard/CRUD/UpdateJadwalKapal', 'Crud\jadwalKapalController@updateJadwal')->name('update-jadwalkapal');
     //Route::get('/Dashboard/CRUD/DeleteJadwalKapal/{id}', 'Crud\jadwalKapalController@deleteJadwal')->name('delete-jadwalkapal');
 
+    //Manajemen Jadwal
+    Route::get('/Dashboard/JadwalData/{hari}', 'Crud\jadwalController@view')->name('viewjadwal-sa');
+    Route::get('/Dashboard/MasterData/', 'Crud\jadwalController@viewMaster')->name('master-jadwal-sa');
+    Route::get('/Dashboard/CreateJadwal', 'Crud\jadwalController@create')->name('create-jadwal');
+    Route::get('/Dashboard/CreateDetailJadwal', 'Crud\jadwalController@createdetail')->name('create-detailjadwal');
+    Route::post('/Dashboard/AddJadwal', 'Crud\jadwalController@addJadwal')->name('add-jadwal');
+    Route::post('/Dashboard/UpdateJadwal', 'Crud\jadwalController@updateJadwal')->name('update-jadwal');
+    Route::get('/Dashboard/DeleteJadwal/{id}', 'Crud\jadwalController@deleteJadwal')->name('delete-jadwal');
+    
     //Pelabuhan
     Route::get('/Dashboard/CRUD/PelabuhanData', 'Crud\pelabuhanController@view')->name('viewpelabuhan');
     Route::get('/Dashboard/CRUD/CreatePelabuhan', 'Crud\pelabuhanController@create')->name('create-pelabuhan');

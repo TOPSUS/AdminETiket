@@ -28,6 +28,69 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard </p>
                     </a>
+                    <li class="nav-header">Jadwal</li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-week"></i>
+                                <p>
+                                    Manajemen Jadwal
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/senin" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Senin</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/selasa" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Selasa</p>
+                                    </a>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/rabu" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Rabu</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/kamis" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Kamis</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/jumat" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Jumat</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/sabtu" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Sabtu</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/Dashboard/JadwalData/minggu" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Minggu</p>
+                                    </a>
+                                </li>
+                                
+                                </li>
+                                </li>
+                            </ul>
+
+                            <li class="nav-item">
+                            <a href="{{ route('master-jadwal-sa') }}" class="nav-link">
+                                <i class="nav-icon fas fa-calendar"></i>
+                                <p>Master Jadwal</p>
+                            </a>
+                        </li>
+
 
                 <li class="nav-header">CRUD Master Data</li>
                 <li class="nav-item has-treeview">
@@ -99,20 +162,8 @@
                                 <p>Pelabuhan</p>
                             </a>
                         </li>
-                        <!--
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>Jadwal</p>
-                            </a>
-                        </li>
-                        -->
-                    <!-- <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-edit nav-icon"></i>
-                  <p>Jadwal Kapal</p>
-                </a>
-              </li> -->
+                        
+                        
                         <li class="nav-item">
                             <a href="{{ route('viewreward') }}" class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>

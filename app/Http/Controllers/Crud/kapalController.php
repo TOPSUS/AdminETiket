@@ -17,7 +17,8 @@ class kapalController extends Controller
 
 //Form Create Kapal
     public function create(){
-        return view('Crud.createKapal');
+        $dataPelabuhan=\App\Pelabuhan::whereIn('tipe_pelabuhan',['feri','speedboat & feri'])->get();
+        return view('Crud.createKapal',compact('dataPelabuhan'));
     }
 
 //Create Kapal
@@ -42,7 +43,7 @@ class kapalController extends Controller
             $file = $request->file('file');
             $file_name = time() . "_" . $file->getClientOriginalName();
             $stored = Storage::disk('admin')->putFile('/kapal_image', $file);
-            \App\Kapal::create([
+            $anggota = \App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
                 'kapasitas'=>$request->kapasitas,
                 'deskripsi'=>$request->deskripsi,
@@ -51,10 +52,17 @@ class kapalController extends Controller
                 'tanggal_beroperasi'=>$request->tanggal_beroperasi,
                 'tipe_kapal'=>'feri'
 
+
+            ]);
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$anggota->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
             ]);
             return redirect('/Dashboard/CRUD/KapalData')->with('success','Data berhasil ditambahkan');
         } else {
-            \App\Kapal::create([
+            $anggota = \App\Kapal::create([
                 'nama_kapal'=>$request->nama_kapal,
                 'kapasitas'=>$request->kapasitas,
                 'deskripsi'=>$request->deskripsi,
@@ -62,8 +70,16 @@ class kapalController extends Controller
                 'tanggal_beroperasi'=>$request->tanggal_beroperasi,
                 'tipe_kapal'=>'feri'
             ]);
+            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
+                'id_kapal'=>$anggota->id,
+                'id_pelabuhan'=>$request->id_pelabuhan,
+                'status'=>'pending',
+    
+            ]);
             return redirect('/Dashboard/CRUD/KapalData')->with('success','Data berhasil ditambahkan!!');
         }
+
+       
     }
 //Update Kapal
     public function updateKapal(Request $request){
@@ -123,6 +139,8 @@ class kapalController extends Controller
 //Delete Kapal
     public function deleteKapal($id){
         $deleteKapal=\App\Kapal::find($id);
+        $anggotaPelabuhan = \App\anggotaPelabuhan::where('id_kapal',$deleteKapal->id)->first();
+        $anggotaPelabuhan->delete();
         $deleteKapal->delete();
 
         return redirect()->back()->with('info','Data berhasil dihapus!');
