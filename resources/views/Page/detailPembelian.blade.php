@@ -88,6 +88,9 @@
                         <div class="col-sm-4 invoice-col">
                             <b>Date :</b> {{date('d F y', strtotime($dataPembelian->tanggal))}}<br>
                             <b>Status :</b> {{$dataPembelian->status}}<br>
+                            @if($dataPembelian->bukti)
+                                <b>Proof Of Payment :</b> <a href="{{asset('/storage/bukti_pembayaran/'.$dataPembelian->bukti)}}">Disini</a>
+                            @endif
                         </div>
                         <!-- /.col -->
                     </div>

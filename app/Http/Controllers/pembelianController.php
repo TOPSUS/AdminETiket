@@ -148,7 +148,11 @@ class pembelianController extends Controller
         if ($request->jadwal) {
             $detailJadwal = detailJadwal::where('id', $request->jadwal)->first();
             $hargaTiket = Jadwal::where('id', $detailJadwal->id_jadwal)->first();
-            $total = $penumpang * $hargaTiket->harga + $hargaGolongan;
+            if($golongan){
+                $total = $penumpang * $hargaTiket->harga + $hargaGolongan;
+            } else {
+                $total = $penumpang * $hargaTiket->harga;
+            }
         }
 
         if ($request->golongan != 0) {
