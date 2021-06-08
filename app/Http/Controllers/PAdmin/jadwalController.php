@@ -157,10 +157,7 @@ class jadwalController extends Controller
 
         $validator = Validator::make($request->all(), [
             'waktu_berangkat' => 'required',
-            'id_asal_pelabuhan' => 'required',
             'estimasi_waktu' => 'required|numeric',
-            'id_tujuan_pelabuhan' => 'required',
-            'id_kapal' => 'required',
             'harga' => 'required|numeric',
         ]);
 
@@ -173,10 +170,7 @@ class jadwalController extends Controller
         $dataUpdate = \App\Jadwal::find($request->id_jadwal);
 
         $dataUpdate->waktu_berangkat = $request->waktu_berangkat;
-        $dataUpdate->id_asal_pelabuhan = $request->id_asal_pelabuhan;
         $dataUpdate->estimasi_waktu = $request->estimasi_waktu;
-        $dataUpdate->id_tujuan_pelabuhan = $request->id_tujuan_pelabuhan;
-        $dataUpdate->id_kapal = $request->id_kapal;
         $dataUpdate->harga = $request->harga;
         $dataUpdate->save();
         return redirect()->back()->with('success', 'Data berhasil diupdate!');
@@ -190,7 +184,6 @@ class jadwalController extends Controller
         foreach ($deleteDetail as $dt) {
             $dt->delete();
         }
-
         $deleteJadwal->delete();
 
         return redirect()->back()->with('info', 'Data berhasil dihapus!');

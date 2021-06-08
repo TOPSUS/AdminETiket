@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\PAdmin;
 
+use App\hakAksesPelabuhan;
 use App\Http\Controllers\Controller;
+use App\Pelabuhan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -13,14 +15,15 @@ class beritaController extends Controller
 {
 //View Berita Pelabuhan
     public function indexPelabuhan(){
-        $dataBerita=\App\beritaPelabuhan::with('relasiPelabuhan')->get();
-        $pelabuhan=\App\beritaPelabuhan::all();
+        $hakAkses = hakAksesPelabuhan::where('id_user',Auth::user()->id)->pluck('id_pelabuhan');
+        $dataBerita=\App\beritaPelabuhan::whereIn('id_pelabuhan',$hakAkses)->with('relasiPelabuhan')->get();
         return view('PAdmin.beritaPelabuhan',compact('dataBerita'));
     }
 
 //Form Create Pelabuhan
     public function createBeritaPelabuhan(){
-        $dataPelabuhan=\App\Pelabuhan::all();
+        $hakAkses = hakAksesPelabuhan::where('id_user',Auth::user()->id)->pluck('id_pelabuhan');
+        $dataPelabuhan = Pelabuhan::whereIn('id',$hakAkses)->get();
         return view('PAdmin.createBeritaPelabuhan', compact('dataPelabuhan'));
     }
 
@@ -86,7 +89,7 @@ class beritaController extends Controller
 
     public function editFormBeritaPelabuhan($id){
         $berita = \App\beritaPelabuhan::find($id);
-        return view('Page.editBeritaPelabuhan',compact('berita'));
+        return view('PAdmin.editBeritaPelabuhan',compact('berita'));
     }
 
     //Update Berita
@@ -99,7 +102,7 @@ class beritaController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/AdminPelabuhan/BeritaPelabuhan/Create')
+            return back()
                 ->withErrors($validator)
                 ->withInput();
         }

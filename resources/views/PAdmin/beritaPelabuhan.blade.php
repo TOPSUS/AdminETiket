@@ -37,7 +37,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin-home') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="{{ route('create-beritaPelabuhan') }}"><i
+                            <li class="breadcrumb-item active"><a href="{{ route('create-beritaPelabuhan-pa') }}"><i
                                         class="fas fa-plus"></i> Tambah Data
                                 </a>
                         </ol>
@@ -73,7 +73,7 @@
 
                           <a class="float-right btn-tool" data-toggle="modal" data-target="#delete{{$berita->id}}"><i
                                   class="fas fa-times"></i></a>
-                          <a href="/Dashboard/BeritaPelabuhan/{{$berita->id}}/update" class="float-right btn-tool"><i
+                          <a href="/AdminPelabuhan/BeritaPelabuhan/{{$berita->id}}/update" class="float-right btn-tool"><i
                                   class="fas fa-pen"></i></a>
                         </span>
                                             <span
@@ -99,7 +99,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form action="/Dashboard/BeritaPelabuhan/{{$berita->id}}/delete"
+                                                    <form action="/AdminPelabuhan/BeritaPelabuhan/{{$berita->id}}/delete"
                                                           method="POST">
                                                         <div class="modal-body">
                                                             {{ csrf_field() }}

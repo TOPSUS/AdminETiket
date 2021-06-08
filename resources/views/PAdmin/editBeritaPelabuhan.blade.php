@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminPelabuhan.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminPelabuhan.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active"><a href="{{ route('berita-pelabuhan') }}">Berita</a></li>
+                            <li class="breadcrumb-item active"><a href="{{ route('berita-pelabuhan-pa') }}">Berita</a></li>
                             <li class="breadcrumb-item"> Tambah Berita
                                 </a>
                             </li>
@@ -52,7 +52,7 @@
             <!-- Begin Page Content -->
             <div class="card shadow mb-4">
                 <div class="card shadow">
-                    <form method="POST" enctype="multipart/form-data" action="{{route('update-beritaPelabuhan')}}">
+                    <form method="POST" enctype="multipart/form-data" action="{{route('update-beritaPelabuhan-pa')}}">
                         @csrf
                         <input type="hidden" value="{{$berita->id}}" name="id_berita">
                         <div class="form-group card-header">
@@ -96,7 +96,7 @@
     </div>
     <!-- /.content-wrapper -->
 
-@include('adminDashboard/footer')
+@include('adminPelabuhan.footer')
 <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->

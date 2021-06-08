@@ -319,12 +319,12 @@ Route::group(['middleware' => 'PAdmin'], function () {
     Route::get('/AdminPelabuhan/VerifikasiKapal/DetailVerifikasiKapal/Reject/{id}', 'PAdmin\verifKapalController@reject')->name('verifkapal-reject');
 
     //Berita Pelabuhan
-    Route::get('/AdminPelabuhan/BeritaPelabuhan', 'PAdmin\beritaController@indexPelabuhan')->name('berita-pelabuhan');
-    Route::get('/AdminPelabuhan/BeritaPelabuhan/Create', 'PAdmin\beritaController@createBeritaPelabuhan')->name('create-beritaPelabuhan');
-    Route::Post('/AdminPelabuhan/BeritaPelabuhan/AddBerita', 'PAdmin\beritaController@addBeritaPelabuhan')->name('add-beritaPelabuhan');
-    Route::get('/AdminPelabuhan/BeritaPelabuhan/{id}/update','PAdmin\beritaController@editFormBeritaPelabuhan')->name('form-updateBeritaPelabuhan');
-    Route::Post('/AdminPelabuhan/BeritaPelabuhan/update/post', 'PAdmin\beritaController@updateBeritaPelabuhan')->name('update-beritaPelabuhan');
-    route::delete('/AdminPelabuhan/BeritaPelabuhan/{id}/delete', 'PAdmin\beritaController@deleteBeritaPelabuhan')->name('delete-BeritaPelabuhan');
+    Route::get('/AdminPelabuhan/BeritaPelabuhan', 'PAdmin\beritaController@indexPelabuhan')->name('berita-pelabuhan-pa');
+    Route::get('/AdminPelabuhan/BeritaPelabuhan/Create', 'PAdmin\beritaController@createBeritaPelabuhan')->name('create-beritaPelabuhan-pa');
+    Route::Post('/AdminPelabuhan/BeritaPelabuhan/AddBerita', 'PAdmin\beritaController@addBeritaPelabuhan')->name('add-beritaPelabuhan-pa');
+    Route::get('/AdminPelabuhan/BeritaPelabuhan/{id}/update','PAdmin\beritaController@editFormBeritaPelabuhan')->name('form-updateBeritaPelabuhan-pa');
+    Route::Post('/AdminPelabuhan/BeritaPelabuhan/update/post', 'PAdmin\beritaController@updateBeritaPelabuhan')->name('update-beritaPelabuhan-pa');
+    route::delete('/AdminPelabuhan/BeritaPelabuhan/{id}/delete', 'PAdmin\beritaController@deleteBeritaPelabuhan')->name('delete-BeritaPelabuhan-pa');
 
     //Manajemen Jadwal
     Route::get('/AdminPelabuhan/JadwalData/{hari}', 'PAdmin\jadwalController@view')->name('viewjadwal');
