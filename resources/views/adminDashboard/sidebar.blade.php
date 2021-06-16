@@ -162,6 +162,13 @@
                                 <p>Pelabuhan</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('viewdermaga') }}" class="nav-link">
+                                <i class="far fa-edit nav-icon"></i>
+                                <p>Dermaga</p>
+                            </a>
+                        </li>
                         
                         
                         <li class="nav-item">

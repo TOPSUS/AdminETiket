@@ -110,6 +110,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('dermaga-pa') }}" class="nav-link">
+                        <i class="nav-icon fas fa-anchor"></i>
+                        <p class="text">Dermaga</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('golongan-pa') }}" class="nav-link">
                         <i class="nav-icon fas fa-circle-notch"></i>
                         <p class="text">Golongan</p>

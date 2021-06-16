@@ -159,6 +159,13 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::post('/Dashboard/CRUD/UpdatePelabuhan', 'Crud\pelabuhanController@updatePelabuhan')->name('update-pelabuhan');
     Route::get('/Dashboard/CRUD/DeletePelabuhan/{id}', 'Crud\pelabuhanController@deletePelabuhan')->name('delete-pelabuhan');
 
+    //Dermaga
+    Route::get('/Dashboard/CRUD/DermagaData', 'Crud\dermagaController@view')->name('viewdermaga');
+    Route::get('/Dashboard/CRUD/CreateDermaga', 'Crud\dermagaController@create')->name('create-dermaga');
+    Route::post('/Dashboard/CRUD/AddDermaga', 'Crud\dermagaController@addDermaga')->name('add-dermaga');
+    Route::post('/Dashboard/CRUD/UpdateDermaga', 'Crud\dermagaController@updateDermaga')->name('update-dermaga');
+    Route::get('/Dashboard/CRUD/DeleteDermaga/{id}', 'Crud\dermagaController@deleteDermaga')->name('delete-dermaga');
+
     //Reward Speedboat
     Route::get('/Dashboard/CRUD/RewardSpeedboatData', 'Crud\rewardSpeedboatController@view')->name('viewreward');
     Route::get('/Dashboard/CRUD/CreateRewardSpeedboatData', 'Crud\rewardSpeedboatController@create')->name('create-reward');
@@ -179,7 +186,7 @@ Route::group(['middleware' => 'SAdmin'], function () {
     Route::get('/Dashboard/CRUD/DetailPembelian/Approve/{id}', 'pembelianController@approve')->name('approve-pembelian');
     Route::get('/Dashboard/CRUD/DetailPembelian/Reject/{id}', 'pembelianController@reject')->name('reject-pembelian');
 
-    //Card
+    //Golongan
     Route::get('/Dashboard/CRUD/Golongan', 'Crud\golonganController@view')->name('viewgolongan');
     Route::get('/Dashboard/CRUD/CreateGolongan', 'Crud\golonganController@create')->name('create-golongan');
     Route::post('/Dashboard/CRUD/AddGolongan', 'Crud\golonganController@addGolongan')->name('add-golongan');
@@ -336,17 +343,28 @@ Route::group(['middleware' => 'PAdmin'], function () {
     Route::post('/AdminPelabuhan/UpdateJadwal', 'PAdmin\jadwalController@updateJadwal')->name('update-jadwal');
     Route::get('/AdminPelabuhan/DeleteJadwal/{id}', 'PAdmin\jadwalController@deleteJadwal')->name('delete-jadwal');
 
+    //Pembelian
     Route::get('/Pembelian/CreatePembelian', 'pembelianController@create')->name('createPembelian');
     Route::post('/beli', 'pembelianController@beli')->name('testBeli');
 
+    //Transaksi
     Route::get('/AdminPelabuhan/Transaksi/Detail','PAdmin\TransaksiController@index')->name('transaksi-pa');
     Route::get('/AdminPelabuhan/DetailTransaksi/{id}', 'PAdmin\TransaksiController@detail')->name('detail-transaksi-pa');
 
+    //Golongan
     Route::get('/AdminPelabuhan/Golongan','PAdmin\golonganController@index')->name('golongan-pa');
     Route::get('/AdminPelabuhan/Golongan/Create','PAdmin\golonganController@create')->name('golongan-create-pa');
     Route::post('/AdminPelabuhan/Golongan/Create/Post','PAdmin\golonganController@addGolongan')->name('golongan-add-pa');
     Route::post('/AdminPelabuhan/Golongan/Update/Post','PAdmin\golonganController@updateGolongan')->name('golongan-update-pa');
     Route::get('/AdminPelabuhan/Golongan/Delete/{id}','PAdmin\golonganController@deleteGolongan')->name('golongan-delete-pa');
+
+    //Dermaga
+    Route::get('/AdminPelabuhan/Dermaga','PAdmin\dermagaController@index')->name('dermaga-pa');
+    Route::get('/AdminPelabuhan/Dermaga/Create','PAdmin\dermagaController@create')->name('dermaga-create-pa');
+    Route::post('/AdminPelabuhan/Dermaga/Create/Post','PAdmin\dermagaController@addDermaga')->name('dermaga-add-pa');
+    Route::post('/AdminPelabuhan/Dermaga/Update/Post','PAdmin\dermagaController@updateDermaga')->name('dermaga-update-pa');
+    Route::get('/AdminPelabuhan/Dermaga/Delete/{id}','PAdmin\dermagaController@deleteDermaga')->name('dermaga-delete-pa');
+
 
 });
 
