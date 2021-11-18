@@ -94,19 +94,25 @@
                                 <td>{{$jadwal->relasiJadwal->estimasi_waktu}}</td>
                                 <td>{{$jadwal->relasiJadwal->kapal->nama_kapal}}</td>
                                 <td><!-- Default switch -->
-                                @if($jadwal->status=="aktif")
+                                    @if($jadwal->status=="aktif")
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" onclick="statusJadwal({{$jadwal->id}})" id="customSwitch_{{$jadwal->id}}" checked>
-                                            <label class="custom-control-label" id="label_{{$jadwal->id}}" for="customSwitch_{{$jadwal->id}}">Aktif</label>
+                                            <input type="checkbox" class="custom-control-input"
+                                                   onclick="statusJadwal({{$jadwal->id}})"
+                                                   id="customSwitch_{{$jadwal->id}}" checked>
+                                            <label class="custom-control-label" id="label_{{$jadwal->id}}"
+                                                   for="customSwitch_{{$jadwal->id}}">Aktif</label>
 
                                         </div>
                                     @else
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" onclick="statusJadwal({{$jadwal->id}})" id="customSwitch_{{$jadwal->id}}">
-                                            <label class="custom-control-label" id="label_{{$jadwal->id}}" for="customSwitch_{{$jadwal->id}}">Tidak Aktif</label>
+                                            <input type="checkbox" class="custom-control-input"
+                                                   onclick="statusJadwal({{$jadwal->id}})"
+                                                   id="customSwitch_{{$jadwal->id}}">
+                                            <label class="custom-control-label" id="label_{{$jadwal->id}}"
+                                                   for="customSwitch_{{$jadwal->id}}">Tidak Aktif</label>
 
                                         </div>
-                                @endif
+                                    @endif
                                 </td>
 
 
@@ -162,11 +168,11 @@
                 },
                 success: function (result) {
                     document.getElementById("customSwitch_" + id).checked = true;
-                    document.getElementById("label_"+id).innerHTML = 'Aktif';
+                    document.getElementById("label_" + id).innerHTML = 'Aktif';
                 },
                 error: function (result) {
                     document.getElementById("customSwitch_" + id).checked = false;
-                    document.getElementById("label_"+id).innerHTML = 'Tidak Aktif';
+                    document.getElementById("label_" + id).innerHTML = 'Tidak Aktif';
                 }
             });
         } else {
@@ -178,11 +184,11 @@
                 },
                 success: function (result) {
                     document.getElementById("customSwitch_" + id).checked = false;
-                    document.getElementById("label_"+id).innerHTML = 'Tidak Aktif';
+                    document.getElementById("label_" + id).innerHTML = 'Tidak Aktif';
                 },
                 error: function (result) {
                     document.getElementById("customSwitch_" + id).checked = true;
-                    document.getElementById("label_"+id).innerHTML = 'Aktif';
+                    document.getElementById("label_" + id).innerHTML = 'Aktif';
                 }
             });
         }

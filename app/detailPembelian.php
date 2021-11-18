@@ -26,4 +26,5 @@ class detailPembelian extends Model
     {
         return $this->belongsTo('App\Pembelian','id_pembelian','id')->withTrashed();;
     }
+
 }

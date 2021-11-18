@@ -34,4 +34,15 @@ class Pembelian extends Model
         return $this->belongsTo('\App\Golongan','id_golongan')->withTrashed();
     }
 
+    public function refund()
+    {
+        return $this->hasOne('App\Refund','id_pembelian','id')->withTrashed();
+    }
+
+    public function metodePembayaran()
+    {
+        return $this->belongsTo('App\metodePembayaran','id_metode_pembayaran','id')->withTrashed();
+    }
+
+
 }

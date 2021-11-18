@@ -43,6 +43,8 @@ Route::get('/berita/public/kapal/{id}','publicBeritaController@kapal');
 route::get('/kapal/list/{id}','PAdmin\jadwalController@ajaxList')->name('listKapalBasedOnAsalPelabuhan');
 route::post('/ajax/jadwal/turnOn','PAdmin\jadwalController@ajaxTurnOn')->name('status-aktif-jadwal');
 route::post('/ajax/jadwal/turnOff','PAdmin\jadwalController@ajaxTurnOff')->name('status-nonaktif-jadwal');
+route::get('/ajax/dermaga/list/tujuan/{id}','PAdmin\jadwalController@ajaxDermagaTujuan')->name('status-nonaktif-jadwal');
+route::get('/ajax/dermaga/list/asal/{id}','PAdmin\jadwalController@ajaxDermagaAsal')->name('status-nonaktif-jadwal');
 Route::post('/ajax/kapal/pelabuhan','direkturController@ajaxPelabuhan');
 route::get('/cetakpdf','report@cetakPDF');
 
@@ -141,6 +143,12 @@ Route::group(['middleware' => 'SAdmin'], function () {
     //Route::post('/Dashboard/CRUD/AddJadwalKapal', 'Crud\jadwalKapalController@addJadwal')->name('add-jadwalkapal');
     //Route::post('/Dashboard/CRUD/UpdateJadwalKapal', 'Crud\jadwalKapalController@updateJadwal')->name('update-jadwalkapal');
     //Route::get('/Dashboard/CRUD/DeleteJadwalKapal/{id}', 'Crud\jadwalKapalController@deleteJadwal')->name('delete-jadwalkapal');
+
+    //Refund
+    Route::get('/Dashboard/Refund','Crud\refundController@index')->name('refund-sa');
+    Route::post('/ajax/persentase-refund','Crud\refundController@persentase');
+    Route::get('/Dashboard/Refund/Terima/{id}','Crud\refundController@terima');
+    Route::get('/Dashboard/Refund/Tolak/{id}','Crud\refundController@tolak');
 
     //Manajemen Jadwal
     Route::get('/Dashboard/JadwalData/{hari}', 'Crud\jadwalController@view')->name('viewjadwal-sa');

@@ -79,7 +79,7 @@
                                         <p>Minggu</p>
                                     </a>
                                 </li>
-                                
+
                                 </li>
                                 </li>
                             </ul>
@@ -139,7 +139,7 @@
                                         <p>Admin</p>
                                     </a>
                                 </li>
-                                
+
                                 </li>
                                 </li>
                             </ul>
@@ -169,8 +169,8 @@
                                 <p>Dermaga</p>
                             </a>
                         </li>
-                        
-                        
+
+
                         <li class="nav-item">
                             <a href="{{ route('viewreward') }}" class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>
@@ -218,6 +218,13 @@
                     <a href="{{ route('viewpembelian') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-bar"></i>
                         <p class="text">Pembelian</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('refund-sa') }}" class="nav-link">
+                        <i class="nav-icon fas fa-credit-card"></i>
+                        <p class="text">Refund</p>
                     </a>
                 </li>
 

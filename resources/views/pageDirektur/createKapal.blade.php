@@ -213,6 +213,13 @@
             $('#id_pelabuhan').empty();
             $('#id_pelabuhan').append('<option value="">- Pilih Pelabuhan -</option>');
         }
+
+        if($('#tipe_kapal').val() == 'feri') {
+            console.log('readonly');
+            $('#kapasitas').attr('readonly',true);
+        } else {
+            $('#kapasitas').removeAttr('readonly');
+        }
     });
 
     $(document).ready(function () {

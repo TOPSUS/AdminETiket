@@ -53,7 +53,7 @@
                 <form method="POST" enctype="multipart/form-data" action="{{route('add-speedboat')}}">
                     @csrf
                     <div class="row card-header">
-                        <div class="col">
+                        <div class="col-sm-12 col-md-6 col-xl-6">
                             <label for="nama_speedboat" class="font-weight-bold text-dark">Nama SpeedBoat</label>
                             <input type="text" class="form-control @error('nama_speedboat') is-invalid @enderror" id="nama_speedboat"
                                    placeholder="Masukan Nama Speed Boat" name="nama_speedboat">
@@ -61,11 +61,20 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-sm-12 col-md-3 col-xl-3">
                             <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
                             <input type="number" class="form-control @error('kapasitas') is-invalid @enderror" id="kapasitas"
                                    placeholder="Masukan Jumlah Kapasitas" name="kapasitas" min="0">
                             @error('kapasitas')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-xl-3">
+                            <label for="harga" class="font-weight-bold text-dark">Harga</label>
+                            <input type="text" class="form-control @error('harga') is-invalid @enderror" id="contact_service"
+                                   placeholder="Masukan Harga Tiket Kapal"
+                                   name="contact_service">
+                            @error('harga')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
