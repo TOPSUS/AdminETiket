@@ -80,7 +80,6 @@ class jadwalController extends Controller
             'estimasi_waktu' => 'required|numeric',
             'id_tujuan_pelabuhan' => 'required',
             'id_kapal' => 'required',
-            'harga' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -96,7 +95,6 @@ class jadwalController extends Controller
                 'estimasi_waktu' => $request->estimasi_waktu,
                 'id_tujuan_pelabuhan' => $request->id_tujuan_pelabuhan,
                 'id_kapal' => $request->id_kapal,
-                'harga' => $request->harga,
             ]);
 
             \App\Jadwal::create([
@@ -105,7 +103,6 @@ class jadwalController extends Controller
                 'estimasi_waktu' => $request->estimasi_waktu,
                 'id_tujuan_pelabuhan' => $request->id_asal_pelabuhan,
                 'id_kapal' => $request->id_kapal,
-                'harga' => $request->harga,
             ]);
 
             return redirect(route('master-jadwal-sa'))->with('success', 'Data berhasil ditambahkan!!');
@@ -124,7 +121,6 @@ class jadwalController extends Controller
             'estimasi_waktu' => 'required|numeric',
             'id_tujuan_pelabuhan' => 'required',
             'id_kapal' => 'required',
-            'harga' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -140,7 +136,6 @@ class jadwalController extends Controller
         $dataUpdate->estimasi_waktu = $request->estimasi_waktu;
         $dataUpdate->id_tujuan_pelabuhan = $request->id_tujuan_pelabuhan;
         $dataUpdate->id_kapal = $request->id_kapal;
-        $dataUpdate->harga = $request->harga;
         $dataUpdate->save();
         return redirect()->back()->with('success', 'Data berhasil diupdate!');
     }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Dashboard | Data Pembelian</title>
+    <title> Dashboard | Verifikasi Kapal</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,11 +24,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard/header')
+@include('adminSpeedboat.header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard/sidebar')
+@include('adminSpeedboat.sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -37,7 +37,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Pembelian</h1>
+                        <h1>Data Verifikasi Kapal</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -69,40 +69,42 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama Pembeli</th>
-                            <th>Jadwal</th>
-                            <th>Pelabuhan Asal</th>
-                            <th>Speedboat</th>
-                            <th>Tanggal Pembelian</th>
+                            <th>Reward</th>
+                            <th>Nama Penerima</th>
+                            <th>Nomor Telepon</th>
+                            <th>Alamat</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                         </thead>
-
-
                         <tbody>
-                        @foreach($dataPembelian as $pb => $pembelian)
+                        @foreach($dataVerifikasiKapal as $dvf => $reward)
                             <tr>
-                                <td>{{$pb+1}}</td>
-                                <td>{{$pembelian->user->nama}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->waktu_berangkat}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->asal->nama_pelabuhan}}</td>
-                                <td>{{$pembelian->jadwal->relasiJadwal->kapal->nama_kapal}}</td>
-                                <td>{{$pembelian->jadwal->hari}}/{{$pembelian->tanggal}}</td>
-                                <td>{{$pembelian->status}}</td>
+                                <td>{{$dvf+1}}</td>
+                                <td>{{$reward->relasiKapal->nama_kapal}}</td>
+                                <td>{{$reward->relasiKapal->tipe_kapal}}</td>
+                                <td>{{$reward->relasiKapal->kapasitas}}</td>
+                                <td>{{$reward->relasiPelabuhan->nama_pelabuhan}}</td>
+                                <td>{{$reward->status}}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary" href="DetailPembelian/{{$pembelian->id}}"><i
-                                            class="fas fa-eye"></i>
+                                    <a class="btn btn-sm btn-primary" href="DetailVerifikasiKapal/{{$verifKapal->id}}"><i class="fas fa-eye"></i>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
+
             </div>
-        </section>
+
     </div>
-@include('adminDashboard/footer')
+    <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@include('adminSpeedboat.footer')
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

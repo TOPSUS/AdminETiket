@@ -190,17 +190,6 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="row card-header">
-                            <div class="col">
-                                <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
-                                <input type="text" step="1" class="form-control @error('harga') is-invalid @enderror"
-                                       id="harga"
-                                       placeholder="Masukan Harga Tiket" name="harga" value="{{$jj->harga}}">
-                                @error('harga')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-success">Simpan</button>

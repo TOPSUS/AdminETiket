@@ -64,7 +64,7 @@
 
                     </div>
                     <div class="row card-header">
-                        <div class="col">
+                        <div class="col-sm-12 col-md-6 col-xl-6">
                             <label for="kapasitas" class="font-weight-bold text-dark">Kapasitas</label>
                             <input type="number" class="form-control @error('kapasitas') is-invalid @enderror" id="kapasitas" placeholder="Masukan Nama Kapal"
                                    name="kapasitas">
@@ -72,7 +72,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col">
+                        <div class="col-sm-12 col-md-6 col-xl-6">
                             <label for="contact_service" class="font-weight-bold text-dark">Contact Service</label>
                             <input type="text" class="form-control @error('contact_service') is-invalid @enderror" id="contact_service"
                                    placeholder="Masukan Nama Kapal"

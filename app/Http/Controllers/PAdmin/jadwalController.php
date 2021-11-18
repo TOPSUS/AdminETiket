@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\PAdmin;
 
+use App\Dermaga;
 use App\Http\Controllers\Controller;
+use App\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +74,18 @@ class jadwalController extends Controller
         return response()->json(['message'=>'data not found'],401);
     }
 
+    public function ajaxDermagaAsal($id){
+        $jadwal = Jadwal::find($id);
+        $dermaga = Dermaga::where('id_pelabuhan',$jadwal->id_asal_pelabuhan)->get();
+        return response()->json($dermaga,200);
+    }
+
+    public function ajaxDermagaTujuan($id){
+        $jadwal = Jadwal::find($id);
+        $dermaga = Dermaga::where('id_pelabuhan',$jadwal->id_tujuan_pelabuhan)->get();
+        return response()->json($dermaga,200);
+    }
+
 //Form Create Detail Jadwal
     public function createdetail()
     {
@@ -99,6 +113,8 @@ class jadwalController extends Controller
         if (!$check) {
             $detailJadwal = \App\detailJadwal::create([
                 'id_jadwal' => $request->id_jadwal,
+                'id_dermaga_asal'=> $request->dermaga_asal,
+                'id_dermaga_tujuan'=>$request->dermaga_tujuan,
                 'hari' => $request->hari,
                 'status'=>'aktif',
             ]);
@@ -117,7 +133,6 @@ class jadwalController extends Controller
             'estimasi_waktu' => 'required|numeric',
             'id_tujuan_pelabuhan' => 'required',
             'id_kapal' => 'required',
-            'harga' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
@@ -133,7 +148,6 @@ class jadwalController extends Controller
                 'estimasi_waktu' => $request->estimasi_waktu,
                 'id_tujuan_pelabuhan' => $request->id_tujuan_pelabuhan,
                 'id_kapal' => $request->id_kapal,
-                'harga' => $request->harga,
             ]);
 
             \App\Jadwal::create([
@@ -142,7 +156,6 @@ class jadwalController extends Controller
                 'estimasi_waktu' => $request->estimasi_waktu,
                 'id_tujuan_pelabuhan' => $request->id_asal_pelabuhan,
                 'id_kapal' => $request->id_kapal,
-                'harga' => $request->harga,
             ]);
 
             return redirect(route('master-jadwal'))->with('success', 'Data berhasil ditambahkan!!');

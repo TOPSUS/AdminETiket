@@ -17,36 +17,54 @@ class kapalDirekturController extends Controller
         $IdAdmin = Auth::user()->id;
         $dataAdmin = \App\User::find($IdAdmin);
         $hakAkses = \App\hakAksesKapal::where('id_user', $IdAdmin)->pluck('id_kapal');
-        $anggota = \App\anggotaPelabuhan::whereIn('id_kapal',$hakAkses)->with('relasiKapal','relasiPelabuhan')->get();
+        $anggota = \App\anggotaPelabuhan::whereIn('id_kapal', $hakAkses)->with('relasiKapal', 'relasiPelabuhan')->get();
         $profiles = \App\Kapal::whereIn('id', $hakAkses)->get();
-        return view('pageDirektur.profileKapal', compact('profiles','anggota'));
+        return view('pageDirektur.profileKapal', compact('profiles', 'anggota'));
     }
 
     //Form Kapal
     public function formKapal()
     {
-        $dataPelabuhan=\App\Pelabuhan::all();
-        return view('pageDirektur.createKapal',compact('dataPelabuhan'));
+        $dataPelabuhan = \App\Pelabuhan::all();
+        return view('pageDirektur.createKapal', compact('dataPelabuhan'));
     }
 
     //Create Kapal
     public function createKapal(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_kapal' => 'required',
-            'tipe_kapal' => 'required|not_in:0',
-            'kapasitas' => 'required|numeric',
-            'reward_point' => 'required',
-            'file' => 'required|file|image',
-            'tanggal_beroperasi' => 'required|date',
-            'contact_service' => 'required|numeric',
-            'deskripsi' => 'required',
-        ]);
+        if ($request->tipe_kapal == 'speedboat'){
+            $validator = Validator::make($request->all(), [
+                'nama_kapal' => 'required',
+                'tipe_kapal' => 'required|not_in:0',
+                'kapasitas' => 'required|numeric',
+                'reward_point' => 'required',
+                'file' => 'required|file|image',
+                'tanggal_beroperasi' => 'required|date',
+                'contact_service' => 'required|numeric',
+                'deskripsi' => 'required',
+            ]);
 
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+        } else {
+            $validator = Validator::make($request->all(), [
+                'nama_kapal' => 'required',
+                'tipe_kapal' => 'required|not_in:0',
+                'reward_point' => 'required',
+                'file' => 'required|file|image',
+                'tanggal_beroperasi' => 'required|date',
+                'contact_service' => 'required|numeric',
+                'deskripsi' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
+            }
         }
 
         if ($request->hasfile('file')) {
@@ -60,7 +78,7 @@ class kapalDirekturController extends Controller
                 'contact_service' => $request->contact_service,
                 'tanggal_beroperasi' => $request->tanggal_beroperasi,
                 'tipe_kapal' => $request->tipe_kapal,
-                'poin'=>$request->reward_point,
+                'poin' => $request->reward_point,
                 'foto' => basename($stored),
             ]);
 
@@ -72,13 +90,13 @@ class kapalDirekturController extends Controller
                 ]);
             }
 
-            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
-                'id_kapal'=>$kapal->id,
-                'id_pelabuhan'=>$request->id_pelabuhan,
-                'status'=>'pending',
+            $anggotaPelabuhan = \App\anggotaPelabuhan::create([
+                'id_kapal' => $kapal->id,
+                'id_pelabuhan' => $request->id_pelabuhan,
+                'status' => 'pending',
 
             ]);
-            return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
+            return redirect('/Direktur/Kapal')->with('success', 'Data berhasil ditambahkan!');
         } else {
             $kapal = \App\Kapal::create([
                 'nama_kapal' => $request->nama_kapal,
@@ -86,7 +104,7 @@ class kapalDirekturController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'contact_service' => $request->contact_service,
                 'tanggal_beroperasi' => $request->tanggal_beroperasi,
-                'poin'=>$request->reward_point,
+                'poin' => $request->reward_point,
                 'tipe_kapal' => $request->tipe_kapal,
             ]);
 
@@ -97,13 +115,13 @@ class kapalDirekturController extends Controller
                     'hak_akses' => 'Direktur',
                 ]);
             }
-            $anggotaPelabuhan= \App\anggotaPelabuhan::create([
-                'id_kapal'=>$kapal->id,
-                'id_pelabuhan'=>$request->id_pelabuhan,
-                'status'=>'pending',
+            $anggotaPelabuhan = \App\anggotaPelabuhan::create([
+                'id_kapal' => $kapal->id,
+                'id_pelabuhan' => $request->id_pelabuhan,
+                'status' => 'pending',
 
             ]);
-            return redirect('/Direktur/Kapal')->with('success','Data berhasil ditambahkan!');
+            return redirect('/Direktur/Kapal')->with('success', 'Data berhasil ditambahkan!');
         }
     }
 
@@ -123,7 +141,7 @@ class kapalDirekturController extends Controller
 
         if ($validator->fails()) {
             return back()
-                ->with('errors','Oops, sepertinya terjadi kesalahan input')
+                ->with('errors', 'Oops, sepertinya terjadi kesalahan input')
                 ->withInput();
         }
 
@@ -140,7 +158,7 @@ class kapalDirekturController extends Controller
             $dataUpdate->poin = $request->reward_point;
 
             $dataUpdate->save();
-            return redirect('/Direktur/Kapal')->with('success','Data berhasil diupdate!');
+            return redirect('/Direktur/Kapal')->with('success', 'Data berhasil diupdate!');
         } else {
             $dataUpdate->nama_kapal = $request->nama_kapal;
             $dataUpdate->kapasitas = $request->kapasitas;
@@ -150,7 +168,7 @@ class kapalDirekturController extends Controller
             $dataUpdate->poin = $request->reward_point;
 
             $dataUpdate->save();
-            return redirect('/Direktur/Kapal')->with('success','Data berhasil diupdate!');
+            return redirect('/Direktur/Kapal')->with('success', 'Data berhasil diupdate!');
         }
     }
 
@@ -195,7 +213,7 @@ class kapalDirekturController extends Controller
             'nohp' => $request->no_hp,
             'password' => Hash::make($request->password),
             'role' => 'Admin',
-            'foto'=>'avatar5.png',
+            'foto' => 'avatar5.png',
         ]);
 
         if ($admin) {

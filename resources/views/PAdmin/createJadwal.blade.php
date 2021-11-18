@@ -133,18 +133,6 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="row card-header">
-                            <div class="col">
-                                <label for="harga" class="font-weight-bold text-dark">Harga Tiket</label>
-                                <input type="text" step="1" class="form-control @error('harga') is-invalid @enderror"
-                                       id="harga"
-                                       placeholder="Masukan Harga Tiket" name="harga">
-                                @error('harga')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="form-group card-header">
                             <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add Data</button>
                         </div>

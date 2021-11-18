@@ -20,11 +20,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     <!-- Navbar -->
-@include('adminDashboard.header')
+@include('adminDashboard/header')
 <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-@include('adminDashboard.sidebar')
+@include('adminDashboard/sidebar')
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h2 class="page-header">
-                                <i class="fa fa-globe"></i> E-Tiket Speedboat
+                                <i class="fa fa-globe"></i> Refund Page
                             </h2>
                         </div>
                         <!-- /.col -->
@@ -86,13 +86,12 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-4 invoice-col">
-                            <b>Date :</b> {{date('d F Y', strtotime($dataPembelian->tanggal))}}<br>
-                            <b>Status :</b> {{ucfirst($dataPembelian->status)}}<br>
+                            <b>Date :</b> {{date('d F y', strtotime($dataPembelian->tanggal))}}<br>
+                            <b>Status :</b> {{$dataPembelian->status}}<br>
                             @if($dataPembelian->bukti)
                                 <b>Proof Of Payment :</b> <a
-                                    href="{{asset('/storage/bukti_pembayaran/'.$dataPembelian->bukti)}}">Disini</a><br>
+                                    href="{{asset('/storage/bukti_pembayaran/'.$dataPembelian->bukti)}}">Disini</a>
                             @endif
-                            <b>Metode Pembayaran :</b> {{ucfirst($dataPembelian->metodePembayaran->nama_metode)}}
                         </div>
                         <!-- /.col -->
                     </div>
@@ -117,7 +116,7 @@
                                         <td>{{$pembelian->nama_pemegang_tiket}}</td>
                                         <td>{{$pembelian->kode_tiket}}</td>
                                         <td>{{$pembelian->no_id_card}}</td>
-                                        <td>{{ucfirst($pembelian->status)}}</td>
+                                        <td>{{$pembelian->status}}</td>
                                         <td>{{number_format($pembelian->harga)}}</td>
                                     </tr>
                                 @endforeach
@@ -131,17 +130,12 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <th style="width:50%">Golongan
-                                        : {{ucfirst(optional($dataPembelian->golongans)->golongan)}}</th>
-                                    <td>IDR. {{number_format(optional($dataPembelian->golongans)->harga)}}</td>
-                                </tr>
-                                <tr>
                                     <th style="width:50%">Price:</th>
-                                    <td>IDR. {{number_format($dataPembelian->total_harga)}}</td>
+                                    <td>IDR. {{number_format($jumlah)}}</td>
                                 </tr>
                                 <tr>
                                     <th>Total:</th>
-                                    <td>IDR. {{number_format($dataPembelian->total_harga)}}</td>
+                                    <td>IDR. {{number_format($jumlah)}}</td>
                                 </tr>
                             </table>
                         </div>
@@ -168,8 +162,28 @@
                     </div>
                 </div>
         </section>
+        <!-- /.content -->
+        <div class="clearfix"></div>
     </div>
-@include('adminDashboard.footer')
+    <!-- /.content-wrapper -->
+</div>
+
+</div>
+<!-- /.card -->
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+@include('adminDashboard/footer')
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 
 <!-- jQuery -->
 <script src="{{ asset ('Lte/plugins/jquery/jquery.min.js') }}"></script>

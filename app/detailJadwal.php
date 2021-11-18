@@ -13,7 +13,7 @@ class detailJadwal extends Model
     protected $primarykey ='id';
     protected $table = 'tb_detail_jadwal';
     protected $fillable = [
-        'id_jadwal','hari','status',
+        'id_jadwal','hari','status','id_dermaga_asal','id_dermaga_tujuan',
     ];
 
     public function relasiJadwal()

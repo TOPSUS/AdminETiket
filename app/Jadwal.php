@@ -13,7 +13,7 @@ class Jadwal extends Model
     protected $primarykey ='id';
     protected $table = 'tb_jadwal';
     protected $fillable = [
-        'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal','harga',
+        'waktu_berangkat','id_asal_pelabuhan','estimasi_waktu','id_tujuan_pelabuhan','id_kapal',
     ];
 
 //relasi ke tb kapal

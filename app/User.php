@@ -19,7 +19,7 @@ class User extends Authenticatable
     use SoftDeletes;
     protected $guarded = [];
     protected $table = 'tb_user';
-    
+
     protected $fillable = [
         'nama','alamat','jeniskelamin', 'nohp', 'email', 'password', 'foto', 'role'
     ];
@@ -57,7 +57,12 @@ class User extends Authenticatable
 //relasi ke reward speedboat
     public function reward()
     {
-    
+
     return $this->hasMany('App\rewardSpeedboat');
+    }
+
+    public function refund()
+    {
+        return $this->hasMany('App\Refund','id_sup_admin','id')->withTrashed();
     }
 }
